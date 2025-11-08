@@ -8,7 +8,7 @@ layout: ../layouts/Layout.astro
 
 ## Overview
 
-All of the open source software projects I worked on can be found on my [GitHub page](https://github.com/mohamed82008). The following is a summary of my significant open source contributions categorized by field.
+All of the open source software projects I worked on can be found on my [GitHub page](https://github.com/mohdibntarek). The following is a summary of my significant open source contributions categorized by field.
 
 **I am not involved in some of these projects anymore** but I try to maintain many of the packages I started, although some may be neglected. If you are interested in any of the software I created and you think it is neglected, feel free to contact me and let me know! **You can always open an issue and ping me.**
 
@@ -33,8 +33,8 @@ If you are interested in doing a [Google Summer of Code](https://summerofcode.wi
 - [Preconditioners.jl](https://github.com/JuliaLinearAlgebra/Preconditioners.jl)
 - The locally optimal block preconditioned conjugate gradient (LOBPCG) algorithm in [IterativeSolvers.jl](https://github.com/JuliaLinearAlgebra/IterativeSolvers.jl)
 - [AlgebraicMultigrid.jl](https://github.com/JuliaLinearAlgebra/AlgebraicMultigrid.jl)
-- [DifferentiableFactorizations.jl](https://github.com/mohamed82008/DifferentiableFactorizations.jl)
-- [TraceEstimators.jl](https://github.com/mohamed82008/TraceEstimators.jl) which is mostly copied from the original [TraceEstimation.jl](https://github.com/luca-aki/TraceEstimation.jl)
+- [DifferentiableFactorizations.jl](https://github.com/mohdibntarek/DifferentiableFactorizations.jl)
+- [TraceEstimators.jl](https://github.com/mohdibntarek/TraceEstimators.jl) which is mostly copied from the original [TraceEstimation.jl](https://github.com/luca-aki/TraceEstimation.jl)
 
 ## Bayesian inference
 
@@ -52,13 +52,13 @@ If you are interested in doing a [Google Summer of Code](https://summerofcode.wi
 - [ImplicitDifferentiation.jl](https://github.com/gdalle/ImplicitDifferentiation.jl)
 - [ForwardDiffChainRules.jl](https://github.com/ThummeTo/ForwardDiffChainRules.jl)
 - [NonconvexUtils.jl](https://github.com/JuliaNonconvex/NonconvexUtils.jl)
-- [DifferentiableFactorizations.jl](https://github.com/mohamed82008/DifferentiableFactorizations.jl)
+- [DifferentiableFactorizations.jl](https://github.com/mohdibntarek/DifferentiableFactorizations.jl)
 - [DifferentiableFlatten.jl](https://github.com/JuliaNonconvex/DifferentiableFlatten.jl)
 
 ## Others
 
-- [KissThreading.jl](https://github.com/mohamed82008/KissThreading.jl)
-- [ConvergencePlots.jl](https://github.com/mohamed82008/ConvergencePlots.jl)
-- [RCPSP.jl](https://github.com/mohamed82008/RCPSP.jl)
-- [ComputExp.jl](https://github.com/mohamed82008/ComputExp.jl)
-- [BranchAndBound.jl](https://github.com/mohamed82008/BranchAndBound.jl)
+- [KissThreading.jl](https://github.com/mohdibntarek/KissThreading.jl)
+- [ConvergencePlots.jl](https://github.com/mohdibntarek/ConvergencePlots.jl)
+- [RCPSP.jl](https://github.com/mohdibntarek/RCPSP.jl)
+- [ComputExp.jl](https://github.com/mohdibntarek/ComputExp.jl)
+- [BranchAndBound.jl](https://github.com/mohdibntarek/BranchAndBound.jl)
