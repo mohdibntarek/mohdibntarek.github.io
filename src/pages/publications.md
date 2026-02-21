@@ -65,7 +65,8 @@ The following is the list of my publications, including preprints, conference po
 
 ## Videos
 
-1. [**Generaive Machine Learning and Nonlinear Mixed Effects Modelling are the Exact Same Thing**](https://youtu.be/HlExhuvaAVQ?si=LG2Vqu4BK5ooPqCg)
+1. [**Playlist: Introduction to DeepPumas Learning Path**](https://www.youtube.com/watch?v=gMrzM2kvmiM&list=PLTPIIhCuAkznnft0FrGHUoSBSw7ZufxcI&index=7). Sept 9-25, 2025.
+1. [**Generaive Machine Learning and Nonlinear Mixed Effects Modelling are the Exact Same Thing**](https://youtu.be/HlExhuvaAVQ?si=LG2Vqu4BK5ooPqCg). Mar 10, 2025.
 1. [**Understanding automatic differentiation (in Julia)**](https://www.youtube.com/watch?v=UqymrMG-Qi4&t=1862s). Dec 11, 2021.
 1. [**Nonconvex.jl**](https://www.youtube.com/watch?v=eQ9qpsO5OBM), JuMP-dev Workshop. Jul 30, 2021.
 1. [**TopOpt.jl: topology optimization done right**](https://www.youtube.com/watch?v=sBqdkxPXluU), JuliaCon. Jul 29, 2021.
