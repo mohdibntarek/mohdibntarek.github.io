@@ -25,6 +25,9 @@ The following is the list of my publications, including preprints, conference po
 
 ## Conferences
 
+1. **Finding complex relationships between random effects and covariates using data-driven distributions**, American Conference on Pharmacometrics. Oct 21, 2025.
+1. [**Machine Learning For Exploratory Data Analysis And Model Diagnosis In Oncology**](https://pai-marketing-materials.s3.us-east-2.amazonaws.com/2025/Poster/Machine+Learning+For+Exploratory+Data+Analysis+And+Model+Diagnosis+In+Oncology.pdf). Oct 19, 2025.
+1. [**A DeepNLME framework for modeling ordinal data to describe disease progression in patients with Alzheimer's disease**](https://www.page-meeting.org/wp-content/uploads/pdf_abstracts/2025/11775.pdf), Population Approach Group in Europe. Jun 6, 2025. 
 1. [**A DeepNLME-based Tumor Growth Dynamics and Overall Survival Model for Non Small Cell Lung Cancer**](https://pai-marketing-materials.s3.us-east-2.amazonaws.com/2024/Poster/A+DeepNLME-based+Tumor+Growth+Dynamics+and+Overall+Survival+Model+for+Non+Small+Cell+Lung+Cancer.pdf), American Conference on Pharmacometrics. Nov 12, 2024.
 1. [**Make models great again by optimally restricting parameters to make non-identifiable models provably identifiable**](https://www.page-meeting.org/default.asp?abstract=11072), Population Approach Group in Europe. Jun 28, 2024.
 1. [**Bayesian Pharmacometric Software Benchmarks**](https://github.com/PumasAI-Labs/Bayesian-Benchmarks), American Conference on Pharmacometrics. Nov 7, 2023.
@@ -71,8 +74,9 @@ The following is the list of my publications, including preprints, conference po
 1. [**DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models**](https://www.youtube.com/watch?v=aD_VEjDtOX0), JuliaCon. Jul 31, 2020.
 1. [**Topology Optimization and JuMP**](https://www.youtube.com/watch?v=zNZ_bw1ti00), JuMP-dev Workshop. Jul 28, 2018.
 
-## Workshops Taught
+## Workshops and Courses Taught
 
+- [**Certificate Course on AI for Drug Development**](https://sophas.net/courses-ai-in-drug-development/). Virtual 2025-2026.
 - [**Hands-on-Workshop: NLME Modeling Workflows Using Pumas**](https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025). Virtual 2025. Feb 3-5, 2025.
 - [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2024_ACoP). American Conference on Pharmacometrics 2024. Nov 9-10, 2024.
 - [**Intermediate Workshop on Population Modelling Using Pumas**](https://github.com/PumasAI-Labs/PAGANZ_2024_NLME_Workshop). Population Approach Group in Australia and New Zealand. Feb 14, 2024.
