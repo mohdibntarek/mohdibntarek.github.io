@@ -44,6 +44,39 @@ This project uses [pagefind](https://pagefind.app/) for full-text search on the 
 - **Styles**: CSS with oklch colors; no Tailwind
 - **Components**: `.astro` files in `src/components/`; receive props via `Astro.props`
 
+## Styles
+
+### Color System
+
+Colors are defined in `src/styles/typography.css` using CSS custom properties and oklch color space:
+
+```css
+:root {
+  /* Backgrounds */
+  --color-bg: oklch(97% 0.01 260);           /* Light background */
+  --color-bg-dark: oklch(25% 0.035 265);     /* Dark sidebar/headers */
+  
+  /* Cards */
+  --color-card: oklch(92% 0.025 255);        /* Card backgrounds */
+  --color-card-border: oklch(85% 0.03 255);  /* Card borders */
+  
+  /* Text */
+  --color-text: oklch(25% 0.03 260);         /* Primary text */
+  --color-text-muted: oklch(50% 0.04 260);   /* Secondary text */
+  --color-text-light: oklch(95% 0.01 260);   /* Text on dark backgrounds */
+  
+  /* Links */
+  --color-link: oklch(50% 0.15 250);         /* Link color */
+  --color-link-hover: oklch(40% 0.18 250);    /* Link hover */
+}
+```
+
+### Typography
+
+- **Font stack**: System fonts (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto`)
+- **Monospace**: `var(--font-mono)` for code blocks
+- **Headings**: 600 weight with slight negative letter-spacing
+
 ## Frontmatter Format
 
 All markdown pages require:
