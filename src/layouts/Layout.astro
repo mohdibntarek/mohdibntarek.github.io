@@ -2,6 +2,7 @@
 const { frontmatter } = Astro.props;
 import LeftSide from "../components/LeftSide.astro";
 import "../styles/markdown.css";
+import "../styles/typography.css";
 ---
 
 <html lang="en">
@@ -14,7 +15,7 @@ import "../styles/markdown.css";
   </head>
   <body>
     <aside>
-      <LeftSide text_color_1="rgb(205, 167, 40)" text_color_2="white" />
+      <LeftSide text_color_1="oklch(98% 0.025 145)" text_color_2="var(--color-text-light)" />
     </aside>
     <main>
       <article>
@@ -55,7 +56,7 @@ import "../styles/markdown.css";
     min-width: 240px;
     max-width: 240px;
     top: 0;
-    background-color: oklch(20.8% 0.042 265.755);
+    background-color: var(--color-bg-dark);
     height: 100vh;
     /* Show aside only on larger screens */
     @media (width < 64rem) {
@@ -65,7 +66,7 @@ import "../styles/markdown.css";
   body {
     display: flex;
     background-color: white;
-    color: black;
+    color: var(--color-text);
     font-size: 1.1em;
   }
   .article-title {
@@ -73,7 +74,7 @@ import "../styles/markdown.css";
     justify-content: center;
     position: sticky;
     top: 0.5em;
-    background-color: oklch(20.8% 0.042 265.755);
+    background-color: var(--color-bg-dark);
     border-radius: 2em;
     padding: 0.5em;
     margin-bottom: 2em;

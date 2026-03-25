@@ -1,0 +1,46 @@
+/* Typography and color variables */
+:root {
+  /* Font stack - system fonts with fallbacks */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, Inconsolata, "Fira Code", monospace;
+  
+  /* Refined color palette using oklch */
+  /* Primary - warm slate blue-gray */
+  --color-bg: oklch(97% 0.01 260);
+  --color-bg-dark: oklch(25% 0.035 265);
+  --color-card: oklch(92% 0.025 255);
+  --color-card-border: oklch(85% 0.03 255);
+  
+  /* Accent - warm amber/gold */
+  --color-accent: oklch(65% 0.12 75);
+  --color-accent-dark: oklch(75% 0.1 80);
+  
+  /* Text colors */
+  --color-text: oklch(25% 0.03 260);
+  --color-text-muted: oklch(50% 0.04 260);
+  --color-text-light: oklch(95% 0.01 260);
+  
+  /* Link colors */
+  --color-link: oklch(50% 0.15 250);
+  --color-link-hover: oklch(40% 0.18 250);
+}
+
+/* Base typography */
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+/* Smooth scrolling for the whole document */
+html {
+  scroll-behavior: smooth;
+}

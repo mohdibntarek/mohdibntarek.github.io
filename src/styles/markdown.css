@@ -4,7 +4,7 @@ h2:before {
 h2 {
   counter-increment: h2;
   counter-reset: h3;
-  color: black;
+  color: var(--color-text);
   scroll-margin-top: 70px;
 }
 h2:before {
@@ -14,7 +14,7 @@ h2:before {
 h3 {
   counter-increment: h3;
   counter-reset: h4;
-  color: black;
+  color: var(--color-text);
   scroll-margin-top: 70px;
 }
 h3:before {
@@ -27,24 +27,47 @@ h4:before {
   scroll-margin-top: 70px;
 }
 p {
-  line-height: 1.5;
+  line-height: 1.7;
+  margin-bottom: 1em;
 }
 li {
-  line-height: 1.5;
+  line-height: 1.6;
+  margin-bottom: 0.3em;
 }
 a {
-  color: #0074d9;
+  color: var(--color-link);
   text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+a:hover {
+  border-bottom-color: var(--color-link);
 }
 h1 a {
-  color: white;
+  color: var(--color-text-light);
 }
 h2 a {
-  color: black;
+  color: var(--color-text);
 }
 h3 a {
-  color: black;
+  color: var(--color-text);
 }
 h4 a {
-  color: black;
+  color: var(--color-text);
+}
+
+/* Code blocks */
+code {
+  font-family: var(--font-mono);
+  background-color: var(--color-card);
+  padding: 0.15em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+
+pre code {
+  display: block;
+  padding: 1em;
+  overflow-x: auto;
+  line-height: 1.5;
 }

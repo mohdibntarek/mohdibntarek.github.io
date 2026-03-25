@@ -7,6 +7,7 @@ import blogPostsIcon from "../assets/text-documents-line-icon.png";
 import awarenessIcon from "../assets/head-idea-icon.png";
 import LeftSide from "../components/LeftSide.astro";
 import SearchBar from "../components/SearchBar.astro";
+import "../styles/typography.css";
 ---
 
 <!doctype html>
@@ -22,11 +23,10 @@ import SearchBar from "../components/SearchBar.astro";
     <header>
       <h1>Mohamed Tarek, PhD</h1>
       <p>Senior Product Engineer @ PumasAI Inc.</p>
-      <p>Research Affiliate @ University of Sydney</p>
     </header>
     <main>
       <aside>
-        <LeftSide text_color_1="rgb(105, 87, 20)" />
+        <LeftSide text_color_1="oklch(40% 0.07 240)" />
       </aside>
       <section>
         <div class="search-bar-container">
@@ -90,14 +90,11 @@ import SearchBar from "../components/SearchBar.astro";
       overscroll-behavior: none;
     }
 
-    :root {
-      --primary_bg_color: oklch(96.8% 0.007 247.896);
-    }
-
     body {
       display: grid;
       grid-template-columns: 1fr;
-      background-color: var(--primary_bg_color);
+      background-color: var(--color-bg);
+      color: var(--color-text);
     }
 
     header {
@@ -116,12 +113,12 @@ import SearchBar from "../components/SearchBar.astro";
       h1 {
         padding-bottom: 1rem;
         font-size: 2.3rem;
-        font-weight: bold;
-        color: white;
+        font-weight: 600;
+        color: oklch(98% 0.025 145);
       }
       p {
         font-size: 1.2rem;
-        color: rgb(202, 194, 165);
+        color: oklch(95% 0.03 145);
       }
       p:not(:first-of-type) {
         padding-top: 0.3em;
@@ -142,7 +139,7 @@ import SearchBar from "../components/SearchBar.astro";
       max-width: 240px;
       height: 25vh;
       top: 30%;
-      background: var(--primary_bg_color);
+      background: var(--color-bg);
     }
 
     section {
@@ -150,9 +147,9 @@ import SearchBar from "../components/SearchBar.astro";
 
       .search-bar-container {
         position: relative;
-        margin-top: 10px;
+        margin-top: 1.5em;
         width: 100%;
-        margin-bottom: 70px;
+        margin-bottom: 6em;
 
         .search-bar {
           z-index: 1;
@@ -183,8 +180,8 @@ import SearchBar from "../components/SearchBar.astro";
           padding-top: 1em;
           padding-bottom: 1em;
           border-radius: 2em;
-          background-color: oklch(88.2% 0.059 254.128);
-          border: 1px solid oklch(86.9% 0.022 252.894);
+          background-color: var(--color-card);
+          border: 1px solid var(--color-card-border);
           transition-property: box-shadow scale;
           transition-duration: 300ms;
           &:hover {
@@ -201,14 +198,14 @@ import SearchBar from "../components/SearchBar.astro";
           h2 {
             margin-bottom: 0.1em;
             font-size: 1.2rem;
-            font-weight: bold;
-            color: oklch(27.9% 0.041 260.031);
+            font-weight: 600;
+            color: var(--color-text);
           }
 
           p {
             font-size: 0.95rem;
             margin-bottom: 0.1em;
-            color: oklch(27.9% 0.041 260.031);
+            color: var(--color-text-muted);
           }
         }
       }

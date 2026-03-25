@@ -11,7 +11,7 @@ import {
   faGoogleScholar,
   faResearchgate,
 } from "@fortawesome/free-brands-svg-icons";
-const { text_color_1 = "rgb(105, 87, 20)", text_color_2 = "black" } =
+const { text_color_1 = "var(--color-text)", text_color_2 = "black" } =
   Astro.props;
 ---
 
@@ -69,14 +69,18 @@ const { text_color_1 = "rgb(105, 87, 20)", text_color_2 = "black" } =
       width: 7rem;
       border-radius: 3.5rem;
       margin: 1em;
+      margin-top: -1em;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     p {
       font-size: 1.25rem;
-      font-weight: bold;
+      font-weight: 600;
       margin-bottom: 1em;
+      letter-spacing: -0.01em;
     }
   }
   section {
     color: var(--text-color-2);
+    margin-top: 1em;
   }
 </style>
