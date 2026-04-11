@@ -1,110 +1,58 @@
 ---
-title: About
+title: About Me
 author: Mohamed Tarek
-description: About Mohamed Tarek
 date: '2025-4-8'
 published: true
 layout: ../layouts/Layout.astro
 ---
 
-## Background
+I am a senior product engineer and scientific consultant from Egypt and Australia (*eligible for the E-3 visa in the US*) with expertise in various areas of applied math, statistics, pharmacometrics, scientific computing, (scientific) machine learning and systems engineering.
 
-I am originally from Egypt, raised in both Egypt and Saudi Arabia. I currently live in Sharjah, UAE.
+## Experience
 
-## Languages
+**Senior Product Engineer and Consultant**  
+PumasAI, USA (Remote)  
+*2020 - Present*
 
-- Arabic (native)
-- English (fluent)
+- Developed and maintained proprietary parameter estimation, Bayesian inference, simulation, optimal design and scientific machine learning software for nonlinear mixed effects models in Julia.
+- Led and supported consulting projects in pharmacometrics and scientific machine learning, including modelling of tumor dynamics and overall survival, IRT, TMDD, Bayesian analysis and optimal design of experiments.
+- Supported Pumas and DeepPumas users by providing training and technical support, and by developing educational materials and teaching them both virtually and in-person.
+- Led and supported new method development projects for parameter estimation, covariate modelling, sequential model building, exploratory data analysis, model evaluation, optimal design of experiments, Bayesian inference and biomarker modeling.
+- Supported the development of AskPumas, a RAG-based LLM assistant for Pumas users.
+
+**Software Developer** — Turing.jl Project  
+Machine Learning Group, University of Cambridge, UK (Remote)  
+*2018 - 2020*
+
+- Core developer and maintainer of the Turing.jl ecosystem for Bayesian inference and probabilistic programming in Julia.
 
 ## Education
 
-I have 3 degrees in 3 different fields from 3 different universities in 3 different countries with 3 different cultures.
+**PhD in Computer Science** — Topology Optimization  
+University of New South Wales at Canberra, Australia  
+*2017 - 2021*
 
-- **Bachelor of Science** in Mechanical Engineering, Alfaisal University, Saudi Arabia. **2015**.
-- **Master of Science** in Industrial and Systems Engineering, Korea Advanced Institute of Science and Technology, South Korea. **2017**.
-- **Doctor of Philosophy** in Computer Science, University of New South Wales, Australia. **2021**.
+**MSc in Industrial & Systems Engineering**  
+Korea Advanced Institute of Science and Technology, South Korea  
+*2015 - 2017*  
+GPA: 3.95/4.3
 
-My [PhD research](https://unsworks.unsw.edu.au/entities/publication/d34622da-75cb-419f-b433-d9a452a2146a/full) was on developing new algorithms for accelerating topology optimization. All of my PhD research was implemented in an open source software package called [TopOpt.jl](https://github.com/JuliaTopOpt/TopOpt.jl).
+**BSc in Mechanical Engineering**  
+Alfaisal University, Saudi Arabia  
+*2011 - 2015*  
+GPA: 3.99/4.0
 
-## Work Experience
+## Skills
 
-During my PhD, I worked as a part-time [Julia](https://julialang.org) programmer in the [Turing.jl project](https://github.com/TuringLang/Turing.jl). Currently, I am a senior product engineer and consultant at [PumasAI Inc.](https://pumas.ai). I am also a casual research affiliate at the University of Sydney Business School.
+**Technical Skills**
 
-## Areas of Expertise
+- **Math and computer science**: mixed effects modelling, Bayesian statistics, learning algorithms, optimal design of experiments, (scientific) generative machine learning, supervised and unsupervised machine learning, optimal transport, operations research, system dynamics, linear algebra, constrained optimization, automatic differentiation, complexity analysis, decision-making under uncertainty, data reconciliation
+- **Pharmacometrics**: PKPD, tumor dynamics and overall survival, item response theory, TMDD, biomarker and covariate modelling, clinical trial simulation, DeepNLME for pharmacometrics, dose optimization, optimal design of clinical trials
+- **Programming**: Julia, Python, Java, Javascript, Typescript, Zig, GPU and parallel programming, CI/CD
+- **Productivity tools**: Git, Quarto, Typst, LaTeX, Manim, Inkscape, Microsoft Office
+- **Industrial and systems engineering**: operations research, discrete event simulation, supply chain and project management
+- **Web development**: HTML, Javascript, Typescript, HTMX, Alpine.js, Vue.js, Nuxt.js
 
-### Programming
+**Languages**
 
-- Julia
-- Python
-- Java
-- Rust
-- Matlab
-- CUDA
-- Git
-
-### Topology optimization
-
-- Compliance minimization algorithms
-- Stress and buckling constraints
-- Robust, stochastic and reliability-based topology optimization
-- Multiple materials
-- Neural design parameterisation
-
-### Statistics and machine learning
-
-- Bayesian statistics
-- Statistical learning algorithms
-- Hierarchical nonlinear mixed effects models
-- Model-based optimal design of experiments
-- Scientific machine learning
-- Supervised and unsupervised machine learning
-- Neural networks and neural differential equations
-- Generative models
-
-### Operations research and optimization
-
-- Mathematical model formulation
-- Linear programming
-- Conic/convex programming
-- Nonlinear programming
-- Mixed integer linear/convex/nonlinear programming
-- Robust and stochastic programming
-- Black-box optimization
-- Multi-start algorithms
-
-### Automatic differentiation
-
-- Forward-mode
-- Reverse-mode
-- Mixed-mode
-- Sparse Jacobians
-- Implicit functions
-
-### Pharmacometrics
-
-- Population pharmacokinetic modelling
-- Pharmacokinetic-pharmacodynamic (PKPD) modelling
-- Tumour growth dynamics and survival modelling
-- Optimal design of clinical trials
-- Bayesian precision dosing
-- Machine learning augmented pharmacometrics
-
-### Computational linear algebra
-
-- Linear system solvers
-- Generalized eigenvalue solvers
-- Matrix factorizations
-- Preconditioners
-- Trace and diagonal estimation algorithms
-
-### Optimal transport
-
-- Formulations
-- Algorithms
-- Applications
-
-### Simulation
-
-- System dynamics
-- Discrete event simulations
-- Finite element analysis
+- Arabic (native), English (IELTS - 8.5)

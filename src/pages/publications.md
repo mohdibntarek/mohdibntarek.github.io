@@ -6,23 +6,6 @@ published: true
 layout: ../layouts/Layout.astro
 ---
 
-The following is the list of my publications, including preprints, conference posters and presentations, journal papers, videos and workshops taught.
-
-## Preprints
-
-1. [**Nonconvex.jl: A Comprehensive Julia Package for Non-Convex Optimization**](https://www.researchgate.net/publication/372336223_Nonconvexjl_A_Comprehensive_Julia_Package_for_Non-Convex_Optimization). July 13, 2023.
-1. [**Earth Movers in The Big Data Era: A Review of Optimal Transport in Machine Learning**](https://arxiv.org/abs/2305.05080). May 8, 2023.
-1. [**A Practitioner's Guide to Bayesian Inference in Pharmacometrics using Pumas**](https://arxiv.org/abs/2304.04752). Mar 31, 2023.
-1. [**Preconditioners.jl: A Flexible and Extensible Framework for Preconditioning in Iterative Solvers**](https://www.researchgate.net/publication/368781255_Preconditionersjl_A_Flexible_and_Extensible_Framework_for_Preconditioning_in_Iterative_Solvers). Feb 25, 2023.
-1. [**Accelerated Predictive Healthcare Analytics with Pumas, A High Performance Pharmaceutical Modeling and Simulation Platform**](https://www.biorxiv.org/content/10.1101/2020.11.28.402297v2.abstract). Mar 20, 2022.
-1. [**Bayesian Neural Ordinary Differential Equations**](https://arxiv.org/abs/2012.07244). Feb 6, 2022.
-1. [**AbstractDifferentiation.jl: Backend-Agnostic Differentiable Programming in Julia**](https://arxiv.org/abs/2109.12449). Feb 4, 2022.
-1. [**Simplifying deflation for non-convex optimization with applications in Bayesian inference and topology optimization**](https://arxiv.org/abs/2201.11926). Jan 28, 2022.
-1. [**Some popular nonlinear programming algorithms**](https://www.researchgate.net/publication/355362612_Some_popular_nonlinear_programming_algorithms). Oct 18, 2021.
-1. [**Approximation schemes for stochastic compliance-based topology optimization with many loading scenarios**](https://arxiv.org/abs/2108.03654). Aug 8, 2021.
-1. [**Robust and stochastic compliance-based topology optimization with finitely many loading scenarios**](https://arxiv.org/abs/2103.04594). Mar 8, 2021.
-1. [**DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models**](https://arxiv.org/abs/2002.02702). Feb 7, 2020.
-
 ## Conferences
 
 1. **Finding complex relationships between random effects and covariates using data-driven distributions**, American Conference on Pharmacometrics. Oct 21, 2025.
@@ -53,6 +36,21 @@ The following is the list of my publications, including preprints, conference po
 1. [**Bijectors.jl: Flexible transformations for probability distributions**](https://proceedings.mlr.press/v118/fjelde20a), 2nd Symposium on Advances in Approximate Bayesian Inference. Jan 1, 2019.
 1. **TopOpt.jl: An efficient and high-performance package for topology optimization of continuum structures in the Julia programming language**, The World Congress of Structural and Multidisciplinary Optimization (WCSMO) 13. Jan 1, 2019.
 1. [**Topology Optimization and JuMP**](https://www.youtube.com/watch?v=zNZ_bw1ti00), JuMP-dev Workshop. Jul 28, 2018.
+
+## Preprints
+
+1. [**Nonconvex.jl: A Comprehensive Julia Package for Non-Convex Optimization**](https://www.researchgate.net/publication/372336223_Nonconvexjl_A_Comprehensive_Julia_Package_for_Non-Convex_Optimization). July 13, 2023.
+1. [**Earth Movers in The Big Data Era: A Review of Optimal Transport in Machine Learning**](https://arxiv.org/abs/2305.05080). May 8, 2023.
+1. [**A Practitioner's Guide to Bayesian Inference in Pharmacometrics using Pumas**](https://arxiv.org/abs/2304.04752). Mar 31, 2023.
+1. [**Preconditioners.jl: A Flexible and Extensible Framework for Preconditioning in Iterative Solvers**](https://www.researchgate.net/publication/368781255_Preconditionersjl_A_Flexible_and_Extensible_Framework_for_Preconditioning_in_Iterative_Solvers). Feb 25, 2023.
+1. [**Accelerated Predictive Healthcare Analytics with Pumas, A High Performance Pharmaceutical Modeling and Simulation Platform**](https://www.biorxiv.org/content/10.1101/2020.11.28.402297v2.abstract). Mar 20, 2022.
+1. [**Bayesian Neural Ordinary Differential Equations**](https://arxiv.org/abs/2012.07244). Feb 6, 2022.
+1. [**AbstractDifferentiation.jl: Backend-Agnostic Differentiable Programming in Julia**](https://arxiv.org/abs/2109.12449). Feb 4, 2022.
+1. [**Simplifying deflation for non-convex optimization with applications in Bayesian inference and topology optimization**](https://arxiv.org/abs/2201.11926). Jan 28, 2022.
+1. [**Some popular nonlinear programming algorithms**](https://www.researchgate.net/publication/355362612_Some_popular_nonlinear_programming_algorithms). Oct 18, 2021.
+1. [**Approximation schemes for stochastic compliance-based topology optimization with many loading scenarios**](https://arxiv.org/abs/2108.03654). Aug 8, 2021.
+1. [**Robust and stochastic compliance-based topology optimization with finitely many loading scenarios**](https://arxiv.org/abs/2103.04594). Mar 8, 2021.
+1. [**DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models**](https://arxiv.org/abs/2002.02702). Feb 7, 2020.
 
 ## Journals
 

@@ -1,214 +1,723 @@
 ---
-import userIcon from "../assets/user-icon.png";
-import pubsIcon from "../assets/publish-publishing-icon.png";
-import softwareIcon from "../assets/programmer-icon.png";
-import communityIcon from "../assets/community-icon.png";
-import blogPostsIcon from "../assets/text-documents-line-icon.png";
-import awarenessIcon from "../assets/head-idea-icon.png";
+import Card from "../components/Card.astro";
+import TaglineCard from "../components/TaglineCard.astro";
 import LeftSide from "../components/LeftSide.astro";
 import SearchBar from "../components/SearchBar.astro";
+import personalPhoto from "../assets/personal_photo.png";
+import arxivIcon from "../assets/arxiv.ico";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { icon } from "@fortawesome/fontawesome-svg-core";
+import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faSun, faMoon, faHandsHelping, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGithub,
+  faYoutube,
+  faLinkedin,
+  faGoogleScholar,
+  faResearchgate,
+  faOrcid,
+} from "@fortawesome/free-brands-svg-icons";
 import "../styles/typography.css";
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Mohamed Tarek's Personal Website</title>
+    <title>Mohamed Tarek, PhD</title>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Personal website of Mohamed Tarek - Computer Scientist, Engineer, and Researcher" />
     <link rel="icon" href="https://fav.farm/👨🏻‍💻" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Prevent theme flash -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme-preference') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
-
   <body>
-    <header>
-      <h1>Mohamed Tarek, PhD</h1>
-      <p>Senior Product Engineer @ PumasAI Inc.</p>
-    </header>
-    <main>
-      <aside>
-        <LeftSide text_color_1="oklch(40% 0.07 240)" />
-      </aside>
-      <section>
-        <div class="search-bar-container">
-          <div class="search-bar">
-            <SearchBar />
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+      <span class="theme-icon sun"><Fragment set:html={icon(faSun).html} /></span>
+      <span class="theme-icon moon"><Fragment set:html={icon(faMoon).html} /></span>
+    </button>
+
+    <!-- Theme Management Script -->
+    <script is:inline>
+      (function() {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        function updateToggleIcon(theme) {
+          if (theme === 'dark') {
+            toggle?.classList.add('dark');
+          } else {
+            toggle?.classList.remove('dark');
+          }
+        }
+        
+        toggle?.addEventListener('click', () => {
+          const currentTheme = html.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme-preference', newTheme);
+          updateToggleIcon(newTheme);
+        });
+
+        // Initial icon state
+        const theme = html.getAttribute('data-theme') || 'light';
+        updateToggleIcon(theme);
+      })();
+    </script>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-greeting">Welcome to my website</div>
+          <h1 class="hero-title">Mohamed Tarek, PhD</h1>
+          <div class="tagline-wrapper">
+            <TaglineCard mode="hero" />
+          </div>
+          <div class="hero-actions">
+            <a href="#content" class="btn btn-primary">Explore</a>
+            <a href="mailto:mohdibntarek@gmail.com" class="btn btn-secondary">
+              <Fragment set:html={icon(faEnvelope).html} />
+              Get in Touch
+            </a>
           </div>
         </div>
-        <div class="card-wrapper">
-          <!-- About -->
-          <a href="/about">
-            <img src={userIcon.src} alt="user icon" />
-            <h2>About</h2>
-            <p>Background, education and work.</p>
+        <div class="hero-visual">
+          <div class="hero-image-container">
+            <img 
+              src={personalPhoto.src} 
+              alt="Mohamed Tarek" 
+              class="hero-image"
+            />
+            <div class="hero-image-ring"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-indicator">
+          <span>Scroll to explore</span>
+          <div class="scroll-arrow"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="content">
+      <!-- Search Section -->
+      <section class="section section-search">
+        <div class="section-header">
+          <h2 class="section-title">Search</h2>
+          <p class="section-description">Find content across the entire site</p>
+        </div>
+        <div class="search-container">
+          <SearchBar />
+        </div>
+      </section>
+
+      <!-- Navigation Cards -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Navigate</h2>
+          <p class="section-description">Explore different sections of my website</p>
+        </div>
+        
+        <div class="cards-grid">
+          <Card
+            href="/about"
+            title="About Me"
+            icon={icon(faBrain).html}
+            description="Learn about my background, education, and expertise in computer science, engineering, and research."
+            color="gradient-blue"
+          />
+          <Card
+            href="/publications"
+            title="Publications"
+            icon={icon(faFlask).html}
+            description="Explore my research papers in topology optimization, machine learning, and scientific computing."
+            color="gradient-green"
+          />
+          <Card
+            href="/software"
+            title="Software"
+            icon={icon(faCode).html}
+            description="Explore my open-source software contributions and projects."
+            color="gradient-orange"
+          />
+          <Card
+            href="/awareness"
+            title="Awareness"
+            icon={icon(faLightbulb).html}
+            description="Resources and links to expand your awareness on topics that matter to me."
+            color="gradient-red"
+          />
+          <Card
+            href="/mentorship"
+            title="Mentorship"
+            icon={icon(faHandsHelping).html}
+            description="Students and researchers I have mentored through GSoC and JSoC programs."
+            color="gradient-teal"
+          />
+          <Card
+            href="/blogposts"
+            title="Blog Posts"
+            icon={icon(faLaptopCode).html}
+            description="Read my thoughts and tutorials on programming, machine learning, and software engineering."
+            color="gradient-purple"
+          />
+        </div>
+      </section>
+
+      <!-- Social Links Section -->
+      <section class="section section-social">
+        <div class="section-header">
+          <h2 class="section-title">Connect</h2>
+          <p class="section-description">Find me on these platforms</p>
+        </div>
+        
+        <div class="social-row">
+          <a href="https://github.com/mohdibntarek/" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><Fragment set:html={icon(faGithub).html} /></span>
+            <span class="social-pill-name">GitHub</span>
           </a>
-          <!-- Research and training -->
-          <a href="/publications">
-            <img src={pubsIcon.src} alt="research icon" />
-            <h2>Research & Teaching</h2>
-            <p>Publications and teaching material.</p>
+          <a href="https://scholar.google.com/citations?user=mXZ8aioAAAAJ&hl=en" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><Fragment set:html={icon(faGoogleScholar).html} /></span>
+            <span class="social-pill-name">Scholar</span>
           </a>
-          <!-- Software -->
-          <a href="/software">
-            <img src={softwareIcon.src} alt="programmer icon" />
-            <h2>Software</h2>
-            <p>Open source contributions.</p>
+          <a href="https://arxiv.org/a/tarek_m_1.html/" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><img src={arxivIcon} alt="" style="width: 1em; height: 1em; object-fit: contain;" /></span>
+            <span class="social-pill-name">arXiv</span>
           </a>
-          <!-- Mentorship -->
-          <a href="/mentorship">
-            <img src={communityIcon.src} alt="community icon" />
-            <h2>Mentorship</h2>
-            <p>People and projects I mentored.</p>
+          <a href="https://orcid.org/0000-0003-3074-0678?lang=en" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><Fragment set:html={icon(faOrcid).html} /></span>
+            <span class="social-pill-name">ORCID</span>
           </a>
-          <!-- Blog posts -->
-          <a href="/blogposts">
-            <img src={blogPostsIcon.src} alt="documents icon" />
-            <h2>Blog posts</h2>
-            <p>Blog posts I have written.</p>
+          <a href="https://www.researchgate.net/profile/Mohamed-Tarek-18/" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><Fragment set:html={icon(faResearchgate).html} /></span>
+            <span class="social-pill-name">ResearchGate</span>
           </a>
-          <!-- Awareness -->
-          <a href="/awareness">
-            <img src={awarenessIcon.src} alt="awareness icon" />
-            <h2>Awareness</h2>
-            <p>Raise your awareness.</p>
+          <a href="https://www.linkedin.com/in/mohdibntarek/" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><Fragment set:html={icon(faLinkedin).html} /></span>
+            <span class="social-pill-name">LinkedIn</span>
+          </a>
+          <a href="https://www.youtube.com/@MrMohamed82008/" target="_blank" rel="noopener" class="social-pill">
+            <span class="social-pill-icon"><Fragment set:html={icon(faYoutube).html} /></span>
+            <span class="social-pill-name">YouTube</span>
           </a>
         </div>
       </section>
+
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="footer-text">© {new Date().getFullYear()} Mohamed Tarek.</p>
+        <p class="footer-built">Built with Astro & Pagefind</p>
+      </div>
+    </footer>
   </body>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      text-decoration: none;
-    }
-
-    html {
-      overflow: scroll;
-      scroll-behavior: smooth;
-      overscroll-behavior: none;
-    }
-
-    body {
-      display: grid;
-      grid-template-columns: 1fr;
-      background-color: var(--color-bg);
-      color: var(--color-text);
-    }
-
-    header {
-      background-color: black;
-      background-image: url("../assets/home-page-background.png");
-      background-size: auto 200%;
-      background-position: 50%;
-      background-repeat: no-repeat;
-      padding-left: 17vw;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      position: sticky;
-      z-index: 2;
-      top: 0;
-      display: grid;
-      h1 {
-        padding-bottom: 1rem;
-        font-size: 2.3rem;
-        font-weight: 600;
-        color: oklch(98% 0.025 145);
-      }
-      p {
-        font-size: 1.2rem;
-        color: oklch(95% 0.03 145);
-      }
-      p:not(:first-of-type) {
-        padding-top: 0.3em;
-      }
-    }
-    main {
-      padding-right: 60px;
-      display: grid;
-      grid-template-columns: 280px auto;
-      grid-template-rows: 100%;
-    }
-
-    aside {
-      padding-left: 20%;
-      margin-top: 10%;
-      position: sticky;
-      min-width: 240px;
-      max-width: 240px;
-      height: 25vh;
-      top: 30%;
-      background: var(--color-bg);
-    }
-
-    section {
-      padding-bottom: 10px;
-
-      .search-bar-container {
-        position: relative;
-        margin-top: 1.5em;
-        width: 100%;
-        margin-bottom: 6em;
-
-        .search-bar {
-          z-index: 1;
-          width: 90%;
-          position: absolute;
-        }
-      }
-
-      .card-wrapper {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 260px);
-        row-gap: 30px;
-        column-gap: 20px;
-        justify-content: space-around;
-        margin-top: 80px;
-        margin-right: 10%;
-
-        a {
-          max-width: 280px;
-          min-width: 280px;
-          max-height: 200px;
-          min-height: 200px;
-          display: grid;
-          grid-template-columns: 300px;
-          row-gap: 6%;
-          justify-content: center;
-          justify-items: center;
-          padding-top: 1em;
-          padding-bottom: 1em;
-          border-radius: 2em;
-          background-color: var(--color-card);
-          border: 1px solid var(--color-card-border);
-          transition-property: box-shadow scale;
-          transition-duration: 300ms;
-          &:hover {
-            scale: 1.05;
-            box-shadow:
-              0 10px 15px -3px rgb(0 0 0 / 0.1),
-              0 4px 6px -4px rgb(0 0 0 / 0.1);
-          }
-
-          img {
-            width: 30%;
-          }
-
-          h2 {
-            margin-bottom: 0.1em;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--color-text);
-          }
-
-          p {
-            font-size: 0.95rem;
-            margin-bottom: 0.1em;
-            color: var(--color-text-muted);
-          }
-        }
-      }
-    }
-  </style>
 </html>
+
+<style>
+  /* Reset & Base */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+  }
+
+  body {
+    font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+    background-color: var(--color-bg, #fafafa);
+    color: var(--color-text, #1a1a1a);
+    line-height: 1.6;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--color-bg, #fafafa) 0%, var(--color-bg-secondary, #f0f0f5) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 150%;
+    background: radial-gradient(ellipse, oklch(55% 0.12 250 / 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .hero-greeting {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary, #4a6cf7);
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background: oklch(55% 0.12 250 / 0.1);
+    border-radius: 100px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-text, #1a1a1a) 0%, var(--color-text-secondary, #4a4a4a) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #666);
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  .tagline-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 250ms ease;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-primary, #4a6cf7) 0%, var(--color-primary-dark, #3a5ce7) 100%);
+    color: white;
+    box-shadow: 0 4px 14px oklch(55% 0.12 250 / 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px oklch(55% 0.12 250 / 0.5);
+  }
+
+  .btn-secondary {
+    background: var(--color-card, white);
+    color: var(--color-text, #1a1a1a);
+    border-color: var(--color-card-border, #e5e5e5);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-bg-secondary, #f5f5f5);
+    border-color: var(--color-primary, #4a6cf7);
+  }
+
+  /* Hero Image */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 20px 60px oklch(20% 0.02 260 / 0.3);
+    position: relative;
+    z-index: 2;
+    border: 4px solid white;
+  }
+
+  .hero-image-ring {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 2px dashed var(--color-primary, #4a6cf7);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: rotate 30s linear infinite;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Scroll Indicator */
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted, #888);
+    font-size: 0.875rem;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+
+  .scroll-arrow {
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid var(--color-text-muted, #888);
+    border-bottom: 2px solid var(--color-text-muted, #888);
+    transform: rotate(45deg);
+  }
+
+  /* Main Content */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .section-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary, #666);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Social Section */
+  .section-social {
+    background: var(--color-bg-secondary, #f5f5f5);
+    margin: 0 -2rem;
+    padding: 4rem 2rem;
+    border-radius: 2rem;
+  }
+
+  .social-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .social-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: var(--color-card, white);
+    border-radius: 100px;
+    color: var(--color-text, #1a1a1a);
+    text-decoration: none;
+    transition: all 250ms ease;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    box-shadow: 0 2px 8px oklch(20% 0.02 260 / 0.06);
+  }
+
+  .social-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px oklch(20% 0.02 260 / 0.12);
+    border-color: var(--color-primary, #4a6cf7);
+  }
+
+  .social-pill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .social-pill-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .social-pill-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0.9);
+  }
+
+  .social-pill-name {
+    font-weight: 500;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background: var(--color-card, white);
+    border-radius: 1rem;
+    transition: all 250ms ease;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    box-shadow: 0 2px 8px oklch(20% 0.02 260 / 0.06);
+  }
+
+  .social-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px oklch(20% 0.02 260 / 0.12);
+    border-color: var(--color-primary, #4a6cf7);
+  }
+
+  .social-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    transition: transform 250ms ease;
+  }
+
+  .social-card:hover .social-icon {
+    transform: scale(1.1);
+  }
+
+  .social-name {
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-text, #1a1a1a);
+    margin-bottom: 0.25rem;
+  }
+
+  .social-handle {
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #888);
+  }
+
+  /* Search Section */
+  .section-search {
+    text-align: center;
+  }
+
+  .search-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--color-card-border, #e5e5e5);
+    padding: 2rem;
+    text-align: center;
+    background: var(--color-bg-secondary, #f5f5f5);
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-text {
+    color: var(--color-text-secondary, #666);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-built {
+    color: var(--color-text-muted, #888);
+    font-size: 0.75rem;
+  }
+
+  /* Theme Toggle Button - matches ThemeToggle.astro component */
+  .theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-card, white);
+    border: none;
+    color: var(--color-text, #1a1a1a);
+    cursor: pointer;
+    transition: all 250ms ease;
+    box-shadow: 0 2px 8px oklch(20% 0.02 260 / 0.15);
+    overflow: hidden;
+  }
+
+  .theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px oklch(20% 0.02 260 / 0.25);
+  }
+
+  .theme-toggle:active {
+    transform: translateY(0);
+  }
+
+  .theme-icon {
+    position: absolute;
+    transition: all 250ms ease;
+  }
+
+  .theme-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-text, #1a1a1a);
+  }
+
+  /* Light mode: show moon (indicates switch to dark) */
+  .theme-icon.sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  .theme-icon.moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  /* Dark mode: show sun (indicates switch to light) */
+  .theme-toggle.dark .theme-icon.sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  .theme-toggle.dark .theme-icon.moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
+    .hero-image-container {
+      width: 200px;
+      height: 200px;
+      order: -1;
+    }
+
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .social-row {
+      gap: 0.5rem;
+    }
+    
+    .social-pill {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    main {
+      padding: 2rem 1rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+  }
+</style>

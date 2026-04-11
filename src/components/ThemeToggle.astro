@@ -1,0 +1,95 @@
+---
+// Theme Toggle Component - Alpine.js version
+---
+
+<button 
+  class="theme-toggle" 
+  aria-label="Toggle dark mode"
+  title="Toggle dark mode"
+  x-data="themeToggle"
+  @click="toggle"
+>
+  <!-- Sun icon - visible in dark mode (click to switch to light) -->
+  <span 
+    class="theme-toggle__icon theme-toggle__icon--sun"
+    x-show="isDark"
+    x-transition:enter="transition ease-out duration-250"
+    x-transition:enter-start="opacity-0 -rotate-90 scale-50"
+    x-transition:enter-end="opacity-100 rotate-0 scale-100"
+    x-transition:leave="transition ease-in duration-250"
+    x-transition:leave-start="opacity-100 rotate-0 scale-100"
+    x-transition:leave-end="opacity-0 rotate-90 scale-50"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </span>
+  
+  <!-- Moon icon - visible in light mode (click to switch to dark) -->
+  <span 
+    class="theme-toggle__icon theme-toggle__icon--moon"
+    x-show="!isDark"
+    x-transition:enter="transition ease-out duration-250"
+    x-transition:enter-start="opacity-0 rotate-90 scale-50"
+    x-transition:enter-end="opacity-100 rotate-0 scale-100"
+    x-transition:leave="transition ease-in duration-250"
+    x-transition:leave-start="opacity-100 rotate-0 scale-100"
+    x-transition:leave-end="opacity-0 -rotate-90 scale-50"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-card);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 250ms ease;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color-hover);
+    background: var(--color-card-hover);
+  }
+
+  .theme-toggle:active {
+    transform: translateY(0);
+  }
+
+  .theme-toggle__icon {
+    position: absolute;
+    pointer-events: none;
+    display: none; /* Hidden by default */
+  }
+
+  /* Show correct icon immediately based on data-theme - no JS required */
+  html[data-theme="dark"] .theme-toggle__icon--sun {
+    display: block;
+  }
+
+  html[data-theme="light"] .theme-toggle__icon--moon {
+    display: block;
+  }
+</style>

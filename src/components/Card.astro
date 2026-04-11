@@ -1,0 +1,147 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  icon?: string;
+  color?: "gradient-blue" | "gradient-purple" | "gradient-green" | "gradient-orange" | "gradient-pink" | "gradient-teal" | "gradient-red";
+}
+
+const { 
+  href, 
+  title, 
+  description, 
+  icon = "", 
+  color = "gradient-blue" 
+} = Astro.props;
+
+const colorStyles: Record<string, string> = {
+  "gradient-blue": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+  "gradient-purple": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+  "gradient-green": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+  "gradient-orange": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+  "gradient-pink": "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+  "gradient-teal": "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)",
+  "gradient-red": "linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%)",
+};
+---
+
+<a href={href} class="card" data-color={color}>
+  <div class="card-glow" style={`background: ${colorStyles[color]};`}></div>
+  <div class="card-content">
+    {icon && (
+      <div class="card-icon" style={`background: ${colorStyles[color]};`}>
+        <Fragment set:html={icon} />
+      </div>
+    )}
+    <h3 class="card-title">{title}</h3>
+    <p class="card-description">{description}</p>
+    <div class="card-arrow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+      </svg>
+    </div>
+  </div>
+</a>
+
+<style>
+  .card {
+    position: relative;
+    display: block;
+    background: var(--color-card, #ffffff);
+    border-radius: 1rem;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 300ms ease;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    box-shadow: 0 2px 8px oklch(20% 0.02 260 / 0.06);
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px oklch(20% 0.02 260 / 0.15);
+    border-color: transparent;
+  }
+
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    opacity: 0.8;
+    transition: height 300ms ease, opacity 300ms ease;
+  }
+
+  .card:hover .card-glow {
+    height: 100%;
+    opacity: 0.08;
+  }
+
+  .card-content {
+    position: relative;
+    padding: 1.75rem;
+    z-index: 1;
+  }
+
+  .card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.25rem;
+    transition: transform 300ms ease;
+  }
+
+  .card:hover .card-icon {
+    transform: scale(1.1);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text, #1a1a1a);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card-description {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary, #666);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .card-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-bg-secondary, #f5f5f5);
+    color: var(--color-text-secondary, #666);
+    margin-left: auto;
+    transition: all 300ms ease;
+  }
+
+  .card:hover .card-arrow {
+    background: var(--color-primary, #667eea);
+    color: white;
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .card-content {
+      padding: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.125rem;
+    }
+  }
+</style>

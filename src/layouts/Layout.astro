@@ -1,9 +1,45 @@
 ---
 const { frontmatter } = Astro.props;
 import LeftSide from "../components/LeftSide.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 import "../styles/markdown.css";
 import "../styles/typography.css";
 ---
+
+<script>
+  import Alpine from 'alpinejs';
+  
+  // Theme toggle component
+  Alpine.data('themeToggle', () => ({
+    // Initialize immediately from the document attribute (set by inline script)
+    // This prevents the toggle from showing the wrong icon during hydration
+    isDark: document.documentElement.getAttribute('data-theme') === 'dark',
+    
+    init() {
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only update if no manual preference is saved
+        if (!localStorage.getItem('theme-preference')) {
+          this.isDark = e.matches;
+          this.applyTheme();
+        }
+      });
+    },
+    
+    toggle() {
+      this.isDark = !this.isDark;
+      this.applyTheme();
+    },
+    
+    applyTheme() {
+      const theme = this.isDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme-preference', theme);
+    }
+  }));
+  
+  Alpine.start();
+</script>
 
 <html lang="en">
   <head>
@@ -11,22 +47,43 @@ import "../styles/typography.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={frontmatter.description} />
     <link rel="icon" href="https://fav.farm/👨🏻‍💻" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Prevent theme flash -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme-preference') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <!-- Prevent toggle flicker - hide icons until theme is applied -->
+    <style>
+      .theme-toggle__icon { display: none; }
+      [data-theme="dark"] .theme-toggle__icon--sun,
+      [data-theme="light"] .theme-toggle__icon--moon { display: block; }
+    </style>
   </head>
   <body>
     <aside>
-      <LeftSide text_color_1="oklch(98% 0.025 145)" text_color_2="var(--color-text-light)" />
+      <div class="sidebar-content">
+        <LeftSide text_color_1="oklch(98% 0.025 145)" text_color_2="var(--color-text-light)" />
+      </div>
+      <div class="sidebar-footer">
+        <ThemeToggle />
+      </div>
     </aside>
     <main>
       <article>
-        <div class="article-title">
-          <h1>
-            {frontmatter.title}
-          </h1>
-        </div>
+        <header class="article-header">
+          <h1 class="article-title">{frontmatter.title}</h1>
+          {frontmatter.description && (
+            <p class="article-description">{frontmatter.description}</p>
+          )}
+        </header>
         <div class="article-body">
-          <!-- Markdown content is injected here -->
-          <!-- ... -->
           <slot />
         </div>
       </article>
@@ -41,67 +98,156 @@ import "../styles/typography.css";
     padding: 0;
     text-decoration: none;
   }
+
   html {
     scroll-behavior: smooth;
     overscroll-behavior: none;
   }
-  main {
-    padding: 1em;
-  }
-  aside {
-    position: sticky;
-    font-size: 1rem;
-    padding-left: 2em;
-    padding-top: 5em;
-    min-width: 240px;
-    max-width: 240px;
-    top: 0;
-    background-color: var(--color-bg-dark);
-    height: 100vh;
-    /* Show aside only on larger screens */
-    @media (width < 64rem) {
-      display: none;
-    }
-  }
+
   body {
     display: flex;
-    background-color: white;
-    color: var(--color-text);
-    font-size: 1.1em;
+    background-color: var(--color-bg, #fafafa);
+    color: var(--color-text, #1a1a1a);
+    font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    min-height: 100vh;
   }
-  .article-title {
+
+  aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-bg-dark, oklch(25% 0.035 265));
+    z-index: 100;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary, #667eea) transparent;
+    display: flex;
+    flex-direction: column;
+  }
+
+  aside::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  aside::-webkit-scrollbar-thumb {
+    background: var(--color-primary, #667eea);
+    border-radius: 3px;
+  }
+
+  .sidebar-content {
+    flex: 1;
+  }
+
+  .sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: center;
-    position: sticky;
-    top: 0.5em;
-    background-color: var(--color-bg-dark);
-    border-radius: 2em;
-    padding: 0.5em;
-    margin-bottom: 2em;
+    align-items: center;
   }
-  .article-body {
-    @media (width >= 64rem) {
-      margin: 0em 2em 0em 1em;
-    }
-    text-wrap: pretty;
+
+  main {
+    flex: 1;
+    margin-left: 280px;
+    padding: 1.25rem;
+    min-height: 100vh;
   }
+
   article {
-    margin: 0em 2em;
-    margin-bottom: 1em;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .article-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-card-border, #e5e5e5);
+  }
+
+  .article-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text, #1a1a1a);
+    margin-bottom: 1rem;
+  }
+
+  .article-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary, #666);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .article-body {
+    text-wrap: pretty;
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 1024px) {
+    aside {
+      transform: translateX(-100%);
+      transition: transform 300ms ease;
+    }
+
+    aside.open {
+      transform: translateX(0);
+    }
+
+    main {
+      margin-left: 0;
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .article-title {
+      font-size: 1.75rem;
+    }
+
+    .article-description {
+      font-size: 1rem;
+    }
   }
 </style>
 
 <script>
-  const anchorHeadings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+  // Add anchor links to headings
+  const anchorHeadings = document.querySelectorAll("h2, h3, h4, h5, h6");
   [...anchorHeadings].forEach((heading) => {
-    const anchor = document.createElement("a");
-    anchor.className = "cursor-pointer";
-    anchor.href = `#${heading.id}`;
-    // Move heading's existing content into the anchor
-    while (heading.firstChild) {
-      anchor.appendChild(heading.firstChild);
+    if (heading.id) {
+      const anchor = document.createElement("a");
+      anchor.className = "heading-anchor";
+      anchor.href = `#${heading.id}`;
+      anchor.setAttribute("aria-label", "Link to this heading");
+      anchor.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
+      heading.appendChild(anchor);
     }
-    // Append the anchor to the heading
-    heading.appendChild(anchor);
   });
 </script>

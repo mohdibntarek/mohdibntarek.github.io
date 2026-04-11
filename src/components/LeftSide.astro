@@ -1,5 +1,6 @@
 ---
 import IconCard from "../components/IconCard.astro";
+import TaglineCard from "../components/TaglineCard.astro";
 import personalPhoto from "../assets/personal_photo.png";
 import arxivIcon from "../assets/arxiv.ico";
 import { icon } from "@fortawesome/fontawesome-svg-core";
@@ -10,77 +11,212 @@ import {
   faLinkedin,
   faGoogleScholar,
   faResearchgate,
+  faOrcid,
 } from "@fortawesome/free-brands-svg-icons";
 const { text_color_1 = "var(--color-text)", text_color_2 = "black" } =
   Astro.props;
 ---
 
-<a style={`--text-color-1: ${text_color_1};`} href="/">
-  <img src={personalPhoto.src} alt="Mohamed Tarek" />
-  <p>Mohamed Tarek</p>
-</a>
-<section style={`--text-color-2: ${text_color_2};`}>
-  <div>
-    <IconCard icon={icon(faMapMarkerAlt)}> Sharjah </IconCard>
-    <IconCard href="https://github.com/mohdibntarek/" icon={icon(faGithub)}>
-      GitHub
-    </IconCard>
-    <IconCard
-      href="https://www.linkedin.com/in/mohdibntarek/"
-      icon={icon(faLinkedin)}
-    >
-      LinkedIn
-    </IconCard>
-    <IconCard
-      href="https://www.youtube.com/@MrMohamed82008/"
-      icon={icon(faYoutube)}
-    >
-      YouTube
-    </IconCard>
-    <IconCard
-      href="https://scholar.google.com/citations?user=mXZ8aioAAAAJ&hl=en"
-      icon={icon(faGoogleScholar)}
-    >
-      Google Scholar
-    </IconCard>
-    <IconCard
-      href="https://www.researchgate.net/profile/Mohamed-Tarek-18/"
-      icon={icon(faResearchgate)}
-    >
-      ResearchGate
-    </IconCard>
-    <IconCard href="https://arxiv.org/a/tarek_m_1.html/" path={arxivIcon}>
-      arXiv
-    </IconCard>
-  </div>
-</section>
+<div class="sidebar-content">
+  <a class="profile-link" style={`--text-color-1: ${text_color_1};`} href="/">
+    <div class="profile-image-wrapper">
+      <img src={personalPhoto.src} alt="Mohamed Tarek, PhD" />
+      <div class="profile-glow"></div>
+    </div>
+    <div class="profile-info">
+      <p class="profile-name">Mohamed Tarek, PhD</p>
+      <TaglineCard mode="compact" />
+    </div>
+  </a>
+  
+  <section class="contact-section" style={`--text-color-2: ${text_color_2};`}>
+    <div class="social-links">
+      <IconCard href="https://github.com/mohdibntarek/" icon={icon(faGithub)}>GitHub</IconCard>
+      <IconCard
+        href="https://scholar.google.com/citations?user=mXZ8aioAAAAJ&hl=en"
+        icon={icon(faGoogleScholar)}
+      >Google Scholar</IconCard>
+      <IconCard href="https://arxiv.org/a/tarek_m_1.html/" path={arxivIcon}>arXiv</IconCard>
+      <IconCard
+        href="https://orcid.org/0000-0003-3074-0678?lang=en"
+        icon={icon(faOrcid)}
+      >ORCID</IconCard>
+      <IconCard
+        href="https://www.researchgate.net/profile/Mohamed-Tarek-18/"
+        icon={icon(faResearchgate)}
+      >ResearchGate</IconCard>
+      <IconCard
+        href="https://www.linkedin.com/in/mohdibntarek/"
+        icon={icon(faLinkedin)}
+      >LinkedIn</IconCard>
+      <IconCard
+        href="https://www.youtube.com/@MrMohamed82008/"
+        icon={icon(faYoutube)}
+      >YouTube</IconCard>
+    </div>
+  </section>
+</div>
 
 <style>
-  * {
+  .sidebar-content {
+    padding: 2rem 1.5rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .profile-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--text-color-1, white);
+    transition: transform 300ms ease;
+  }
+
+  .profile-link:hover {
+    transform: translateY(-2px);
+  }
+
+  .profile-image-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .profile-image-wrapper img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid oklch(98% 0.025 145 / 0.3);
+    box-shadow: 
+      0 8px 30px oklch(20% 0.02 260 / 0.3),
+      0 0 0 1px oklch(98% 0.025 145 / 0.1);
+    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .profile-link:hover .profile-image-wrapper img {
+    transform: scale(1.05);
+    border-color: oklch(98% 0.025 145 / 0.6);
+    box-shadow: 
+      0 12px 40px oklch(20% 0.02 260 / 0.4),
+      0 0 0 2px oklch(98% 0.025 145 / 0.2);
+  }
+
+  .profile-glow {
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(
+      circle at center,
+      oklch(60% 0.15 250 / 0.4) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 400ms ease;
+    z-index: 0;
+    filter: blur(20px);
+  }
+
+  .profile-link:hover .profile-glow {
+    opacity: 1;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .profile-name {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-color-1, white);
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
   }
-  a {
-    font-size: 1.125rem;
-    color: var(--text-color-1);
-    img {
-      width: 7rem;
-      border-radius: 3.5rem;
-      margin: 1em;
-      margin-top: -1em;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    p {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1em;
-      letter-spacing: -0.01em;
+
+  .profile-title {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: oklch(98% 0.025 145 / 0.8);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .contact-section {
+    color: var(--text-color-2, rgba(255, 255, 255, 0.9));
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  /* Stagger animation for social links */
+  .social-links > :global(*) {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideIn 400ms ease forwards;
+  }
+
+  .social-links > :global(*:nth-child(1)) { animation-delay: 100ms; }
+  .social-links > :global(*:nth-child(2)) { animation-delay: 150ms; }
+  .social-links > :global(*:nth-child(3)) { animation-delay: 200ms; }
+  .social-links > :global(*:nth-child(4)) { animation-delay: 250ms; }
+  .social-links > :global(*:nth-child(5)) { animation-delay: 300ms; }
+  .social-links > :global(*:nth-child(6)) { animation-delay: 350ms; }
+  .social-links > :global(*:nth-child(7)) { animation-delay: 400ms; }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
-  section {
-    color: var(--text-color-2);
-    margin-top: 1em;
+
+  /* Scrollbar styling */
+  :global(aside) {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(60% 0.15 250 / 0.5) transparent;
+  }
+
+  :global(aside::-webkit-scrollbar) {
+    width: 6px;
+  }
+
+  :global(aside::-webkit-scrollbar-track) {
+    background: transparent;
+  }
+
+  :global(aside::-webkit-scrollbar-thumb) {
+    background: oklch(60% 0.15 250 / 0.3);
+    border-radius: 3px;
+  }
+
+  :global(aside::-webkit-scrollbar-thumb:hover) {
+    background: oklch(60% 0.15 250 / 0.5);
+  }
+
+  @media (max-width: 1024px) {
+    .sidebar-content {
+      padding: 1.5rem;
+    }
+
+    .profile-image-wrapper img {
+      width: 6rem;
+      height: 6rem;
+    }
+
+    .profile-name {
+      font-size: 1.125rem;
+    }
   }
 </style>
