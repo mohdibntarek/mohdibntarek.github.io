@@ -67,6 +67,11 @@ import "../styles/typography.css";
     </style>
   </head>
   <body>
+    <!-- Mobile Theme Toggle - Fixed position for mobile when sidebar is hidden -->
+    <div class="mobile-theme-toggle">
+      <ThemeToggle />
+    </div>
+    
     <aside>
       <div class="sidebar-content">
         <LeftSide text_color_1="oklch(98% 0.025 145)" text_color_2="var(--color-text-light)" />
@@ -200,6 +205,15 @@ import "../styles/typography.css";
     }
   }
 
+  /* Mobile Theme Toggle - Hidden on desktop, visible on mobile */
+  .mobile-theme-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+
   /* Mobile Responsive */
   @media (max-width: 1024px) {
     aside {
@@ -214,6 +228,11 @@ import "../styles/typography.css";
     main {
       margin-left: 0;
       padding: 1.5rem;
+    }
+
+    /* Show mobile theme toggle when sidebar is hidden */
+    .mobile-theme-toggle {
+      display: block;
     }
   }
 
