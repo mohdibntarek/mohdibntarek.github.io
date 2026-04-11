@@ -8,6 +8,12 @@ layout: ../layouts/Layout.astro
 
 ## Conferences
 
+1. **Early go/no-go decisions in clinical trials using a DeepNLME joint tumor growth dynamics and overall survival model**, Population Approach Group in Europe. 2026. Submitted.
+1. **Using DeepNLME to identify promising biomarkers with an application to disease progression modelling of Alzheimer's disease**, Population Approach Group in Europe. 2026. Submitted.
+1. **Multidimensional scaling for longitudinal data embeddings in pharmacometrics**, Population Approach Group in Europe. 2026. Submitted.
+1. **Post-hoc model joining with normalizing flows for efficient and scalable multi-endpoint PKPD**, Population Approach Group in Europe. 2026. Submitted.
+1. **Application of DeepNLME framework to characterize distinct platelet dynamics in patients treated with Milademetan**, Population Approach Group in Europe. 2026. Submitted.
+1. [**Metric multi-dimensional scaling for longitudinal data embeddings in pharmacometrics**](https://openreview.net/forum?id=f3oaZyXr29#discussion), ICLR Workshop on Geometry-grounded Representation Learning and Generative Modeling. April 25-26, 2026.
 1. **Finding complex relationships between random effects and covariates using data-driven distributions**, American Conference on Pharmacometrics. Oct 21, 2025.
 1. [**Machine Learning For Exploratory Data Analysis And Model Diagnosis In Oncology**](https://pai-marketing-materials.s3.us-east-2.amazonaws.com/2025/Poster/Machine+Learning+For+Exploratory+Data+Analysis+And+Model+Diagnosis+In+Oncology.pdf). Oct 19, 2025.
 1. [**A DeepNLME framework for modeling ordinal data to describe disease progression in patients with Alzheimer's disease**](https://www.page-meeting.org/wp-content/uploads/pdf_abstracts/2025/11775.pdf), Population Approach Group in Europe. Jun 6, 2025. 
@@ -54,6 +60,8 @@ layout: ../layouts/Layout.astro
 
 ## Journals
 
+1. **DeepNLME: conditional generative scientific machine learning with applications in pharmacology**, Quantitative Medicine. Under Review.
+1. **Pumas: a unified platform for pharmaceutical modeling and simulation**, Quantitative Medicine. Under Review.
 1. [**Turing.jl: a general-purpose probabilistic programming language**](https://dl.acm.org/doi/abs/10.1145/3711897), ACM Transactions on Probabilistic Machine Learning. Feb 14, 2025.
 1. [**ReverseDiff: Reverse mode automatic Differentiation for Julia**](https://ui.adsabs.harvard.edu/abs/2024ascl.soft11010R/abstract), Astrophysics Source Code Library. Nov 1, 2024.
 1. [**Scalable Optimal Transport Methods in Machine Learning: A Contemporary Survey**](https://ieeexplore.ieee.org/abstract/document/10476763), IEEE Transactions on Pattern Analysis and Machine Intelligence. Mar 20, 2024.
