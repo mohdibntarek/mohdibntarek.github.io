@@ -1,0 +1,262 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { faLaptopCode } from '@fortawesome/free-solid-svg-icons';
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import '../styles/markdown.css';
+import { readFileSync, readdirSync } from 'fs';
+import { join, basename, extname } from 'path';
+
+// Function to parse YAML frontmatter from file content
+function parseFrontmatter(content: string): Record<string, any> {
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  
+  const yaml = match[1];
+  const result: Record<string, any> = {};
+  
+  // Simple YAML parser for basic types
+  const lines = yaml.split('\n');
+  let currentKey = '';
+  let collectingArray = false;
+  let arrayValues: string[] = [];
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    
+    // Check for array continuation
+    if (collectingArray && trimmed.startsWith('- ')) {
+      arrayValues.push(trimmed.slice(2).trim().replace(/["']/g, ''));
+      continue;
+    } else if (collectingArray) {
+      // End of array
+      result[currentKey] = arrayValues;
+      collectingArray = false;
+      arrayValues = [];
+    }
+    
+    // Key-value pair
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.slice(0, colonIndex).trim();
+      let value = line.slice(colonIndex + 1).trim();
+      
+      // Check if it's an inline array [a, b, c]
+      if (value.startsWith('[') && value.endsWith(']')) {
+        result[key] = value.slice(1, -1).split(',').map(v => v.trim().replace(/["']/g, '')).filter(v => v);
+      } 
+      // Check if it's a multi-line array
+      else if (value === '') {
+        currentKey = key;
+        collectingArray = true;
+        arrayValues = [];
+      }
+      // Regular string value
+      else {
+        result[key] = value.replace(/["']/g, '');
+      }
+    }
+  }
+  
+  // Handle case where array is at end of frontmatter
+  if (collectingArray && arrayValues.length > 0) {
+    result[currentKey] = arrayValues;
+  }
+  
+  return result;
+}
+
+// Automatically discover and parse blog posts from qmd files
+const postsDir = 'quarto_blog/posts';
+let blogPosts: Array<{
+  title: string;
+  href: string;
+  description: string;
+  date: string;
+  categories: string[];
+}> = [];
+
+try {
+  const files = readdirSync(postsDir).filter(f => f.endsWith('.qmd'));
+  
+  blogPosts = files.map(filename => {
+    const filepath = join(postsDir, filename);
+    const content = readFileSync(filepath, 'utf-8');
+    const fm = parseFrontmatter(content);
+    
+    // Generate href from filename
+    const nameWithoutExt = basename(filename, extname(filename));
+    
+    return {
+      title: fm.title || 'Untitled',
+      href: `/quarto_blog/posts/${nameWithoutExt}.html`,
+      description: fm.description || '',
+      date: fm.date || '',
+      categories: Array.isArray(fm.categories) ? fm.categories : []
+    };
+  }).filter(post => post.title !== 'Untitled'); // Filter out files without titles
+  
+  // Sort by date (newest first)
+  blogPosts.sort((a, b) => {
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+  
+} catch (error) {
+  console.error('Error reading blog posts:', error);
+}
+---
+<Layout frontmatter={{ title: "Blog Posts", description: "Tutorials, guides, and thoughts on programming, machine learning, and software engineering." }}>
+  <div class="blog-container">
+    <div class="posts-grid">
+      {blogPosts.map(post => (
+        <article class="post-card">
+          <a href={post.href} class="post-link">
+            <div class="post-header">
+              <h2 class="post-title">{post.title}</h2>
+              <time class="post-date" datetime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+            <p class="post-description">{post.description}</p>
+            <div class="post-categories">
+              {post.categories.map(cat => (
+                <span class="category-tag">{cat}</span>
+              ))}
+            </div>
+            <div class="read-more">
+              Read more →
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+  }
+
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    background: var(--color-card, white);
+    border-radius: 1rem;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    box-shadow: 0 2px 8px oklch(20% 0.02 260 / 0.06);
+    transition: all 250ms ease;
+    overflow: hidden;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px oklch(20% 0.02 260 / 0.12);
+    border-color: var(--color-primary, #4a6cf7);
+  }
+
+  .post-link {
+    display: block;
+    padding: 2rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text, #1a1a1a);
+    margin: 0;
+  }
+
+  .post-date {
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #888);
+  }
+
+  .post-description {
+    font-size: 1rem;
+    color: var(--color-text-secondary, #666);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .category-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.375rem 0.75rem;
+    background: oklch(55% 0.12 250 / 0.1);
+    color: var(--color-primary, #4a6cf7);
+    border-radius: 100px;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--color-primary, #4a6cf7);
+    transition: gap 250ms ease;
+  }
+
+  .post-card:hover .read-more {
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .blog-container {
+      padding: 2rem 1rem;
+    }
+
+    .blog-header h1 {
+      font-size: 2rem;
+    }
+
+    .header-icon {
+      font-size: 2.5rem;
+    }
+
+    .post-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .post-title {
+      font-size: 1.25rem;
+    }
+
+    .post-link {
+      padding: 1.5rem;
+    }
+  }
+</style>

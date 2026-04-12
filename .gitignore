@@ -11,6 +11,12 @@ node_modules
 /.astro
 public/pagefind
 
+# Quarto
+quarto_blog/_site
+*.quarto
+.quarto
+public/quarto_blog
+
 # OS
 .DS_Store
 Thumbs.db
@@ -24,3 +30,12 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# CondaPkg
+.CondaPkg
+
+# Julia Manifest
+quarto_blog/Manifest.toml
+
+/.quarto/
+**/*.quarto_ipynb

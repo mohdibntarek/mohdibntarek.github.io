@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: _site
+
+execute:
+  project:
+    type: julia
+    
+website:
+  title: "Back to Blog Posts"
+  favicon: ../src/assets/text-documents-line-icon.png
+  
+  navbar:
+    logo-href: "../../blog"
+    search: false
+
+format:
+  html:
+    toc: true
+    code-copy: true
+    code-fold: false
+    code-tools: true

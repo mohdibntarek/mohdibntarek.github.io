@@ -1,0 +1,83 @@
+---
+title: "How I Built This Site: Combining Astro and Quarto"
+author: "Mohamed Tarek"
+date: "2025-04-12"
+description: "Why I used two frameworks instead of one—and how it actually works better."
+categories: [web-development, astro, quarto, tutorial]
+engine: julia
+---
+
+---
+
+In this post, I am going to describe my thought process of building this personal website and how it evolved over time.
+
+## Static Site Generators: The Easy Start
+
+Three years ago, I thought I needed a personal website. I initially set out to build a simple static site, some information about me, a portfolio of my work and maybe a blog to share some thoughts. Simple enough, right? Well, the design choices and technical details turned out to be more complex than it seemed at first. First, let me acknowledge that I am not a web developer by trade. I know enough HTML, CSS and JavaScript (both vanilla and frameworks) to get by, but I don't enjoy writing HTML templates or wrestling with CSS frameworks. I wanted something that would let me focus on content. So adding a new blog post should be as simple as writing a Markdown file and letting the system do the rest. This is all fine because any static site generator (SSG) can do that. This is exactly why I started with one 3 years ago.
+
+I am a Julia developer so a natural choice was to use [Franklin.jl](https://franklinjl.org/), which is an SSG written in Julia. It seemed like a good fit. I could use an existing template. I didn't know much HTML or CSS back then so I only did minimal customization. It was fine, generic but it worked. I had a website that I could update with new content without worrying about the underlying code.
+
+The issue with SSGs is that they are designed to be simple and static. Once the site grows and you want to reuse components, add interactivity, or have more control over the design, you start to run into limitations. Franklin was great for getting started, but I felt like I needed more.
+
+## JavaScript Frameworks: The Next Step
+
+I looked into JavaScript frameworks like React (+ Next), Vue (+ Nuxt), and Svelte (+ SvelteKit). They are powerful and flexible, but they are designed to build single page applications (SPAs) and highly interactive multi-page applications (MPAs), with secondary support for static sites. I didn't want an SPA or a highly interactive MPA. I wanted a static site with some minimal interactivity sprinkled in.
+
+At this point, I could have used Alpine.js or even vanilla JavaScript to add interactivity to a static site, but I wanted a more structured way to build the site and reuse components. Once I learned about components from JavaScript frameworks, I wanted that for my site. It just felt like a more modern way to build websites and make them easier to maintain and think about compared to writing HTML templates.
+
+However, the problem with most JavaScript frameworks is that they didn't handle Markdown content well. While there are ways to integrate Markdown, for example using `@nuxt/content` in Nuxt and `mdsvex` in SvelteKit, it felt like I was trying too hard to do something supposedly simple. I would have to set up a build process to convert Markdown files into components, and it just felt like too much overhead for what I wanted. Remember, I am not a web developer, I just wanted to write content and have it look nice!
+
+## Technical Content: The Real Challenge
+
+So far, we are only talking about building a personal website with some static pages and maybe a blog, with content written in Markdown. However, the bigger challenge was that I wanted to write technical content. I am an applied mathematician and machine learning researcher. I wanted to write computational notebooks that could execute code, render math and plots, and include proper citations. This is where things got really tricky. This is where I realized that I needed a tool that was designed for technical publishing, not just static site generation.
+
+Luckily, about 2 years ago, I discovered Quarto, which is a tool designed for exactly this purpose. Quarto is built by Posit (formerly RStudio) and it's essentially a next-generation version of R Markdown that supports multiple languages (R, Python, Julia, etc.) and is designed for technical publishing. It has built-in support for executable code blocks, math rendering, citations, and all the features that make technical writing work.
+
+Once I got more familiar with Quarto, I wanted to use it in my website. Quarto supports building entire websites with technical content so that seemed like a good option. However, while Quarto is great for technical presentations, once you use it to build something complicated, you run into a few issues:
+
+1. **Quarto does not support easy design customization.** Quarto uses a lot of Quarto-specific CSS classes for its themes, which makes it difficult to customize the design without diving into the underlying code and knowing a lot of CSS. You can create custom themes, but getting it to look eactly the way you want can be challenging.
+1. **Quarto does not natively support client-side interactivity.** You can add JavaScript to your Quarto site, but it's not designed for building interactive components that are common in modern websites. So if you want any feature that is not provided out of the box in Quarto, you are on your own.
+1. **Quarto does not support reusable components.** Recall that I fell in love with the idea of components from JavaScript frameworks. Quarto does not have a component model in the way that other frameworks do. I can use HTML partials or even native HTML web components, but that seemed less than ideal and not as elegant as using a framework that has built-in support for components to help organize the codebase and make it easier to maintain.
+1. **Quarto is very slow.** Quarto takes a long time to build documents. Simple ones without code blocks are faster but still slow compared to SSGs. Caching helps so it is not too bad but it is still a pain to wait for a build every time you make a change.
+
+These limitations meant that I did not want to use Quarto for the entire site, but I still wanted to use it for the mostly technical blog posts because of its excellent support for technical content. I wanted to have the best of both worlds: a modern, fast, and customizable website built with a component-based JavaScript framework, and technical blog posts built with Quarto.
+
+## Learning About Astro: The Game Changer
+
+After using Franklin, and while I was learning more about web development and JavaScript frameworks, I ported the website to Nuxt + Vue and then to Svelte + SvelteKit. However, I soon realized that they were not the right fit for my needs. They were powerful, but they felt like overkill for a mostly static personal website. And Quarto integration was not obvious how to do. Also, AI tools were still in their infancy back then so I couldn't just have Claude Code figure it out for me :)
+
+About a year ago, I learned about Astro, and it was almost a perfect match. It delivered exactly what I wanted: a modern static site builder that focuses on performance and simplicity, with its "Islands Architecture" that allows you to build static sites with interactive components without the overhead of a full JavaScript framework. It also has first-class support for Markdown, which was a huge plus for me, no need to write manual build scripts to convert Markdown files into components. I could have Astro, Vue, Svelte or even React components all in the same project for added interactivity and it all blended together harmoniously. I could easily customize the layout of the Markdown content by writing a simple Astro component that wraps the Markdown content. I could write reusable components for the navigation, e.g. the sidebar. I can write scoped style and scripts inside the component, keeping things local and organized. Astro gave me all the best practices of modern web development while treating Markdown content as a first-class citizen. It was exactly what I needed for the non-technical parts of the site. Not to mention, Astro is FAST! The build feels instantaneous compared to Quarto and the developer experience is fantastic. The documentation is also great which made it easy to learn.
+
+## Integrating Astro and Quarto: The Hybrid Approach
+
+While Astro solved almost all of my problems for building the website, I still had the issue of writing technical content. I wanted to use Quarto for that, it just seemed like the best tool for the job. But integrating Quarto into an Astro site was not straightforward. With some help from AI tools (more on that in a future post), I was able to set up a build process where Quarto generates the blog posts as static HTML files, which are then copied into Astro's `public/` folder during the build. This way, I can write my technical blog posts in Quarto, and they get automatically integrated into the Astro site without any manual copying.
+
+This works well enough for now. In fact, this blog post is written in a Quarto `.qmd` file, rendered to HTML, and then served as part of the Astro site. However, this approach is not without limitations:
+
+1. **Theming**: The Quarto blog posts have a different look and feel than the Astro pages because they are rendered separately. I have to write custom CSS (not done yet as of the time of this post) to make them look consistent, and it is not perfect.
+2. **Hot-Reloading**: When I make changes to a Quarto blog post, I have to run the build process to see the changes in the Astro site. This is not ideal for development, but it is manageable. In practice, I just use Quarto's live preview for writing and then run the build when I am ready to publish.
+
+These are relatively minor issues compared to the benefits of using the right tool for each part of the site. Astro is fantastic for building the overall website structure, navigation, and non-technical pages, while Quarto excels at rendering technical content with executable code blocks, math, and citations. By combining the two, I get a site that is both performant and rich in features without having to compromise on either aspect.
+
+## The Search Problem
+
+One last piece of the puzzle was search. I wanted a client-side search solution that could index both the Astro pages and the Quarto blog posts. After some research, I found Pagefind, which is a Rust-based static search generator that runs at build time and creates a tiny index for client-side search. It was easy to integrate into the build process, and it gives me fast search across the entire site without any server-side components.
+
+## AI Tools: The Secret Sauce
+
+The last 2 weeks, I have been learning about various AI tools for coding, e.g. Claude Code, Codex and Cline to name a few. These tools can be used in different interfaces, e.g. chat, code editor plugins, command line interfaces, etc. I found them useful when styling my personal website. Initially, I was writing CSS manually to learn CSS and have full control. However, getting the design right on different screen sizes and making it look good was a challenge. AI helped me quite a bit in this process. At first, it was really bad at writing CSS but recently it seems to have gotten better. AI also helped me with the Astro-Quarto integration but I had to manually review and fix the code it generated. I will write a separate post about my experience with AI tools for coding in the near future, but I just wanted to give a shoutout to these tools for helping me get this site up and running faster than I could have done on my own. In particular, Cline through its VSCode extension + the kimi-k2.5:cloud large language model served by Ollama was a game changer for me.
+
+## Conclusion
+
+Building this website has been a fun and educational journey. It started as a simple static site built with Franklin, evolved through various JavaScript frameworks, and finally settled on a hybrid approach using Astro for the main site and Quarto for the technical blog posts. This combination allows me to leverage the strengths of both tools while mitigating their weaknesses. I get a fast, modern website with great support for technical content, and I can focus on writing without worrying about the underlying code too much.
+
+## Resources
+
+If you want to dig deeper:
+
+- **Astro Docs**: [https://docs.astro.build/](https://docs.astro.build/) — genuinely excellent documentation
+- **Quarto Docs**: [https://quarto.org/docs/](https://quarto.org/docs/) — especially the guides on computational documents
+- **Pagefind**: [https://pagefind.app/](https://pagefind.app/) — static search that just works
+- **This site's source**: [GitHub repo](https://github.com/mohdibntarek/mohdibntarek.github.io) — for when you want to see how the sausage is made
+
+Happy building!

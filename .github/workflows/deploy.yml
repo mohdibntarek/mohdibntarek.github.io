@@ -20,6 +20,34 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+
+      - name: Install Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+      
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: latest
+      
+      - name: Instantiate Julia environment
+        run: |
+          cd quarto_blog
+          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+      
+      - name: Render Quarto blogposts
+        env:
+          JULIA_PROJECT: ${{ github.workspace }}/quarto_blog
+        run: |
+          cd quarto_blog
+          quarto render --cache-refresh
+      
+      - name: Copy Quarto output to public directory
+        run: |
+          rm -rf public/quarto_blog
+          cp -r quarto_blog/_site public/quarto_blog
+      
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:

@@ -11,7 +11,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && bun pagefind --site dist/ && cp -r dist/pagefind public/pagefind",
+    "quarto": "quarto render --cache-refresh quarto_blog/",
+    "build": "julia --project=quarto_blog -e 'using Pkg; Pkg.instantiate()' && quarto render --cache-refresh quarto_blog/ && rm -rf public/quarto_blog && cp -r quarto_blog/_site public/quarto_blog && astro build && bun pagefind --site dist/ && cp -r dist/pagefind public/pagefind",
     "preview": "astro preview",
     "astro": "astro"
   },
