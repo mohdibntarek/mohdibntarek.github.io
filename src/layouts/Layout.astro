@@ -6,51 +6,6 @@ import "../styles/markdown.css";
 import "../styles/typography.css";
 ---
 
-<script>
-  import Alpine from 'alpinejs';
-  
-  // Theme toggle component
-  Alpine.data('themeToggle', () => ({
-    // Initialize immediately from the document attribute (set by inline script)
-    // This prevents the toggle from showing the wrong icon during hydration
-    isDark: document.documentElement.getAttribute('data-theme') === 'dark',
-    
-    init() {
-      // Listen for system preference changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        // Only update if no manual preference is saved
-        if (!localStorage.getItem('theme-preference')) {
-          this.isDark = e.matches;
-          this.applyTheme();
-        }
-      });
-      
-      // Listen for theme changes from other pages (Quarto/Astro cross-sync)
-      window.addEventListener('storage', (e) => {
-        if (e.key === 'theme-preference') {
-          const newTheme = e.newValue;
-          if (newTheme) {
-            this.isDark = newTheme === 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-          }
-        }
-      });
-    },
-    
-    toggle() {
-      this.isDark = !this.isDark;
-      this.applyTheme();
-    },
-    
-    applyTheme() {
-      const theme = this.isDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme-preference', theme);
-    }
-  }));
-  
-  Alpine.start();
-</script>
 
 <html lang="en">
   <head>
@@ -326,6 +281,53 @@ import "../styles/typography.css";
     }
   }
 </style>
+
+<script>
+  import Alpine from 'alpinejs';
+  
+  // Theme toggle component for Alpine.js
+  Alpine.data('themeToggle', () => ({
+    isDark: false,
+    
+    init() {
+      // Initialize from localStorage or system preference
+      const stored = localStorage.getItem('theme-preference');
+      if (stored) {
+        this.isDark = stored === 'dark';
+      } else {
+        this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme-preference')) {
+          this.isDark = e.matches;
+          this.applyTheme();
+        }
+      });
+      
+      // Listen for theme changes from other pages (Quarto/Astro cross-sync)
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'theme-preference') {
+          this.isDark = e.newValue === 'dark';
+          this.applyTheme();
+        }
+      });
+    },
+    
+    toggle() {
+      this.isDark = !this.isDark;
+      this.applyTheme();
+      localStorage.setItem('theme-preference', this.isDark ? 'dark' : 'light');
+    },
+    
+    applyTheme() {
+      document.documentElement.setAttribute('data-theme', this.isDark ? 'dark' : 'light');
+    }
+  }));
+  
+  Alpine.start();
+</script>
 
 <script>
   // Add anchor links to headings

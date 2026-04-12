@@ -1,18 +1,8 @@
 ---
-import IconCard from "../components/IconCard.astro";
 import TaglineCard from "../components/TaglineCard.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 import personalPhoto from "../assets/personal_photo.png";
-import arxivIcon from "../assets/arxiv.ico";
-import { icon } from "@fortawesome/fontawesome-svg-core";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-import {
-  faGithub,
-  faYoutube,
-  faLinkedin,
-  faGoogleScholar,
-  faResearchgate,
-  faOrcid,
-} from "@fortawesome/free-brands-svg-icons";
+
 const { text_color_1 = "var(--color-text)", text_color_2 = "black" } =
   Astro.props;
 ---
@@ -30,30 +20,7 @@ const { text_color_1 = "var(--color-text)", text_color_2 = "black" } =
   </a>
   
   <section class="contact-section" style={`--text-color-2: ${text_color_2};`}>
-    <div class="social-links">
-      <IconCard href="https://github.com/mohdibntarek/" icon={icon(faGithub)}>GitHub</IconCard>
-      <IconCard
-        href="https://scholar.google.com/citations?user=mXZ8aioAAAAJ&hl=en"
-        icon={icon(faGoogleScholar)}
-      >Google Scholar</IconCard>
-      <IconCard href="https://arxiv.org/a/tarek_m_1.html/" path={arxivIcon}>arXiv</IconCard>
-      <IconCard
-        href="https://orcid.org/0000-0003-3074-0678?lang=en"
-        icon={icon(faOrcid)}
-      >ORCID</IconCard>
-      <IconCard
-        href="https://www.researchgate.net/profile/Mohamed-Tarek-18/"
-        icon={icon(faResearchgate)}
-      >ResearchGate</IconCard>
-      <IconCard
-        href="https://www.linkedin.com/in/mohdibntarek/"
-        icon={icon(faLinkedin)}
-      >LinkedIn</IconCard>
-      <IconCard
-        href="https://www.youtube.com/@MrMohamed82008/"
-        icon={icon(faYoutube)}
-      >YouTube</IconCard>
-    </div>
+    <SocialLinks variant="sidebar" />
   </section>
 </div>
 

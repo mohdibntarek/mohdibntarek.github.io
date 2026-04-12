@@ -3,23 +3,15 @@
 ---
 
 <button 
+  id="theme-toggle" 
   class="theme-toggle" 
   aria-label="Toggle dark mode"
   title="Toggle dark mode"
-  x-data="themeToggle"
-  @click="toggle"
+  x-data="themeToggle()"
+  @click="toggle()"
 >
   <!-- Sun icon - visible in dark mode (click to switch to light) -->
-  <span 
-    class="theme-toggle__icon theme-toggle__icon--sun"
-    x-show="isDark"
-    x-transition:enter="transition ease-out duration-250"
-    x-transition:enter-start="opacity-0 -rotate-90 scale-50"
-    x-transition:enter-end="opacity-100 rotate-0 scale-100"
-    x-transition:leave="transition ease-in duration-250"
-    x-transition:leave-start="opacity-100 rotate-0 scale-100"
-    x-transition:leave-end="opacity-0 rotate-90 scale-50"
-  >
+  <span class="theme-toggle__icon theme-toggle__icon--sun" :class="{ 'visible': isDark }">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"></circle>
       <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -34,16 +26,7 @@
   </span>
   
   <!-- Moon icon - visible in light mode (click to switch to dark) -->
-  <span 
-    class="theme-toggle__icon theme-toggle__icon--moon"
-    x-show="!isDark"
-    x-transition:enter="transition ease-out duration-250"
-    x-transition:enter-start="opacity-0 rotate-90 scale-50"
-    x-transition:enter-end="opacity-100 rotate-0 scale-100"
-    x-transition:leave="transition ease-in duration-250"
-    x-transition:leave-start="opacity-100 rotate-0 scale-100"
-    x-transition:leave-end="opacity-0 -rotate-90 scale-50"
-  >
+  <span class="theme-toggle__icon theme-toggle__icon--moon" :class="{ 'visible': !isDark }">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
@@ -84,15 +67,13 @@
   .theme-toggle__icon {
     position: absolute;
     pointer-events: none;
-    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+    transition: opacity 250ms ease, transform 250ms ease;
   }
 
-  /* Show correct icon immediately based on data-theme - no JS required */
-  html[data-theme="dark"] .theme-toggle__icon--sun {
-    display: block;
-  }
-
-  html[data-theme="light"] .theme-toggle__icon--moon {
-    display: block;
+  .theme-toggle__icon.visible {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
 </style>

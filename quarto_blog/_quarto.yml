@@ -22,9 +22,9 @@ format:
     code-tools: true
     include-before-body: 
       - text: |
+          <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
           <script>
-            // Theme initialization - runs immediately
-            // Sync with Astro theme system using 'theme-preference' key
+            // Theme initialization - runs immediately before Alpine loads
             (function() {
               const savedTheme = localStorage.getItem('theme-preference');
               const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -35,29 +35,6 @@ format:
               document.documentElement.style.colorScheme = theme;
             })();
           </script>
-    include-after-body:
-      - text: |
-          <!-- Theme Toggle Button -->
-          <button id="quarto-theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-            <span class="theme-toggle__icon theme-toggle__icon--sun" style="display: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg>
-            </span>
-            <span class="theme-toggle__icon theme-toggle__icon--moon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg>
-            </span>
-          </button>
           <style>
             .theme-toggle {
               position: fixed;
@@ -97,64 +74,73 @@ format:
               position: absolute;
               transition: opacity 250ms ease;
             }
-            
-            [data-theme="dark"] .theme-toggle__icon--sun {
-              display: block !important;
-            }
-            
-            [data-theme="dark"] .theme-toggle__icon--moon {
-              display: none !important;
-            }
-            
-            [data-theme="light"] .theme-toggle__icon--sun {
-              display: none !important;
-            }
-            
-            [data-theme="light"] .theme-toggle__icon--moon {
-              display: block !important;
-            }
           </style>
+    include-after-body:
+      - text: |
+          <!-- Theme Toggle button with Alpine.js -->
+          <button 
+            class="theme-toggle" 
+            aria-label="Toggle dark mode" 
+            title="Toggle dark mode"
+            x-data
+            @click="$dispatch('theme-toggle')"
+          >
+            <span class="theme-toggle__icon theme-toggle__icon--sun" x-show="$store.theme.isDark" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </span>
+            <span class="theme-toggle__icon theme-toggle__icon--moon" x-show="!$store.theme.isDark">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </span>
+          </button>
           <script>
-            // Theme toggle functionality
-            (function() {
-              const toggle = document.getElementById('quarto-theme-toggle');
-              if (!toggle) return;
-              
-              // Update icon visibility based on current theme
-              const updateIcons = function() {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                toggle.querySelector('.theme-toggle__icon--sun').style.display = isDark ? 'block' : 'none';
-                toggle.querySelector('.theme-toggle__icon--moon').style.display = isDark ? 'none' : 'block';
-              };
-              
-              // Initial state
-              updateIcons();
-              
-              // Toggle function
-              toggle.addEventListener('click', function() {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                const newTheme = isDark ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                document.documentElement.setAttribute('data-bs-theme', newTheme);
-                document.documentElement.style.colorScheme = newTheme;
-                localStorage.setItem('theme-preference', newTheme); // Sync with Astro
-                updateIcons();
-              });
-              
-              // Listen for theme changes from Astro pages via storage event
-              window.addEventListener('storage', function(e) {
-                if (e.key === 'theme-preference') {
-                  const newTheme = e.newValue;
-                  if (newTheme) {
-                    document.documentElement.setAttribute('data-theme', newTheme);
-                    document.documentElement.setAttribute('data-bs-theme', newTheme);
-                    document.documentElement.style.colorScheme = newTheme;
-                    updateIcons();
-                  }
+            // Alpine.js theme store - syncs with Astro via localStorage
+            document.addEventListener('alpine:init', () => {
+              Alpine.store('theme', {
+                isDark: document.documentElement.getAttribute('data-theme') === 'dark',
+                
+                toggle() {
+                  this.isDark = !this.isDark;
+                  const theme = this.isDark ? 'dark' : 'light';
+                  document.documentElement.setAttribute('data-theme', theme);
+                  document.documentElement.setAttribute('data-bs-theme', theme);
+                  document.documentElement.style.colorScheme = theme;
+                  localStorage.setItem('theme-preference', theme);
                 }
               });
               
-              // Darken inline code background in dark mode
+              // Listen for toggle events from button
+              window.addEventListener('theme-toggle', () => {
+                Alpine.store('theme').toggle();
+              });
+              
+              // Listen for storage events from Astro pages
+              window.addEventListener('storage', (e) => {
+                if (e.key === 'theme-preference') {
+                  const newTheme = e.newValue;
+                  if (newTheme) {
+                    Alpine.store('theme').isDark = newTheme === 'dark';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    document.documentElement.setAttribute('data-bs-theme', newTheme);
+                    document.documentElement.style.colorScheme = newTheme;
+                  }
+                }
+              });
+            });
+            
+            // Inline code background fix for dark mode (Quarto-specific)
+            (function() {
               const updateInlineCodeBackground = function() {
                 const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
                 const inlineCodeSelectors = [
@@ -167,12 +153,9 @@ format:
                   const elements = document.querySelectorAll(selector);
                   elements.forEach(function(el) {
                     if (isDark) {
-                      // Apply lighter background in dark mode with !important
                       el.style.setProperty('background-color', 'rgba(70, 70, 75, 0.6)', 'important');
-                      // Color the text a bit red for better readability
                       el.style.setProperty('color', '#ff6b6b', 'important');
                     } else {
-                      // Remove inline styles in light mode (revert to CSS)
                       el.style.removeProperty('background-color');
                       el.style.removeProperty('color');
                     }
@@ -180,7 +163,6 @@ format:
                 });
               };
               
-              // Watch for theme changes
               const observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
                   if (mutation.attributeName === 'data-bs-theme') {
@@ -190,8 +172,6 @@ format:
               });
               
               observer.observe(document.documentElement, { attributes: true });
-              
-              // Initialize inline code background
               updateInlineCodeBackground();
             })();
           </script>

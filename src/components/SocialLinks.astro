@@ -1,0 +1,160 @@
+---
+// Reusable Social Links Component
+// Used across index.astro and LeftSide.astro to avoid duplication
+import IconCard from "./IconCard.astro";
+import arxivIcon from "../assets/arxiv.ico";
+import { icon } from "@fortawesome/fontawesome-svg-core";
+import {
+  faGithub,
+  faYoutube,
+  faLinkedin,
+  faGoogleScholar,
+  faResearchgate,
+  faOrcid,
+} from "@fortawesome/free-brands-svg-icons";
+
+interface Props {
+  variant?: "sidebar" | "pills";
+}
+
+const { variant = "sidebar" } = Astro.props;
+
+// Social links data - single source of truth
+const socialLinks = [
+  { name: "GitHub", href: "https://github.com/mohdibntarek/", icon: icon(faGithub) },
+  { name: "Scholar", href: "https://scholar.google.com/citations?user=mXZ8aioAAAAJ&hl=en", icon: icon(faGoogleScholar) },
+  { name: "arXiv", href: "https://arxiv.org/a/tarek_m_1.html/", path: arxivIcon },
+  { name: "ORCID", href: "https://orcid.org/0000-0003-3074-0678?lang=en", icon: icon(faOrcid) },
+  { name: "ResearchGate", href: "https://www.researchgate.net/profile/Mohamed-Tarek-18/", icon: icon(faResearchgate) },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/mohdibntarek/", icon: icon(faLinkedin) },
+  { name: "YouTube", href: "https://www.youtube.com/@MrMohamed82008/", icon: icon(faYoutube) },
+];
+---
+
+{variant === "sidebar" ? (
+  <div class="social-links">
+    {socialLinks.map((link) => (
+      <IconCard href={link.href} icon={link.icon} path={link.path}>
+        {link.name}
+      </IconCard>
+    ))}
+  </div>
+) : (
+  <div class="social-row">
+    {socialLinks.map((link) => (
+      <a href={link.href} target="_blank" rel="noopener" class="social-pill">
+        <span class="social-pill-icon">
+          {link.path ? (
+            <img src={link.path.src || link.path} alt="" style="width: 1em; height: 1em; object-fit: contain;" />
+          ) : (
+            <Fragment set:html={link.icon.html} />
+          )}
+        </span>
+        <span class="social-pill-name">{link.name}</span>
+      </a>
+    ))}
+  </div>
+)}
+
+<style>
+  /* Sidebar variant styles */
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  /* Pills variant styles */
+  .social-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .social-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: var(--color-card, white);
+    border-radius: 100px;
+    color: var(--color-text, #1a1a1a);
+    text-decoration: none;
+    transition: all 250ms ease;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    box-shadow: 0 2px 8px oklch(20% 0.02 260 / 0.06);
+  }
+
+  .social-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px oklch(20% 0.02 260 / 0.12);
+    border-color: var(--color-primary, #4a6cf7);
+  }
+
+  .social-pill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .social-pill-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .social-pill-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0.9);
+  }
+
+  .social-pill-name {
+    font-weight: 500;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+
+  /* Stagger animation for sidebar variant */
+  .social-links > :global(*) {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideIn 400ms ease forwards;
+  }
+
+  .social-links > :global(*:nth-child(1)) { animation-delay: 100ms; }
+  .social-links > :global(*:nth-child(2)) { animation-delay: 150ms; }
+  .social-links > :global(*:nth-child(3)) { animation-delay: 200ms; }
+  .social-links > :global(*:nth-child(4)) { animation-delay: 250ms; }
+  .social-links > :global(*:nth-child(5)) { animation-delay: 300ms; }
+  .social-links > :global(*:nth-child(6)) { animation-delay: 350ms; }
+  .social-links > :global(*:nth-child(7)) { animation-delay: 400ms; }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .social-row {
+      gap: 0.4rem;
+    }
+
+    .social-pill {
+      padding: 0.4rem 0.625rem;
+    }
+
+    .social-pill-name {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
