@@ -5,6 +5,7 @@ project:
 execute:
   project:
     type: julia
+  cache: true
     
 website:
   title: "Back to Blog Posts"
