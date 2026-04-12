@@ -14,7 +14,7 @@ PumasAI, USA (Remote)
 *2020 - Present*
 
 - Developed and maintained proprietary parameter estimation, Bayesian inference, simulation, optimal design and scientific machine learning software for nonlinear mixed effects models in Julia.
-- Led and supported consulting projects in pharmacometrics and scientific machine learning, including modelling of tumor dynamics and overall survival, IRT, TMDD, Bayesian analysis and optimal design of experiments.
+- Led and supported consulting projects in pharmacometrics and scientific machine learning, including modelling of tumor dynamics and overall survival, item response theory, target-mediated drug disposition, Bayesian analysis and optimal design of experiments.
 - Supported Pumas and DeepPumas users by providing training and technical support, and by developing educational materials and teaching them both virtually and in-person.
 - Led and supported new method development projects for parameter estimation, covariate modelling, sequential model building, exploratory data analysis, model evaluation, optimal design of experiments, Bayesian inference and biomarker modeling.
 - Supported the development of AskPumas, a RAG-based LLM assistant for Pumas users.
@@ -46,11 +46,11 @@ GPA: 3.99/4.0
 **Technical Skills**
 
 - **Math and computer science**: mixed effects modelling, Bayesian statistics, learning algorithms, optimal design of experiments, (scientific) generative machine learning, supervised and unsupervised machine learning, optimal transport, operations research, system dynamics, linear algebra, constrained optimization, automatic differentiation, complexity analysis, decision-making under uncertainty, data reconciliation
-- **Pharmacometrics**: PKPD, tumor dynamics and overall survival, item response theory, TMDD, biomarker and covariate modelling, clinical trial simulation, DeepNLME for pharmacometrics, dose optimization, optimal design of clinical trials
+- **Pharmacometrics**: PKPD, tumor dynamics and overall survival, item response theory, target-mediated drug disposition, biomarker and covariate modelling, clinical trial simulation, DeepNLME for pharmacometrics, dose optimization, optimal design of clinical trials
 - **Programming**: Julia, Python, Java, Javascript, Typescript, Zig, GPU and parallel programming, CI/CD
-- **Productivity tools**: Git, Quarto, Typst, LaTeX, Manim, Inkscape, Microsoft Office
+- **Productivity tools**: Git, Quarto, Typst, LaTeX, Manim, Inkscape, Microsoft Office, Cline AI, Claude Code
 - **Industrial and systems engineering**: operations research, discrete event simulation, supply chain and project management
-- **Web development**: HTML, Javascript, Typescript, HTMX, Alpine.js, Vue.js, Nuxt.js
+- **Web development**: Astro.js, HTML, Javascript, Typescript, HTMX, Alpine.js, Vue.js, Nuxt.js
 
 **Languages**
 
