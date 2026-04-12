@@ -1,7 +1,6 @@
 ---
 title: Islam and Science
 description: Understand the relationship between Islam and Science.
-date: '2025-4-8'
 published: true
 layout: ../../layouts/Layout.astro
 ---

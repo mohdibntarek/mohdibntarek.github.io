@@ -41,7 +41,7 @@ jobs:
           JULIA_PROJECT: ${{ github.workspace }}/quarto_blog
         run: |
           cd quarto_blog
-          quarto render --cache-refresh
+          quarto render
       
       - name: Copy Quarto output to public directory
         run: |

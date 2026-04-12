@@ -1,7 +1,6 @@
 ---
 title: Research and Teaching
 description: Publications and workshops taught
-date: "2025-4-8"
 published: true
 layout: ../layouts/Layout.astro
 ---

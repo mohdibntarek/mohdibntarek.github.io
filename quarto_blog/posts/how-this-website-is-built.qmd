@@ -1,7 +1,7 @@
 ---
 title: "How I Built This Site: Combining Astro and Quarto"
 author: "Mohamed Tarek"
-date: "2025-04-12"
+date: "2026-04-12"
 description: "Why I used two frameworks instead of one—and how it actually works better."
 categories: [web-development, astro, quarto, tutorial]
 engine: julia
