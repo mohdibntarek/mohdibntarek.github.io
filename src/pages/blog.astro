@@ -92,7 +92,7 @@ try {
       href: `/quarto_blog/posts/${nameWithoutExt}.html`,
       description: fm.description || '',
       date: fm.date || '',
-      categories: Array.isArray(fm.categories) ? fm.categories : []
+      categories: Array.isArray(fm.tags) ? fm.tags : []
     };
   }).filter(post => post.title !== 'Untitled'); // Filter out files without titles
   
