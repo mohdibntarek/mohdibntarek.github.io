@@ -41,8 +41,26 @@ import "../styles/typography.css";
   <body>
     <!-- Theme Toggle Button -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-      <span class="theme-icon sun"><Fragment set:html={icon(faSun).html} /></span>
-      <span class="theme-icon moon"><Fragment set:html={icon(faMoon).html} /></span>
+      <!-- Sun icon - visible in dark mode (click to switch to light) -->
+      <span class="theme-icon sun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </span>
+      <!-- Moon icon - visible in light mode (click to switch to dark) -->
+      <span class="theme-icon moon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </span>
     </button>
 
     <!-- Theme Management Script -->
@@ -65,6 +83,17 @@ import "../styles/typography.css";
           html.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme-preference', newTheme);
           updateToggleIcon(newTheme);
+        });
+        
+        // Listen for theme changes from other pages (Quarto/Astro cross-sync)
+        window.addEventListener('storage', function(e) {
+          if (e.key === 'theme-preference') {
+            const newTheme = e.newValue;
+            if (newTheme) {
+              html.setAttribute('data-theme', newTheme);
+              updateToggleIcon(newTheme);
+            }
+          }
         });
 
         // Initial icon state
@@ -628,8 +657,8 @@ import "../styles/typography.css";
   /* Theme Toggle Button - matches ThemeToggle.astro component */
   .theme-toggle {
     position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
+    bottom: 1.25rem;
+    right: 1.25rem;
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -663,7 +692,8 @@ import "../styles/typography.css";
   .theme-icon svg {
     width: 20px;
     height: 20px;
-    fill: var(--color-text, #1a1a1a);
+    stroke: currentColor;
+    fill: none;
   }
 
   /* Light mode: show moon (indicates switch to dark) */

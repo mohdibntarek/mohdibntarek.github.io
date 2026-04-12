@@ -20,3 +20,178 @@ format:
     code-copy: true
     code-fold: false
     code-tools: true
+    include-before-body: 
+      - text: |
+          <script>
+            // Theme initialization - runs immediately
+            // Sync with Astro theme system using 'theme-preference' key
+            (function() {
+              const savedTheme = localStorage.getItem('theme-preference');
+              const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+              const theme = isDark ? 'dark' : 'light';
+              document.documentElement.setAttribute('data-theme', theme);
+              document.documentElement.setAttribute('data-bs-theme', theme);
+              document.documentElement.style.colorScheme = theme;
+            })();
+          </script>
+    include-after-body:
+      - text: |
+          <!-- Theme Toggle Button -->
+          <button id="quarto-theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <span class="theme-toggle__icon theme-toggle__icon--sun" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </span>
+            <span class="theme-toggle__icon theme-toggle__icon--moon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </span>
+          </button>
+          <style>
+            .theme-toggle {
+              position: fixed;
+              bottom: 1.25rem;
+              right: 1.25rem;
+              width: 44px;
+              height: 44px;
+              border: none;
+              border-radius: 50%;
+              background: #1a1a1a;
+              color: white;
+              cursor: pointer;
+              transition: all 250ms ease;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+              z-index: 1000;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+            }
+            
+            [data-theme="light"] .theme-toggle {
+              background: white;
+              color: #1a1a1a;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            }
+            
+            .theme-toggle:hover {
+              transform: scale(1.1);
+            }
+            
+            .theme-toggle:active {
+              transform: scale(0.95);
+            }
+            
+            .theme-toggle__icon {
+              position: absolute;
+              transition: opacity 250ms ease;
+            }
+            
+            [data-theme="dark"] .theme-toggle__icon--sun {
+              display: block !important;
+            }
+            
+            [data-theme="dark"] .theme-toggle__icon--moon {
+              display: none !important;
+            }
+            
+            [data-theme="light"] .theme-toggle__icon--sun {
+              display: none !important;
+            }
+            
+            [data-theme="light"] .theme-toggle__icon--moon {
+              display: block !important;
+            }
+          </style>
+          <script>
+            // Theme toggle functionality
+            (function() {
+              const toggle = document.getElementById('quarto-theme-toggle');
+              if (!toggle) return;
+              
+              // Update icon visibility based on current theme
+              const updateIcons = function() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                toggle.querySelector('.theme-toggle__icon--sun').style.display = isDark ? 'block' : 'none';
+                toggle.querySelector('.theme-toggle__icon--moon').style.display = isDark ? 'none' : 'block';
+              };
+              
+              // Initial state
+              updateIcons();
+              
+              // Toggle function
+              toggle.addEventListener('click', function() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                const newTheme = isDark ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                document.documentElement.setAttribute('data-bs-theme', newTheme);
+                document.documentElement.style.colorScheme = newTheme;
+                localStorage.setItem('theme-preference', newTheme); // Sync with Astro
+                updateIcons();
+              });
+              
+              // Listen for theme changes from Astro pages via storage event
+              window.addEventListener('storage', function(e) {
+                if (e.key === 'theme-preference') {
+                  const newTheme = e.newValue;
+                  if (newTheme) {
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    document.documentElement.setAttribute('data-bs-theme', newTheme);
+                    document.documentElement.style.colorScheme = newTheme;
+                    updateIcons();
+                  }
+                }
+              });
+              
+              // Darken inline code background in dark mode
+              const updateInlineCodeBackground = function() {
+                const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+                const inlineCodeSelectors = [
+                  'p code:not(.sourceCode)',
+                  'li code:not(.sourceCode)',
+                  'td code:not(.sourceCode)'
+                ];
+                
+                inlineCodeSelectors.forEach(function(selector) {
+                  const elements = document.querySelectorAll(selector);
+                  elements.forEach(function(el) {
+                    if (isDark) {
+                      // Apply lighter background in dark mode with !important
+                      el.style.setProperty('background-color', 'rgba(70, 70, 75, 0.6)', 'important');
+                      // Color the text a bit red for better readability
+                      el.style.setProperty('color', '#ff6b6b', 'important');
+                    } else {
+                      // Remove inline styles in light mode (revert to CSS)
+                      el.style.removeProperty('background-color');
+                      el.style.removeProperty('color');
+                    }
+                  });
+                });
+              };
+              
+              // Watch for theme changes
+              const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                  if (mutation.attributeName === 'data-bs-theme') {
+                    updateInlineCodeBackground();
+                  }
+                });
+              });
+              
+              observer.observe(document.documentElement, { attributes: true });
+              
+              // Initialize inline code background
+              updateInlineCodeBackground();
+            })();
+          </script>

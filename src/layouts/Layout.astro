@@ -24,6 +24,17 @@ import "../styles/typography.css";
           this.applyTheme();
         }
       });
+      
+      // Listen for theme changes from other pages (Quarto/Astro cross-sync)
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'theme-preference') {
+          const newTheme = e.newValue;
+          if (newTheme) {
+            this.isDark = newTheme === 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+          }
+        }
+      });
     },
     
     toggle() {
@@ -75,7 +86,7 @@ import "../styles/typography.css";
           <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
       </a>
-      <ThemeToggle />
+      <!-- ThemeToggle removed - now positioned fixed at bottom-right globally -->
     </div>
     
     <aside>
@@ -83,9 +94,11 @@ import "../styles/typography.css";
         <LeftSide text_color_1="oklch(98% 0.025 145)" text_color_2="var(--color-text-light)" />
       </div>
       <div class="sidebar-footer">
-        <ThemeToggle />
+        <!-- ThemeToggle removed - now positioned fixed at bottom-right globally -->
       </div>
     </aside>
+    <!-- Global ThemeToggle - fixed position at bottom-right -->
+    <ThemeToggle />
     <main>
       <article>
         <header class="article-header">
@@ -284,13 +297,13 @@ import "../styles/typography.css";
       display: flex;
     }
 
-    /* Position home button at bottom right */
+    /* Position home button at bottom left */
     .mobile-home-button {
       position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
+      bottom: 1.25rem;
+      left: 1.25rem;
       top: auto;
-      z-index: 1000;
+      z-index: 1001;
     }
   }
 

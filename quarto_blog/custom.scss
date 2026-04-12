@@ -1,0 +1,45 @@
+/* Custom Quarto Styles */
+
+// Dark mode inline code styling - target inline code elements
+html[data-bs-theme="dark"] code:not(pre code),
+html[data-theme="dark"] code:not(pre code),
+body.quarto-dark code:not(pre code) {
+    background-color: #0d0d1a;
+    color: #e6e6fa;
+}
+
+// Dark mode code block background styling - darker background for pre code blocks
+html[data-bs-theme="dark"] pre,
+html[data-theme="dark"] pre,
+body.quarto-dark pre {
+    background-color: #0a0a0f;
+    border-color: #1a1a2e;
+}
+
+html[data-bs-theme="dark"] pre code,
+html[data-theme="dark"] pre code,
+body.quarto-dark pre code {
+    background-color: #0a0a0f;
+    color: #f8f8f2;
+}
+
+// Target p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) which are the active selectors
+// Using chained selectors for maximum specificity to override Bootstrap defaults
+html[data-bs-theme="dark"] p code:not(.sourceCode),
+html[data-bs-theme="dark"] li code:not(.sourceCode),
+html[data-bs-theme="dark"] td code:not(.sourceCode) {
+    background-color: #1a1a2e !important;
+}
+
+// Additional targeting for Quarto source code blocks
+html[data-bs-theme="dark"] .sourceCode,
+html[data-theme="dark"] .sourceCode,
+body.quarto-dark .sourceCode {
+    background-color: #0a0a0f;
+}
+
+html[data-bs-theme="dark"] .sourceCode pre,
+html[data-theme="dark"] .sourceCode pre,
+body.quarto-dark .sourceCode pre {
+    background-color: #0a0a0f;
+}

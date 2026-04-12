@@ -331,6 +331,20 @@
   background: var(--color-card, oklch(30% 0.03 265));
 }
 
+/* Dark Mode - Inline code readability */
+:root.dark .article-body code {
+  background: var(--color-code-bg, oklch(35% 0.04 265));
+  color: var(--color-code-text, #e2e8f0);
+}
+
+:root.dark .article-body pre {
+  background: var(--color-code-block-bg, #1e293b);
+}
+
+:root.dark .article-body pre code {
+  color: var(--color-code-block-text, #e2e8f0);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .article-body {
