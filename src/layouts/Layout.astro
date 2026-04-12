@@ -67,8 +67,14 @@ import "../styles/typography.css";
     </style>
   </head>
   <body>
-    <!-- Mobile Theme Toggle - Fixed position for mobile when sidebar is hidden -->
-    <div class="mobile-theme-toggle">
+    <!-- Mobile Header - Fixed position for mobile when sidebar is hidden -->
+    <div class="mobile-header">
+      <a href="/" class="mobile-home-button" aria-label="Go to homepage">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </a>
       <ThemeToggle />
     </div>
     
@@ -205,13 +211,55 @@ import "../styles/typography.css";
     }
   }
 
-  /* Mobile Theme Toggle - Hidden on desktop, visible on mobile */
-  .mobile-theme-toggle {
+  /* Mobile Header - Hidden on desktop, visible on mobile */
+  .mobile-header {
     display: none;
     position: fixed;
     top: 1rem;
     right: 1rem;
     z-index: 1000;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-home-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--color-card, #ffffff);
+    border: 2px solid var(--color-primary, #667eea);
+    color: var(--color-text, #1a1a1a);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 200ms ease;
+    cursor: pointer;
+  }
+
+  .mobile-home-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    background: var(--color-primary, #667eea);
+    color: #ffffff;
+  }
+
+  .mobile-home-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: currentColor;
+  }
+
+  /* Dark mode adjustments for the mobile home button */
+  [data-theme="dark"] .mobile-home-button {
+    color: var(--color-text-light, #fafafa);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .mobile-home-button {
+      color: var(--color-text-light, #fafafa);
+    }
   }
 
   /* Mobile Responsive */
@@ -228,11 +276,21 @@ import "../styles/typography.css";
     main {
       margin-left: 0;
       padding: 1.5rem;
+      padding-top: 4rem; /* Add space for mobile header */
     }
 
-    /* Show mobile theme toggle when sidebar is hidden */
-    .mobile-theme-toggle {
-      display: block;
+    /* Show mobile header when sidebar is hidden */
+    .mobile-header {
+      display: flex;
+    }
+
+    /* Position home button at bottom right */
+    .mobile-home-button {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      top: auto;
+      z-index: 1000;
     }
   }
 
