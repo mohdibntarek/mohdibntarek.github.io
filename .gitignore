@@ -39,3 +39,5 @@ quarto_blog/Manifest.toml
 
 /.quarto/
 **/*.quarto_ipynb
+
+memory-bank/
