@@ -9,6 +9,7 @@ import personalPhoto from "../assets/personal_photo.png";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faHandsHelping, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { ViewTransitions } from "astro:transitions";
 import "../styles/typography.css";
 ---
 
@@ -36,6 +37,7 @@ import "../styles/typography.css";
       [data-theme="dark"] .theme-toggle__icon--sun,
       [data-theme="light"] .theme-toggle__icon--moon { display: block; }
     </style>
+    <ViewTransitions />
   </head>
   <body>
     <ThemeToggle />

@@ -2,6 +2,7 @@
 const { frontmatter } = Astro.props;
 import LeftSide from "../components/LeftSide.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+import { ViewTransitions } from "astro:transitions";
 import "../styles/markdown.css";
 import "../styles/typography.css";
 ---
@@ -31,6 +32,7 @@ import "../styles/typography.css";
       [data-theme="dark"] .theme-toggle__icon--sun,
       [data-theme="light"] .theme-toggle__icon--moon { display: block; }
     </style>
+    <ViewTransitions />
   </head>
   <body>
     <!-- Mobile Header - Fixed position for mobile when sidebar is hidden -->
@@ -165,6 +167,10 @@ import "../styles/typography.css";
 
   .article-body {
     text-wrap: pretty;
+  }
+
+  /* Only animate on initial page load, not during view transitions */
+  .article-body.animate-in {
     animation: fadeIn 0.5s ease-out;
   }
 
@@ -340,6 +346,16 @@ import "../styles/typography.css";
       anchor.setAttribute("aria-label", "Link to this heading");
       anchor.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
       heading.appendChild(anchor);
+    }
+  });
+</script>
+
+<script>
+  // Only animate article body on initial page load, not during view transitions
+  document.addEventListener('astro:page-load', () => {
+    const articleBody = document.querySelector('.article-body');
+    if (articleBody) {
+      articleBody.classList.add('animate-in');
     }
   });
 </script>
