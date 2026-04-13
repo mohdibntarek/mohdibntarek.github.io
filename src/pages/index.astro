@@ -169,9 +169,11 @@ import "../styles/typography.css";
       import Alpine from 'alpinejs';
       
       Alpine.data('themeToggle', () => ({
-        isDark: document.documentElement.getAttribute('data-theme') === 'dark',
+        isDark: false,
         
         init() {
+          this.syncThemeFromStorage();
+          
           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem('theme-preference')) {
               this.isDark = e.matches;
@@ -184,10 +186,20 @@ import "../styles/typography.css";
               const newTheme = e.newValue;
               if (newTheme) {
                 this.isDark = newTheme === 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
+                this.applyTheme();
               }
             }
           });
+        },
+        
+        syncThemeFromStorage() {
+          const stored = localStorage.getItem('theme-preference');
+          if (stored) {
+            this.isDark = stored === 'dark';
+          } else {
+            this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          }
+          this.applyTheme();
         },
         
         toggle() {
@@ -203,6 +215,14 @@ import "../styles/typography.css";
       }));
       
       Alpine.start();
+      
+      // Re-sync theme on back navigation (ViewTransitions bfcache)
+      document.addEventListener('astro:page-load', () => {
+        const stored = localStorage.getItem('theme-preference');
+        if (stored) {
+          document.documentElement.setAttribute('data-theme', stored);
+        }
+      });
     </script>
   </body>
 </html>

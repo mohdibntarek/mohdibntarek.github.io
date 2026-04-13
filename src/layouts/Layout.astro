@@ -297,12 +297,7 @@ import "../styles/typography.css";
     
     init() {
       // Initialize from localStorage or system preference
-      const stored = localStorage.getItem('theme-preference');
-      if (stored) {
-        this.isDark = stored === 'dark';
-      } else {
-        this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      }
+      this.syncThemeFromStorage();
       
       // Listen for system preference changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -319,6 +314,16 @@ import "../styles/typography.css";
           this.applyTheme();
         }
       });
+    },
+    
+    syncThemeFromStorage() {
+      const stored = localStorage.getItem('theme-preference');
+      if (stored) {
+        this.isDark = stored === 'dark';
+      } else {
+        this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      this.applyTheme();
     },
     
     toggle() {
@@ -356,6 +361,12 @@ import "../styles/typography.css";
     const articleBody = document.querySelector('.article-body');
     if (articleBody) {
       articleBody.classList.add('animate-in');
+    }
+    
+    // Re-sync theme from localStorage on back navigation (ViewTransitions bfcache)
+    const stored = localStorage.getItem('theme-preference');
+    if (stored) {
+      document.documentElement.setAttribute('data-theme', stored);
     }
   });
 </script>
