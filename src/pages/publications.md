@@ -83,12 +83,12 @@ layout: ../layouts/Layout.astro
 
 ## Workshops and Courses Taught
 
-- [**Certificate Course on AI for Drug Development**](https://sophas.net/courses-ai-in-drug-development/). Virtual 2025-2026.
-- [**Hands-on-Workshop: NLME Modeling Workflows Using Pumas**](https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025). Virtual 2025. Feb 3-5, 2025.
-- [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2024_ACoP). American Conference on Pharmacometrics 2024. Nov 9-10, 2024.
-- [**Intermediate Workshop on Population Modelling Using Pumas**](https://github.com/PumasAI-Labs/PAGANZ_2024_NLME_Workshop). Population Approach Group in Australia and New Zealand. Feb 14, 2024.
-- [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_ACOP). American Conference on Pharmacometrics 14. Nov 4-5, 2023.
-- [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_PAGE). Population Approach Group in Europe. Jun 26-27, 2023.
-- [**DeepPumas Workshop at UMB**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_UMB). University of Maryland, Baltimore. Feb 20, 2023.
-- [**Pumas for Quantitative Pharmacology**](https://github.com/PumasAI/Pumas_Workshop_Tokyo_2022). Tokyo, Japan. Dec 5-6, 2022.
-- [**Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs**](https://github.com/PumasAI/Bayesian-Workshop). American Conference on Pharmacometrics 13. Nov 3-4, 2022.
+1. [**Certificate Course on AI for Drug Development**](https://sophas.net/courses-ai-in-drug-development/). Virtual 2025-2026.
+1. [**Hands-on-Workshop: NLME Modeling Workflows Using Pumas**](https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025). Virtual 2025. Feb 3-5, 2025.
+1. [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2024_ACoP). American Conference on Pharmacometrics 2024. Nov 9-10, 2024.
+1. [**Intermediate Workshop on Population Modelling Using Pumas**](https://github.com/PumasAI-Labs/PAGANZ_2024_NLME_Workshop). Population Approach Group in Australia and New Zealand. Feb 14, 2024.
+1. [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_ACOP). American Conference on Pharmacometrics 14. Nov 4-5, 2023.
+1. [**Scientific Modeling Augmented by Machine-Learning with DeepPumas**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_PAGE). Population Approach Group in Europe. Jun 26-27, 2023.
+1. [**DeepPumas Workshop at UMB**](https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_UMB). University of Maryland, Baltimore. Feb 20, 2023.
+1. [**Pumas for Quantitative Pharmacology**](https://github.com/PumasAI/Pumas_Workshop_Tokyo_2022). Tokyo, Japan. Dec 5-6, 2022.
+1. [**Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs**](https://github.com/PumasAI/Bayesian-Workshop). American Conference on Pharmacometrics 13. Nov 3-4, 2022.
