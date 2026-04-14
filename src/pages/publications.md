@@ -13,7 +13,7 @@ layout: ../layouts/Layout.astro
 1. **Post-hoc model joining with normalizing flows for efficient and scalable multi-endpoint PKPD**, Population Approach Group in Europe. 2026. Submitted.
 1. **Application of DeepNLME framework to characterize distinct platelet dynamics in patients treated with Milademetan**, Population Approach Group in Europe. 2026. Submitted.
 1. [**Metric multi-dimensional scaling for longitudinal data embeddings in pharmacometrics**](https://openreview.net/forum?id=f3oaZyXr29#discussion), ICLR Workshop on Geometry-grounded Representation Learning and Generative Modeling. April 25-26, 2026.
-1. **A Deep Dive into Generative Scientific Machine Learning**, 2nd Bonn Conference on Mathematical Life Sciences. March 18, 2026.
+1. [**A Deep Dive into Generative Scientific Machine Learning**](https://pai-marketing-materials.s3.us-east-2.amazonaws.com/2026/Conference+Presentation/A+Deep+Dive+into+Generative+Scientific+Machine+Learning.pdf), 2nd Bonn Conference on Mathematical Life Sciences. March 18, 2026.
 1. **Finding complex relationships between random effects and covariates using data-driven distributions**, American Conference on Pharmacometrics. Oct 21, 2025.
 1. [**Machine Learning For Exploratory Data Analysis And Model Diagnosis In Oncology**](https://pai-marketing-materials.s3.us-east-2.amazonaws.com/2025/Poster/Machine+Learning+For+Exploratory+Data+Analysis+And+Model+Diagnosis+In+Oncology.pdf). American Conference on Pharmacometrics. Oct 19, 2025.
 1. [**A DeepNLME framework for modeling ordinal data to describe disease progression in patients with Alzheimer's disease**](https://www.page-meeting.org/wp-content/uploads/pdf_abstracts/2025/11775.pdf), Population Approach Group in Europe. Jun 6, 2025. 
