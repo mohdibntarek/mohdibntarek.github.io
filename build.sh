@@ -23,4 +23,6 @@ find dist/ -name '*.bak' -delete
 
 # Build Pagefind search index
 bun pagefind --site dist/
+
+rm -rf public/pagefind
 cp -r dist/pagefind public/pagefind
