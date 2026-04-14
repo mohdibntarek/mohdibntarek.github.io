@@ -341,18 +341,82 @@ import "../styles/typography.css";
 </script>
 
 <script>
-  // Add anchor links to headings
-  const anchorHeadings = document.querySelectorAll("h2, h3, h4, h5, h6");
-  [...anchorHeadings].forEach((heading) => {
-    if (heading.id) {
-      const anchor = document.createElement("a");
-      anchor.className = "heading-anchor";
-      anchor.href = `#${heading.id}`;
-      anchor.setAttribute("aria-label", "Link to this heading");
-      anchor.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
-      heading.appendChild(anchor);
-    }
-  });
+  // Add numbered headers and anchor links to headings
+  function addNumberedHeadings() {
+    const counters = { h2: 0, h3: 0, h4: 0, h5: 0, h6: 0 };
+    const headings = document.querySelectorAll(".article-body h2, .article-body h3, .article-body h4, .article-body h5, .article-body h6");
+    
+    [...headings].forEach((heading) => {
+      // Remove existing number span if present (for re-runs)
+      const existingNumber = heading.querySelector('.heading-number');
+      if (existingNumber) existingNumber.remove();
+      
+      // Remove existing anchor if present (for re-runs)
+      const existingAnchor = heading.querySelector('.heading-anchor');
+      if (existingAnchor) existingAnchor.remove();
+      
+      const tagName = heading.tagName.toLowerCase();
+      
+      // Update counters
+      if (tagName === "h2") {
+        counters.h2++;
+        counters.h3 = 0;
+        counters.h4 = 0;
+        counters.h5 = 0;
+        counters.h6 = 0;
+      } else if (tagName === "h3") {
+        counters.h3++;
+        counters.h4 = 0;
+        counters.h5 = 0;
+        counters.h6 = 0;
+      } else if (tagName === "h4") {
+        counters.h4++;
+        counters.h5 = 0;
+        counters.h6 = 0;
+      } else if (tagName === "h5") {
+        counters.h5++;
+        counters.h6 = 0;
+      } else if (tagName === "h6") {
+        counters.h6++;
+      }
+      
+      // Build the number string
+      let numberStr = "";
+      if (tagName === "h2") {
+        numberStr = counters.h2 + ".";
+      } else if (tagName === "h3") {
+        numberStr = counters.h2 + "." + counters.h3 + ".";
+      } else if (tagName === "h4") {
+        numberStr = counters.h2 + "." + counters.h3 + "." + counters.h4 + ".";
+      } else if (tagName === "h5") {
+        numberStr = counters.h2 + "." + counters.h3 + "." + counters.h4 + "." + counters.h5 + ".";
+      } else if (tagName === "h6") {
+        numberStr = counters.h2 + "." + counters.h3 + "." + counters.h4 + "." + counters.h5 + "." + counters.h6 + ".";
+      }
+      
+      // Create the number span and prepend it
+      const numberSpan = document.createElement("span");
+      numberSpan.className = "heading-number";
+      numberSpan.textContent = numberStr;
+      heading.insertBefore(numberSpan, heading.firstChild);
+      
+      // Add anchor link
+      if (heading.id) {
+        const anchor = document.createElement("a");
+        anchor.className = "heading-anchor";
+        anchor.href = `#${heading.id}`;
+        anchor.setAttribute("aria-label", "Link to this heading");
+        anchor.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
+        heading.appendChild(anchor);
+      }
+    });
+  }
+  
+  // Run on initial load
+  addNumberedHeadings();
+  
+  // Re-run on ViewTransitions navigation
+  document.addEventListener('astro:page-load', addNumberedHeadings);
 </script>
 
 <script>

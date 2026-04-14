@@ -26,28 +26,67 @@
   letter-spacing: -0.02em;
 }
 
+/* Numbered Headers - Counter System */
+.article-body {
+  counter-reset: h2-counter h3-counter h4-counter h5-counter h6-counter;
+}
+
 .article-body h2 {
   font-size: 1.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--color-card-border, #e5e5e5);
+  counter-reset: h3-counter;
+  counter-increment: h2-counter;
+}
+
+.article-body h2 .heading-number {
+  margin-right: 0.5rem;
+  color: var(--color-primary, #667eea);
 }
 
 .article-body h3 {
   font-size: 1.25rem;
+  counter-reset: h4-counter;
+  counter-increment: h3-counter;
+}
+
+.article-body h3 .heading-number {
+  margin-right: 0.5rem;
+  color: var(--color-primary, #667eea);
 }
 
 .article-body h4 {
   font-size: 1.125rem;
+  counter-reset: h5-counter;
+  counter-increment: h4-counter;
+}
+
+.article-body h4 .heading-number {
+  margin-right: 0.5rem;
+  color: var(--color-primary, #667eea);
 }
 
 .article-body h5 {
   font-size: 1rem;
+  counter-reset: h6-counter;
+  counter-increment: h5-counter;
+}
+
+.article-body h5 .heading-number {
+  margin-right: 0.5rem;
+  color: var(--color-primary, #667eea);
 }
 
 .article-body h6 {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  counter-increment: h6-counter;
+}
+
+.article-body h6 .heading-number {
+  margin-right: 0.5rem;
+  color: var(--color-primary, #667eea);
 }
 
 /* Heading anchor links */
@@ -103,7 +142,8 @@
 .article-body ul,
 .article-body ol {
   margin-bottom: 1.25rem;
-  padding-left: 1.75rem;
+  padding-left: 0.25rem;
+  margin-left: 0.5rem;
 }
 
 .article-body li {
@@ -113,12 +153,13 @@
 .article-body ul li {
   list-style-type: none;
   position: relative;
+  padding-left: 1rem;
 }
 
 .article-body ul li::before {
   content: '';
   position: absolute;
-  left: -1.25rem;
+  left: 0;
   top: 0.6em;
   width: 6px;
   height: 6px;
@@ -128,20 +169,25 @@
 
 .article-body ol {
   counter-reset: list-counter;
+  list-style-type: none;
 }
 
 .article-body ol li {
   list-style-type: none;
   counter-increment: list-counter;
   position: relative;
+  padding-left: 2rem;
 }
 
 .article-body ol li::before {
   content: counter(list-counter) ".";
   position: absolute;
-  left: -1.75rem;
+  left: 0;
   color: var(--color-primary, #667eea);
   font-weight: 600;
+  width: 1.5rem;
+  text-align: right;
+  padding-right: 0.5rem;
 }
 
 /* Blockquotes */
