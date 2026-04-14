@@ -15,10 +15,11 @@ cp -r quarto_blog/_site public/quarto_blog
 astro build
 
 # Add data-pagefind-ignore to code blocks and code-tools button
-find dist/ -name '*.html' -exec sed -i '' \
+find dist/ -name '*.html' -exec sed -i.bak \
   -e 's/class="sourceCode/data-pagefind-ignore class="sourceCode/g' \
   -e 's/class="btn code-tools-button"/data-pagefind-ignore class="btn code-tools-button"/g' \
   {} +
+find dist/ -name '*.bak' -delete
 
 # Build Pagefind search index
 bun pagefind --site dist/
