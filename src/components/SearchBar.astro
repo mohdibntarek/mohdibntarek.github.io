@@ -2,7 +2,13 @@
 <script src="/pagefind/pagefind-ui.js" is:inline></script>
 <div id="search"></div>
 <script>
-  window.addEventListener("DOMContentLoaded", (event) => {
+  document.addEventListener("astro:page-load", () => {
+    // Clear any existing PagefindUI instance before re-initializing
+    const searchContainer = document.getElementById("search");
+    if (searchContainer) {
+      searchContainer.innerHTML = "";
+    }
+    
     new PagefindUI({
       element: "#search",
       showSubResults: true,
