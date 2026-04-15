@@ -107,13 +107,21 @@ const frontmatter = {
     noResults.hidden = !q || anyVisible;
   }
 
-  const input = document.getElementById('pub-query')!;
-  const clearBtn = document.getElementById('pub-clear')!;
-  input.addEventListener('input', filterPublications);
-  clearBtn.addEventListener('click', () => {
-    (input as HTMLInputElement).value = '';
+  function initSearch() {
+    const input = document.getElementById('pub-query') as HTMLInputElement | null;
+    const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement | null;
+    if (!input || !clearBtn) return;
+    input.value = '';
     filterPublications();
-  });
+    input.addEventListener('input', filterPublications);
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      filterPublications();
+    });
+  }
+
+  initSearch();
+  document.addEventListener('astro:page-load', initSearch);
 </script>
 
 <style>
