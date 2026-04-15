@@ -17,12 +17,14 @@ const frontmatter = {
       if (!q) return ${JSON.stringify(publications.sections)};
       return ${JSON.stringify(publications.sections)}.map(section => ({
         ...section,
-        items: section.items.filter(item =>
-          item.title.toLowerCase().includes(q) ||
-          item.venue.toLowerCase().includes(q) ||
-          (item.status || '').toLowerCase().includes(q) ||
-          String(item.year).includes(q)
-        )
+        items: section.items.filter(item => {
+          const aliases = q === 'video' ? ['youtube'] : q === 'paper' ? ['paper', 'journal'] : [q];
+          return item.title.toLowerCase().includes(q) ||
+            item.venue.toLowerCase().includes(q) ||
+            (item.status || '').toLowerCase().includes(q) ||
+            String(item.year).includes(q) ||
+            item.links.some(l => aliases.some(a => l.label.toLowerCase().includes(a)));
+        })
       })).filter(section => section.items.length > 0);
     }
   }`}>
