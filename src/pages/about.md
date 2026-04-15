@@ -3,6 +3,7 @@ title: About Me
 author: Mohamed Tarek
 published: true
 layout: ../layouts/Layout.astro
+number-sections: true
 ---
 
 I am a senior product engineer and scientific consultant from Egypt and Australia (*eligible for the E-3 visa in the US*) with expertise in various areas of applied math, statistics, pharmacometrics, scientific computing, (scientific) machine learning and systems engineering.
