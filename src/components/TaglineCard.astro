@@ -3,7 +3,7 @@ const { mode = 'hero' } = Astro.props;
 const isCompact = mode === 'compact';
 ---
 
-<div class={`tagline-card ${isCompact ? 'tagline-card-compact' : 'tagline-card-hero'}`}>
+<div class={`tagline-card ${isCompact ? 'tagline-card-compact' : 'tagline-card-hero'}`} data-pagefind-ignore>
   {isCompact ? (
     <div class="tagline-compact-content">
       <span class="tagline-discipline">Pharmacometrics</span>
