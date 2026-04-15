@@ -45,9 +45,9 @@ const frontmatter = {
       <p class="no-results">No publications matching your search.</p>
     </template>
 
-    <template x-for="section in sections" :key="section.title">
+    <template x-for="(section, sIdx) in sections" :key="section.title">
       <div>
-        <h2 x-text="section.title"></h2>
+        <h2><span class="heading-number" x-text="(sIdx + 1) + '.'"></span> <span x-text="section.title"></span></h2>
         <ol>
           <template x-for="(item, idx) in section.items" :key="idx">
             <li>
