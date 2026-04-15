@@ -1,0 +1,120 @@
+---
+import Layout from "../layouts/Layout.astro";
+import publications from "../data/publications.json";
+
+const frontmatter = {
+  title: "Research and Teaching",
+  description: "Publications and workshops taught",
+  published: true,
+};
+---
+
+<Layout frontmatter={frontmatter}>
+  <div x-data={`{
+    query: '',
+    get sections() {
+      const q = this.query.toLowerCase().trim();
+      if (!q) return ${JSON.stringify(publications.sections)};
+      return ${JSON.stringify(publications.sections)}.map(section => ({
+        ...section,
+        items: section.items.filter(item =>
+          item.title.toLowerCase().includes(q) ||
+          item.venue.toLowerCase().includes(q) ||
+          (item.status || '').toLowerCase().includes(q) ||
+          String(item.year).includes(q)
+        )
+      })).filter(section => section.items.length > 0);
+    }
+  }`}>
+    <div class="search-container">
+      <input
+        type="text"
+        x-model="query"
+        placeholder="Search publications by title, venue, year..."
+        class="search-input"
+      />
+      <template x-if="query">
+        <button @click="query = ''" class="search-clear" aria-label="Clear search">&times;</button>
+      </template>
+    </div>
+
+    <template x-if="query && sections.length === 0">
+      <p class="no-results">No publications matching your search.</p>
+    </template>
+
+    <template x-for="section in sections" :key="section.title">
+      <div>
+        <h2 x-text="section.title"></h2>
+        <ol>
+          <template x-for="(item, idx) in section.items" :key="idx">
+            <li>
+              <strong x-text="item.title"></strong><span x-show="item.venue">, <span x-text="item.venue"></span></span><span x-show="item.date">. <span x-text="item.date"></span></span><span x-show="item.status">. <span x-text="item.status"></span></span><span x-text="item.status ? '.' : ''"></span>
+              <template x-for="link in item.links" :key="link.url">
+                <span>
+                  &nbsp;[<a :href="link.url" x-text="link.label" target="_blank" rel="noopener"></a>]
+                </span>
+              </template>
+            </li>
+          </template>
+        </ol>
+      </div>
+    </template>
+  </div>
+</Layout>
+
+<style>
+  .search-container {
+    position: relative;
+    margin-bottom: 2rem;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .search-input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    border-radius: 8px;
+    background: var(--color-card, #ffffff);
+    color: var(--color-text, #1a1a1a);
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-primary, #667eea);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-secondary, #999);
+  }
+
+  .search-clear {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #999);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+  }
+
+  .search-clear:hover {
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .no-results {
+    color: var(--color-text-secondary, #666);
+    font-style: italic;
+    margin: 2rem 0;
+  }
+</style>

@@ -1,0 +1,721 @@
+{
+  "sections": [
+    {
+      "title": "Conferences",
+      "items": [
+        {
+          "title": "Early go/no-go decisions in clinical trials using a DeepNLME joint tumor growth dynamics and overall survival model",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2026,
+          "date": "2026",
+          "status": "Submitted",
+          "links": []
+        },
+        {
+          "title": "Using DeepNLME to identify promising biomarkers with an application to disease progression modelling of Alzheimer's disease",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2026,
+          "date": "2026",
+          "status": "Submitted",
+          "links": []
+        },
+        {
+          "title": "Multidimensional scaling for longitudinal data embeddings in pharmacometrics",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2026,
+          "date": "2026",
+          "status": "Submitted",
+          "links": []
+        },
+        {
+          "title": "Post-hoc model joining with normalizing flows for efficient and scalable multi-endpoint PKPD",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2026,
+          "date": "2026",
+          "status": "Submitted",
+          "links": []
+        },
+        {
+          "title": "Application of DeepNLME framework to characterize distinct platelet dynamics in patients treated with Milademetan",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2026,
+          "date": "2026",
+          "status": "Submitted",
+          "links": []
+        },
+        {
+          "title": "Metric multi-dimensional scaling for longitudinal data embeddings in pharmacometrics",
+          "venue": "ICLR Workshop on Geometry-grounded Representation Learning and Generative Modeling",
+          "year": 2026,
+          "date": "April 25-26, 2026",
+          "links": [
+            { "label": "openreview", "url": "https://openreview.net/forum?id=f3oaZyXr29#discussion" },
+            { "label": "paper", "url": "/pdfs/metric-mds-iclr-2026.pdf" }
+          ]
+        },
+        {
+          "title": "A Deep Dive into Generative Scientific Machine Learning",
+          "venue": "2nd Bonn Conference on Mathematical Life Sciences",
+          "year": 2026,
+          "date": "March 18, 2026",
+          "links": [
+            { "label": "slides", "url": "/pdfs/deep-dive-generative-sml-2026.pdf" }
+          ]
+        },
+        {
+          "title": "Finding complex relationships between random effects and covariates using data-driven distributions",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2025,
+          "date": "Oct 21, 2025",
+          "links": []
+        },
+        {
+          "title": "Machine Learning For Exploratory Data Analysis And Model Diagnosis In Oncology",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2025,
+          "date": "Oct 19, 2025",
+          "links": [
+            { "label": "poster", "url": "/pdfs/ml-eda-oncology-2025.pdf" }
+          ]
+        },
+        {
+          "title": "A DeepNLME framework for modeling ordinal data to describe disease progression in patients with Alzheimer's disease",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2025,
+          "date": "Jun 6, 2025",
+          "links": [
+            { "label": "abstract", "url": "https://www.page-meeting.org/Abstracts/a-deepnlme-framework-for-modeling-ordinal-data-to-describe-disease-progression-in-patients-with-alzheimers-disease/" },
+            { "label": "slides", "url": "/pdfs/deepnlme-alzheimers-page-2025.pdf" }
+          ]
+        },
+        {
+          "title": "A DeepNLME-based Tumor Growth Dynamics and Overall Survival Model for Non Small Cell Lung Cancer",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2024,
+          "date": "Nov 12, 2024",
+          "links": [
+            { "label": "abstract", "url": "https://acop2024.eventscribe.net/fsPopup.asp?PosterID=690541&mode=posterInfo" },
+            { "label": "poster", "url": "/pdfs/deepnlme-tgd-os-nsclc-2024.pdf" }
+          ]
+        },
+        {
+          "title": "Make models great again by optimally restricting parameters to make non-identifiable models provably identifiable",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2024,
+          "date": "Jun 28, 2024",
+          "links": [
+            { "label": "abstract", "url": "https://www.page-meeting.org/default.asp?abstract=11072" },
+            { "label": "slides", "url": "/pdfs/make-models-great-again-2024.pdf" }
+          ]
+        },
+        {
+          "title": "Bayesian Pharmacometric Software Benchmarks",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2023,
+          "date": "Nov 7, 2023",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/Bayesian-Benchmarks" },
+            { "label": "poster", "url": "/pdfs/bayesian-benchmarks-2023.pdf" }
+          ]
+        },
+        {
+          "title": "DeepPumas for automatic discovery of individualizable functions governing longitudinal patient outcomes",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2023,
+          "date": "Jun 27, 2023",
+          "links": [
+            { "label": "abstract", "url": "https://www.page-meeting.org/default.asp?abstract=10522" },
+            { "label": "poster", "url": "/pdfs/deeppumas-individualizable-2023.pdf" }
+          ]
+        },
+        {
+          "title": "Fast cross-validation for Bayesian inference using proposals on a linear subspace",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2023,
+          "date": "Jun 27, 2023",
+          "links": [
+            { "label": "abstract", "url": "https://www.page-meeting.org/default.asp?abstract=10636" },
+            { "label": "poster", "url": "/pdfs/fast-crossvalidation-subspace-2023.pdf" }
+          ]
+        },
+        {
+          "title": "Marginal No-U-Turn Sampler for Bayesian Analysis in Pharmacometrics",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2023,
+          "date": "Jun 27, 2023",
+          "links": [
+            { "label": "abstract", "url": "https://www.page-meeting.org/default.asp?abstract=10637" },
+            { "label": "poster", "url": "/pdfs/marginal-nuts-2023.pdf" }
+          ]
+        },
+        {
+          "title": "A Complete Bayesian Workflow in Pumas",
+          "venue": "Population Approach Group in Australia and New Zealand (PAGANZ)",
+          "year": 2023,
+          "date": "Jan 20, 2023",
+          "links": [
+            { "label": "abstract", "url": "https://www.paganz.org/abstracts/a-complete-bayesian-workflow-in-pumas/" },
+            { "label": "slides", "url": "/pdfs/bayesian-workflow-pumas-paganz-2023.pdf" }
+          ]
+        },
+        {
+          "title": "ImplicitDifferentiation.jl: Differentiating Implicit Functions",
+          "venue": "JuliaCon",
+          "year": 2022,
+          "date": "Jul 29, 2022",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=TkVDcujVNJ4&t=1s" }
+          ]
+        },
+        {
+          "title": "AbstractDifferentiation.jl: Backend-Agnostic Differentiable Programming in Julia",
+          "venue": "Differentiable Programming NeurIPS Workshop",
+          "year": 2021,
+          "date": "Dec 13, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://neurips.cc/virtual/2021/35276" },
+            { "label": "openreview", "url": "https://openreview.net/forum?id=gnaNi-_snQ" },
+            { "label": "paper", "url": "/pdfs/abstractdifferentiation-neurips-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Nonlinear mixed effects model based optimal design of experiments using mathematical programming in Pumas",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2021,
+          "date": "Nov 9, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://www.go-acop.org/default.asp?abstract=247" },
+            { "label": "poster", "url": "/pdfs/optimal-design-pumas-acop-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Non-Gaussian random effects in nonlinear mixed effects models in Pumas",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2021,
+          "date": "Nov 9, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://www.go-acop.org/default.asp?abstract=246" },
+            { "label": "poster", "url": "/pdfs/nongaussian-random-effects-acop-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Parallel hierarchical Gibbs-NUTS MCMC algorithm for Nonlinear Mixed Effects models in Pumas",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
+          "year": 2021,
+          "date": "Nov 9, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://www.go-acop.org/default.asp?abstract=248" },
+            { "label": "poster", "url": "/pdfs/parallel-gibbs-nuts-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Subspace MCMC algorithm for Bayesian parameter estimation of hierarchical PK/PD models in Pumas",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2021,
+          "date": "Sep 7, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://www.page-meeting.org/Abstracts/subspace-mcmc-algorithm-for-bayesian-parameter-estimation-of-hierarchical-pk-pd-models-in-pumas/" },
+            { "label": "poster", "url": "/pdfs/subspace-mcmc-page-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Nonconvex.jl",
+          "venue": "JuMP-dev Workshop",
+          "year": 2021,
+          "date": "Jul 30, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=eQ9qpsO5OBM" }
+          ]
+        },
+        {
+          "title": "TopOpt.jl: topology optimization done right",
+          "venue": "JuliaCon",
+          "year": 2021,
+          "date": "Jul 29, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=sBqdkxPXluU" }
+          ]
+        },
+        {
+          "title": "TopOpt.jl: Truss and Continuum Topology Optimization - Interactive Visualization, Automatic Differentiation and More",
+          "venue": "World Congress of Structural and Multidisciplinary Optimization (WCSMO) 14",
+          "year": 2021,
+          "date": "Jun 16, 2021",
+          "links": [
+            { "label": "abstract", "url": "/pdfs/topopt-jl-wcsmo-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Bayesian Neural Ordinary Differential Equations",
+          "venue": "Languages for Inference (LAFI)",
+          "year": 2021,
+          "date": "Jan 15, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://popl21.sigplan.org/details/lafi-2021-papers/7/Bayesian-Neural-Ordinary-Differential-Equations" },
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=Rw-CcL_RQQ8" }
+          ]
+        },
+        {
+          "title": "Analysis of Laplace Approximation for Pharmaceutical Nonlinear Mixed Effects Models",
+          "venue": "Population Approach Group of Australia and New Zealand (PAGANZ)",
+          "year": 2021,
+          "date": "Jan 7, 2021",
+          "links": [
+            { "label": "abstract", "url": "https://www.paganz.org/abstracts/analysis-of-laplace-approximation-for-pharmaceutical-nonlinear-mixed-effects-models/" }
+          ]
+        },
+        {
+          "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
+          "venue": "JuliaCon",
+          "year": 2020,
+          "date": "Jul 31, 2020",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=aD_VEjDtOX0" }
+          ]
+        },
+        {
+          "title": "AdvancedHMC.jl: A robust, modular and efficient implementation of advanced HMC algorithms",
+          "venue": "The International Conference on Probabilistic Programming (PROBPROG)",
+          "year": 2020,
+          "date": "Jan 1, 2020",
+          "links": [
+            { "label": "poster", "url": "/pdfs/advancedhmc-probprog-2020.pdf" }
+          ]
+        },
+        {
+          "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
+          "venue": "The International Conference on Probabilistic Programming (PROBPROG)",
+          "year": 2020,
+          "date": "Jan 1, 2020",
+          "links": [
+            { "label": "poster", "url": "/pdfs/dynamicppl-probprog-2020.pdf" }
+          ]
+        },
+        {
+          "title": "AdvancedHMC.jl: A robust, modular and efficient implementation of advanced HMC algorithms",
+          "venue": "2nd Symposium on Advances in Approximate Bayesian Inference (AABI)",
+          "year": 2019,
+          "date": "Jan 1, 2019",
+          "links": [
+            { "label": "proceedings", "url": "https://proceedings.mlr.press/v118/xu20a.html?ref=https://githubhelp.com" },
+            { "label": "paper", "url": "/pdfs/advancedhmc-aabi-2019.pdf" }
+          ]
+        },
+        {
+          "title": "Bijectors.jl: Flexible transformations for probability distributions",
+          "venue": "2nd Symposium on Advances in Approximate Bayesian Inference (AABI)",
+          "year": 2019,
+          "date": "Jan 1, 2019",
+          "links": [
+            { "label": "proceedings", "url": "https://proceedings.mlr.press/v118/fjelde20a" },
+            { "label": "paper", "url": "/pdfs/bijectors-aabi-2019.pdf" }
+          ]
+        },
+        {
+          "title": "AdvancedHMC.jl: A robust, modular and efficient implementation of advanced HMC algorithms",
+          "venue": "StanCon",
+          "year": 2019,
+          "date": "August 20-23, 2019",
+          "links": [
+            { "label": "slides", "url": "/pdfs/advancedhmc-stancon-2019.pdf" }
+          ]
+        },
+        {
+          "title": "TopOpt.jl: An efficient and high-performance package for topology optimization of continuum structures in the Julia programming language",
+          "venue": "The World Congress of Structural and Multidisciplinary Optimization (WCSMO) 13",
+          "year": 2019,
+          "date": "Jan 1, 2019",
+          "links": []
+        },
+        {
+          "title": "Topology Optimization and JuMP",
+          "venue": "JuMP-dev Workshop",
+          "year": 2018,
+          "date": "Jul 28, 2018",
+          "links": [
+            { "label": "abstract", "url": "https://jump.dev/meetings/bordeaux2018/" },
+            { "label": "slides", "url": "/pdfs/topology-optimization-jump-2018.pdf" },
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=zNZ_bw1ti00" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Preprints",
+      "items": [
+        {
+          "title": "Nonconvex.jl: A Comprehensive Julia Package for Non-Convex Optimization",
+          "venue": "",
+          "year": 2023,
+          "date": "July 13, 2023",
+          "links": [
+            { "label": "researchgate", "url": "https://www.researchgate.net/publication/372336223_Nonconvexjl_A_Comprehensive_Julia_Package_for_Non-Convex_Optimization" },
+            { "label": "paper", "url": "/pdfs/nonconvex-jl-2023.pdf" }
+          ]
+        },
+        {
+          "title": "Earth Movers in The Big Data Era: A Review of Optimal Transport in Machine Learning",
+          "venue": "",
+          "year": 2023,
+          "date": "May 8, 2023",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2305.05080" },
+            { "label": "paper", "url": "/pdfs/earth-movers-ot-survey-2023.pdf" }
+          ]
+        },
+        {
+          "title": "A Practitioner's Guide to Bayesian Inference in Pharmacometrics using Pumas",
+          "venue": "",
+          "year": 2023,
+          "date": "Mar 31, 2023",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2304.04752" },
+            { "label": "paper", "url": "/pdfs/bayesian-pumas-guide-2023.pdf" }
+          ]
+        },
+        {
+          "title": "Preconditioners.jl: A Flexible and Extensible Framework for Preconditioning in Iterative Solvers",
+          "venue": "",
+          "year": 2023,
+          "date": "Feb 25, 2023",
+          "links": [
+            { "label": "researchgate", "url": "https://www.researchgate.net/publication/368781255_Preconditionersjl_A_Flexible_and_Extensible_Framework_for_Preconditioning_in_Iterative_Solvers" },
+            { "label": "paper", "url": "/pdfs/preconditioners-jl-2023.pdf" }
+          ]
+        },
+        {
+          "title": "Accelerated Predictive Healthcare Analytics with Pumas, A High Performance Pharmaceutical Modeling and Simulation Platform",
+          "venue": "",
+          "year": 2022,
+          "date": "Mar 20, 2022",
+          "links": [
+            { "label": "biorxiv", "url": "https://www.biorxiv.org/content/10.1101/2020.11.28.402297v2.abstract" },
+            { "label": "paper", "url": "/pdfs/pumas-predictive-healthcare-2022.pdf" }
+          ]
+        },
+        {
+          "title": "Bayesian Neural Ordinary Differential Equations",
+          "venue": "",
+          "year": 2022,
+          "date": "Feb 6, 2022",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2012.07244" },
+            { "label": "paper", "url": "/pdfs/bayesian-neural-ode-2022.pdf" }
+          ]
+        },
+        {
+          "title": "AbstractDifferentiation.jl: Backend-Agnostic Differentiable Programming in Julia",
+          "venue": "",
+          "year": 2022,
+          "date": "Feb 4, 2022",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2109.12449" },
+            { "label": "paper", "url": "/pdfs/abstractdifferentiation-2022.pdf" }
+          ]
+        },
+        {
+          "title": "Simplifying deflation for non-convex optimization with applications in Bayesian inference and topology optimization",
+          "venue": "",
+          "year": 2022,
+          "date": "Jan 28, 2022",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2201.11926" },
+            { "label": "paper", "url": "/pdfs/simplifying-deflation-2022.pdf" }
+          ]
+        },
+        {
+          "title": "Some popular nonlinear programming algorithms",
+          "venue": "",
+          "year": 2021,
+          "date": "Oct 18, 2021",
+          "links": [
+            { "label": "researchgate", "url": "https://www.researchgate.net/publication/355362612_Some_popular_nonlinear_programming_algorithms" },
+            { "label": "paper", "url": "/pdfs/nonlinear-programming-algorithms-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Approximation schemes for stochastic compliance-based topology optimization with many loading scenarios",
+          "venue": "",
+          "year": 2021,
+          "date": "Aug 8, 2021",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2108.03654" },
+            { "label": "paper", "url": "/pdfs/stochastic-topology-approx-2021.pdf" }
+          ]
+        },
+        {
+          "title": "Robust and stochastic compliance-based topology optimization with finitely many loading scenarios",
+          "venue": "",
+          "year": 2021,
+          "date": "Mar 8, 2021",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2103.04594" },
+            { "label": "paper", "url": "/pdfs/robust-stochastic-topology-2021.pdf" }
+          ]
+        },
+        {
+          "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
+          "venue": "",
+          "year": 2020,
+          "date": "Feb 7, 2020",
+          "links": [
+            { "label": "arxiv", "url": "https://arxiv.org/abs/2002.02702" },
+            { "label": "paper", "url": "/pdfs/dynamicppl-2020.pdf" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Journals",
+      "items": [
+        {
+          "title": "DeepNLME: conditional generative scientific machine learning with applications in pharmacology",
+          "venue": "Quantitative Medicine",
+          "year": 2026,
+          "date": "",
+          "status": "Under Review",
+          "links": []
+        },
+        {
+          "title": "Pumas: a unified platform for pharmaceutical modeling and simulation",
+          "venue": "Quantitative Medicine",
+          "year": 2026,
+          "date": "",
+          "status": "Under Review",
+          "links": []
+        },
+        {
+          "title": "Turing.jl: a general-purpose probabilistic programming language",
+          "venue": "ACM Transactions on Probabilistic Machine Learning (TPML)",
+          "year": 2025,
+          "date": "Feb 14, 2025",
+          "links": [
+            { "label": "journal", "url": "https://dl.acm.org/doi/abs/10.1145/3711897" }
+          ]
+        },
+        {
+          "title": "Scalable Optimal Transport Methods in Machine Learning: A Contemporary Survey",
+          "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)",
+          "year": 2024,
+          "date": "Mar 20, 2024",
+          "links": [
+            { "label": "journal", "url": "https://ieeexplore.ieee.org/abstract/document/10476763" }
+          ]
+        },
+        {
+          "title": "Approximation schemes for stochastic compliance-based topology optimization with many loading scenarios",
+          "venue": "Structural and Multidisciplinary Optimization (SMO)",
+          "year": 2022,
+          "date": "Apr 13, 2022",
+          "links": [
+            { "label": "journal", "url": "https://link.springer.com/article/10.1007/s00158-022-03221-0" }
+          ]
+        },
+        {
+          "title": "Robust and stochastic compliance-based topology optimization with finitely many loading scenarios",
+          "venue": "Structural and Multidisciplinary Optimization (SMO)",
+          "year": 2021,
+          "date": "Sept 26, 2021",
+          "links": [
+            { "label": "journal", "url": "https://link.springer.com/article/10.1007/s00158-021-03022-x" }
+          ]
+        },
+        {
+          "title": "Adaptive continuation solid isotropic material with penalization for volume constrained compliance minimization",
+          "venue": "Computer Methods in Applied Mechanics and Engineering (CMAME)",
+          "year": 2020,
+          "date": "May 1, 2020",
+          "links": [
+            { "label": "journal", "url": "https://www.sciencedirect.com/science/article/pii/S0045782520300621" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software",
+      "items": [
+        {
+          "title": "ReverseDiff: Reverse mode automatic Differentiation for Julia",
+          "venue": "Astrophysics Source Code Library (ASCL)",
+          "year": 2024,
+          "date": "Nov 1, 2024",
+          "links": [
+            { "label": "abstract", "url": "https://ui.adsabs.harvard.edu/abs/2024ascl.soft11010R/abstract" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Videos",
+      "items": [
+        {
+          "title": "Playlist: Introduction to DeepPumas Learning Path",
+          "venue": "",
+          "year": 2025,
+          "date": "Sept 9-25, 2025",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=gMrzM2kvmiM&list=PLTPIIhCuAkznnft0FrGHUoSBSw7ZufxcI&index=7" }
+          ]
+        },
+        {
+          "title": "Generaive Machine Learning and Nonlinear Mixed Effects Modelling are the Exact Same Thing",
+          "venue": "",
+          "year": 2025,
+          "date": "Mar 10, 2025",
+          "links": [
+            { "label": "youtube", "url": "https://youtu.be/HlExhuvaAVQ?si=LG2Vqu4BK5ooPqCg" }
+          ]
+        },
+        {
+          "title": "Understanding automatic differentiation (in Julia)",
+          "venue": "",
+          "year": 2021,
+          "date": "Dec 11, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=UqymrMG-Qi4&t=1862s" }
+          ]
+        },
+        {
+          "title": "Nonconvex.jl",
+          "venue": "JuMP-dev Workshop",
+          "year": 2021,
+          "date": "Jul 30, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=eQ9qpsO5OBM" }
+          ]
+        },
+        {
+          "title": "TopOpt.jl: topology optimization done right",
+          "venue": "JuliaCon",
+          "year": 2021,
+          "date": "Jul 29, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=sBqdkxPXluU" }
+          ]
+        },
+        {
+          "title": "Setup, Reading and Developing Julia Packages",
+          "venue": "Canberra Julia Language Meetup",
+          "year": 2021,
+          "date": "Apr 25, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=HbR4oCjMCM8" }
+          ]
+        },
+        {
+          "title": "Pumas 2.0 Features: Beyond Gaussian Random Effects",
+          "venue": "",
+          "year": 2021,
+          "date": "Mar 30, 2021",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=rSlT6KUwTK4" }
+          ]
+        },
+        {
+          "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
+          "venue": "JuliaCon",
+          "year": 2020,
+          "date": "Jul 31, 2020",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=aD_VEjDtOX0" }
+          ]
+        },
+        {
+          "title": "Topology Optimization and JuMP",
+          "venue": "JuMP-dev Workshop",
+          "year": 2018,
+          "date": "Jul 28, 2018",
+          "links": [
+            { "label": "youtube", "url": "https://www.youtube.com/watch?v=zNZ_bw1ti00" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Workshops and Courses Taught",
+      "items": [
+        {
+          "title": "Certificate Course on AI for Drug Development",
+          "venue": "Virtual 2025-2026",
+          "year": 2025,
+          "date": "",
+          "links": [
+            { "label": "sophas", "url": "https://sophas.net/courses-ai-in-drug-development/" }
+          ]
+        },
+        {
+          "title": "Hands-on-Workshop: NLME Modeling Workflows Using Pumas",
+          "venue": "Virtual 2025",
+          "year": 2025,
+          "date": "Feb 3-5, 2025",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025" }
+          ]
+        },
+        {
+          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
+          "venue": "American Conference on Pharmacometrics (ACoP) 2024",
+          "year": 2024,
+          "date": "Nov 9-10, 2024",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2024_ACoP" }
+          ]
+        },
+        {
+          "title": "Intermediate Workshop on Population Modelling Using Pumas",
+          "venue": "Population Approach Group in Australia and New Zealand (PAGANZ)",
+          "year": 2024,
+          "date": "Feb 14, 2024",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/PAGANZ_2024_NLME_Workshop" }
+          ]
+        },
+        {
+          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
+          "venue": "American Conference on Pharmacometrics (ACoP) 14",
+          "year": 2023,
+          "date": "Nov 4-5, 2023",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_ACOP" }
+          ]
+        },
+        {
+          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2023,
+          "date": "Jun 26-27, 2023",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_PAGE" }
+          ]
+        },
+        {
+          "title": "DeepPumas Workshop at UMB",
+          "venue": "University of Maryland, Baltimore (UMB)",
+          "year": 2023,
+          "date": "Feb 20, 2023",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_UMB" }
+          ]
+        },
+        {
+          "title": "Pumas for Quantitative Pharmacology",
+          "venue": "Tokyo, Japan",
+          "year": 2022,
+          "date": "Dec 5-6, 2022",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI/Pumas_Workshop_Tokyo_2022" }
+          ]
+        },
+        {
+          "title": "Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs",
+          "venue": "American Conference on Pharmacometrics (ACoP) 13",
+          "year": 2022,
+          "date": "Nov 3-4, 2022",
+          "links": [
+            { "label": "github", "url": "https://github.com/PumasAI/Bayesian-Workshop" }
+          ]
+        }
+      ]
+    }
+  ]
+}
