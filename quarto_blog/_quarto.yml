@@ -17,6 +17,7 @@ website:
 
 format:
   html:
+    number-sections: true
     toc: true
     code-copy: true
     code-fold: false
@@ -24,6 +25,11 @@ format:
     include-in-header:
       - text: |
           <script defer src="https://cloud.umami.is/script.js" data-website-id="83603249-8763-4c0b-a83b-bf4adae042e8"></script>
+          <style>
+          .header-section-number::after { content: "."; }
+          .header-section-number { color: oklch(45% 0.14 250); }
+          [data-theme="dark"] .header-section-number { color: oklch(75% 0.1 250); }
+          </style>
     include-before-body: 
       - text: |
           <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
