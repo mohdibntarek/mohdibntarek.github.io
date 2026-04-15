@@ -6,6 +6,7 @@ const frontmatter = {
   title: "Research and Teaching",
   description: "Publications and workshops taught",
   published: true,
+  "number-sections": true,
 };
 ---
 
@@ -23,9 +24,9 @@ const frontmatter = {
 
     <p id="pub-no-results" class="no-results" hidden>No publications matching your search.</p>
 
-    {publications.sections.map((section, sIdx) => (
+    {publications.sections.map((section) => (
       <div data-section>
-        <h2 id={section.title.toLowerCase().replace(/\s+/g, '-')}><span class="heading-number">{sIdx + 1}.</span> {section.title}</h2>
+        <h2 id={section.title.toLowerCase().replace(/\s+/g, '-')}>{section.title}</h2>
         <ol>
           {section.items.map((item) => (
             <li
@@ -179,4 +180,6 @@ const frontmatter = {
     font-style: italic;
     margin: 2rem 0;
   }
+
+  /* Hidden sections don't contribute to h2 counter (display:none excludes from box tree) */
 </style>
