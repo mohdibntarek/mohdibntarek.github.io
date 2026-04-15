@@ -348,8 +348,10 @@ import "../styles/typography.css";
   function addNumberedHeadings() {
     const counters = { h2: 0, h3: 0, h4: 0, h5: 0, h6: 0 };
     const headings = document.querySelectorAll(".article-body h2, .article-body h3, .article-body h4, .article-body h5, .article-body h6");
-    
+
     [...headings].forEach((heading) => {
+      // Skip headings inside blog post cards (they have their own numbering)
+      if (heading.closest('.post-card')) return;
       // Remove existing number span if present (for re-runs)
       const existingNumber = heading.querySelector('.heading-number');
       if (existingNumber) existingNumber.remove();

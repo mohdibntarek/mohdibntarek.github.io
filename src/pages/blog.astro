@@ -123,13 +123,31 @@ try {
 }
 ---
 <Layout frontmatter={{ title: "Blog Posts", description: "Tutorials, guides, and thoughts on programming, machine learning, and software engineering." }}>
-  <div class="blog-container">
+  <div class="blog-container" id="blog-search">
+    <div class="search-container">
+      <input
+        type="text"
+        id="blog-query"
+        placeholder="Search posts by title, description, tag, date..."
+        class="search-input"
+      />
+      <button id="blog-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
+    </div>
+
+    <p id="blog-no-results" class="no-results" hidden>No posts matching your search.</p>
+
     <div class="posts-grid">
       {blogPosts.map(post => (
-        <article class="post-card">
+        <article
+          class="post-card"
+          data-title={post.title}
+          data-description={post.description}
+          data-date={`${post.date} ${post.date ? new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : ''} ${post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'short' }) : ''}`}
+          data-categories={post.categories.join(',')}
+        >
           <a href={post.href} class="post-link">
             <div class="post-header">
-              <h2 class="post-title">{post.title}</h2>
+              <h2 class="post-title"><span class="post-number"></span>{post.title}</h2>
               <time class="post-date" datetime={post.date}>
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -154,6 +172,69 @@ try {
   </div>
 </Layout>
 
+<script>
+  function fuzzy(text: string, pattern: string): boolean {
+    text = text.toLowerCase();
+    pattern = pattern.toLowerCase();
+    if (text.includes(pattern)) return true;
+    if (pattern.length < 3) return false;
+    let ti = 0, pi = 0, gaps = 0;
+    while (ti < text.length && pi < pattern.length) {
+      if (text[ti] === pattern[pi]) { pi++; }
+      else if (pi > 0) { gaps++; }
+      ti++;
+    }
+    return pi === pattern.length && gaps <= Math.floor(pattern.length / 3);
+  }
+
+  function matchesPost(el: HTMLElement, tokens: string[]): boolean {
+    const { title = '', description = '', date = '', categories = '' } = el.dataset;
+    return tokens.every(token =>
+      fuzzy(title, token) ||
+      fuzzy(description, token) ||
+      date.toLowerCase().includes(token) ||
+      categories.split(',').some(c => fuzzy(c, token))
+    );
+  }
+
+  function filterPosts() {
+    const input = document.getElementById('blog-query') as HTMLInputElement;
+    const clearBtn = document.getElementById('blog-clear') as HTMLButtonElement;
+    const noResults = document.getElementById('blog-no-results') as HTMLElement;
+    const cards = document.querySelectorAll<HTMLElement>('#blog-search .post-card');
+
+    const q = input.value.trim();
+    const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+
+    clearBtn.hidden = !q;
+
+    let anyVisible = false;
+    cards.forEach(card => {
+      const visible = !q || matchesPost(card, tokens);
+      card.hidden = !visible;
+      if (visible) anyVisible = true;
+    });
+
+    noResults.hidden = !q || anyVisible;
+  }
+
+  function initBlogSearch() {
+    const input = document.getElementById('blog-query') as HTMLInputElement | null;
+    const clearBtn = document.getElementById('blog-clear') as HTMLButtonElement | null;
+    if (!input || !clearBtn) return;
+    input.value = '';
+    filterPosts();
+    input.addEventListener('input', filterPosts);
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      filterPosts();
+    });
+  }
+
+  initBlogSearch();
+  document.addEventListener('astro:page-load', initBlogSearch);
+</script>
+
 <style>
   .blog-container {
     max-width: 900px;
@@ -161,10 +242,80 @@ try {
     padding: 1rem 2rem;
   }
 
+  .search-container {
+    position: relative;
+    margin-bottom: 2rem;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .search-input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    border-radius: 8px;
+    background: var(--color-card, #ffffff);
+    color: var(--color-text, #1a1a1a);
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-primary, #667eea);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-secondary, #999);
+  }
+
+  .search-clear {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #999);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+  }
+
+  .search-clear:hover {
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .no-results {
+    color: var(--color-text-secondary, #666);
+    font-style: italic;
+    margin: 2rem 0;
+  }
+
   .posts-grid {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    counter-reset: post-counter;
+  }
+
+  .post-card {
+    counter-increment: post-counter;
+  }
+
+  .post-card[hidden] {
+    counter-increment: none;
+  }
+
+  .post-number::before {
+    content: counter(post-counter) ". ";
+    color: var(--color-text-muted, #888);
+    font-weight: 500;
   }
 
   .post-card {
