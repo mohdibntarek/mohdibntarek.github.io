@@ -23,7 +23,8 @@ const frontmatter = {
             item.venue.toLowerCase().includes(q) ||
             (item.status || '').toLowerCase().includes(q) ||
             String(item.year).includes(q) ||
-            item.links.some(l => aliases.some(a => l.label.toLowerCase().includes(a)));
+            item.links.some(l => aliases.some(a => l.label.toLowerCase().includes(a))) ||
+            (item.tags || []).some(t => t.toLowerCase().includes(q));
         })
       })).filter(section => section.items.length > 0);
     }
