@@ -17,7 +17,6 @@ website:
 
 format:
   html:
-    number-sections: true
     toc: true
     code-copy: true
     code-fold: false

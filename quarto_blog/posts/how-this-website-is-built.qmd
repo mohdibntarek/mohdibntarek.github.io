@@ -5,6 +5,7 @@ date: "2026-04-12"
 description: "Why I used two frameworks instead of one—and how it actually works better."
 tags: [web-development, astro, quarto, tutorial]
 engine: julia
+number-sections: false
 ---
 
 ---
