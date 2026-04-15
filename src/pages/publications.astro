@@ -10,80 +10,111 @@ const frontmatter = {
 ---
 
 <Layout frontmatter={frontmatter}>
-  <div x-data={`{
-    query: '',
-    fuzzy(text, pattern) {
-      text = text.toLowerCase();
-      pattern = pattern.toLowerCase();
-      if (text.includes(pattern)) return true;
-      if (pattern.length < 3) return false;
-      let ti = 0, pi = 0, gaps = 0;
-      while (ti < text.length && pi < pattern.length) {
-        if (text[ti] === pattern[pi]) { pi++; }
-        else if (pi > 0) { gaps++; }
-        ti++;
-      }
-      return pi === pattern.length && gaps <= Math.floor(pattern.length / 3);
-    },
-    tokenize(q) {
-      return q.toLowerCase().trim().split(/\\s+/).filter(Boolean);
-    },
-    matchItem(item, q) {
-      const tokens = this.tokenize(q);
-      return tokens.every(token => {
-        const aliases = token === 'video' ? ['youtube'] : token === 'paper' ? ['paper', 'journal'] : [token];
-        return this.fuzzy(item.title, token) ||
-          this.fuzzy(item.venue, token) ||
-          this.fuzzy(item.status || '', token) ||
-          String(item.year).includes(token) ||
-          item.links.some(l => aliases.some(a => this.fuzzy(l.label, a))) ||
-          (item.tags || []).some(t => this.fuzzy(t, token));
-      });
-    },
-    get sections() {
-      const q = this.query.trim();
-      if (!q) return ${JSON.stringify(publications.sections)};
-      return ${JSON.stringify(publications.sections)}.map(section => ({
-        ...section,
-        items: section.items.filter(item => this.matchItem(item, q))
-      })).filter(section => section.items.length > 0);
-    }
-  }`}>
+  <div id="pub-search">
     <div class="search-container">
       <input
         type="text"
-        x-model="query"
+        id="pub-query"
         placeholder="Search publications by title, venue, year..."
         class="search-input"
       />
-      <template x-if="query">
-        <button @click="query = ''" class="search-clear" aria-label="Clear search">&times;</button>
-      </template>
+      <button id="pub-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
     </div>
 
-    <template x-if="query && sections.length === 0">
-      <p class="no-results">No publications matching your search.</p>
-    </template>
+    <p id="pub-no-results" class="no-results" hidden>No publications matching your search.</p>
 
-    <template x-for="(section, sIdx) in sections" :key="section.title">
-      <div>
-        <h2><span class="heading-number" x-text="(sIdx + 1) + '.'"></span> <span x-text="section.title"></span></h2>
+    {publications.sections.map((section, sIdx) => (
+      <div data-section>
+        <h2><span class="heading-number">{sIdx + 1}.</span> {section.title}</h2>
         <ol>
-          <template x-for="(item, idx) in section.items" :key="idx">
-            <li>
-              <strong x-text="item.title"></strong><span x-show="item.venue">, <span x-text="item.venue"></span></span><span x-show="item.date">. <span x-text="item.date"></span></span><span x-show="item.status">. <span x-text="item.status"></span></span><span x-text="item.status ? '.' : ''"></span>
-              <template x-for="link in item.links" :key="link.url">
+          {section.items.map((item) => (
+            <li
+              data-title={item.title}
+              data-venue={item.venue}
+              data-year={String(item.year)}
+              data-status={item.status || ''}
+              data-tags={(item.tags || []).join(',')}
+              data-links={item.links.map(l => l.label).join(',')}
+            >
+              <strong>{item.title}</strong>{item.venue && <span>, {item.venue}</span>}{item.date && <span>. {item.date}</span>}{item.status && <span>. {item.status}</span>}{item.status && '.'}
+              {item.links.map((link) => (
                 <span>
-                  &nbsp;[<a :href="link.url" x-text="link.label" target="_blank" rel="noopener"></a>]
+                  &nbsp;[<a href={link.url} target="_blank" rel="noopener">{link.label}</a>]
                 </span>
-              </template>
+              ))}
             </li>
-          </template>
+          ))}
         </ol>
       </div>
-    </template>
+    ))}
   </div>
+
 </Layout>
+
+<script>
+  function fuzzy(text: string, pattern: string): boolean {
+    text = text.toLowerCase();
+    pattern = pattern.toLowerCase();
+    if (text.includes(pattern)) return true;
+    if (pattern.length < 3) return false;
+    let ti = 0, pi = 0, gaps = 0;
+    while (ti < text.length && pi < pattern.length) {
+      if (text[ti] === pattern[pi]) { pi++; }
+      else if (pi > 0) { gaps++; }
+      ti++;
+    }
+    return pi === pattern.length && gaps <= Math.floor(pattern.length / 3);
+  }
+
+  function matchesItem(el: HTMLElement, tokens: string[]): boolean {
+    const { title = '', venue = '', year = '', status = '', tags = '', links = '' } = el.dataset;
+    return tokens.every(token => {
+      const aliases = token === 'video' ? ['youtube'] : token === 'paper' ? ['paper', 'journal'] : [token];
+      return fuzzy(title, token) ||
+        fuzzy(venue, token) ||
+        fuzzy(status, token) ||
+        year.includes(token) ||
+        aliases.some(a => links.split(',').some(l => fuzzy(l, a))) ||
+        tags.split(',').some(t => fuzzy(t, token));
+    });
+  }
+
+  function filterPublications() {
+    const input = document.getElementById('pub-query') as HTMLInputElement;
+    const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement;
+    const noResults = document.getElementById('pub-no-results') as HTMLElement;
+    const sections = document.querySelectorAll<HTMLElement>('#pub-search [data-section]');
+
+    const q = input.value.trim();
+    const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+
+    clearBtn.hidden = !q;
+
+    let anyVisible = false;
+
+    sections.forEach(section => {
+      const items = section.querySelectorAll<HTMLElement>('li[data-title]');
+      let sectionHasVisible = false;
+      items.forEach(li => {
+        const visible = !q || matchesItem(li, tokens);
+        li.hidden = !visible;
+        if (visible) sectionHasVisible = true;
+      });
+      section.hidden = !sectionHasVisible;
+      if (sectionHasVisible) anyVisible = true;
+    });
+
+    noResults.hidden = !q || anyVisible;
+  }
+
+  const input = document.getElementById('pub-query')!;
+  const clearBtn = document.getElementById('pub-clear')!;
+  input.addEventListener('input', filterPublications);
+  clearBtn.addEventListener('click', () => {
+    (input as HTMLInputElement).value = '';
+    filterPublications();
+  });
+</script>
 
 <style>
   .search-container {
