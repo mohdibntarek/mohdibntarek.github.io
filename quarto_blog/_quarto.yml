@@ -21,6 +21,9 @@ format:
     code-copy: true
     code-fold: false
     code-tools: true
+    include-in-header:
+      - text: |
+          <script defer src="https://cloud.umami.is/script.js" data-website-id="83603249-8763-4c0b-a83b-bf4adae042e8"></script>
     include-before-body: 
       - text: |
           <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
