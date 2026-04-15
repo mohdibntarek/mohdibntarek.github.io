@@ -12,20 +12,40 @@ const frontmatter = {
 <Layout frontmatter={frontmatter}>
   <div x-data={`{
     query: '',
+    fuzzy(text, pattern) {
+      text = text.toLowerCase();
+      pattern = pattern.toLowerCase();
+      if (text.includes(pattern)) return true;
+      if (pattern.length < 3) return false;
+      let ti = 0, pi = 0, gaps = 0;
+      while (ti < text.length && pi < pattern.length) {
+        if (text[ti] === pattern[pi]) { pi++; }
+        else if (pi > 0) { gaps++; }
+        ti++;
+      }
+      return pi === pattern.length && gaps <= Math.floor(pattern.length / 3);
+    },
+    tokenize(q) {
+      return q.toLowerCase().trim().split(/\\s+/).filter(Boolean);
+    },
+    matchItem(item, q) {
+      const tokens = this.tokenize(q);
+      return tokens.every(token => {
+        const aliases = token === 'video' ? ['youtube'] : token === 'paper' ? ['paper', 'journal'] : [token];
+        return this.fuzzy(item.title, token) ||
+          this.fuzzy(item.venue, token) ||
+          this.fuzzy(item.status || '', token) ||
+          String(item.year).includes(token) ||
+          item.links.some(l => aliases.some(a => this.fuzzy(l.label, a))) ||
+          (item.tags || []).some(t => this.fuzzy(t, token));
+      });
+    },
     get sections() {
-      const q = this.query.toLowerCase().trim();
+      const q = this.query.trim();
       if (!q) return ${JSON.stringify(publications.sections)};
       return ${JSON.stringify(publications.sections)}.map(section => ({
         ...section,
-        items: section.items.filter(item => {
-          const aliases = q === 'video' ? ['youtube'] : q === 'paper' ? ['paper', 'journal'] : [q];
-          return item.title.toLowerCase().includes(q) ||
-            item.venue.toLowerCase().includes(q) ||
-            (item.status || '').toLowerCase().includes(q) ||
-            String(item.year).includes(q) ||
-            item.links.some(l => aliases.some(a => l.label.toLowerCase().includes(a))) ||
-            (item.tags || []).some(t => t.toLowerCase().includes(q));
-        })
+        items: section.items.filter(item => this.matchItem(item, q))
       })).filter(section => section.items.length > 0);
     }
   }`}>
