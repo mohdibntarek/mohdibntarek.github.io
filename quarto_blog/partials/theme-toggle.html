@@ -1,0 +1,110 @@
+<!-- Theme Toggle button with Alpine.js -->
+<button 
+  class="theme-toggle" 
+  aria-label="Toggle dark mode" 
+  title="Toggle dark mode"
+  x-data
+  @click="$dispatch('theme-toggle')"
+>
+  <span class="theme-toggle__icon theme-toggle__icon--sun" x-show="$store.theme.isDark" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </span>
+  <span class="theme-toggle__icon theme-toggle__icon--moon" x-show="!$store.theme.isDark">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </span>
+</button>
+<script>
+  // Alpine.js theme store - syncs with Astro via localStorage
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('theme', {
+      isDark: document.documentElement.getAttribute('data-theme') === 'dark',
+      
+      toggle() {
+        this.isDark = !this.isDark;
+        const theme = this.isDark ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+        localStorage.setItem('theme-preference', theme);
+      }
+    });
+    
+    // Listen for toggle events from button
+    window.addEventListener('theme-toggle', () => {
+      Alpine.store('theme').toggle();
+    });
+    
+    // Listen for storage events from Astro pages
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme-preference') {
+        const newTheme = e.newValue;
+        if (newTheme) {
+          Alpine.store('theme').isDark = newTheme === 'dark';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          document.documentElement.setAttribute('data-bs-theme', newTheme);
+          document.documentElement.style.colorScheme = newTheme;
+        }
+      }
+    });
+  });
+  
+  // Inline code background fix for dark mode (Quarto-specific)
+  (function() {
+    const updateInlineCodeBackground = function() {
+      const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+      const inlineCodeSelectors = [
+        'p code:not(.sourceCode)',
+        'li code:not(.sourceCode)',
+        'td code:not(.sourceCode)',
+        'h1 code:not(.sourceCode)',
+        'h2 code:not(.sourceCode)',
+        'h3 code:not(.sourceCode)',
+        'h4 code:not(.sourceCode)',
+        'h5 code:not(.sourceCode)',
+        'h6 code:not(.sourceCode)'
+      ];
+      
+      inlineCodeSelectors.forEach(function(selector) {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(function(el) {
+          if (isDark) {
+            el.style.setProperty('background-color', 'rgba(110, 118, 129, 0.4)', 'important');
+            el.style.setProperty('color', '#e6edf3', 'important');
+            el.style.setProperty('padding', '0.2em 0.4em', 'important');
+            el.style.setProperty('border-radius', '3px', 'important');
+            el.style.setProperty('font-size', '85%', 'important');
+          } else {
+            el.style.removeProperty('background-color');
+            el.style.removeProperty('color');
+            el.style.removeProperty('padding');
+            el.style.removeProperty('border-radius');
+            el.style.removeProperty('font-size');
+          }
+        });
+      });
+    };
+    
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'data-bs-theme') {
+          updateInlineCodeBackground();
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+    updateInlineCodeBackground();
+  })();
+</script>
