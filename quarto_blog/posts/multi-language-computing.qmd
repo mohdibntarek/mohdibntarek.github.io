@@ -116,11 +116,7 @@ Julia packages are managed using the built-in Pkg system. You can add packages f
 
 ```{julia}
 using Pkg
-Pkg.add("Optim")
-Pkg.add("CairoMakie")
-Pkg.add("PythonCall")
-Pkg.add("CondaPkg")
-Pkg.add("RCall")
+Pkg.add(["Optim", "CairoMakie", "PythonCall", "CondaPkg", "RCall"])
 ```
 
 These packages get installed in the document's environment. Every Quarto document is executed by the Julia engine in an environment, which is defined by a `Project.toml` file and an optional `Manifest.toml` file. The `Project.toml` file specifies the packages and their versions that are required for the document, while the `Manifest.toml` file records the exact versions of all packages that were installed, including indirect dependencies. This ensures that your document is reproducible, as anyone else can use the same `Project.toml` and `Manifest.toml` files to recreate the exact same environment. However, one caveat of the `Manifest.toml` file is that it does not guarantee reproducibility across different operating systems and hardware architectures. For example, if you create a `Manifest.toml` file on a Windows machine, it may not work correctly on a Linux machine due to differences in how packages are built and their dependencies. This is something to keep in mind when sharing your document with others who may be using different platforms.
