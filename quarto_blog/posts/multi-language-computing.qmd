@@ -357,7 +357,7 @@ Now let's run the optimization for 1 iteration only to see the print statements 
 pyimport("scipy.optimize").minimize(julia_rosenbrock, julia_x0, method="BFGS", options=Dict("maxiter" => 1))
 ```
 
-Note that PyArray is a thin wrapper around the original NumPy array that allows it to be accessed with 1-based indexing in Julia. So they share the same memory and any changes to the PyArray in Julia will reflect in the original NumPy array in Python and vice versa. However, the indexing is different, so when you access `x[1]` in the Julia function, it corresponds to `x[0]` in the original NumPy array in Python, and when you access `x[2]` in Julia, it corresponds to `x[1]` in the original NumPy array in Python. This is an important detail to keep in mind when working with arrays across language boundaries, as it can lead to off-by-one errors if not handled correctly.
+Note that `PyArray` is a thin wrapper around the original NumPy array that allows it to be accessed with 1-based indexing in Julia. So they share the same memory and any changes to the `PyArray` in Julia will reflect in the original NumPy array in Python and vice versa. However, the indexing is different, so when you access `x[1]` in the Julia function, it corresponds to `x[0]` in the original NumPy array in Python, and when you access `x[2]` in Julia, it corresponds to `x[1]` in the original NumPy array in Python. This is an important detail to keep in mind when working with arrays across language boundaries, as it can lead to off-by-one errors if not handled correctly.
 
 After the optimization is complete, we can read the output back into Julia and compare it with the output from the native Julia optimization:
 
