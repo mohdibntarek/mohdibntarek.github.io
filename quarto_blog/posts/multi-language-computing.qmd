@@ -54,7 +54,7 @@ ENV["CURL_CA_BUNDLE"] = "/etc/pki/tls/certs/ca-bundle.crt"
 
 A more robust version of the above code that should work across a few different Linux distributions and R installation methods is shown below. This is the version I run when building the Quarto document both locally and on GitHub Actions runners which are Ubuntu-based, but the simpler version above is the minimal code I had to run locally at first on my Fedora system, before generalizing it.
 
-```{julia}
+```julia
 # On Linux systems, configure R paths and SSL certificates for RCall if needed
 # The more complicated script below is what's actually run to ensure compatibility
 # across different Linux distributions and R installation methods, but the simpler
@@ -213,6 +213,7 @@ The `install.packages` function is used above to install packages from CRAN, aft
 Since the Julia Quarto engine also uses RCall under the hood, one can also directly utilize Quarto's multi-language code block feature and run an R block instead to install and load the package, which is more straightforward and doesn't require embedding R code in a Julia string macro. This also allows you to have syntax highlighting and code completion for R code in the editor.
 
 ```{r}
+library(utils)
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 install.packages("data.table", dependencies=TRUE)
 ```
