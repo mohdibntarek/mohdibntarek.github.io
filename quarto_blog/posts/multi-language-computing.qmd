@@ -92,19 +92,21 @@ if Sys.islinux()
 end
 ```
 
-Next, let's build RCall to ensure it can find the R installation and is properly configured:
+Next, if `RCall` is already installed but broken, you can build `RCall` to ensure it can find the R installation and is properly configured:
 
-```{julia}
+```julia
 using Pkg
 Pkg.build("RCall")
 ```
 
 To confirm the R installation is correctly found by RCall, you can run a simple command to check the R version:
 
-```{julia}
+```julia
 using RCall
 R"version"
 ```
+
+In this post, we will install `RCall` below, so no need to call the above commands.
 
 ## Installing Packages
 
@@ -140,6 +142,18 @@ julia = "1.12"
 ```
 
 Note that the Julia version is also specified in the `compat` section. This is important for reproducibility because different Julia versions may have different package compatibility and behavior. For example, the pseudo-random number generator in Julia can change between minor (e.g. 1.12 to 1.13) or even patch (e.g. 1.12.0 to 1.12.1) version updates which can lead to different results when running the same code without it being considered a breaking change, according to the Julia documentation.
+
+To check that `RCall` is installed and built successfully, you can run the following code:
+```{julia}
+using RCall
+R"version"
+```
+
+Similarly, to check that `PythonCall` is installed and built successfully, you can run the following code:
+```{julia}
+using PythonCall
+pyimport("sys").version
+```
 
 ### Python Packages
 
