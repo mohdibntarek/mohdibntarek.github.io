@@ -188,6 +188,7 @@ You can install R packages using R's built-in package manager from within Julia 
 
 ```{julia}
 R"""
+library(utils)
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 install.packages("data.table", dependencies=TRUE)
 """
