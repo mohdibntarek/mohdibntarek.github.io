@@ -771,5 +771,11 @@
 
 .theme-toggle__icon {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     transition: opacity 250ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
