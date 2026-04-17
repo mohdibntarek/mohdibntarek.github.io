@@ -1,0 +1,493 @@
+---
+title: "Multi-Language Computing: Julia, Python, and R Working Together"
+author: "Mohamed Tarek"
+date: "2026-04-15"
+description: "Showcasing Quarto's multi-language support and how to seamlessly call Python and R from Julia."
+tags: [julia, python, r, quarto, interoperability]
+engine: julia
+number-sections: true
+execute:
+  cache: true
+---
+
+---
+
+## Introduction
+
+One of the things I love about Quarto is its first-class support for multiple programming languages. In many ways, Quarto feels like the natural evolution of Jupyter notebooks. The term "Jupyter" itself is a nod to the three core languages it originally supported: JUlia, PYThon, and R. Quarto brings this multi-language philosophy to a content-first publishing platform. With Quarto, you write rich Markdown documents with figures, tables, cross-references and citations while incorporating live code blocks possibly from different programming languages, all in the same document. These code blocks get run and their output gets weaved into the document upon rendering. Quarto can render the document into a variety of formats, including HTML, PDF, and even Microsoft Word. The Microsoft Word output is actually surprisingly good, with proper formatting and embedded figures, which is great for sharing with collaborators who prefer that format for editing and reviewing.
+
+But why would anyone want to use multiple languages in the same document? The answer is simple: each language has its strengths, and sometimes you want to leverage the best tool for the job without switching contexts. When I started coding in Julia back in 2016, Julia was a very young language. Its ecosystem was still growing, especially in visualization and plotting libraries. Having access to Python's mature plotting libraries meant that I could use Julia for computationally expensive tasks while still creating beautiful visualizations with Python. This multi-language approach allowed me to be productive and get the best of both worlds.
+
+Fast-forward 10 years to 2026 and Julia's ecosystem has already matured quite a lot. However, R's ecosystem remains unparalleled for statistical analysis and Python's ecosystem for deep learning is still largely unmatched with enormous funds poured into it from big tech companies. Of course, both R and Python have their own quirks and limitations, such as the speed of their native code. Native code of both Python and R is very slow which can be a big issue if you are working in a computationally intensive domain. The way R and Python programmers usually work around this issue is by providing bindings to C/C++/Fortran libraries that are well optimized. So only the shell of your code is in R or Python, while the heavy lifting is done by code written in a lower level language. Julia on the other hand, while relatively young, was designed from the ground up to be fast in runtime (albeit precompilation and compilation can be slow), with excellent technical computing support in its standard library, e.g. support for linear algebra, statistics and multi-threading. Being fast and user-friendly at the same time attracted many early adopters from the Python, R, MATLAB and even C++ communities, each building their own Julia packages in their area of expertise.
+
+Given that each language still has its own strengths and weaknesses, you may find yourself needing to use multiple languages in the same project, if for nothing else then at least for benchmarking purposes, when comparing similar libraries across languages. In this post, I will show how you can use Quarto's multi-language support to call Julia, Python and R in the same notebook. I will then showcase how to call both Python and R from within Julia code using the `PythonCall` and `RCall` packages, sharing data structures and memory across language barriers, i.e. no writing to disk or message-passing using network-style protocols. `PythonCall` and `RCall` are actually how the native Julia Quarto engine implements multi-language support in Quarto under the hood when you set the engine to `julia` in a Quarto document. Different Quarto engines of course have different approaches. Beside their use in the Julia Quarto engine, `PythonCall` and `RCall` are also very powerful tools on their own, allowing you to call Python and R from any Julia code, not just in Quarto documents.
+
+## Prerequisites
+
+This tutorial uses the **Julia Quarto engine**, which allows you to run Julia, Python, and R code blocks in the same document. Before running the code in this tutorial, you need to have Julia, Python, and R installed on your system.
+
+**Installing Julia:**
+- Download from [julialang.org](https://julialang.org/downloads/) or use your system's package manager
+- Verify installation: `julia --version`
+
+**Installing Python:**
+- Download from [python.org](https://www.python.org/downloads/) or use your system's package manager
+- Verify installation: `python --version` or `python3 --version`
+
+**Installing R:**
+- Download from [cran.r-project.org](https://cran.r-project.org/)
+- Verify installation: `R --version`
+
+Once installed, the Julia Quarto engine will automatically find and use these interpreters.
+
+## Making R Visible to Quarto and Fixing SSL Certificate Issues on Linux
+
+On my Linux Fedora system, the R installation was not visible to Quarto and the CRAN package downloads were failing due to SSL certificate issues. To fix this, I had to set the `R_HOME` and `LD_LIBRARY_PATH` environment variables manually to point to my R installation directory and then rebuild RCall. I also had to set the `CURL_CA_BUNDLE` environment variable to point to the system's CA bundle to fix the SSL certificate issues when downloading R packages from CRAN using curl. You can set these environment variables directly in Julia using the following code before building RCall:
+
+```julia
+# Set R home and library path for RCall to find the R installation on Linux Fedora
+ENV["R_HOME"] = "/usr/lib64/R"
+ENV["LD_LIBRARY_PATH"] = "/usr/lib64/R/lib:$(get(ENV, "LD_LIBRARY_PATH", ""))"
+# Fix SSL certificate issues for R package downloads using curl on Linux Fedora
+ENV["CURL_CA_BUNDLE"] = "/etc/pki/tls/certs/ca-bundle.crt"
+```
+
+For Ubuntu-based systems, you would set them like this:
+
+```julia
+# Set R home and library path for RCall to find the R installation on Linux Ubuntu
+ENV["R_HOME"] = "/usr/lib/R"
+ENV["LD_LIBRARY_PATH"] = "/usr/lib/R/lib:$(get(ENV, "LD_LIBRARY_PATH", ""))"
+# Fix SSL certificate issues for R package downloads using curl on Linux Ubuntu
+ENV["CURL_CA_BUNDLE"] = "/etc/ssl/certs/ca-certificates.crt"
+```
+
+This post is built on a GitHub Actions runner running Ubuntu. Downloading R and setting up the environment variables in the GitHub Actions workflow file was done using the following steps in the workflow:
+
+```yaml
+- name: Install R
+  uses: r-lib/actions/setup-r@v2
+  with:
+    use-public-rspm: true
+    r-version: 'release'
+- run: echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+- run: echo "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt" >> $GITHUB_ENV
+```
+
+The entire workflow file can be found in the GitHub repository for the personal website, which is linked at the end of this post.
+
+After setting these environment variables, if `RCall` is already installed but broken (due to the previously missing environment variables), you can re-build `RCall` to ensure it can find the R installation and is properly configured:
+
+```julia
+using Pkg
+Pkg.build("RCall")
+```
+
+To confirm the R installation is correctly found by RCall, you can run a simple command to check the R version:
+
+```julia
+using RCall
+R"version"
+```
+
+In this post, we will install `RCall` below programmatically from within the document itself, which will trigger the build process after installation, so there is no need to manually call `Pkg.build("RCall")` in this case.
+
+## Installing Packages
+
+When using the Julia Quarto engine, package management works differently for each language. Julia packages are managed through the `Project.toml` file, Python packages through `CondaPkg.toml`, and R packages are installed directly via R commands.
+
+### Julia Packages and Project Environment
+
+Julia packages are managed using the built-in Pkg system. You can add packages from the Julia REPL:
+
+```{julia}
+using Pkg
+Pkg.add(["Optim", "CairoMakie", "PythonCall", "CondaPkg", "RCall"])
+```
+
+These packages get installed in the document's environment. Every Quarto document is executed by the Julia engine in an environment, which is defined by a `Project.toml` file and an optional `Manifest.toml` file. The `Project.toml` file specifies the packages and their versions that are required for the document, while the `Manifest.toml` file records the exact versions of all packages that were installed, including indirect dependencies. This ensures that your document is reproducible, as anyone else can use the same `Project.toml` and `Manifest.toml` files to recreate the exact same environment. However, one caveat of the `Manifest.toml` file is that it does not guarantee reproducibility across different operating systems and hardware architectures. For example, if you create a `Manifest.toml` file on a Windows machine, it may not work correctly on a Linux machine due to differences in how packages are built and their dependencies. This is something to keep in mind when sharing your document with others who may be using different platforms.
+
+By default, the Julia Quarto engine looks for a `Project.toml` file in the same directory as the Quarto document. If it finds one, it activates that environment and uses the packages specified there. If it doesn't, it will keep looking up the directory tree until it finds a `Project.toml`. If it fails to find any, it will use an isolated environment for that document, created and managed by the Quarto Julia engine itself.
+
+If you create a `Project.toml` file (and therefore environment) for the document, managing that environment becomes your responsibility. You can launch Julia in that environment before running the document and install packages as you normally would or you can use the `Pkg` API from within the document itself, like we did above, to install packages programmatically. Adding a new package to your Julia environment will automatically update the `Project.toml` and `Manifest.toml` files to reflect the new dependencies. However, keep in mind that the existence of the `Project.toml` and `Manifest.toml` files alone does not guarantee that the packages are actually installed on the system in every scenario. For example, one can copy these files from another project, they are just text files, without actually having the packages installed. To ensure that the packages are installed and the environment is ready to use, you need to run `Pkg.instantiate()` in that environment. This will install all the packages specified in the `Project.toml` and `Manifest.toml` files. If the `toml` files were generated from adding packages and not copied from another project or modified manually, then the packages should already be installed, so running `Pkg.instantiate()` will just verify that the environment is consistent and ready to use. This instantiation step can be done from the Julia REPL or from within the document itself and it only needs to happen once per environment. If only a `Project.toml` file is present, calling `Pkg.instantiate()` will resolve the package versions and create a `Manifest.toml` file automatically. If both files are present, it will install the exact versions specified in the `Manifest.toml` file, if they are not already installed.
+
+An example `Project.toml` file for this document would look like this:
+
+```toml
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+CondaPkg = "992eb4ea-22a4-4c89-a5bb-47a3300528ab"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
+RCall = "6f49c342-dc21-5d91-9882-a32aef131414"
+
+[compat]
+julia = "1.12"
+```
+
+Note that the Julia version is also specified in the `compat` section. This is important for reproducibility because different Julia versions may have different package compatibility and behavior. For example, the pseudo-random number generator in Julia can change between minor (e.g. 1.12 to 1.13) or even patch (e.g. 1.12.0 to 1.12.1) version updates which can lead to different results when running the same code without it being considered a breaking change, according to the Julia documentation.
+
+To check that `RCall` is installed and built successfully, you can run the following code:
+```{julia}
+using RCall
+R"version"
+```
+
+Similarly, to check that `PythonCall` is installed and built successfully, you can run the following code:
+```{julia}
+using PythonCall
+pyimport("sys").version
+```
+
+### Python Packages
+
+When using the Julia Quarto engine, Python packages are managed through [`CondaPkg`](https://github.com/JuliaPy/CondaPkg.jl), which integrates with Julia's package system. The `CondaPkg.toml` file, much like the `Project.toml` file for Julia packages, specifies Python dependencies, e.g:
+
+```toml
+[deps]
+scipy = ""
+numpy = ""
+```
+
+To install Python packages programmatically using PythonCall, you can use the following code:
+
+```{julia}
+using PythonCall
+using CondaPkg
+
+# Add Python packages via Conda
+CondaPkg.add("scipy")
+CondaPkg.add("numpy")
+```
+
+Calling `CondaPkg.add("package_name")` will add the specified package to the `CondaPkg.toml` file and install it in the Python environment that `PythonCall` uses. You can also specify versions if needed, e.g. `CondaPkg.add("scipy", "1.10.0")`.
+
+If the `CondaPkg.toml` file is already present with the required dependencies, running `using PythonCall` in Julia will automatically resolve and install the Python dependencies specified in the `CondaPkg.toml` file, which is similar to instantiating the environment in Julia. To explicitly instantiate the Python environment and ensure all dependencies are installed before loading PythonCall, you can call `CondaPkg.resolve()`, which will read the `CondaPkg.toml` file and install any missing packages.
+
+If instead, you prefer to create your own Conda environment outside of Julia to have full control over your Python environment, you can also do that and then communicate to `CondaPkg` which existing environment to use by setting some environment variables before running the document. For more details, see the `PythonCall` and `CondaPkg` documentation.
+
+### Installing R Packages and Running R Code
+
+You can install R packages using R's built-in package manager from within Julia using RCall:
+
+```{julia}
+R"""
+library(utils)
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages("data.table", dependencies=TRUE)
+"""
+```
+
+To test if the package is installed and can be loaded, you can run the following to check the version of the installed package:
+
+```{julia}
+R"""
+# Load the package to confirm it was installed correctly
+library(data.table)
+packageVersion("data.table")
+"""
+```
+
+The syntax above `R"""..."""` is known as a string macro in Julia. For single line commands, `R"..."` also works. This feature of Julia allows one to define arbitrary syntax and semantics for domain-specific languages (DSLs). In this case, the entire R programming language is treated as a DSL! Note that one has to be careful to use single quotes to define R strings, e.g. `'data.table'`, when using `R"..."` to avoid conflicting with the double quotes used for the Julia string macro. However, when using the multi-line string syntax in Julia `R"""..."""`, using double quotes for R strings works fine.
+
+The `R"..."` string macro allows you to write R code directly in Julia, and it will be executed in the R interpreter. This means that you can install R packages, run R scripts, and even create R plots all from within your Julia code. The main disadvantage of string macros is the lack of syntax highlighting and code completion in the editor, which can make it harder to write and debug R code. However, for simple commands like installing packages, it can be a convenient way to manage R dependencies without leaving the Julia environment. Ensuring the string quote style is correct is also a bit annoying. We will see a better approach below.
+
+The `install.packages` function is used above to install packages from CRAN, after setting the `repos` option to specify the CRAN mirror to use. The `dependencies=TRUE` argument ensures that any dependencies of the package are also installed. You can replace `'data.table'` with the name of the package you want to install.
+
+Since the Julia Quarto engine also uses RCall under the hood, one can also directly utilize Quarto's multi-language code block feature and run an R block instead to install and load the package, which is more straightforward and doesn't require embedding R code in a Julia string macro. This also allows you to have syntax highlighting and code completion for R code in the editor.
+
+```{r}
+library(utils)
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages("data.table", dependencies=TRUE)
+```
+
+```{r}
+library(data.table)
+packageVersion("data.table")
+```
+
+## Solving an Optimization Problem
+
+In the rest of this post, we will attempt to solve the same optimization problem in all three languages, Julia, Python and R. The optimization problem we will solve is known as the Rosenbrock function, which is a common test problem for optimization algorithms. The function is defined as:
+
+$$f(x, y) = (1 - x)^2 + 2(y - x^2)^2$$
+
+Let's visualize the Rosenbrock function with a heatmap:
+
+```{julia}
+using CairoMakie
+
+# Define the Rosenbrock function
+rosenbrock_two_inputs(x, y) = (1 - x)^2 + 2 * (y - x^2)^2
+
+# Create a grid of points
+x = range(-5, 5, length=1000)
+y = range(-2, 7, length=1000)
+
+# Create the heatmap with log scale
+fig, ax, hm = heatmap(x, y, (x, y) -> log(rosenbrock_two_inputs(x, y) + 1), colormap=:viridis)
+scatter!([1.0], [1.0], color=:red, markersize=10, label="Optimum")
+ax.xlabel = "x"
+ax.ylabel = "y"
+ax.title = "Rosenbrock Function (log scale)"
+Colorbar(fig[1, 2], hm, label="log(f(x,y) + 1)")
+fig
+```
+
+
+The Rosenbrock function is interesting because it has a global minimum at $(x, y) = (1, 1)$ with a value of $f(1, 1) = 0$. The valley containing the minimum is shallow and narrow, making it a somewhat challenging problem for optimization algorithms.
+
+## Solving with Julia
+
+Let's start with Julia. We will use the `Optim` package, which provides a variety of optimization algorithms. We will be using the Bryson-Fletcher-Goldfarb-Shanno (BFGS) optimization algorithm, which is a popular quasi-Newton method for unconstrained optimization. The code below defines the Rosenbrock function, sets an initial guess, and then calls the `optimize` function from `Optim` to find the minimum.
+
+```{julia}
+using Optim
+
+# Define the Rosenbrock function
+rosenbrock(x) = (1 - x[1])^2 + 2 * (x[2] - x[1]^2)^2
+
+# Initial guess
+x0 = [0.0, 0.0]
+
+# Solve using Optim with the BFGS method
+result = optimize(rosenbrock, x0, BFGS())
+
+println("Julia (Optim) Results:")
+println("Minimum found at: $(Optim.minimizer(result))")
+println("Minimum value: $(Optim.minimum(result))")
+println("Iterations: $(Optim.iterations(result))")
+```
+
+## Solving with Python
+
+Now let's solve the same problem with Python's SciPy library:
+
+```{python}
+import numpy as np
+from scipy.optimize import minimize
+
+# Define the Rosenbrock function
+def rosenbrock(x):
+    return (1 - x[0])**2 + 2 * (x[1] - x[0]**2)**2
+
+# Initial guess
+x0 = np.array([0.0, 0.0])
+
+# Solve using SciPy
+result = minimize(rosenbrock, x0, method='BFGS')
+
+print("Python (SciPy) Results:")
+print(f"Minimum found at: {result.x}")
+print(f"Minimum value: {result.fun}")
+print(f"Iterations: {result.nit}")
+```
+
+## Solving with R
+
+Let's also solve it with R's built-in optimization functions:
+
+```{r}
+# Define the Rosenbrock function
+rosenbrock <- function(x) {
+  (1 - x[1])^2 + 2 * (x[2] - x[1]^2)^2
+}
+
+# Initial guess
+x0 <- c(0, 0)
+
+# Solve using optim
+result <- optim(x0, rosenbrock, method = "BFGS")
+
+cat("R (optim) Results:\n")
+cat("Minimum found at:", result$par, "\n")
+cat("Minimum value:", result$value, "\n")
+cat("Iterations:", result$counts[1], "\n")
+```
+
+The difference in the number of iterations is due to different implementation details, such as stopping criteria. However, all 3 optimization functions were able to get close to the global minimum at (1, 1) with a function value close to 0, which is expected for this problem.
+
+## Transferring and Sharing Data between Julia and Python
+
+We have seen how to run separate code blocks in different languages within the same Quarto document, which under the hood uses `PythonCall` and `RCall`. We have also seen how to run R code ourselves from within Julia using `RCall`. To run Python code from within Julia, we can similarly use `PythonCall` ourselves directly. In the code below, I define the Rosenbrock function in Julia and then call SciPy's `minimize` function directly on the Julia function to minimize it using Python!
+
+```{julia}
+using PythonCall
+
+# Define the Rosenbrock function in Julia
+julia_rosenbrock(x) = (1 - x[1])^2 + 2 * (x[2] - x[1]^2)^2
+# Call SciPy's minimize from Julia
+julia_x0 = [0.0, 0.0]
+py_result = pyimport("scipy.optimize").minimize(julia_rosenbrock, julia_x0, method="BFGS")
+println("Python via PythonCall:")
+println("Minimum found at: $(py_result.x)")
+println("Minimum value: $(py_result.fun)")
+```
+
+In the above code, there is a lot of magic! Let me explain. First, the Julia function gets converted under the hood to a Python callable that can be used with SciPy's minimize function. The Julia array `julia_x0` also gets converted to a NumPy array under the hood when passed to Python. But NumPy uses 0-based indexing while Julia uses 1-based indexing, so `PythonCall` automatically creates a wrapper around the NumPy array, called a `PyArray`, that behaves like a Julia array with 1-based indexing when accessed from Julia. `PyArray` is a Julia type but it wraps the NumPy array. So the function `julia_rosenbrock` only sees the `PyArray` Julia wrapper of the NumPy array, while `scipy.optimize.minimize` only sees the original NumPy array and the Python callable version of the Julia function 🤯
+
+To verify this, let's add some print statements in the Julia function to see what it receives when called from Python:
+
+```{julia}
+function julia_rosenbrock(x)
+    println("Inside Julia function, received x: $x")
+    println("Type of x in Julia: $(typeof(x))")
+    return (1 - x[1])^2 + 2 * (x[2] - x[1]^2)^2
+end
+```
+
+Now let's run the optimization for 1 iteration only to see the print statements in action:
+
+```{julia}
+pyimport("scipy.optimize").minimize(julia_rosenbrock, julia_x0, method="BFGS", options=Dict("maxiter" => 1))
+```
+
+Note that `PyArray` is a thin wrapper around the original NumPy array that allows it to be accessed with 1-based indexing in Julia. So they share the same memory and any changes to the `PyArray` in Julia will reflect in the original NumPy array in Python and vice versa. However, the indexing is different, so when you access `x[1]` in the Julia function, it corresponds to `x[0]` in the original NumPy array in Python, and when you access `x[2]` in Julia, it corresponds to `x[1]` in the original NumPy array in Python. This is an important detail to keep in mind when working with arrays across language boundaries, as it can lead to off-by-one errors if not handled correctly.
+
+After the optimization is complete, we can read the output back into Julia and compare it with the output from the native Julia optimization:
+
+```{julia}
+println("Comparison:")
+println("Julia minimum: $(Optim.minimizer(result)), value: $(Optim.minimum(result))")
+println("Python minimum: $(py_result.x), value: $(py_result.fun)")
+```
+
+Let's display the Julia types of the results:
+
+```{julia}
+println("Data Types:")
+println("Julia result type: $(typeof(Optim.minimizer(result)))")
+println("Python result type: $(typeof(py_result.x))")
+```
+
+Notice that the Python result is of type `PythonCall.Py` in Julia, which is a generic Julia wrapper around any Python object. However in this case, since `py_result.x` is actually a NumPy array on the Python side, we can convert it to a Julia array type in 2 different ways.
+
+First, we can use `pyconvert` to convert to a native Julia array type:
+
+```{julia}
+py_minimum_julia = pyconvert(Array, py_result.x)
+println("Python minimum converted to Julia array: $py_minimum_julia")
+println("Type after conversion: $(typeof(py_minimum_julia))")
+```
+
+Notice the type after conversion is `Vector{Float64}`, which is a native Julia array type. This means we can now use this result in any further Julia computations without needing to worry about Python interop. However, note that this conversion does involve copying the data from Python to Julia, which can be inefficient for large arrays.
+
+To avoid copying, one can also convert the result to a `PyArray`. Recall, `PyArray` is a Julia type that is meant to wrap NumPy arrays WITH memory sharing, behaving as a Julia mirror of the underlying Python's NumPy arrays. This allows you to manipulate the same data in both languages without copying. To convert to a `PyArray`, you can simply call the `PyArray` constructor on the Python object:
+
+```{julia}
+py_minimum_shared = PyArray(py_result.x)
+```
+
+To verify that this is indeed a shared array, we can modify the `py_minimum_shared` array in Julia and see if it reflects in the original Python result:
+
+```{julia}
+py_minimum_shared[1] += 1.0  # Modify the shared array in Julia
+println("Modified Python minimum (shared): $py_minimum_shared")
+println("Original Python minimum after modification: $(py_result.x)")
+```
+
+## Transferring Data between Julia and R
+
+Similarly, we can also call R code from Julia using `RCall` and share data between the two languages. For example, we can define the Rosenbrock function in Julia and then call R's `optim` function directly on the Julia function to minimize it using R!
+
+```{julia}
+using RCall
+
+# Define the Rosenbrock function in Julia
+julia_rosenbrock(x) = (1 - x[1])^2 + 2 * (x[2] - x[1]^2)^2
+# Call R's optim from Julia
+julia_x0 = [0.0, 0.0]
+r_result = R"optim"(julia_x0, julia_rosenbrock, method="BFGS")
+julia_result_par = rcopy(r_result[:par])
+julia_result_value = rcopy(r_result[:value])
+println("R via RCall:")
+println("Minimum found at: $(julia_result_par)")
+println("Minimum value: $(julia_result_value)")
+```
+
+Similar kind of magic happens under the hood as with `PythonCall` to manage the conversion of the Julia function and array to their R counterparts. Notice that to access the fields of the R object, we use the `[:field_name]` syntax, which is how `RCall` allows you to access R objects from Julia, as opposed to the `$field_name` syntax used in R itself. This is because `$` is reserved for string interpolation in Julia, which can be used to interpolate Julia objects/data into R code when using the `R"..."` string macro, but it cannot be used to access fields of R objects from Julia.
+
+Now let's print the types of the results:
+```{julia}
+println("Data Types:")
+println("R result type before conversion: $(typeof(r_result[:par]))")
+println("R result type: $(typeof(julia_result_par))")
+```
+
+Notice that the R result is just a wrapper around the underlying R vector object. By calling `rcopy`, we convert it to a native Julia array type `Vector{Float64}`. This conversion involves copying the data from R to Julia, which can be inefficient for large arrays. However, unlike `PythonCall`, as far as I know, `RCall` does not have a built-in way to share memory between R and Julia without copying, so using `rcopy` is the standard way to get the data into a native Julia format for further computations.
+
+## Sharing Data between Cells in Quarto
+
+In a Quarto document, you can also share data between code blocks in different languages. To demonstrate this, let's define a variable in Python and another in R, then read both of them in Julia and perform some computations on them.
+
+```{python}
+# Define a variable in Python
+python_var = 3
+```
+
+```{r}
+# Define a variable in R
+r_var <- 4
+```
+
+Now in Julia, we can access both `python_var` and `r_var`:
+```{julia}
+using QuartoNotebookWorker: @py_str
+python_var_in_julia = pyconvert(Int, py"python_var")
+println("Python variable in Julia: $python_var_in_julia")
+# Access the R variable
+r_var_in_julia = rcopy(R"r_var")
+println("R variable in Julia: $r_var_in_julia")
+# Perform some computation using both variables
+result = python_var_in_julia * r_var_in_julia
+println("Result of multiplying Python and R variables in Julia: $result")
+```
+
+The convenient `py"..."` allows us to access the Python namespace/environment directly from Julia, similar to `R"..."` for R. However, this string macro is not defined in `PythonCall` as of the time of the writing of this post. This string macro is defined inside a sneaky Julia package, called `QuartoNotebookWorker`, that the Julia Quarto engine defines for us in every Quarto document. Notice that we didn't need to install any package by this name. The `py"..."` string macro is not exported or documented anywhere as far as I know, but you can find it in the implementation of the Julia Quarto engine which lives in the [`QuartoNotebookRunner`](https://github.com/PumasAI/QuartoNotebookRunner.jl) Julia package. The fact that it is not exported or documented means that its behaviour, location or even existence can change in future versions without being considered a breaking change according to semantic versioning (semver) rules. But for now, it works!
+
+## Side Note on String Macros in Julia
+
+String macros in Julia have a funny naming convention. Say we want to define our own string macro called `foo"..."`, we can define it using the following syntax:
+
+```julia
+macro foo_str(str)
+    # Do something with the string `str`
+end
+```
+
+But when we are using the macro, we are using it using the following syntax (without the `_str` suffix):
+
+```julia
+foo"some string"
+```
+
+And when importing it explicitly from a package like we are doing above, we use the following syntax (with an added `@` prefix):
+
+```julia
+using PackageName: @foo_str
+```
+
+So you refer to string macros in 3 different ways in different contexts! This is arguably a bit of a Julia quirk. But as you saw, string macros are also extremely powerful, so we will let that one slide!
+
+## Conclusion
+
+With this, hopefully, you see the relative ease of mixing multiple programming languages in the same Quarto document using the Julia engine. While `PythonCall` and `RCall` each have their own slightly different syntax and semantics, they both work well enough unlocking the entirety of the Python and R ecosystems from within Julia. So if not having access to that one Python/R package you need was stopping you from exploring Julia, hopefully, I have convinced you that you can have your cake and eat it too with Quarto's multi-language support and the Julia Quarto engine.
+
+While PythonCall and RCall may seem like magic if you have never used multiple programming languages like this before, under the hood, it's all careful engineering and management of data structures and memory across language boundaries. Quarto makes things even easier by providing language-specific code blocks with syntax highlighting and native syntax for each language (e.g. using `$` in R blocks), while the Julia engine simplifies the sharing and transfer of data across language barriers.
+
+Of course, we barely scratched the surface here. Both PythonCall and RCall have many more features for more complex use cases. The same goes for Quarto which has other engines besides the Julia Quarto engine, that we have used here, with different implementation details and capabilities.
+
+Happy multi-language computing with Quarto and Julia!
+
+## References
+
+- [Quarto Documentation](https://quarto.org/)
+- [Julia Documentation](https://docs.julialang.org/)
+- [Optim.jl Documentation](https://julianlsolvers.github.io/Optim.jl/stable/)
+- [SciPy Optimize Documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
+- [R optim Documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/optim.html)
+- [PythonCall.jl Documentation](https://juliapy.github.io/PythonCall.jl/stable/)
+- [RCall.jl Documentation](https://juliainterop.github.io/RCall.jl/stable/)
+- [QuartoNotebookRunner.jl Source Code](https://github.com/PumasAI/QuartoNotebookRunner.jl)
+- [GitHub Repository for Personal Website](https://github.com/mohdibntarek/mohdibntarek.github.io)
