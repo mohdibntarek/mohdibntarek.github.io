@@ -231,7 +231,7 @@ $$f(x, y) = (1 - x)^2 + 2(y - x^2)^2$$
 
 Let's visualize the Rosenbrock function with a heatmap:
 
-<!-- ```{julia}
+```{julia}
 using CairoMakie
 
 # Define the Rosenbrock function
@@ -494,4 +494,4 @@ While PythonCall and RCall may seem like magic if you have never used multiple p
 
 Of course, we barely scratched the surface here. Both PythonCall and RCall have many more features for more complex use cases. The same goes for Quarto which has other engines besides the Julia Quarto engine, that we have used here, with different implementation details and capabilities.
 
-Happy multi-language computing with Quarto and Julia! -->
+Happy multi-language computing with Quarto and Julia!
