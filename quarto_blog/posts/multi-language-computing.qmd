@@ -244,7 +244,7 @@ The Rosenbrock function is interesting because it has a global minimum at $(x, y
 
 ## Solving with Julia
 
-Let's start with Julia. We will use the `Optim` package, which provides a variety of optimization algorithms. We will be using the Bryson-Fletcher-Goldfarb-Shanno (BFGS) optimization algorithm, which is a popular quasi-Newton method for unconstrained optimization. The code below defines the Rosenbrock function, sets an initial guess, and then calls the `optimize` function from `Optim` to find the minimum.
+Let's start with Julia. We will use the `Optim` package, which provides a variety of optimization algorithms. We will be using the Broyden–Fletcher–Goldfarb–Shanno (BFGS) optimization algorithm, which is a popular quasi-Newton method for unconstrained optimization. The code below defines the Rosenbrock function, sets an initial guess, and then calls the `optimize` function from `Optim` to find the minimum.
 
 ```{julia}
 using Optim
