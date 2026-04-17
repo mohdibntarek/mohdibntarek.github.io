@@ -52,47 +52,31 @@ ENV["LD_LIBRARY_PATH"] = "/usr/lib64/R/lib:$(get(ENV, "LD_LIBRARY_PATH", ""))"
 ENV["CURL_CA_BUNDLE"] = "/etc/pki/tls/certs/ca-bundle.crt"
 ```
 
-A more robust version of the above code that should work across a few different Linux distributions and R installation methods is shown below. This is the version I run when building the Quarto document both locally and on GitHub Actions runners which are Ubuntu-based, but the simpler version above is the minimal code I had to run locally at first on my Fedora system, before generalizing it.
+For Ubuntu-based systems, you would set them like this:
 
 ```julia
-# On Linux systems, configure R paths and SSL certificates for RCall if needed
-# The more complicated script below is what's actually run to ensure compatibility
-# across different Linux distributions and R installation methods, but the simpler
-# version above was what I actually had to run locally.
-# However, these posts are built on GitHub Actions runners which are Ubuntu-based,
-# so the more complicated script is what we need to ensure it works correctly both
-# in the CI environment and locally.
-if Sys.islinux()
-    r_home = get(ENV, "R_HOME", "")
-    if isempty(r_home)
-        # Try to auto-detect R installation using Rscript
-        try
-            r_path = strip(read(`Rscript -e "cat(R.home())"`, String))
-            if !isempty(r_path)
-                ENV["R_HOME"] = r_path
-                ENV["LD_LIBRARY_PATH"] = "$(joinpath(r_path, "lib")):$(get(ENV, "LD_LIBRARY_PATH", ""))"
-            end
-        catch
-            @warn "Could not auto-detect R installation. RCall may not work correctly."
-        end
-    end
-
-    # Set SSL certificate bundle if available (handles various Linux distributions)
-    if !haskey(ENV, "CURL_CA_BUNDLE")
-        ca_paths = ["/etc/pki/tls/certs/ca-bundle.crt",  # Fedora/RHEL
-            "/etc/ssl/certs/ca-certificates.crt",  # Debian/Ubuntu
-            "/etc/ssl/certs/ca-bundle.crt"]  # Alpine
-        for ca_path in ca_paths
-            if isfile(ca_path)
-                ENV["CURL_CA_BUNDLE"] = ca_path
-                break
-            end
-        end
-    end
-end
+# Set R home and library path for RCall to find the R installation on Linux Ubuntu
+ENV["R_HOME"] = "/usr/lib/R"
+ENV["LD_LIBRARY_PATH"] = "/usr/lib/R/lib:$(get(ENV, "LD_LIBRARY_PATH", ""))"
+# Fix SSL certificate issues for R package downloads using curl on Linux Ubuntu
+ENV["CURL_CA_BUNDLE"] = "/etc/ssl/certs/ca-certificates.crt"
 ```
 
-Next, if `RCall` is already installed but broken, you can build `RCall` to ensure it can find the R installation and is properly configured:
+This post is built on a GitHub Actions runner running Ubuntu. Downloading R and setting up the environment variables in the GitHub Actions workflow file was done using the following steps in the workflow:
+
+```yaml
+- name: Install R
+  uses: r-lib/actions/setup-r@v2
+  with:
+    use-public-rspm: true
+    r-version: 'release'
+- run: echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+- run: echo "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt" >> $GITHUB_ENV
+```
+
+The entire workflow file can be found in the GitHub repository for the personal website, which is linked at the end of this post.
+
+After setting these environment variables, if `RCall` is already installed but broken (due to the previously missing environment variables), you can re-build `RCall` to ensure it can find the R installation and is properly configured:
 
 ```julia
 using Pkg
@@ -106,7 +90,7 @@ using RCall
 R"version"
 ```
 
-In this post, we will install `RCall` below, so no need to call the above commands.
+In this post, we will install `RCall` below programmatically from within the document itself, which will trigger the build process after installation, so there is no need to manually call `Pkg.build("RCall")` in this case.
 
 ## Installing Packages
 
@@ -495,3 +479,15 @@ While PythonCall and RCall may seem like magic if you have never used multiple p
 Of course, we barely scratched the surface here. Both PythonCall and RCall have many more features for more complex use cases. The same goes for Quarto which has other engines besides the Julia Quarto engine, that we have used here, with different implementation details and capabilities.
 
 Happy multi-language computing with Quarto and Julia!
+
+## References
+
+- [Quarto Documentation](https://quarto.org/)
+- [Julia Documentation](https://docs.julialang.org/)
+- [Optim.jl Documentation](https://julianlsolvers.github.io/Optim.jl/stable/)
+- [SciPy Optimize Documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
+- [R optim Documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/optim.html)
+- [PythonCall.jl Documentation](https://juliapy.github.io/PythonCall.jl/stable/)
+- [RCall.jl Documentation](https://juliainterop.github.io/RCall.jl/stable/)
+- [QuartoNotebookRunner.jl Source Code](https://github.com/PumasAI/QuartoNotebookRunner.jl)
+- [GitHub Repository for Personal Website](https://github.com/mohdibntarek/mohdibntarek.github.io)
