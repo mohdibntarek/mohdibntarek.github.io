@@ -92,16 +92,6 @@ if Sys.islinux()
 end
 ```
 
-<!-- ```{julia}
-r_path = strip(read(`Rscript -e "cat(R.home())"`, String))
-ENV["LD_LIBRARY_PATH"] = "$(joinpath(r_path, "lib")):$(get(ENV, "LD_LIBRARY_PATH", ""))"
-``` -->
-
-<!-- ```{bash}
-#!/bin/bash
-echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH"
-``` -->
-
 Next, if `RCall` is already installed but broken, you can build `RCall` to ensure it can find the R installation and is properly configured:
 
 ```julia
@@ -241,7 +231,7 @@ $$f(x, y) = (1 - x)^2 + 2(y - x^2)^2$$
 
 Let's visualize the Rosenbrock function with a heatmap:
 
-```{julia}
+<!-- ```{julia}
 using CairoMakie
 
 # Define the Rosenbrock function
@@ -504,4 +494,4 @@ While PythonCall and RCall may seem like magic if you have never used multiple p
 
 Of course, we barely scratched the surface here. Both PythonCall and RCall have many more features for more complex use cases. The same goes for Quarto which has other engines besides the Julia Quarto engine, that we have used here, with different implementation details and capabilities.
 
-Happy multi-language computing with Quarto and Julia!
+Happy multi-language computing with Quarto and Julia! -->
