@@ -70,8 +70,12 @@ This post is built on a GitHub Actions runner running Ubuntu. Downloading R and 
   with:
     use-public-rspm: true
     r-version: 'release'
-- run: echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-- run: echo "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt" >> $GITHUB_ENV
+
+- name: Set R library path
+  run: echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+
+- name: Set CURL_CA_BUNDLE for R on Ubuntu
+  run: echo "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt" >> $GITHUB_ENV
 ```
 
 The entire workflow file can be found in the GitHub repository for the personal website, which is linked at the end of this post.
