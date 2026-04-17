@@ -13,6 +13,8 @@ public/pagefind
 
 # Quarto
 quarto_blog/_site
+quarto_blog/site_libs
+quarto_blog/posts/*.html
 *.quarto
 .quarto
 public/quarto_blog
@@ -34,7 +36,7 @@ vite.config.ts.timestamp-*
 # CondaPkg
 .CondaPkg
 
-# Julia Manifest
+# Julia toml files
 quarto_blog/Project.toml
 quarto_blog/CondaPkg.toml
 quarto_blog/Manifest.toml
