@@ -1,0 +1,98 @@
+---
+export interface Item {
+  title: string;
+  venue: string;
+  year: number;
+  date: string;
+  status?: string;
+  tags: string[];
+  links: { label: string; url: string }[];
+}
+
+export interface Section {
+  title: string;
+  description?: string;
+  items: Item[];
+}
+
+export interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+---
+
+<div class="content-list" data-sections={JSON.stringify(sections)}>
+  {sections.map((section) => (
+    <div data-section>
+      <h2 id={section.title.toLowerCase().replace(/\s+/g, '-')}>{section.title}</h2>
+      {section.description && <p class="section-description">{section.description}</p>}
+      <ol>
+        {section.items.map((item) => (
+          <li
+            data-title={item.title}
+            data-venue={item.venue}
+            data-year={String(item.year)}
+            data-status={item.status || ''}
+            data-tags={(item.tags || []).join(',')}
+            data-links={item.links.map(l => l.label).join(',')}
+          >
+            <strong>{item.title}</strong>{item.venue && <span>, {item.venue}</span>}{item.date && <span>. {item.date}.</span>}{item.status && <span> {item.status}.</span>}
+            {item.links.map((link) => (
+              <span>
+                &nbsp;[<a href={link.url} target="_blank" rel="noopener">{link.label}</a>]
+              </span>
+            ))}
+          </li>
+        ))}
+      </ol>
+    </div>
+  ))}
+</div>
+
+<style>
+  .content-list h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: var(--space-xl) 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-card-border);
+  }
+
+  .content-list ol {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .content-list li {
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+  }
+
+  .content-list li strong {
+    font-weight: 600;
+  }
+
+  .content-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .content-list a:hover {
+    text-decoration: underline;
+  }
+
+  .section-description {
+    color: var(--color-text);
+    font-style: italic;
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .content-list ol {
+      padding-left: 1.25rem;
+    }
+  }
+</style>

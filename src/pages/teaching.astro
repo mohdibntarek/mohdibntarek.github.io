@@ -1,31 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ContentList from "../components/ContentList.astro";
-import publications from "../data/publications.json";
+import teaching from "../data/teaching.json";
 
 const frontmatter = {
-  title: "Publications and Software",
-  description: "Research papers and open source software I contributed to.",
+  title: "Teaching and Videos",
+  description: "Videos, workshops, and courses",
   published: true,
-  "number-sections": true,
 };
 ---
 
 <Layout frontmatter={frontmatter}>
-  <div id="pub-search">
+  <div id="teaching-search">
     <div class="search-container">
       <input
         type="text"
-        id="pub-query"
-        placeholder="Search publications by title, venue, year..."
+        id="teaching-query"
+        placeholder="Search videos, workshops, and courses..."
         class="search-input"
       />
-      <button id="pub-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
+      <button id="teaching-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
     </div>
 
-    <p id="pub-no-results" class="no-results" hidden>No publications matching your search.</p>
+    <p id="teaching-no-results" class="no-results" hidden>No teaching materials matching your search.</p>
 
-    <ContentList sections={publications.sections} />
+    <ContentList sections={teaching.sections} />
   </div>
 </Layout>
 
@@ -57,11 +56,11 @@ const frontmatter = {
     });
   }
 
-  function filterPublications() {
-    const input = document.getElementById('pub-query') as HTMLInputElement;
-    const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement;
-    const noResults = document.getElementById('pub-no-results') as HTMLElement;
-    const sections = document.querySelectorAll<HTMLElement>('#pub-search [data-section]');
+  function filterTeaching() {
+    const input = document.getElementById('teaching-query') as HTMLInputElement;
+    const clearBtn = document.getElementById('teaching-clear') as HTMLButtonElement;
+    const noResults = document.getElementById('teaching-no-results') as HTMLElement;
+    const sections = document.querySelectorAll<HTMLElement>('#teaching-search [data-section]');
 
     const q = input.value.trim();
     const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
@@ -86,15 +85,15 @@ const frontmatter = {
   }
 
   function initSearch() {
-    const input = document.getElementById('pub-query') as HTMLInputElement | null;
-    const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement | null;
+    const input = document.getElementById('teaching-query') as HTMLInputElement | null;
+    const clearBtn = document.getElementById('teaching-clear') as HTMLButtonElement | null;
     if (!input || !clearBtn) return;
     input.value = '';
-    filterPublications();
-    input.addEventListener('input', filterPublications);
+    filterTeaching();
+    input.addEventListener('input', filterTeaching);
     clearBtn.addEventListener('click', () => {
       input.value = '';
-      filterPublications();
+      filterTeaching();
     });
   }
 
@@ -157,11 +156,4 @@ const frontmatter = {
     font-style: italic;
     margin: 2rem 0;
   }
-
-  .software-note {
-    color: var(--color-text);
-    margin: var(--space-md) 0;
-  }
-
-  /* Hidden sections don't contribute to h2 counter (display:none excludes from box tree) */
 </style>

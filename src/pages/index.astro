@@ -8,7 +8,7 @@ import SocialLinks from "../components/SocialLinks.astro";
 import personalPhoto from "../assets/personal_photo.png";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { icon } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faHandsHelping, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faHandsHelping, faLightbulb, faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 import { ViewTransitions } from "astro:transitions";
 import "../styles/typography.css";
 ---
@@ -110,16 +110,16 @@ import "../styles/typography.css";
           />
           <Card
             href="/publications"
-            title="Publications"
+            title="Publications and Software"
             icon={icon(faFlask).html}
-            description="Explore my research papers in topology optimization, machine learning, and scientific computing."
+            description="Explore my research papers and open source software."
             color="gradient-green"
           />
           <Card
-            href="/software"
-            title="Software"
-            icon={icon(faCode).html}
-            description="Explore my open-source software contributions and projects."
+            href="/teaching"
+            title="Teaching and Videos"
+            icon={icon(faChalkboardTeacher).html}
+            description="Explore my online videos, workshops and courses that I taught."
             color="gradient-orange"
           />
           <Card
