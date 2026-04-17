@@ -35,6 +35,8 @@ vite.config.ts.timestamp-*
 .CondaPkg
 
 # Julia Manifest
+quarto_blog/Project.toml
+quarto_blog/CondaPkg.toml
 quarto_blog/Manifest.toml
 
 /.quarto/
