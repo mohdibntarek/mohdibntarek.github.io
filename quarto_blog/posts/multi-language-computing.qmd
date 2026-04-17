@@ -24,7 +24,7 @@ Given that each language still has its own strengths and weaknesses, you may fin
 
 ## Prerequisites
 
-This tutorial uses the **Julia Quarto engine**, which allows you to run Julia, Python, and R code blocks in the same document. Before running the code in this tutorial, you need to have Julia, Python, and R installed on your system.
+This document is built using **Quarto** and the **Julia Quarto engine**, which allows you to run Julia, Python, and R code blocks in the same document. Before running the code in this document, you need to have Julia, Python, and R installed on your system.
 
 **Installing Julia:**
 - Download from [julialang.org](https://julialang.org/downloads/) or use your system's package manager
