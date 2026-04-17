@@ -92,6 +92,15 @@ if Sys.islinux()
 end
 ```
 
+<!-- ```{julia}
+r_path = strip(read(`Rscript -e "cat(R.home())"`, String))
+ENV["LD_LIBRARY_PATH"] = "$(joinpath(r_path, "lib")):$(get(ENV, "LD_LIBRARY_PATH", ""))"
+``` -->
+
+```{bash}
+echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH"
+```
+
 Next, if `RCall` is already installed but broken, you can build `RCall` to ensure it can find the R installation and is properly configured:
 
 ```julia
