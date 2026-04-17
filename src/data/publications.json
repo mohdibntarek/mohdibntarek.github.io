@@ -2124,6 +2124,88 @@
               "url": "https://tutorials.pumas.ai/html/AIDD/02-DL_covariate_modelling.html"
             }
           ]
+        },
+        {
+          "title": "Regression using Machine Learning",
+          "venue": "",
+          "tags": [
+            "machine learning",
+            "ML",
+            "regression",
+            "DeepPumas"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/2_machine_learning/tutorials/machine_learning.html"
+            }
+          ]
+        },
+        {
+          "title": "SciML using DeepPumas",
+          "venue": "",
+          "tags": [
+            "scientific machine learning",
+            "SciML",
+            "DeepPumas",
+            "machine learning"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/3_sciml/tutorials/sciml.html"
+            }
+          ]
+        },
+        {
+          "title": "Mixed-effects neural networks",
+          "venue": "",
+          "tags": [
+            "mixed-effects",
+            "neural networks",
+            "DeepPumas",
+            "machine learning"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/4_mixed_effects/tutorials/menets.html"
+            }
+          ]
+        },
+        {
+          "title": "Mixed Effects Pharmacodynamics Identification using DeepNLME",
+          "venue": "",
+          "tags": [
+            "mixed effects",
+            "pharmacodynamics",
+            "DeepNLME",
+            "machine learning",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/dynamics.html"
+            }
+          ]
+        },
+        {
+          "title": "Covariate Modelling in Nonlinear Mixed Effects Models using DeepPumas",
+          "venue": "",
+          "tags": [
+            "covariate modelling",
+            "NLME",
+            "DeepPumas",
+            "machine learning",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/covariates.html"
+            }
+          ]
         }
       ]
     }
