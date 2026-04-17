@@ -1940,6 +1940,192 @@
           ]
         }
       ]
+    },
+    {
+      "title": "Tutorials",
+      "items": [
+        {
+          "title": "Fitting Non-Identifiable and Poorly Identifiable Models using Bayesian Inference",
+          "venue": "",
+          "tags": [
+            "Bayesian",
+            "pharmacometrics",
+            "identifiability"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
+            }
+          ]
+        },
+        {
+          "title": "Introduction to Bayesian Models in Pumas",
+          "venue": "",
+          "tags": [
+            "Bayesian",
+            "pharmacometrics",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/01-bayes_intro.html"
+            }
+          ]
+        },
+        {
+          "title": "Random Effects in Bayesian Models",
+          "venue": "",
+          "tags": [
+            "Bayesian",
+            "random effects",
+            "NLME"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/02-bayes_random_effects.html"
+            }
+          ]
+        },
+        {
+          "title": "Posterior Postprocessing - Plots and Queries",
+          "venue": "",
+          "tags": [
+            "Bayesian",
+            "posterior",
+            "visualization"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/03-posterior_postprocessing.html"
+            }
+          ]
+        },
+        {
+          "title": "Markov Chain Monte Carlo Convergence",
+          "venue": "",
+          "tags": [
+            "MCMC",
+            "Bayesian",
+            "convergence"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/04-mcmc_convergence.html"
+            }
+          ]
+        },
+        {
+          "title": "Model Comparison with Crossvalidation",
+          "venue": "",
+          "tags": [
+            "cross-validation",
+            "model comparison",
+            "Bayesian"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/05-model_comparison.html"
+            }
+          ]
+        },
+        {
+          "title": "Introduction to Optimal Design",
+          "venue": "",
+          "tags": [
+            "optimal design",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/optimal_design/optimal_design.html"
+            }
+          ]
+        },
+        {
+          "title": "Two-compartment PK optimal design",
+          "venue": "",
+          "tags": [
+            "optimal design",
+            "pharmacometrics",
+            "PK"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/optimal_design/ODpaperCase1.html"
+            }
+          ]
+        },
+        {
+          "title": "LASSO for Covariate Modeling in NLME Models",
+          "venue": "",
+          "tags": [
+            "LASSO",
+            "NLME",
+            "covariates",
+            "machine learning"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/LearningPaths/05-LP/12-Module/mod12-lasso.html"
+            }
+          ]
+        },
+        {
+          "title": "Machine learning fundamentals",
+          "venue": "",
+          "tags": [
+            "machine learning",
+            "ML",
+            "fundamentals"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/AIDD/01-machine_learning_fundamentals.html"
+            }
+          ]
+        },
+        {
+          "title": "Variational Expectation Maximization (VEM)",
+          "venue": "",
+          "tags": [
+            "VEM",
+            "variational inference",
+            "optimization"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/estimation/01-vem-introduction.html"
+            }
+          ]
+        },
+        {
+          "title": "Deep Learning for Covariate Modelling in NLME Models",
+          "venue": "",
+          "tags": [
+            "deep learning",
+            "covariate modelling",
+            "NLME",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/AIDD/02-DL_covariate_modelling.html"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
