@@ -4,11 +4,16 @@ on:
   # Trigger the workflow every time you push to the `main` branch
   push:
     branches: [main]
-  # Trigger the workflow on pull requests to the main branch
+  # Trigger the workflow on pull requests to the main branch (build only, no deploy)
   pull_request:
     branches: [main]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+
+# Prevent concurrent deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -19,6 +24,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
@@ -28,13 +34,27 @@ jobs:
         with:
           use-public-rspm: true
           r-version: 'release'
-      - run: echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-      - run: echo "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt" >> $GITHUB_ENV
-      - uses: julia-actions/julia-buildpkg@v1
+
+      - name: Set R library path
+        run: echo "LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+
+      - name: Set CURL_CA_BUNDLE for R on Ubuntu
+        run: echo "CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt" >> $GITHUB_ENV
+
       - name: Install Julia
         uses: julia-actions/setup-julia@v2
         with:
           version: '1'
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Cache Julia packages
         uses: julia-actions/cache@v2
@@ -43,11 +63,6 @@ jobs:
           cache-registries: 'true'
           cache-artifacts: 'true'
           cache-compiled: 'true'
-
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
 
       - name: Cache Quarto installation
         id: cache-quarto
@@ -61,13 +76,11 @@ jobs:
       - name: Install Quarto
         if: steps.cache-quarto.outputs.cache-hit != 'true'
         run: |
-          wget https://quarto.org/download/latest/quarto-linux-amd64.deb
+          wget -q https://quarto.org/download/latest/quarto-linux-amd64.deb
           sudo dpkg -i quarto-linux-amd64.deb
 
-      - name: Add Quarto to PATH (if cached)
-        if: steps.cache-quarto.outputs.cache-hit == 'true'
-        run: |
-          echo "/opt/quarto/bin" >> $GITHUB_PATH
+      - name: Add Quarto to PATH
+        run: echo "/opt/quarto/bin" >> $GITHUB_PATH
 
       - name: Cache CondaPkg environment
         uses: actions/cache@v4
@@ -79,33 +92,32 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-condapkg-
 
+      - name: Cleanup old builds
+        run: rm -rf public/quarto_blog quarto_blog/_site
+
       - name: Instantiate Julia environment
-        run: |
-          cd quarto_blog
-          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+        working-directory: ./quarto_blog
+        run: julia --project=. -e 'using Pkg; Pkg.instantiate()'
       
       - name: Render Quarto blogposts
+        working-directory: ./quarto_blog
         env:
           JULIA_PROJECT: ${{ github.workspace }}/quarto_blog
-        run: |
-          cd quarto_blog
-          quarto render
+        run: quarto render
       
       - name: Copy Quarto output to public directory
         run: |
-          rm -rf public/quarto_blog
           cp -r quarto_blog/_site public/quarto_blog
       
       - name: Install, build, and upload your site
         uses: withastro/action@v3
-        # with:
-        # path: . # The root location of your Astro project inside the repository. (optional)
-        # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
-        # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
+        with:
+          package-manager: bun@latest
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     # Only deploy on pushes to main, not on PRs
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment:
