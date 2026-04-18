@@ -192,9 +192,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Introduction to Bayesian Models in Pumas",
@@ -209,9 +207,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/01-bayes_intro.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Random Effects in Bayesian Models",
@@ -227,9 +223,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/02-bayes_random_effects.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Posterior Postprocessing - Plots and Queries",
@@ -245,9 +239,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/03-posterior_postprocessing.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Markov Chain Monte Carlo Convergence",
@@ -263,9 +255,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/04-mcmc_convergence.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Model Comparison with Crossvalidation",
@@ -281,9 +271,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/05-model_comparison.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Introduction to Optimal Design",
@@ -298,9 +286,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/optimal_design/optimal_design.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Two-compartment PK optimal design",
@@ -316,9 +302,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/optimal_design/ODpaperCase1.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "LASSO for Covariate Modeling in NLME Models",
@@ -335,9 +319,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/LearningPaths/05-LP/12-Module/mod12-lasso.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Machine learning fundamentals",
@@ -353,9 +335,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/AIDD/01-machine_learning_fundamentals.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Variational Expectation Maximization (VEM)",
@@ -371,9 +351,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/estimation/01-vem-introduction.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Deep Learning for Covariate Modelling in NLME Models",
@@ -390,9 +368,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/AIDD/02-DL_covariate_modelling.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Regression using Machine Learning",
@@ -409,9 +385,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/2_machine_learning/tutorials/machine_learning.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "SciML using DeepPumas",
@@ -428,9 +402,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/3_sciml/tutorials/sciml.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Mixed-effects neural networks",
@@ -447,9 +419,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/4_mixed_effects/tutorials/menets.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Mixed Effects Pharmacodynamics Identification using DeepNLME",
@@ -467,9 +437,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/dynamics.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         },
         {
           "title": "Covariate Modelling in Nonlinear Mixed Effects Models using DeepPumas",
@@ -487,9 +455,7 @@
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/covariates.html"
             }
-          ],
-          "year": 2024,
-          "date": "2024"
+          ]
         }
       ]
     },
