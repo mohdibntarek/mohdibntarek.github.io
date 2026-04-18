@@ -79,15 +79,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /opt/quarto
-          key: ${{ runner.os }}-quarto-1.6  # Update version when upgrading Quarto
+          key: ${{ runner.os }}-quarto-1.9.37
           restore-keys: |
             ${{ runner.os }}-quarto-
 
       - name: Install Quarto
         if: steps.cache-quarto.outputs.cache-hit != 'true'
         run: |
-          wget -q https://quarto.org/download/latest/quarto-linux-amd64.deb
-          sudo dpkg -i quarto-linux-amd64.deb
+          wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.37/quarto-1.9.37-linux-amd64.deb
+          sudo dpkg -i quarto-1.9.37-linux-amd64.deb
 
       - name: Add Quarto to PATH
         run: echo "/opt/quarto/bin" >> $GITHUB_PATH
