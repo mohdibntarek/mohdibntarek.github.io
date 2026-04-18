@@ -47,14 +47,14 @@ You can add dependencies as needed to these environments either external to the 
 
 Once done writing, always commit your TOML files to git. They are used during rendering to ensure reproducible builds.
 
-If your post uses Julia code with a `Project.toml` file, you should include a (hidden) cell in your post** that calls `Pkg.instantiate()`:
+If your post uses Julia code with a `Project.toml` file, you should include a (hidden) cell in your post that calls `Pkg.instantiate()`:
 
 ```julia
 using Pkg
 Pkg.instantiate()
 ```
 
-This will run when the document is built on CI and when others are running your document. But for someone else to run your, document they need to setup the toml files on their end.
+This will run when the document is built on CI and when others are running your document. But for someone else to run your document, they need to have the TOML files on their end so it is a good idea to link to them at the end of your post.
 
 ---
 
