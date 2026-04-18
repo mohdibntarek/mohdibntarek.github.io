@@ -76,11 +76,11 @@ let blogPosts: Array<{
   categories: string[];
 }> = [];
 
-// Extract frontmatter text from an .ipynb file's first raw cell
+// Extract frontmatter text from an .ipynb file's first markdown cell
 function extractIpynbFrontmatter(filepath: string): string {
   const nb = JSON.parse(readFileSync(filepath, 'utf-8'));
   for (const cell of nb.cells ?? []) {
-    if (cell.cell_type === 'raw') {
+    if (cell.cell_type === 'markdown') {
       const src = Array.isArray(cell.source) ? cell.source.join('') : (cell.source ?? '');
       if (src.trim().startsWith('---')) return src;
     }
@@ -88,23 +88,59 @@ function extractIpynbFrontmatter(filepath: string): string {
   return '';
 }
 
-try {
-  const files = readdirSync(postsDir).filter(f => f.endsWith('.qmd') || f.endsWith('.ipynb'));
+// Recursively find all index.qmd and .ipynb files in post directories
+function findPostFiles(dir: string): string[] {
+  const files: string[] = [];
+  const entries = readdirSync(dir, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    if (entry.isDirectory() && !entry.name.startsWith('.')) {
+      const subDir = join(dir, entry.name);
+      // Look for index.qmd inside the directory
+      const indexQmd = join(subDir, 'index.qmd');
+      try {
+        readFileSync(indexQmd, 'utf-8');
+        files.push(indexQmd);
+      } catch {
+        // index.qmd doesn't exist, skip
+      }
+      
+      // Also check for .ipynb files
+      try {
+        const subEntries = readdirSync(subDir);
+        for (const subFile of subEntries) {
+          if (subFile.endsWith('.ipynb')) {
+            files.push(join(subDir, subFile));
+          }
+        }
+      } catch {
+        // Directory not readable, skip
+      }
+    }
+  }
+  
+  return files;
+}
 
-  blogPosts = files.map(filename => {
-    const filepath = join(postsDir, filename);
+try {
+  const files = findPostFiles(postsDir);
+
+  blogPosts = files.map(filepath => {
+    const filename = basename(filepath);
     const ext = extname(filename);
+    const parentDir = basename(join(filepath, '..'));
+    
     const content = ext === '.ipynb'
       ? extractIpynbFrontmatter(filepath)
       : readFileSync(filepath, 'utf-8');
     const fm = parseFrontmatter(content);
     
-    // Generate href from filename
-    const nameWithoutExt = basename(filename, extname(filename));
+    // For index.qmd or index.ipynb in a folder, use the folder name in the URL
+    const postSlug = (filename === 'index.qmd' || filename === 'index.ipynb') ? parentDir : basename(filename, ext);
     
     return {
       title: fm.title || 'Untitled',
-      href: `/quarto_blog/posts/${nameWithoutExt}.html`,
+      href: `/quarto_blog/posts/${postSlug}/index.html`,
       description: fm.description || '',
       date: fm.date || '',
       categories: Array.isArray(fm.tags) ? fm.tags : []

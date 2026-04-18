@@ -1,0 +1,9 @@
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+CondaPkg = "992eb4ea-22a4-4c89-a5bb-47a3300528ab"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
+RCall = "6f49c342-dc21-5d91-9882-a32aef131414"
+
+[compat]
+julia = "1.12"

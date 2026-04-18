@@ -1,14 +1,22 @@
 ---
 title: "Multi-Language Computing: Julia, Python, and R Working Together"
 author: "Mohamed Tarek"
-date: "2026-04-15"
+date: "2026-04-17"
 description: "Showcasing Quarto's multi-language support and how to seamlessly call Python and R from Julia."
 tags: [julia, python, r, quarto, interoperability]
 engine: julia
 number-sections: true
 execute:
+  freeze: true
   cache: true
 ---
+
+```{julia}
+#| include: false
+
+using Pkg
+Pkg.instantiate()
+```
 
 ---
 
@@ -87,7 +95,7 @@ using Pkg
 Pkg.build("RCall")
 ```
 
-To confirm the R installation is correctly found by RCall, you can run a simple command to check the R version:
+To confirm the R installation is correctly found by `RCall`, you can run a simple command to check the R version:
 
 ```julia
 using RCall
@@ -105,6 +113,8 @@ When using the Julia Quarto engine, package management works differently for eac
 Julia packages are managed using the built-in Pkg system. You can add packages from the Julia REPL:
 
 ```{julia}
+#| output: false
+
 using Pkg
 Pkg.add(["Optim", "CairoMakie", "PythonCall", "CondaPkg", "RCall"])
 ```
@@ -153,9 +163,11 @@ scipy = ""
 numpy = ""
 ```
 
-To install Python packages programmatically using PythonCall, you can use the following code:
+To install Python packages programmatically using `PythonCall`, you can use the following code:
 
 ```{julia}
+#| output: false
+
 using PythonCall
 using CondaPkg
 
@@ -166,7 +178,7 @@ CondaPkg.add("numpy")
 
 Calling `CondaPkg.add("package_name")` will add the specified package to the `CondaPkg.toml` file and install it in the Python environment that `PythonCall` uses. You can also specify versions if needed, e.g. `CondaPkg.add("scipy", "1.10.0")`.
 
-If the `CondaPkg.toml` file is already present with the required dependencies, running `using PythonCall` in Julia will automatically resolve and install the Python dependencies specified in the `CondaPkg.toml` file, which is similar to instantiating the environment in Julia. To explicitly instantiate the Python environment and ensure all dependencies are installed before loading PythonCall, you can call `CondaPkg.resolve()`, which will read the `CondaPkg.toml` file and install any missing packages.
+If the `CondaPkg.toml` file is already present with the required dependencies, running `using PythonCall` in Julia will automatically resolve and install the Python dependencies specified in the `CondaPkg.toml` file, which is similar to instantiating the environment in Julia. To explicitly instantiate the Python environment and ensure all dependencies are installed before loading `PythonCall`, you can call `CondaPkg.resolve()`, which will read the `CondaPkg.toml` file and install any missing packages.
 
 If instead, you prefer to create your own Conda environment outside of Julia to have full control over your Python environment, you can also do that and then communicate to `CondaPkg` which existing environment to use by setting some environment variables before running the document. For more details, see the `PythonCall` and `CondaPkg` documentation.
 
@@ -175,6 +187,7 @@ If instead, you prefer to create your own Conda environment outside of Julia to 
 You can install R packages using R's built-in package manager from within Julia using RCall:
 
 ```{julia}
+using RCall
 R"""
 library(utils)
 options(repos = c(CRAN = "https://cloud.r-project.org"))
@@ -198,7 +211,7 @@ The `R"..."` string macro allows you to write R code directly in Julia, and it w
 
 The `install.packages` function is used above to install packages from CRAN, after setting the `repos` option to specify the CRAN mirror to use. The `dependencies=TRUE` argument ensures that any dependencies of the package are also installed. You can replace `'data.table'` with the name of the package you want to install.
 
-Since the Julia Quarto engine also uses RCall under the hood, one can also directly utilize Quarto's multi-language code block feature and run an R block instead to install and load the package, which is more straightforward and doesn't require embedding R code in a Julia string macro. This also allows you to have syntax highlighting and code completion for R code in the editor.
+Since the Julia Quarto engine also uses `RCall` under the hood, one can also directly utilize Quarto's multi-language code block feature and run an R block instead to install and load the package, which is more straightforward and doesn't require embedding R code in a Julia string macro. This also allows you to have syntax highlighting and code completion for R code in the editor.
 
 ```{r}
 library(utils)
@@ -478,14 +491,18 @@ So you refer to string macros in 3 different ways in different contexts! This is
 
 With this, hopefully, you see the relative ease of mixing multiple programming languages in the same Quarto document using the Julia engine. While `PythonCall` and `RCall` each have their own slightly different syntax and semantics, they both work well enough unlocking the entirety of the Python and R ecosystems from within Julia. So if not having access to that one Python/R package you need was stopping you from exploring Julia, hopefully, I have convinced you that you can have your cake and eat it too with Quarto's multi-language support and the Julia Quarto engine.
 
-While PythonCall and RCall may seem like magic if you have never used multiple programming languages like this before, under the hood, it's all careful engineering and management of data structures and memory across language boundaries. Quarto makes things even easier by providing language-specific code blocks with syntax highlighting and native syntax for each language (e.g. using `$` in R blocks), while the Julia engine simplifies the sharing and transfer of data across language barriers.
+While `PythonCall` and `RCall` may seem like magic if you have never used multiple programming languages like this before, under the hood, it's all careful engineering and management of data structures and memory across language boundaries. Quarto makes things even easier by providing language-specific code blocks with syntax highlighting and native syntax for each language (e.g. using `$` in R blocks), while the Julia engine simplifies the sharing and transfer of data across language barriers.
 
-Of course, we barely scratched the surface here. Both PythonCall and RCall have many more features for more complex use cases. The same goes for Quarto which has other engines besides the Julia Quarto engine, that we have used here, with different implementation details and capabilities.
+Of course, we barely scratched the surface here. Both `PythonCall` and `RCall` have many more features for more complex use cases. The same goes for Quarto which has other engines besides the Julia Quarto engine, that we have used here, with different implementation details and capabilities.
 
 Happy multi-language computing with Quarto and Julia!
 
 ## References
 
+- TOML files used in this post:
+  - [`Project.toml`](./Project.toml)
+  - [`Manifest.toml`](./Manifest.toml)
+  - [`CondaPkg.toml`](./CondaPkg.toml)
 - [Quarto Documentation](https://quarto.org/)
 - [Julia Documentation](https://docs.julialang.org/)
 - [Optim.jl Documentation](https://julianlsolvers.github.io/Optim.jl/stable/)

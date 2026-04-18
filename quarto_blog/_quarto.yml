@@ -6,13 +6,14 @@ execute:
   project:
     type: julia
   cache: true
+  freeze: false
 
 website:
   title: "Back to Blog Posts"
   favicon: "favicon.svg"
   
   navbar:
-    logo-href: "../../blog"
+    logo-href: "../../../blog"
     search: false
 
 format:

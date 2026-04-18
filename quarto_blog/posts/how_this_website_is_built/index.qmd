@@ -6,9 +6,10 @@ description: "Why I used two frameworks instead of one—and how it actually wor
 tags: [web-development, astro, quarto, tutorial]
 engine: julia
 number-sections: false
+execute:
+  freeze: true
 ---
 
----
 
 In this post, I am going to describe my thought process of building this personal website and how it evolved over time.
 

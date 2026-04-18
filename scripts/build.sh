@@ -1,15 +1,6 @@
 #!/bin/bash
 set -e
 
-# Copy .example.toml files to .toml files only if they don't exist
-if [ ! -f quarto_blog/Project.toml ]; then
-    cp quarto_blog/Project.example.toml quarto_blog/Project.toml
-fi
-
-if [ ! -f quarto_blog/CondaPkg.toml ]; then
-    cp quarto_blog/CondaPkg.example.toml quarto_blog/CondaPkg.toml
-fi
-
 # Render Quarto blog
 quarto render quarto_blog/
 
