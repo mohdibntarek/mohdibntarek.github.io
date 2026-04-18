@@ -16,6 +16,8 @@ execute:
 
 using Pkg
 Pkg.instantiate()
+
+1 + 1 # dummy code to test _freeze/ cache invalidation on CI
 ```
 
 ---
