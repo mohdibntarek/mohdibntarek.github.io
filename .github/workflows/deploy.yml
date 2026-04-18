@@ -115,19 +115,6 @@ jobs:
       - name: Cleanup old builds
         run: rm -rf public/quarto_blog quarto_blog/_site
 
-      - name: Instantiate Julia environments
-        run: |
-          julia --color=yes -e '
-          using Pkg
-          for (root, dirs, files) in walkdir(".")
-              if "Project.toml" in files
-                  println("Instantiating environment in: ", root)
-                  Pkg.activate(root)
-                  Pkg.instantiate()
-              end
-          end
-          '
-      
       - name: Render Quarto blogposts
         working-directory: ./quarto_blog
         env:

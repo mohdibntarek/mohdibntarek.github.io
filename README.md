@@ -41,19 +41,20 @@ This creates a new post at `quarto_blog/posts/<post-name>/` with:
 
 ### 2. Set Up Your Environment (for Julia posts)
 
-If your post uses Julia code, instantiate your environment before rendering:
+If your post is using Julia or Python packages, it should have either both `Project.toml` and `Manifest.toml` files in the case of Julia, or `CondaPkg.toml` file in the case of Python.
 
-```bash
-cd quarto_blog/posts/<post-name>
-julia --project=. -e 'using Pkg; Pkg.instantiate()'
+You can add dependencies as needed to these environments either external to the document or within the document while writing it.
+
+Once done writing, always commit your TOML files to git. They are used during rendering to ensure reproducible builds.
+
+If your post uses Julia code with a `Project.toml` file, you should include a (hidden) cell in your post** that calls `Pkg.instantiate()`:
+
+```julia
+using Pkg
+Pkg.instantiate()
 ```
 
-Add dependencies as needed:
-```bash
-julia --project=. -e 'using Pkg; Pkg.add("Plots")'
-```
-
-**Note on TOML files:** Commit your TOML files (`Project.toml`, `CondaPkg.toml`, etc.) directly to git. They are used during rendering to ensure reproducible builds.
+This will run when the document is built on CI and when others are running your document. But for someone else to run your, document they need to setup the toml files on their end.
 
 ---
 

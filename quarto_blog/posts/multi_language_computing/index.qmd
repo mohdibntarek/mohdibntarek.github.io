@@ -11,6 +11,13 @@ execute:
   cache: true
 ---
 
+```{julia}
+#| include: false
+
+using Pkg
+Pkg.instantiate()
+```
+
 ---
 
 ## Introduction
@@ -40,14 +47,6 @@ This document is built using **Quarto** and the **Julia Quarto engine**, which a
 - Verify installation: `R --version`
 
 Once installed, the Julia Quarto engine will automatically find and use these interpreters.
-
-## Environment Setup
-
-To run this post locally, ensure you have these files in the same directory as the post.
-
-- [`Project.toml`](./Project.toml)
-- [`Manifest.toml`](./Manifest.toml)
-- [`CondaPkg.toml`](./CondaPkg.toml)
 
 ## Making R Visible to Quarto and Fixing SSL Certificate Issues on Linux
 
@@ -500,6 +499,10 @@ Happy multi-language computing with Quarto and Julia!
 
 ## References
 
+- TOML files used in this post:
+  - [`Project.toml`](./Project.toml)
+  - [`Manifest.toml`](./Manifest.toml)
+  - [`CondaPkg.toml`](./CondaPkg.toml)
 - [Quarto Documentation](https://quarto.org/)
 - [Julia Documentation](https://docs.julialang.org/)
 - [Optim.jl Documentation](https://julianlsolvers.github.io/Optim.jl/stable/)
