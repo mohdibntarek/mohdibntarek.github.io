@@ -108,7 +108,7 @@ jobs:
           path: |
             quarto_blog/_freeze
             quarto_blog/.quarto
-          key: ${{ runner.os }}-quarto-freeze-${{ hashFiles('quarto_blog/**/*.qmd', 'quarto_blog/_quarto.yml') }}
+          key: ${{ runner.os }}-quarto-freeze-${{ hashFiles('quarto_blog/**/*.qmd', 'quarto_blog/**/*.ipynb', 'quarto_blog/**/*.toml', 'quarto_blog/_quarto.yml') }}
           restore-keys: |
             ${{ runner.os }}-quarto-freeze-
 
