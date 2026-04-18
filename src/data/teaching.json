@@ -579,23 +579,6 @@
           ]
         },
         {
-          "title": "Pumas 2.0 Features: Beyond Gaussian Random Effects",
-          "venue": "",
-          "year": 2021,
-          "date": "Mar 30, 2021",
-          "tags": [
-            "pharmacometrics",
-            "NLME",
-            "non-Gaussian"
-          ],
-          "links": [
-            {
-              "label": "youtube",
-              "url": "https://www.youtube.com/watch?v=rSlT6KUwTK4"
-            }
-          ]
-        },
-        {
           "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
           "venue": "JuliaCon",
           "year": 2020,
