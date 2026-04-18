@@ -30,25 +30,25 @@ echo "Preparing quarto_blog for publishing..."
 echo "Publishing post: $POST_NAME"
 
 echo ""
-echo "Setting freeze: true in post files..."
+echo "Setting freeze: auto in post files..."
 
 # Process .qmd files only (skip pre-rendered .ipynb files)
 find "$POST_DIR" -maxdepth 1 -type f -name "*.qmd" | while read -r qmd_file; do
     echo "Processing $qmd_file"
     
-    # First remove any existing freeze: false
-    sed -i '/^[[:space:]]*freeze: false/d' "$qmd_file"
+    # Replace freeze: false with freeze: auto, leave freeze: true untouched
+    sed -i 's/^\([[:space:]]*\)freeze: false/\1freeze: auto/' "$qmd_file"
     
     if grep -q "^execute:" "$qmd_file"; then
         # Add freeze: true under existing execute: section
-        # Check if freeze: true already exists
+        # Check if freeze: auto already exists
         if ! grep -q "^execute:" "$qmd_file" | grep -q "freeze: true"; then
-            # Check if freeze: true is already under execute:
+            # Check if freeze: auto is already under execute:
             if ! sed -n '/^execute:/,/^\(---\|$\)/p' "$qmd_file" | grep -q "freeze: true"; then
                 sed -i '/^execute:/a\  freeze: true' "$qmd_file"
-                echo "  Added freeze: true to existing execute: section"
+                echo "  Added freeze: auto to existing execute: section"
             else
-                echo "  freeze: true already exists"
+                echo "  freeze: auto already exists"
             fi
         fi
     else

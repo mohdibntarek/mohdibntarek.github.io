@@ -107,6 +107,23 @@ git commit -m "Publish post: my-new-post"
 | `bun run build` | Build the entire website (Quarto + Astro + search) |
 | `bun run preview` | Preview the built website locally |
 | `bun run quarto` | Render Quarto blog content only |
+| `bun run reset-cache` | Clear cache for all posts (or specific post) |
+
+### Cache Management
+
+The build system caches rendered post outputs to avoid unnecessary re-execution. To force re-rendering:
+
+```bash
+# Reset cache for all posts
+bun run reset-cache
+
+# Reset cache for a specific post
+bun run reset-cache <post-name>
+```
+
+This is useful when:
+- You want to force re-execution of a post on the next build
+- The cache appears to be out of sync
 
 ---
 
