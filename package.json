@@ -16,7 +16,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "new-post": "bash scripts/new_post.sh",
-    "publish": "bash scripts/publish.sh"
+    "publish-post": "bash scripts/publish.sh"
   },
   "type": "module",
   "devDependencies": {

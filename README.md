@@ -70,7 +70,7 @@ bun run build
 **Freeze Configuration:**
 - The project default is `freeze: false` (set in `quarto_blog/_quarto.yml`)
 - This means posts re-execute on each build during development
-- When ready to publish, use `bun run publish` to freeze outputs
+- When ready to publish, use `bun run publish-post` to freeze outputs
 
 > **Note on CI Caching:** The `_freeze/` folder is not committed to git (it's in `.gitignore`), but it is cached on CI. This means once a post is frozen, it will only be executed once on CI. Subsequent builds will use the cached frozen outputs unless the source files change. To re-execute a frozen post on CI, you'll need to make a change to the post's source files.
 
@@ -81,7 +81,7 @@ bun run build
 When ready to publish, run:
 
 ```bash
-bun run publish <post-name>
+bun run publish-post <post-name>
 ```
 
 This prepares the post by setting `freeze: true` in the post, so the outputs are frozen and won't re-execute on CI builds.
