@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContentList from "../components/ContentList.astro";
+import software from "../data/software.json";
+
+const frontmatter = {
+  title: "Software",
+  description: "Open source software packages and tools that I contributed to.",
+  published: true,
+  "number-sections": true,
+};
+---
+
+<Layout frontmatter={frontmatter}>
+  <ContentList sections={software.sections} />
+</Layout>

@@ -4,9 +4,10 @@ import ContentList from "../components/ContentList.astro";
 import teaching from "../data/teaching.json";
 
 const frontmatter = {
-  title: "Teaching and Videos",
-  description: "Videos, workshops, and courses",
+  title: "Teaching",
+  description: "Courses, workshops, and tutorials",
   published: true,
+  "number-sections": true,
 };
 ---
 
@@ -16,13 +17,13 @@ const frontmatter = {
       <input
         type="text"
         id="teaching-query"
-        placeholder="Search videos, workshops, and courses..."
+        placeholder="Search courses, workshops, videos, and tutorials..."
         class="search-input"
       />
       <button id="teaching-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
     </div>
 
-    <p id="teaching-no-results" class="no-results" hidden>No teaching materials matching your search.</p>
+    <p id="teaching-no-results" class="no-results" hidden>No courses, workshops, or tutorials matching your search.</p>
 
     <ContentList sections={teaching.sections} />
   </div>

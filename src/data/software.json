@@ -1,0 +1,878 @@
+{
+    "title": "Open Source Software",
+    "description": "I am not actively contributing to some of these packages anymore.",
+    "sections": [
+        {
+            "title": "Probabilistic Programming",
+            "items": [
+                {
+                    "title": "Turing.jl: General-purpose probabilistic programming language",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "probabilistic programming",
+                        "Julia",
+                        "Bayesian"
+                    ],
+                    "links": [
+                        {
+                            "label": "TPML paper",
+                            "url": "https://dl.acm.org/doi/abs/10.1145/3711897"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/TuringLang/Turing.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "DistributionsAD.jl: Automatic Differentiation for Distributions",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "probabilistic programming",
+                        "Julia",
+                        "automatic differentiation"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaDiff/DistributionsAD.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "Bijectors.jl: Flexible transformations for probability distributions",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "probabilistic programming",
+                        "Julia",
+                        "transformations"
+                    ],
+                    "links": [
+                        {
+                            "label": "aabi paper",
+                            "url": "/pdfs/bijectors-aabi-2019.pdf"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/TuringLang/Bijectors.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "DynamicPPL.jl: Dynamic probabilistic programming language",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "probabilistic programming",
+                        "Julia",
+                        "Bayesian"
+                    ],
+                    "links": [
+                        {
+                            "label": "arxiv preprint",
+                            "url": "/pdfs/dynamicppl-2020.pdf"
+                        },
+                        {
+                            "label": "probprog poster",
+                            "url": "/pdfs/dynamicppl-probprog-2020.pdf"
+                        },
+                        {
+                            "label": "juliacon video",
+                            "url": "https://www.youtube.com/watch?v=aD_VEjDtOX0"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/TuringLang/DynamicPPL.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "AdvancedHMC.jl: Robust and modular HMC algorithms",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "probabilistic programming",
+                        "Julia",
+                        "MCMC",
+                        "HMC"
+                    ],
+                    "links": [
+                        {
+                            "label": "aabi paper",
+                            "url": "/pdfs/advancedhmc-aabi-2019.pdf"
+                        },
+                        {
+                            "label": "probprog poster",
+                            "url": "/pdfs/advancedhmc-probprog-2020.pdf"
+                        },
+                        {
+                            "label": "stancon slides",
+                            "url": "/pdfs/advancedhmc-stancon-2019.pdf"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/TuringLang/AdvancedHMC.jl"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Topology Optimization",
+            "items": [
+                {
+                    "title": "TopOpt.jl: Topology optimization package for truss and continuum structures",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "topology optimization",
+                        "Julia",
+                        "optimization"
+                    ],
+                    "links": [
+                        {
+                            "label": "wcsmo abstract",
+                            "url": "/pdfs/topopt-jl-wcsmo-2021.pdf"
+                        },
+                        {
+                            "label": "juliacon video",
+                            "url": "https://www.youtube.com/watch?v=sBqdkxPXluU"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaTopOpt/TopOpt.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "VTKDataIO.jl: VTK data I/O for Julia",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "visualization",
+                        "Julia",
+                        "VTK",
+                        "data I/O",
+                        "topology optimization"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaTopOpt/VTKDataIO.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "VTKDataTypes.jl: VTK data types for Julia",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "visualization",
+                        "Julia",
+                        "VTK",
+                        "data structures",
+                        "topology optimization"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaTopOpt/VTKDataTypes.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexTOBS.jl: Topology Optimization of Binary Structures",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "binary optimization",
+                        "topology optimization"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexTOBS.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "ReliabilityOptimization.jl: Reliability-Based Design Optimization",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "reliability"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/ReliabilityOptimization.jl"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Automatic Differentiation",
+            "items": [
+                {
+                    "title": "ReverseDiff.jl: Reverse-mode automatic differentiation",
+                    "venue": "Astrophysics Source Code Library",
+                    "year": "2024",
+                    "date": "Nov 1, 2024",
+                    "tags": [
+                        "software",
+                        "automatic differentiation",
+                        "Julia"
+                    ],
+                    "links": [
+                        {
+                            "label": "abstract",
+                            "url": "https://ui.adsabs.harvard.edu/abs/2024ascl.soft11010R/abstract"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaDiff/ReverseDiff.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "DistributionsAD.jl: Automatic Differentiation for Distributions",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "probabilistic programming",
+                        "Julia",
+                        "automatic differentiation"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaDiff/DistributionsAD.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "AbstractDifferentiation.jl: Backend-agnostic differentiable programming",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "automatic differentiation",
+                        "Julia",
+                        "differentiable programming"
+                    ],
+                    "links": [
+                        {
+                            "label": "abstract",
+                            "url": "https://neurips.cc/virtual/2021/35276"
+                        },
+                        {
+                            "label": "arxiv preprint",
+                            "url": "/pdfs/abstractdifferentiation-2022.pdf"
+                        },
+                        {
+                            "label": "diffprog paper",
+                            "url": "/pdfs/abstractdifferentiation-neurips-2021.pdf"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaDiff/AbstractDifferentiation.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "ImplicitDifferentiation.jl: Differentiating implicit functions",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "automatic differentiation",
+                        "Julia",
+                        "implicit functions"
+                    ],
+                    "links": [
+                        {
+                            "label": "juliacon video",
+                            "url": "https://www.youtube.com/watch?v=TkVDcujVNJ4&t=1s"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaDecisionFocusedLearning/ImplicitDifferentiation.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "ForwardDiffChainRules.jl: ForwardDiff with ChainRules support",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "automatic differentiation",
+                        "Julia"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/ThummeTo/ForwardDiffChainRules.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexUtils.jl: Utility functions for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "automatic differentiation"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexUtils.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "DifferentiableFlatten.jl: Differentiable flattening of nested structures",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "automatic differentiation",
+                        "Julia"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/DifferentiableFlatten.jl"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Linear Algebra",
+            "items": [
+                {
+                    "title": "IterativeSolvers.jl: Iterative solvers for linear systems (contributed the LOBPCG algorithm)",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "linear algebra",
+                        "Julia",
+                        "iterative solvers"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaLinearAlgebra/IterativeSolvers.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "Preconditioners.jl: Preconditioning framework for iterative solvers",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "linear algebra",
+                        "Julia",
+                        "numerical methods",
+                        "preconditioning"
+                    ],
+                    "links": [
+                        {
+                            "label": "preprint",
+                            "url": "/pdfs/preconditioners-jl-2023.pdf"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaLinearAlgebra/Preconditioners.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "AlgebraicMultigrid.jl: Algebraic Multigrid Solvers",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "linear algebra",
+                        "Julia",
+                        "multigrid"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaLinearAlgebra/AlgebraicMultigrid.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "DifferentiableFactorizations.jl: Differentiable Matrix Factorizations",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "linear algebra",
+                        "Julia",
+                        "automatic differentiation"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/mohdibntarek/DifferentiableFactorizations.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "TraceEstimators.jl: Trace Estimation for Large Matrices",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "linear algebra",
+                        "Julia",
+                        "numerical methods"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/mohdibntarek/TraceEstimators.jl"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Optimization",
+            "items": [
+                {
+                    "title": "Nonconvex.jl: Comprehensive package for non-convex optimization",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex"
+                    ],
+                    "links": [
+                        {
+                            "label": "preprint",
+                            "url": "/pdfs/nonconvex-jl-2023.pdf"
+                        },
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/Nonconvex.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexMMA.jl: Method of Moving Asymptotes for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexMMA.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "ReliabilityOptimization.jl: Reliability-Based Design Optimization",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "reliability"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/ReliabilityOptimization.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexBayesian.jl: Bayesian Optimization for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "Bayesian",
+                        "non-convex"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexBayesian.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexSemidefinite.jl: Semidefinite Programming for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "semidefinite programming"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexSemidefinite.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexMetaheuristics.jl: Metaheuristic algorithms for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "metaheuristics"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexMetaheuristics.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexNLopt.jl: NLopt wrapper for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "NLopt"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexNLopt.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexPercival.jl: Percival wrapper for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "augmented Lagrangian"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexPercival.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexJuniper.jl: Juniper wrapper for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "MINLP"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexJuniper.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexPavito.jl: Pavito wrapper for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "MINLP"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexPavito.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexMultistart.jl: Multi-start optimization for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "global optimization"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexMultistart.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexSearch.jl: Local search methods for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "local search"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexSearch.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexAugLagLab.jl: Experimental augmented Lagrangian for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "augmented Lagrangian"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexAugLagLab.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexNOMAD.jl: NOMAD wrapper for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "derivative-free"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexNOMAD.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexIpopt.jl: Ipopt wrapper for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "Ipopt"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexIpopt.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexCore.jl: Core interface for Nonconvex.jl",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "interface"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexCore.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "NonconvexTOBS.jl: Topology Optimization of Binary Structures",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "non-convex",
+                        "binary optimization",
+                        "topology optimization"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/JuliaNonconvex/NonconvexTOBS.jl"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Utilities",
+            "items": [
+                {
+                    "title": "KissThreading.jl: Keep it simple threading utilities",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "parallel computing",
+                        "Julia"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/mohdibntarek/KissThreading.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "ConvergencePlots.jl: Convergence plots for optimization",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "visualization"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/mohdibntarek/ConvergencePlots.jl"
+                        }
+                    ]
+                },
+                {
+                    "title": "RCPSP.jl: Resource-Constrained Project Scheduling",
+                    "venue": "GitHub",
+                    "year": "",
+                    "date": "",
+                    "tags": [
+                        "software",
+                        "optimization",
+                        "Julia",
+                        "scheduling"
+                    ],
+                    "links": [
+                        {
+                            "label": "software",
+                            "url": "https://github.com/mohdibntarek/RCSP.jl"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

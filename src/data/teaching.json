@@ -1,6 +1,499 @@
 {
   "sections": [
     {
+      "title": "Workshops and Courses",
+      "items": [
+        {
+          "title": "Certificate Course on AI for Drug Development",
+          "venue": "Virtual 2025-2026",
+          "year": 2025,
+          "date": "",
+          "tags": [
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "drug development"
+          ],
+          "links": [
+            {
+              "label": "sophas",
+              "url": "https://sophas.net/courses-ai-in-drug-development/"
+            },
+            {
+              "label": "material",
+              "url": "https://tutorials.pumas.ai/deeppumas.html#path-2-artificial-intelligence-for-drug-development-course"
+            }
+          ]
+        },
+        {
+          "title": "Hands-on-Workshop: NLME Modeling Workflows Using Pumas",
+          "venue": "Virtual 2025",
+          "year": 2025,
+          "date": "Feb 3-5, 2025",
+          "tags": [
+            "pharmacometrics",
+            "NLME",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025"
+            }
+          ]
+        },
+        {
+          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
+          "venue": "American Conference on Pharmacometrics (ACoP) 2024",
+          "year": 2024,
+          "date": "Nov 9-10, 2024",
+          "tags": [
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "deep learning",
+            "scientific ML",
+            "SciML"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2024_ACoP"
+            }
+          ]
+        },
+        {
+          "title": "Intermediate Workshop on Population Modelling Using Pumas",
+          "venue": "Population Approach Group in Australia and New Zealand (PAGANZ)",
+          "year": 2024,
+          "date": "Feb 14, 2024",
+          "tags": [
+            "pharmacometrics",
+            "NLME",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/PAGANZ_2024_NLME_Workshop"
+            }
+          ]
+        },
+        {
+          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
+          "venue": "American Conference on Pharmacometrics (ACoP) 14",
+          "year": 2023,
+          "date": "Nov 4-5, 2023",
+          "tags": [
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "deep learning",
+            "scientific ML",
+            "SciML"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_ACOP"
+            }
+          ]
+        },
+        {
+          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
+          "venue": "Population Approach Group in Europe (PAGE)",
+          "year": 2023,
+          "date": "Jun 26-27, 2023",
+          "tags": [
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "deep learning",
+            "scientific ML",
+            "SciML"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_PAGE"
+            }
+          ]
+        },
+        {
+          "title": "DeepPumas Workshop at UMB",
+          "venue": "University of Maryland, Baltimore (UMB)",
+          "year": 2023,
+          "date": "Feb 20, 2023",
+          "tags": [
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "deep learning",
+            "scientific ML",
+            "SciML"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_UMB"
+            }
+          ]
+        },
+        {
+          "title": "Pumas for Quantitative Pharmacology",
+          "venue": "Tokyo, Japan",
+          "year": 2022,
+          "date": "Dec 5-6, 2022",
+          "tags": [
+            "pharmacometrics",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI/Pumas_Workshop_Tokyo_2022"
+            }
+          ]
+        },
+        {
+          "title": "Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs",
+          "venue": "American Conference on Pharmacometrics (ACoP) 13",
+          "year": 2022,
+          "date": "Nov 3-4, 2022",
+          "tags": [
+            "Bayesian",
+            "pharmacometrics",
+            "MCMC",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI/Bayesian-Workshop"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tutorials",
+      "items": [
+        {
+          "title": "Fitting Non-Identifiable and Poorly Identifiable Models using Bayesian Inference",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "Bayesian",
+            "pharmacometrics",
+            "identifiability"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Introduction to Bayesian Models in Pumas",
+          "venue": "",
+          "tags": [
+            "Bayesian",
+            "pharmacometrics",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/01-bayes_intro.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Random Effects in Bayesian Models",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "Bayesian",
+            "random effects",
+            "NLME"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/02-bayes_random_effects.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Posterior Postprocessing - Plots and Queries",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "Bayesian",
+            "posterior",
+            "visualization"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/03-posterior_postprocessing.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Markov Chain Monte Carlo Convergence",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "MCMC",
+            "Bayesian",
+            "convergence"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/04-mcmc_convergence.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Model Comparison with Crossvalidation",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "cross-validation",
+            "model comparison",
+            "Bayesian"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/05-model_comparison.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Introduction to Optimal Design",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "optimal design",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/optimal_design/optimal_design.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Two-compartment PK optimal design",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "optimal design",
+            "pharmacometrics",
+            "PK"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/optimal_design/ODpaperCase1.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "LASSO for Covariate Modeling in NLME Models",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "LASSO",
+            "NLME",
+            "covariates",
+            "machine learning"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/LearningPaths/05-LP/12-Module/mod12-lasso.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Machine learning fundamentals",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "machine learning",
+            "ML",
+            "fundamentals"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/AIDD/01-machine_learning_fundamentals.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Variational Expectation Maximization (VEM)",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "VEM",
+            "variational inference",
+            "optimization"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/estimation/01-vem-introduction.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Deep Learning for Covariate Modelling in NLME Models",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "deep learning",
+            "covariate modelling",
+            "NLME",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/AIDD/02-DL_covariate_modelling.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Regression using Machine Learning",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "machine learning",
+            "ML",
+            "regression",
+            "DeepPumas"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/2_machine_learning/tutorials/machine_learning.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "SciML using DeepPumas",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "scientific machine learning",
+            "SciML",
+            "DeepPumas",
+            "machine learning"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/3_sciml/tutorials/sciml.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Mixed-effects neural networks",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "mixed-effects",
+            "neural networks",
+            "DeepPumas",
+            "machine learning"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/4_mixed_effects/tutorials/menets.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Mixed Effects Pharmacodynamics Identification using DeepNLME",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "mixed effects",
+            "pharmacodynamics",
+            "DeepNLME",
+            "machine learning",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/dynamics.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        },
+        {
+          "title": "Covariate Modelling in Nonlinear Mixed Effects Models using DeepPumas",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "covariate modelling",
+            "NLME",
+            "DeepPumas",
+            "machine learning",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/covariates.html"
+            }
+          ],
+          "year": 2024,
+          "date": "2024"
+        }
+      ]
+    },
+    {
       "title": "Videos",
       "items": [
         {
@@ -172,181 +665,6 @@
             {
               "label": "youtube",
               "url": "https://www.youtube.com/watch?v=zNZ_bw1ti00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Workshops and Courses",
-      "items": [
-        {
-          "title": "Certificate Course on AI for Drug Development",
-          "venue": "Virtual 2025-2026",
-          "year": 2025,
-          "date": "",
-          "tags": [
-            "machine learning",
-            "ML",
-            "pharmacometrics",
-            "drug development"
-          ],
-          "links": [
-            {
-              "label": "sophas",
-              "url": "https://sophas.net/courses-ai-in-drug-development/"
-            },
-            {
-              "label": "material",
-              "url": "https://tutorials.pumas.ai/deeppumas.html#path-2-artificial-intelligence-for-drug-development-course"
-            }
-          ]
-        },
-        {
-          "title": "Hands-on-Workshop: NLME Modeling Workflows Using Pumas",
-          "venue": "Virtual 2025",
-          "year": 2025,
-          "date": "Feb 3-5, 2025",
-          "tags": [
-            "pharmacometrics",
-            "NLME",
-            "tutorial"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025"
-            }
-          ]
-        },
-        {
-          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
-          "venue": "American Conference on Pharmacometrics (ACoP) 2024",
-          "year": 2024,
-          "date": "Nov 9-10, 2024",
-          "tags": [
-            "machine learning",
-            "ML",
-            "pharmacometrics",
-            "deep learning",
-            "scientific ML",
-            "SciML"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2024_ACoP"
-            }
-          ]
-        },
-        {
-          "title": "Intermediate Workshop on Population Modelling Using Pumas",
-          "venue": "Population Approach Group in Australia and New Zealand (PAGANZ)",
-          "year": 2024,
-          "date": "Feb 14, 2024",
-          "tags": [
-            "pharmacometrics",
-            "NLME",
-            "tutorial"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI-Labs/PAGANZ_2024_NLME_Workshop"
-            }
-          ]
-        },
-        {
-          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
-          "venue": "American Conference on Pharmacometrics (ACoP) 14",
-          "year": 2023,
-          "date": "Nov 4-5, 2023",
-          "tags": [
-            "machine learning",
-            "ML",
-            "pharmacometrics",
-            "deep learning",
-            "scientific ML",
-            "SciML"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_ACOP"
-            }
-          ]
-        },
-        {
-          "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
-          "venue": "Population Approach Group in Europe (PAGE)",
-          "year": 2023,
-          "date": "Jun 26-27, 2023",
-          "tags": [
-            "machine learning",
-            "ML",
-            "pharmacometrics",
-            "deep learning",
-            "scientific ML",
-            "SciML"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_PAGE"
-            }
-          ]
-        },
-        {
-          "title": "DeepPumas Workshop at UMB",
-          "venue": "University of Maryland, Baltimore (UMB)",
-          "year": 2023,
-          "date": "Feb 20, 2023",
-          "tags": [
-            "machine learning",
-            "ML",
-            "pharmacometrics",
-            "deep learning",
-            "scientific ML",
-            "SciML"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI-Labs/DeepPumas_workshop_2023_UMB"
-            }
-          ]
-        },
-        {
-          "title": "Pumas for Quantitative Pharmacology",
-          "venue": "Tokyo, Japan",
-          "year": 2022,
-          "date": "Dec 5-6, 2022",
-          "tags": [
-            "pharmacometrics",
-            "tutorial"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI/Pumas_Workshop_Tokyo_2022"
-            }
-          ]
-        },
-        {
-          "title": "Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs",
-          "venue": "American Conference on Pharmacometrics (ACoP) 13",
-          "year": 2022,
-          "date": "Nov 3-4, 2022",
-          "tags": [
-            "Bayesian",
-            "pharmacometrics",
-            "MCMC",
-            "tutorial"
-          ],
-          "links": [
-            {
-              "label": "material",
-              "url": "https://github.com/PumasAI/Bayesian-Workshop"
             }
           ]
         }

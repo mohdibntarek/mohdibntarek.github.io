@@ -610,12 +610,7 @@
             "pharmacometrics",
             "NLME"
           ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaDecisionFocusedLearning/ImplicitDifferentiation.jl"
-            }
-          ]
+          "links": []
         },
         {
           "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
@@ -753,7 +748,7 @@
           ],
           "links": [
             {
-              "label": "slides",
+              "label": "poster",
               "url": "/pdfs/advancedhmc-stancon-2019.pdf"
             },
             {
@@ -804,6 +799,148 @@
             {
               "label": "youtube",
               "url": "https://www.youtube.com/watch?v=zNZ_bw1ti00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Journals",
+      "items": [
+        {
+          "title": "DeepNLME: conditional generative scientific machine learning with applications in pharmacology",
+          "venue": "Quantitative Medicine",
+          "year": 2026,
+          "date": "",
+          "status": "Under Review",
+          "tags": [
+            "journal",
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "deep learning",
+            "generative models",
+            "NLME",
+            "DeepNLME"
+          ],
+          "links": [
+            {
+              "label": "software",
+              "url": "https://pumas.ai/our-products/deepPumas"
+            }
+          ]
+        },
+        {
+          "title": "Pumas: a unified platform for pharmaceutical modeling and simulation",
+          "venue": "Quantitative Medicine",
+          "year": 2026,
+          "date": "",
+          "status": "Under Review",
+          "tags": [
+            "journal",
+            "pharmacometrics",
+            "Julia",
+            "simulation"
+          ],
+          "links": [
+            {
+              "label": "software",
+              "url": "https://pumas.ai/our-products/pumas"
+            }
+          ]
+        },
+        {
+          "title": "Turing.jl: a general-purpose probabilistic programming language",
+          "venue": "ACM Transactions on Probabilistic Machine Learning (TPML)",
+          "year": 2025,
+          "date": "Feb 14, 2025",
+          "tags": [
+            "journal",
+            "probabilistic programming",
+            "Julia",
+            "Bayesian"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://dl.acm.org/doi/abs/10.1145/3711897"
+            },
+            {
+              "label": "software",
+              "url": "https://github.com/TuringLang/DynamicPPL.jl"
+            }
+          ]
+        },
+        {
+          "title": "Scalable Optimal Transport Methods in Machine Learning: A Contemporary Survey",
+          "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)",
+          "year": 2024,
+          "date": "Mar 20, 2024",
+          "tags": [
+            "journal",
+            "optimal transport",
+            "machine learning",
+            "ML",
+            "survey"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://ieeexplore.ieee.org/abstract/document/10476763"
+            }
+          ]
+        },
+        {
+          "title": "Approximation schemes for stochastic compliance-based topology optimization with many loading scenarios",
+          "venue": "Structural and Multidisciplinary Optimization (SMO)",
+          "year": 2022,
+          "date": "Apr 13, 2022",
+          "tags": [
+            "journal",
+            "topology optimization",
+            "optimization",
+            "stochastic"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://link.springer.com/article/10.1007/s00158-022-03221-0"
+            }
+          ]
+        },
+        {
+          "title": "Robust and stochastic compliance-based topology optimization with finitely many loading scenarios",
+          "venue": "Structural and Multidisciplinary Optimization (SMO)",
+          "year": 2021,
+          "date": "Sept 26, 2021",
+          "tags": [
+            "journal",
+            "topology optimization",
+            "optimization",
+            "robust optimization"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://link.springer.com/article/10.1007/s00158-021-03022-x"
+            }
+          ]
+        },
+        {
+          "title": "Adaptive continuation solid isotropic material with penalization for volume constrained compliance minimization",
+          "venue": "Computer Methods in Applied Mechanics and Engineering (CMAME)",
+          "year": 2020,
+          "date": "May 1, 2020",
+          "tags": [
+            "journal",
+            "topology optimization",
+            "optimization",
+            "numerical methods"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://www.sciencedirect.com/science/article/pii/S0045782520300621"
             }
           ]
         }
@@ -1098,1222 +1235,6 @@
             {
               "label": "software",
               "url": "https://github.com/TuringLang/DynamicPPL.jl"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Journals",
-      "items": [
-        {
-          "title": "DeepNLME: conditional generative scientific machine learning with applications in pharmacology",
-          "venue": "Quantitative Medicine",
-          "year": 2026,
-          "date": "",
-          "status": "Under Review",
-          "tags": [
-            "journal",
-            "machine learning",
-            "ML",
-            "pharmacometrics",
-            "deep learning",
-            "generative models",
-            "NLME",
-            "DeepNLME"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://pumas.ai/our-products/deepPumas"
-            }
-          ]
-        },
-        {
-          "title": "Pumas: a unified platform for pharmaceutical modeling and simulation",
-          "venue": "Quantitative Medicine",
-          "year": 2026,
-          "date": "",
-          "status": "Under Review",
-          "tags": [
-            "journal",
-            "pharmacometrics",
-            "Julia",
-            "simulation"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://pumas.ai/our-products/pumas"
-            }
-          ]
-        },
-        {
-          "title": "Turing.jl: a general-purpose probabilistic programming language",
-          "venue": "ACM Transactions on Probabilistic Machine Learning (TPML)",
-          "year": 2025,
-          "date": "Feb 14, 2025",
-          "tags": [
-            "journal",
-            "probabilistic programming",
-            "Julia",
-            "Bayesian"
-          ],
-          "links": [
-            {
-              "label": "journal",
-              "url": "https://dl.acm.org/doi/abs/10.1145/3711897"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/TuringLang/DynamicPPL.jl"
-            }
-          ]
-        },
-        {
-          "title": "Scalable Optimal Transport Methods in Machine Learning: A Contemporary Survey",
-          "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)",
-          "year": 2024,
-          "date": "Mar 20, 2024",
-          "tags": [
-            "journal",
-            "optimal transport",
-            "machine learning",
-            "ML",
-            "survey"
-          ],
-          "links": [
-            {
-              "label": "journal",
-              "url": "https://ieeexplore.ieee.org/abstract/document/10476763"
-            }
-          ]
-        },
-        {
-          "title": "Approximation schemes for stochastic compliance-based topology optimization with many loading scenarios",
-          "venue": "Structural and Multidisciplinary Optimization (SMO)",
-          "year": 2022,
-          "date": "Apr 13, 2022",
-          "tags": [
-            "journal",
-            "topology optimization",
-            "optimization",
-            "stochastic"
-          ],
-          "links": [
-            {
-              "label": "journal",
-              "url": "https://link.springer.com/article/10.1007/s00158-022-03221-0"
-            }
-          ]
-        },
-        {
-          "title": "Robust and stochastic compliance-based topology optimization with finitely many loading scenarios",
-          "venue": "Structural and Multidisciplinary Optimization (SMO)",
-          "year": 2021,
-          "date": "Sept 26, 2021",
-          "tags": [
-            "journal",
-            "topology optimization",
-            "optimization",
-            "robust optimization"
-          ],
-          "links": [
-            {
-              "label": "journal",
-              "url": "https://link.springer.com/article/10.1007/s00158-021-03022-x"
-            }
-          ]
-        },
-        {
-          "title": "Adaptive continuation solid isotropic material with penalization for volume constrained compliance minimization",
-          "venue": "Computer Methods in Applied Mechanics and Engineering (CMAME)",
-          "year": 2020,
-          "date": "May 1, 2020",
-          "tags": [
-            "journal",
-            "topology optimization",
-            "optimization",
-            "numerical methods"
-          ],
-          "links": [
-            {
-              "label": "journal",
-              "url": "https://www.sciencedirect.com/science/article/pii/S0045782520300621"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Open Source Software",
-      "description": "I am not actively contributing to some of these packages anymore.",
-      "items": [
-        {
-          "title": "TopOpt.jl: Topology optimization package for truss and continuum structures",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "topology optimization",
-            "Julia",
-            "optimization"
-          ],
-          "links": [
-            {
-              "label": "wcsmo abstract",
-              "url": "/pdfs/topopt-jl-wcsmo-2021.pdf"
-            },
-            {
-              "label": "juliacon video",
-              "url": "https://www.youtube.com/watch?v=sBqdkxPXluU"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaTopOpt/TopOpt.jl"
-            }
-          ]
-        },
-        {
-          "title": "Nonconvex.jl: Comprehensive package for non-convex optimization",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex"
-          ],
-          "links": [
-            {
-              "label": "preprint",
-              "url": "/pdfs/nonconvex-jl-2023.pdf"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/Nonconvex.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexMMA.jl: Method of Moving Asymptotes for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexMMA.jl"
-            }
-          ]
-        },
-        {
-          "title": "ReliabilityOptimization.jl: Reliability-Based Design Optimization",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "reliability"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/ReliabilityOptimization.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexBayesian.jl: Bayesian Optimization for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "Bayesian",
-            "non-convex"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexBayesian.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexSemidefinite.jl: Semidefinite Programming for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "semidefinite programming"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexSemidefinite.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexMetaheuristics.jl: Metaheuristic algorithms for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "metaheuristics"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexMetaheuristics.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexNLopt.jl: NLopt wrapper for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "NLopt"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexNLopt.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexPercival.jl: Percival wrapper for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "augmented Lagrangian"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexPercival.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexJuniper.jl: Juniper wrapper for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "MINLP"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexJuniper.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexPavito.jl: Pavito wrapper for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "MINLP"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexPavito.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexMultistart.jl: Multi-start optimization for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "global optimization"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexMultistart.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexSearch.jl: Local search methods for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "local search"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexSearch.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexAugLagLab.jl: Experimental augmented Lagrangian for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "augmented Lagrangian"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexAugLagLab.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexNOMAD.jl: NOMAD wrapper for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "derivative-free"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexNOMAD.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexIpopt.jl: Ipopt wrapper for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "Ipopt"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexIpopt.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexTOBS.jl: Topology Optimization of Binary Structures",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "binary optimization",
-            "topology optimization"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexTOBS.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexCore.jl: Core interface for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "non-convex",
-            "interface"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexCore.jl"
-            }
-          ]
-        },
-        {
-          "title": "VTKDataIO.jl: VTK data I/O for Julia",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "visualization",
-            "Julia",
-            "VTK",
-            "data I/O"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaTopOpt/VTKDataIO.jl"
-            }
-          ]
-        },
-        {
-          "title": "VTKDataTypes.jl: VTK data types for Julia",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "visualization",
-            "Julia",
-            "VTK",
-            "data structures"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaTopOpt/VTKDataTypes.jl"
-            }
-          ]
-        },
-        {
-          "title": "Preconditioners.jl: Preconditioning framework for iterative solvers",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "linear algebra",
-            "Julia",
-            "numerical methods",
-            "preconditioning"
-          ],
-          "links": [
-            {
-              "label": "preprint",
-              "url": "/pdfs/preconditioners-jl-2023.pdf"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaLinearAlgebra/Preconditioners.jl"
-            }
-          ]
-        },
-        {
-          "title": "IterativeSolvers.jl: Iterative solvers for linear systems",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "linear algebra",
-            "Julia",
-            "iterative solvers"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaLinearAlgebra/IterativeSolvers.jl"
-            }
-          ]
-        },
-        {
-          "title": "AlgebraicMultigrid.jl: Algebraic Multigrid Solvers",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "linear algebra",
-            "Julia",
-            "multigrid"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaLinearAlgebra/AlgebraicMultigrid.jl"
-            }
-          ]
-        },
-        {
-          "title": "DifferentiableFactorizations.jl: Differentiable Matrix Factorizations",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "linear algebra",
-            "Julia",
-            "automatic differentiation"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/mohdibntarek/DifferentiableFactorizations.jl"
-            }
-          ]
-        },
-        {
-          "title": "TraceEstimators.jl: Trace Estimation for Large Matrices",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "linear algebra",
-            "Julia",
-            "numerical methods"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/mohdibntarek/TraceEstimators.jl"
-            }
-          ]
-        },
-        {
-          "title": "Turing.jl: General-purpose probabilistic programming language",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "probabilistic programming",
-            "Julia",
-            "Bayesian"
-          ],
-          "links": [
-            {
-              "label": "TPML paper",
-              "url": "https://dl.acm.org/doi/abs/10.1145/3711897"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/TuringLang/Turing.jl"
-            }
-          ]
-        },
-        {
-          "title": "DistributionsAD.jl: Automatic Differentiation for Distributions",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "probabilistic programming",
-            "Julia",
-            "automatic differentiation"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaDiff/DistributionsAD.jl"
-            }
-          ]
-        },
-        {
-          "title": "Bijectors.jl: Flexible transformations for probability distributions",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "probabilistic programming",
-            "Julia",
-            "transformations"
-          ],
-          "links": [
-            {
-              "label": "aabi paper",
-              "url": "/pdfs/bijectors-aabi-2019.pdf"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/TuringLang/Bijectors.jl"
-            }
-          ]
-        },
-        {
-          "title": "DynamicPPL.jl: Dynamic probabilistic programming language",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "probabilistic programming",
-            "Julia",
-            "Bayesian"
-          ],
-          "links": [
-            {
-              "label": "arxiv preprint",
-              "url": "/pdfs/dynamicppl-2020.pdf"
-            },
-            {
-              "label": "probprog poster",
-              "url": "/pdfs/dynamicppl-probprog-2020.pdf"
-            },
-            {
-              "label": "juliacon video",
-              "url": "https://www.youtube.com/watch?v=aD_VEjDtOX0"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/TuringLang/DynamicPPL.jl"
-            }
-          ]
-        },
-        {
-          "title": "AdvancedHMC.jl: Robust and modular HMC algorithms",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "probabilistic programming",
-            "Julia",
-            "MCMC",
-            "HMC"
-          ],
-          "links": [
-            {
-              "label": "aabi paper",
-              "url": "/pdfs/advancedhmc-aabi-2019.pdf"
-            },
-            {
-              "label": "probprog poster",
-              "url": "/pdfs/advancedhmc-probprog-2020.pdf"
-            },
-            {
-              "label": "stancon slides",
-              "url": "/pdfs/advancedhmc-stancon-2019.pdf"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/TuringLang/AdvancedHMC.jl"
-            }
-          ]
-        },
-        {
-          "title": "ReverseDiff.jl: Reverse-mode automatic differentiation",
-          "venue": "Astrophysics Source Code Library",
-          "year": "2024",
-          "date": "Nov 1, 2024",
-          "tags": [
-            "software",
-            "automatic differentiation",
-            "Julia"
-          ],
-          "links": [
-            {
-              "label": "abstract",
-              "url": "https://ui.adsabs.harvard.edu/abs/2024ascl.soft11010R/abstract"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaDiff/ReverseDiff.jl"
-            }
-          ]
-        },
-        {
-          "title": "AbstractDifferentiation.jl: Backend-agnostic differentiable programming",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "automatic differentiation",
-            "Julia",
-            "differentiable programming"
-          ],
-          "links": [
-            {
-              "label": "abstract",
-              "url": "https://neurips.cc/virtual/2021/35276"
-            },
-            {
-              "label": "arxiv preprint",
-              "url": "/pdfs/abstractdifferentiation-2022.pdf"
-            },
-            {
-              "label": "diffprog paper",
-              "url": "/pdfs/abstractdifferentiation-neurips-2021.pdf"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaDiff/AbstractDifferentiation.jl"
-            }
-          ]
-        },
-        {
-          "title": "ImplicitDifferentiation.jl: Differentiating implicit functions",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "automatic differentiation",
-            "Julia",
-            "implicit functions"
-          ],
-          "links": [
-            {
-              "label": "juliacon video",
-              "url": "https://www.youtube.com/watch?v=TkVDcujVNJ4&t=1s"
-            },
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaDecisionFocusedLearning/ImplicitDifferentiation.jl"
-            }
-          ]
-        },
-        {
-          "title": "ForwardDiffChainRules.jl: ForwardDiff with ChainRules support",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "automatic differentiation",
-            "Julia"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/ThummeTo/ForwardDiffChainRules.jl"
-            }
-          ]
-        },
-        {
-          "title": "NonconvexUtils.jl: Utility functions for Nonconvex.jl",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "automatic differentiation"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/NonconvexUtils.jl"
-            }
-          ]
-        },
-        {
-          "title": "DifferentiableFlatten.jl: Differentiable flattening of nested structures",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "automatic differentiation",
-            "Julia"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/JuliaNonconvex/DifferentiableFlatten.jl"
-            }
-          ]
-        },
-        {
-          "title": "KissThreading.jl: Keep it simple threading utilities",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "parallel computing",
-            "Julia"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/mohdibntarek/KissThreading.jl"
-            }
-          ]
-        },
-        {
-          "title": "ConvergencePlots.jl: Convergence plots for optimization",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "visualization"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/mohdibntarek/ConvergencePlots.jl"
-            }
-          ]
-        },
-        {
-          "title": "RCPSP.jl: Resource-Constrained Project Scheduling",
-          "venue": "GitHub",
-          "year": "",
-          "date": "",
-          "tags": [
-            "software",
-            "optimization",
-            "Julia",
-            "scheduling"
-          ],
-          "links": [
-            {
-              "label": "software",
-              "url": "https://github.com/mohdibntarek/RCSP.jl"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Tutorials",
-      "items": [
-        {
-          "title": "Fitting Non-Identifiable and Poorly Identifiable Models using Bayesian Inference",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "Bayesian",
-            "pharmacometrics",
-            "identifiability"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
-            }
-          ]
-        },
-        {
-          "title": "Introduction to Bayesian Models in Pumas",
-          "venue": "",
-          "tags": [
-            "Bayesian",
-            "pharmacometrics",
-            "tutorial"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/01-bayes_intro.html"
-            }
-          ]
-        },
-        {
-          "title": "Random Effects in Bayesian Models",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "Bayesian",
-            "random effects",
-            "NLME"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/02-bayes_random_effects.html"
-            }
-          ]
-        },
-        {
-          "title": "Posterior Postprocessing - Plots and Queries",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "Bayesian",
-            "posterior",
-            "visualization"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/03-posterior_postprocessing.html"
-            }
-          ]
-        },
-        {
-          "title": "Markov Chain Monte Carlo Convergence",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "MCMC",
-            "Bayesian",
-            "convergence"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/04-mcmc_convergence.html"
-            }
-          ]
-        },
-        {
-          "title": "Model Comparison with Crossvalidation",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "cross-validation",
-            "model comparison",
-            "Bayesian"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/05-model_comparison.html"
-            }
-          ]
-        },
-        {
-          "title": "Introduction to Optimal Design",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "optimal design",
-            "pharmacometrics"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/optimal_design/optimal_design.html"
-            }
-          ]
-        },
-        {
-          "title": "Two-compartment PK optimal design",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "optimal design",
-            "pharmacometrics",
-            "PK"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/optimal_design/ODpaperCase1.html"
-            }
-          ]
-        },
-        {
-          "title": "LASSO for Covariate Modeling in NLME Models",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "LASSO",
-            "NLME",
-            "covariates",
-            "machine learning"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/LearningPaths/05-LP/12-Module/mod12-lasso.html"
-            }
-          ]
-        },
-        {
-          "title": "Machine learning fundamentals",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "machine learning",
-            "ML",
-            "fundamentals"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/AIDD/01-machine_learning_fundamentals.html"
-            }
-          ]
-        },
-        {
-          "title": "Variational Expectation Maximization (VEM)",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "VEM",
-            "variational inference",
-            "optimization"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/estimation/01-vem-introduction.html"
-            }
-          ]
-        },
-        {
-          "title": "Deep Learning for Covariate Modelling in NLME Models",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "deep learning",
-            "covariate modelling",
-            "NLME",
-            "pharmacometrics"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/AIDD/02-DL_covariate_modelling.html"
-            }
-          ]
-        },
-        {
-          "title": "Regression using Machine Learning",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "machine learning",
-            "ML",
-            "regression",
-            "DeepPumas"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/2_machine_learning/tutorials/machine_learning.html"
-            }
-          ]
-        },
-        {
-          "title": "SciML using DeepPumas",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "scientific machine learning",
-            "SciML",
-            "DeepPumas",
-            "machine learning"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/3_sciml/tutorials/sciml.html"
-            }
-          ]
-        },
-        {
-          "title": "Mixed-effects neural networks",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "mixed-effects",
-            "neural networks",
-            "DeepPumas",
-            "machine learning"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/4_mixed_effects/tutorials/menets.html"
-            }
-          ]
-        },
-        {
-          "title": "Mixed Effects Pharmacodynamics Identification using DeepNLME",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "mixed effects",
-            "pharmacodynamics",
-            "DeepNLME",
-            "machine learning",
-            "pharmacometrics"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/dynamics.html"
-            }
-          ]
-        },
-        {
-          "title": "Covariate Modelling in Nonlinear Mixed Effects Models using DeepPumas",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "covariate modelling",
-            "NLME",
-            "DeepPumas",
-            "machine learning",
-            "pharmacometrics"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/covariates.html"
             }
           ]
         }

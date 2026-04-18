@@ -8,7 +8,7 @@ import SocialLinks from "../components/SocialLinks.astro";
 import personalPhoto from "../assets/personal_photo.png";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { icon } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faHandsHelping, faLightbulb, faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faTerminal, faLightbulb, faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 import { ViewTransitions } from "astro:transitions";
 import "../styles/typography.css";
 ---
@@ -110,37 +110,37 @@ import "../styles/typography.css";
           />
           <Card
             href="/publications"
-            title="Publications and Software"
+            title="Publications"
             icon={icon(faFlask).html}
-            description="Explore my published research, tutorials and open source software."
+            description="Explore my published research and preprints."
             color="gradient-green"
           />
           <Card
             href="/teaching"
-            title="Teaching and Videos"
+            title="Teaching"
             icon={icon(faChalkboardTeacher).html}
-            description="Explore the videos, workshops and courses that I taught."
+            description="Explore the courses, workshops, talks, and tutorials that I gave."
             color="gradient-orange"
+          />
+          <Card
+            href="/software"
+            title="Software"
+            icon={icon(faTerminal).html}
+            description="Open source software packages and tools that I contributed to."
+            color="gradient-red"
+          />
+          <Card
+            href="/blog"
+            title="Blog Posts"
+            icon={icon(faLaptopCode).html}
+            description="Read my thoughts on programming, mathematics and their applications."
+            color="gradient-teal"
           />
           <Card
             href="/awareness"
             title="Awareness"
             icon={icon(faLightbulb).html}
             description="Resources and links to expand your awareness on topics that matter to me."
-            color="gradient-red"
-          />
-          <Card
-            href="/mentorship"
-            title="Mentorship"
-            icon={icon(faHandsHelping).html}
-            description="Students and researchers I have mentored through GSoC and JSoC programs."
-            color="gradient-teal"
-          />
-          <Card
-            href="/blog"
-            title="Blog Posts"
-            icon={icon(faLaptopCode).html}
-            description="Read my thoughts on programming, machine learning, mathematics and pharmacometrics."
             color="gradient-purple"
           />
         </div>
