@@ -92,7 +92,7 @@ When ready to publish, run:
 bun run publish-post <post-name>
 ```
 
-This prepares the post by setting `freeze: true` in the post, so the outputs are frozen and won't re-execute on CI builds.
+This prepares the post by setting `freeze: auto` in the post, so the outputs are frozen and won't re-execute on CI builds.
 
 **Note on `.ipynb` files:** Jupyter notebooks are always frozen (Quarto never executes cells during rendering). Executing cells is the author's responsibility before publishing. For `.ipynb` posts, the TOML files are not used during site rendering, but they are still useful to keep around for:
 - Future edits to your post
