@@ -17,7 +17,7 @@
     "astro": "astro",
     "new-post": "bash scripts/new_post.sh",
     "publish-post": "bash scripts/publish.sh",
-    "reset-cache": "bash -c 'python3 scripts/quarto_post_cache.py --reset \"${1:-}\"' --"
+    "reset-cache": "bash scripts/reset_cache.sh"
   },
   "type": "module",
   "devDependencies": {

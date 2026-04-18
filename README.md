@@ -6,7 +6,9 @@ A personal website built with Astro and Quarto for the blog.
 
 - [Bun](https://bun.sh/) - JavaScript runtime and package manager
 - [Quarto](https://quarto.org/) - For rendering blog content
-- [Julia](https://julialang.org/) (optional) - For running Julia code in blog posts
+- [Julia](https://julialang.org/) - For the Julia Quarto extension and running Julia code in blog posts
+- [Python](https://python.org/) - For some build scripts and running Python code in blog posts (via CondaPkg)
+- [R](https://www.r-project.org/) (optional) - For running R code in blog posts
 
 ## Installation
 
@@ -34,27 +36,32 @@ bun run new-post my-new-post ipynb
 ```
 
 This creates a new post at `quarto_blog/posts/<post-name>/` with:
-- An empty `Project.toml` for Julia dependencies
+- An empty `Project.toml` for Julia dependencies (delete if not using Julia)
 - Template content to get started
+
+**Note:** The `Project.toml` is created by default. If your post is text-only (no Julia code), delete the `Project.toml`. If using Python code with CondaPkg, you may need to create a `CondaPkg.toml` file.
 
 ---
 
-### 2. Set Up Your Environment (for Julia posts)
+### 2. Set Up Your Environment (for Julia/Python posts)
 
-If your post is using Julia or Python packages, it should have either both `Project.toml` and `Manifest.toml` files in the case of Julia, or `CondaPkg.toml` file in the case of Python.
+#### Julia Posts
+If your post uses Julia packages, create both `Project.toml` and `Manifest.toml` files in your post directory. You can add dependencies as needed either external to the document or within the document while writing it.
 
-You can add dependencies as needed to these environments either external to the document or within the document while writing it.
-
-Once done writing, always commit your TOML files to git. They are used during rendering to ensure reproducible builds.
-
-If your post uses Julia code with a `Project.toml` file, you should include a (hidden) cell in your post that calls `Pkg.instantiate()`:
+Include a (hidden) cell in your post that calls `Pkg.instantiate()`:
 
 ```julia
 using Pkg
 Pkg.instantiate()
 ```
 
-This will run when the document is built on CI and when others are running your document. But for someone else to run your document, they need to have the TOML files on their end so it is a good idea to link to them at the end of your post.
+This will run when the document is built on CI and when others run your document. Link to the TOML files at the end of your post so others can reproduce your environment.
+
+#### Python Posts
+If your post uses Python packages via [CondaPkg](https://github.com/JuliaPy/CondaPkg.jl), create a `CondaPkg.toml` file in your post directory to specify Python dependencies.
+
+#### Always Commit TOML Files
+Once done writing, always commit your TOML files to git. They are used during rendering to ensure reproducible builds.
 
 ---
 
@@ -107,7 +114,10 @@ git commit -m "Publish post: my-new-post"
 | `bun run build` | Build the entire website (Quarto + Astro + search) |
 | `bun run preview` | Preview the built website locally |
 | `bun run quarto` | Render Quarto blog content only |
-| `bun run reset-cache` | Clear cache for all posts (or specific post) |
+| `bun run astro` | Run Astro CLI commands |
+| `bun run new-post <name> [format]` | Create a new blog post |
+| `bun run publish-post <name>` | Publish a post (freeze outputs) |
+| `bun run reset-cache [name]` | Clear cache for all posts or a specific post |
 
 ### Cache Management
 
@@ -119,11 +129,18 @@ bun run reset-cache
 
 # Reset cache for a specific post
 bun run reset-cache <post-name>
+
+# Also delete local environment folders (.cache/, .CondaPkg/)
+bun run reset-cache --delete-local-folders
+bun run reset-cache <post-name> --delete-local-folders
 ```
+
+By default, `reset-cache` only removes the `_freeze/` folder, which triggers re-execution on the next build. The `--delete-local-folders` option additionally removes the `.cache/` and `.CondaPkg/` folders that contain local development environments.
 
 This is useful when:
 - You want to force re-execution of a post on the next build
 - The cache appears to be out of sync
+- You want to completely reset a post's environment (with `--delete-local-folders`)
 
 ---
 
@@ -131,13 +148,22 @@ This is useful when:
 
 ```
 ├── src/                    # Astro source files
+│   ├── components/         # Reusable Astro components
+│   ├── layouts/            # Page layout templates
+│   ├── pages/              # Website pages (.astro, .md)
+│   ├── data/               # JSON data files (publications, teaching)
+│   ├── styles/             # Custom CSS stylesheets
+│   └── assets/             # Images and other assets
 ├── quarto_blog/            # Quarto blog content
 │   ├── posts/              # Blog posts
 │   ├── _quarto.yml         # Quarto configuration
-│   └── styles/             # Custom CSS
-├── public/                 # Static assets
-├── scripts/                # Helper scripts
-└── package.json            # Node dependencies
+│   ├── styles/             # Custom CSS
+│   └── partials/           # HTML partial templates
+├── public/                 # Static assets (PDFs, favicon, etc.)
+│   └── pdfs/               # PDF publications
+├── scripts/                # Helper scripts for building and publishing
+├── .github/workflows/      # CI/CD workflows
+└── package.json            # Bun dependencies
 ```
 
 ## Search

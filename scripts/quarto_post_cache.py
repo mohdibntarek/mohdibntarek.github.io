@@ -376,8 +376,24 @@ def main():
         const="ALL",
         help="Reset cache for a specific post, or all posts if no name provided"
     )
+    parser.add_argument(
+        "--delete-local-folders",
+        action="store_true",
+        help="Also delete .cache and .CondaPkg folders (default: off)"
+    )
     
     args = parser.parse_args()
+    
+    def delete_local_folders(post_path: Path) -> None:
+        """Delete .cache and .CondaPkg folders from a post directory."""
+        for folder_name in ('.cache', '.CondaPkg'):
+            folder = post_path / folder_name
+            if folder.exists():
+                try:
+                    shutil.rmtree(folder)
+                    print(f"  Deleted: {folder}")
+                except OSError as e:
+                    print(f"  Warning: Could not delete {folder}: {e}")
     
     # Fix: Empty string from shell script should be treated as "ALL"
     if args.reset == "":
@@ -397,17 +413,6 @@ def main():
             print(f"No cache file to clear: {args.cache_file}")
         return 0
     
-    def delete_local_folders(post_path: Path) -> None:
-        """Delete .cache and .CondaPkg folders from a post directory."""
-        for folder_name in ('.cache', '.CondaPkg'):
-            folder = post_path / folder_name
-            if folder.exists():
-                try:
-                    shutil.rmtree(folder)
-                    print(f"  Deleted: {folder}")
-                except OSError as e:
-                    print(f"  Warning: Could not delete {folder}: {e}")
-    
     # Handle reset command
     if args.reset:
         cache = load_cache(args.cache_file)
@@ -421,7 +426,8 @@ def main():
                 post_name = post_dir.name
                 print(f"\n  Processing: {post_name}")
                 delete_freeze_folder(post_name, FREEZE_DIR)
-                delete_local_folders(post_dir)
+                if args.delete_local_folders:
+                    delete_local_folders(post_dir)
             
             # Clear cache
             if args.cache_file.exists():
@@ -440,9 +446,10 @@ def main():
             else:
                 print(f"  Note: not found in cache")
             
-            # Delete freeze folder and local folders
+            # Delete freeze folder
             delete_freeze_folder(post_name, FREEZE_DIR)
-            delete_local_folders(Path(args.posts_dir) / post_name)
+            if args.delete_local_folders:
+                delete_local_folders(Path(args.posts_dir) / post_name)
             
             print(f"Cache reset complete for '{post_name}'.")
         return 0
