@@ -109,8 +109,6 @@ jobs:
             quarto_blog/_freeze
             quarto_blog/.quarto
           key: ${{ runner.os }}-quarto-freeze-${{ hashFiles('quarto_blog/**/*.qmd', 'quarto_blog/**/*.ipynb', 'quarto_blog/**/*.toml', 'quarto_blog/_quarto.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-quarto-freeze-
 
       - name: Cleanup old builds
         run: rm -rf public/quarto_blog quarto_blog/_site
