@@ -1,20 +1,6 @@
 #!/bin/bash
 set -e
 
-# Find all *.before.toml files and copy them to *.toml files
-# Only copy if the target .toml file doesn't already exist
-find . -name "*.before.toml" -type f | while read -r before_file; do
-    # Get the target filename by removing .before before .toml
-    target_file="${before_file%.before.toml}.toml"
-    
-    if [ ! -f "$target_file" ]; then
-        echo "Copying $before_file -> $target_file"
-        cp "$before_file" "$target_file"
-    else
-        echo "Skipping $target_file (already exists)"
-    fi
-done
-
 # Render Quarto blog
 quarto render quarto_blog/
 

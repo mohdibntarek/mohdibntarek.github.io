@@ -6,7 +6,7 @@ execute:
   project:
     type: julia
   cache: true
-  freeze: true
+  freeze: false
 
 website:
   title: "Back to Blog Posts"

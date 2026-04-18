@@ -32,10 +32,6 @@ vite.config.ts.timestamp-*
 # CondaPkg
 .CondaPkg
 
-# Julia toml files - ignore all .toml except .before.toml templates
-**/*.toml
-!**/*.before.toml
-
 /.quarto/
 **/*.quarto_ipynb
 

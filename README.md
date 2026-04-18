@@ -34,11 +34,8 @@ bun run new-post my-new-post ipynb
 ```
 
 This creates a new post at `quarto_blog/posts/<post-name>/` with:
-- `freeze: false` set in the qmd case for active development (so changes are picked up)
 - An empty `Project.toml` for Julia dependencies
 - Template content to get started
-
-**Important:** `Project.toml` and `Manifest.toml` are gitignored by default (only `.before.toml` files are tracked). This is intentional - see the Publishing section below.
 
 ---
 
@@ -56,6 +53,8 @@ Add dependencies as needed:
 julia --project=. -e 'using Pkg; Pkg.add("Plots")'
 ```
 
+**Note on TOML files:** Commit your TOML files (`Project.toml`, `CondaPkg.toml`, etc.) directly to git. They are used during rendering to ensure reproducible builds.
+
 ---
 
 ### 3. Build Locally
@@ -68,7 +67,12 @@ bun run quarto
 bun run build
 ```
 
-**Note:** Only the new post is unfrozen during development (`freeze: false`), so it'll re-render on each build.
+**Freeze Configuration:**
+- The project default is `freeze: false` (set in `quarto_blog/_quarto.yml`)
+- This means posts re-execute on each build during development
+- When ready to publish, use `bun run publish` to freeze outputs
+
+> **Note on CI Caching:** The `_freeze/` folder is not committed to git (it's in `.gitignore`), but it is cached on CI. This means once a post is frozen, it will only be executed once on CI. Subsequent builds will use the cached frozen outputs unless the source files change. To re-execute a frozen post on CI, you'll need to make a change to the post's source files.
 
 ---
 
@@ -80,19 +84,13 @@ When ready to publish, run:
 bun run publish <post-name>
 ```
 
-This prepares the post by:
-1. Backing up your `.toml` files as `.before.toml` (these get committed)
-2. Removing `freeze: false` so the document renders with frozen outputs
+This prepares the post by setting `freeze: true` in the post, so the outputs are frozen and won't re-execute on CI builds.
 
 **Note on `.ipynb` files:** Jupyter notebooks are always frozen (Quarto never executes cells during rendering). Executing cells is the author's responsibility before publishing. For `.ipynb` posts, the TOML files are not used during site rendering, but they are still useful to keep around for:
 - Future edits to your post
 - Linking to for readers who want to reproduce your environment
 
-**Why this workflow?** The `.before.toml` files are static and represent the state of the environment at the beginning of the post. The regular `.toml` files are dynamic and change as packages are added programmatically during the post—they are also gitignored. This allows the post to modify its environment without committing the full (potentially large) TOML files. When the site builds for deployment, the build script restores `.toml` files from these backups, allowing the CI to reproduce your initial environment and render the post.
-
-**Important:** Before publishing, remove any packages that were added programmatically by your post (e.g., via `Pkg.add()` calls in the notebook). The publish script copies your current `.toml` files to `.before.toml`, so you want the initial state to be clean. The packages will be re-added when the post executes during the CI build. Keep only packages you manually added for development purposes that the post doesn't install itself.
-
-After publishing, commit your changes:
+**After publishing, commit your changes:**
 ```bash
 git add quarto_blog/posts/<post-name>/
 git commit -m "Publish post: my-new-post"

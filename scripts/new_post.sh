@@ -44,8 +44,6 @@ title: "Post Title"
 description: "Post description"
 date: "DATE_PLACEHOLDER"
 categories: []
-execute:
-  freeze: false  # Disable freeze for active development
 ---
 
 ## Introduction
@@ -76,8 +74,6 @@ else
     "description: \\"Post description\\"\\n",
     "date: \\"$(date +%Y-%m-%d)\\"\\n",
     "categories: []\\n",
-    "execute:\\n",
-    "  freeze: false  # Disable freeze for active development\\n",
     "---"
    ]
   },
