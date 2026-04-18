@@ -11,10 +11,6 @@ node_modules
 /.astro
 public/pagefind
 
-# Quarto
-quarto_blog/_site
-quarto_blog/site_libs
-quarto_blog/posts/*.html
 *.quarto
 .quarto
 public/quarto_blog
@@ -36,10 +32,9 @@ vite.config.ts.timestamp-*
 # CondaPkg
 .CondaPkg
 
-# Julia toml files
-quarto_blog/Project.toml
-quarto_blog/CondaPkg.toml
-quarto_blog/Manifest.toml
+# Julia toml files - ignore all .toml except .before.toml templates
+**/*.toml
+!**/*.before.toml
 
 /.quarto/
 **/*.quarto_ipynb

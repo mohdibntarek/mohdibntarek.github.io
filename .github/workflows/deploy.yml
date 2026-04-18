@@ -64,12 +64,22 @@ jobs:
           cache-artifacts: 'true'
           cache-compiled: 'true'
 
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock', 'package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
       - name: Cache Quarto installation
         id: cache-quarto
         uses: actions/cache@v4
         with:
           path: /opt/quarto
-          key: ${{ runner.os }}-quarto-${{ hashFiles('**/quarto-linux-amd64.deb') }}
+          key: ${{ runner.os }}-quarto-1.6  # Update version when upgrading Quarto
           restore-keys: |
             ${{ runner.os }}-quarto-
 
@@ -92,12 +102,31 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-condapkg-
 
+      - name: Cache Quarto render cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            quarto_blog/_freeze
+            quarto_blog/.quarto
+          key: ${{ runner.os }}-quarto-freeze-${{ hashFiles('quarto_blog/**/*.qmd', 'quarto_blog/_quarto.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-quarto-freeze-
+
       - name: Cleanup old builds
         run: rm -rf public/quarto_blog quarto_blog/_site
 
-      - name: Instantiate Julia environment
-        working-directory: ./quarto_blog
-        run: julia --project=. -e 'using Pkg; Pkg.instantiate()'
+      - name: Instantiate Julia environments
+        run: |
+          julia --color=yes -e '
+          using Pkg
+          for (root, dirs, files) in walkdir(".")
+              if "Project.toml" in files
+                  println("Instantiating environment in: ", root)
+                  Pkg.activate(root)
+                  Pkg.instantiate()
+              end
+          end
+          '
       
       - name: Render Quarto blogposts
         working-directory: ./quarto_blog

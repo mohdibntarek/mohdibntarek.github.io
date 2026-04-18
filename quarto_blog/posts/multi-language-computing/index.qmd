@@ -1,7 +1,7 @@
 ---
 title: "Multi-Language Computing: Julia, Python, and R Working Together"
 author: "Mohamed Tarek"
-date: "2026-04-15"
+date: "2026-04-17"
 description: "Showcasing Quarto's multi-language support and how to seamlessly call Python and R from Julia."
 tags: [julia, python, r, quarto, interoperability]
 engine: julia
@@ -39,6 +39,16 @@ This document is built using **Quarto** and the **Julia Quarto engine**, which a
 - Verify installation: `R --version`
 
 Once installed, the Julia Quarto engine will automatically find and use these interpreters.
+
+## Environment Setup
+
+To run this post locally, ensure you have these files in the same directory as the post.
+
+- [`Project.toml`](./Project.toml)
+- [`Manifest.toml`](./Manifest.toml)
+- [`CondaPkg.toml`](./CondaPkg.toml)
+
+When running this document, the above files will be modified automatically when installing new packages.
 
 ## Making R Visible to Quarto and Fixing SSL Certificate Issues on Linux
 

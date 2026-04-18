@@ -1,14 +1,19 @@
 #!/bin/bash
 set -e
 
-# Copy .example.toml files to .toml files only if they don't exist
-if [ ! -f quarto_blog/Project.toml ]; then
-    cp quarto_blog/Project.example.toml quarto_blog/Project.toml
-fi
-
-if [ ! -f quarto_blog/CondaPkg.toml ]; then
-    cp quarto_blog/CondaPkg.example.toml quarto_blog/CondaPkg.toml
-fi
+# Find all *.before.toml files and copy them to *.toml files
+# Only copy if the target .toml file doesn't already exist
+find . -name "*.before.toml" -type f | while read -r before_file; do
+    # Get the target filename by removing .before before .toml
+    target_file="${before_file%.before.toml}.toml"
+    
+    if [ ! -f "$target_file" ]; then
+        echo "Copying $before_file -> $target_file"
+        cp "$before_file" "$target_file"
+    else
+        echo "Skipping $target_file (already exists)"
+    fi
+done
 
 # Render Quarto blog
 quarto render quarto_blog/
