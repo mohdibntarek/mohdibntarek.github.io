@@ -1,0 +1,4 @@
+*.md  linguist-language=Markdown
+*.qmd linguist-language=Markdown
+*.md  linguist-detectable=true
+*.qmd linguist-detectable=true
