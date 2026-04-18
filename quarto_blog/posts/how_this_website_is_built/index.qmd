@@ -7,7 +7,7 @@ tags: [web-development, astro, quarto, tutorial]
 engine: julia
 number-sections: false
 execute:
-  freeze: true
+  freeze: auto
 ---
 
 

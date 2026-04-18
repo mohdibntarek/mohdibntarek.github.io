@@ -7,7 +7,7 @@ tags: [julia, python, r, quarto, interoperability]
 engine: julia
 number-sections: true
 execute:
-  freeze: true
+  freeze: auto
   cache: true
 ---
 

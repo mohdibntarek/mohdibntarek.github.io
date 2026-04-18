@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-# Render Quarto blog
-quarto render quarto_blog/
-
-# Copy Quarto output to public directory
-rm -rf public/quarto_blog
-cp -r quarto_blog/_site public/quarto_blog
-
 # Build Astro site
 astro build
 

@@ -11,12 +11,13 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "quarto": "quarto render quarto_blog/",
-    "build": "bash scripts/build.sh",
+    "quarto": "bash scripts/quarto.sh",
+    "build": "bash scripts/quarto.sh && bash scripts/build.sh",
     "preview": "astro preview",
     "astro": "astro",
     "new-post": "bash scripts/new_post.sh",
-    "publish-post": "bash scripts/publish.sh"
+    "publish-post": "bash scripts/publish.sh",
+    "reset-cache": "bash scripts/reset_cache.sh"
   },
   "type": "module",
   "devDependencies": {

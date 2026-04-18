@@ -32,7 +32,13 @@ vite.config.ts.timestamp-*
 # CondaPkg
 .CondaPkg
 
+# Quarto post cache (cached in CI but gitignored)
+quarto_blog/.post_cache.json
+
 /.quarto/
 **/*.quarto_ipynb
 
 memory-bank/
+
+# Python cache
+scripts/__pycache__
