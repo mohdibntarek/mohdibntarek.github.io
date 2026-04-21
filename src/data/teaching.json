@@ -179,128 +179,18 @@
       "title": "Tutorials",
       "items": [
         {
-          "title": "Fitting Non-Identifiable and Poorly Identifiable Models using Bayesian Inference",
+          "title": "Variational Expectation Maximization (VEM)",
           "venue": "",
           "tags": [
             "tutorial",
-            "Bayesian",
-            "pharmacometrics",
-            "identifiability"
+            "VEM",
+            "variational inference",
+            "optimization"
           ],
           "links": [
             {
               "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
-            }
-          ]
-        },
-        {
-          "title": "Introduction to Bayesian Models in Pumas",
-          "venue": "",
-          "tags": [
-            "Bayesian",
-            "pharmacometrics",
-            "tutorial"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/01-bayes_intro.html"
-            }
-          ]
-        },
-        {
-          "title": "Random Effects in Bayesian Models",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "Bayesian",
-            "random effects",
-            "NLME"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/02-bayes_random_effects.html"
-            }
-          ]
-        },
-        {
-          "title": "Posterior Postprocessing - Plots and Queries",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "Bayesian",
-            "posterior",
-            "visualization"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/03-posterior_postprocessing.html"
-            }
-          ]
-        },
-        {
-          "title": "Markov Chain Monte Carlo Convergence",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "MCMC",
-            "Bayesian",
-            "convergence"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/04-mcmc_convergence.html"
-            }
-          ]
-        },
-        {
-          "title": "Model Comparison with Crossvalidation",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "cross-validation",
-            "model comparison",
-            "Bayesian"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/bayesian/05-model_comparison.html"
-            }
-          ]
-        },
-        {
-          "title": "Introduction to Optimal Design",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "optimal design",
-            "pharmacometrics"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/optimal_design/optimal_design.html"
-            }
-          ]
-        },
-        {
-          "title": "Two-compartment PK optimal design",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "optimal design",
-            "pharmacometrics",
-            "PK"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/optimal_design/ODpaperCase1.html"
+              "url": "https://tutorials.pumas.ai/html/estimation/01-vem-introduction.html"
             }
           ]
         },
@@ -334,22 +224,6 @@
             {
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/AIDD/01-machine_learning_fundamentals.html"
-            }
-          ]
-        },
-        {
-          "title": "Variational Expectation Maximization (VEM)",
-          "venue": "",
-          "tags": [
-            "tutorial",
-            "VEM",
-            "variational inference",
-            "optimization"
-          ],
-          "links": [
-            {
-              "label": "tutorial",
-              "url": "https://tutorials.pumas.ai/html/estimation/01-vem-introduction.html"
             }
           ]
         },
@@ -454,6 +328,132 @@
             {
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/DeepPumas/onboarding/5_deepnlme/tutorials/covariates.html"
+            }
+          ]
+        },
+        {
+          "title": "Introduction to Optimal Design",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "optimal design",
+            "pharmacometrics"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/optimal_design/optimal_design.html"
+            }
+          ]
+        },
+        {
+          "title": "Two-compartment PK optimal design",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "optimal design",
+            "pharmacometrics",
+            "PK"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/optimal_design/ODpaperCase1.html"
+            }
+          ]
+        },
+        {
+          "title": "Fitting Non-Identifiable and Poorly Identifiable Models using Bayesian Inference",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "Bayesian",
+            "pharmacometrics",
+            "identifiability"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
+            }
+          ]
+        },
+        {
+          "title": "Introduction to Bayesian Models in Pumas",
+          "venue": "",
+          "tags": [
+            "Bayesian",
+            "pharmacometrics",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/01-bayes_intro.html"
+            }
+          ]
+        },
+        {
+          "title": "Random Effects in Bayesian Models",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "Bayesian",
+            "random effects",
+            "NLME"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/02-bayes_random_effects.html"
+            }
+          ]
+        },
+        {
+          "title": "Posterior Postprocessing - Plots and Queries",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "Bayesian",
+            "posterior",
+            "visualization"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/03-posterior_postprocessing.html"
+            }
+          ]
+        },
+        {
+          "title": "Markov Chain Monte Carlo Convergence",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "MCMC",
+            "Bayesian",
+            "convergence"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/04-mcmc_convergence.html"
+            }
+          ]
+        },
+        {
+          "title": "Model Comparison with Crossvalidation",
+          "venue": "",
+          "tags": [
+            "tutorial",
+            "cross-validation",
+            "model comparison",
+            "Bayesian"
+          ],
+          "links": [
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/05-model_comparison.html"
             }
           ]
         }
