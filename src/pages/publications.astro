@@ -17,7 +17,7 @@ const frontmatter = {
       <input
         type="text"
         id="pub-query"
-        placeholder="Search publications by title, venue, year..."
+        placeholder="Search publications by title, venue, date..."
         class="search-input"
       />
       <button id="pub-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
@@ -45,13 +45,13 @@ const frontmatter = {
   }
 
   function matchesItem(el: HTMLElement, tokens: string[]): boolean {
-    const { title = '', venue = '', year = '', status = '', tags = '', links = '' } = el.dataset;
+    const { title = '', venue = '', date = '', status = '', tags = '', links = '' } = el.dataset;
     return tokens.every(token => {
       const aliases = token === 'video' ? ['youtube'] : token === 'paper' ? ['paper', 'journal'] : [token];
       return fuzzy(title, token) ||
         fuzzy(venue, token) ||
         fuzzy(status, token) ||
-        year.includes(token) ||
+        date.toLowerCase().includes(token) ||
         aliases.some(a => links.split(',').some(l => fuzzy(l, a))) ||
         tags.split(',').some(t => fuzzy(t, token));
     });

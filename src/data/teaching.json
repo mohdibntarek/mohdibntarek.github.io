@@ -5,9 +5,8 @@
       "items": [
         {
           "title": "Certificate Course on AI for Drug Development",
-          "venue": "Virtual 2025-2026",
-          "year": 2025,
-          "date": "",
+          "venue": "Virtual",
+          "date": "2025-2026",
           "tags": [
             "machine learning",
             "ML",
@@ -27,8 +26,7 @@
         },
         {
           "title": "Hands-on-Workshop: NLME Modeling Workflows Using Pumas",
-          "venue": "Virtual 2025",
-          "year": 2025,
+          "venue": "Virtual at FU Berlin",
           "date": "Feb 3-5, 2025",
           "tags": [
             "pharmacometrics",
@@ -39,13 +37,16 @@
             {
               "label": "material",
               "url": "https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025"
+            },
+            {
+              "label": "videos",
+              "url": "https://www.youtube.com/playlist?list=PLTPIIhCuAkzmA1d05Rp8IC71stEHpHRcQ"
             }
           ]
         },
         {
           "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
           "venue": "American Conference on Pharmacometrics (ACoP) 2024",
-          "year": 2024,
           "date": "Nov 9-10, 2024",
           "tags": [
             "machine learning",
@@ -65,7 +66,6 @@
         {
           "title": "Intermediate Workshop on Population Modelling Using Pumas",
           "venue": "Population Approach Group in Australia and New Zealand (PAGANZ)",
-          "year": 2024,
           "date": "Feb 14, 2024",
           "tags": [
             "pharmacometrics",
@@ -82,7 +82,6 @@
         {
           "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
           "venue": "American Conference on Pharmacometrics (ACoP) 14",
-          "year": 2023,
           "date": "Nov 4-5, 2023",
           "tags": [
             "machine learning",
@@ -102,7 +101,6 @@
         {
           "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
           "venue": "Population Approach Group in Europe (PAGE)",
-          "year": 2023,
           "date": "Jun 26-27, 2023",
           "tags": [
             "machine learning",
@@ -122,7 +120,6 @@
         {
           "title": "DeepPumas Workshop at UMB",
           "venue": "University of Maryland, Baltimore (UMB)",
-          "year": 2023,
           "date": "Feb 20, 2023",
           "tags": [
             "machine learning",
@@ -142,7 +139,6 @@
         {
           "title": "Pumas for Quantitative Pharmacology",
           "venue": "Tokyo, Japan",
-          "year": 2022,
           "date": "Dec 5-6, 2022",
           "tags": [
             "pharmacometrics",
@@ -158,7 +154,6 @@
         {
           "title": "Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs",
           "venue": "American Conference on Pharmacometrics (ACoP) 13",
-          "year": 2022,
           "date": "Nov 3-4, 2022",
           "tags": [
             "Bayesian",
@@ -465,7 +460,6 @@
         {
           "title": "Playlist: Introduction to DeepPumas Learning Path",
           "venue": "",
-          "year": 2025,
           "date": "Sept 9-25, 2025",
           "tags": [
             "machine learning",
@@ -486,9 +480,28 @@
           ]
         },
         {
+          "title": "Playlist: NLME Modeling Workflows Using Pumas at FU Berlin",
+          "venue": "",
+          "date": "April 12-15, 2025",
+          "tags": [
+            "pharmacometrics",
+            "NLME",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "youtube",
+              "url": "https://www.youtube.com/playlist?list=PLTPIIhCuAkzmA1d05Rp8IC71stEHpHRcQ"
+            },
+            {
+              "label": "material",
+              "url": "https://github.com/PumasAI-Labs/Pumas_Berlin_Virtual_Workshop_2025"
+            }
+          ]
+        },
+        {
           "title": "Generaive Machine Learning and Nonlinear Mixed Effects Modelling are the Exact Same Thing",
           "venue": "",
-          "year": 2025,
           "date": "Mar 10, 2025",
           "tags": [
             "machine learning",
@@ -506,7 +519,6 @@
         {
           "title": "Understanding automatic differentiation (in Julia)",
           "venue": "",
-          "year": 2021,
           "date": "Dec 11, 2021",
           "tags": [
             "automatic differentiation",
@@ -523,7 +535,6 @@
         {
           "title": "Nonconvex.jl",
           "venue": "JuMP-dev Workshop",
-          "year": 2021,
           "date": "Jul 30, 2021",
           "tags": [
             "optimization",
@@ -544,7 +555,6 @@
         {
           "title": "TopOpt.jl: topology optimization done right",
           "venue": "JuliaCon",
-          "year": 2021,
           "date": "Jul 29, 2021",
           "tags": [
             "topology optimization",
@@ -565,7 +575,6 @@
         {
           "title": "Setup, Reading and Developing Julia Packages",
           "venue": "Canberra Julia Language Meetup",
-          "year": 2021,
           "date": "Apr 25, 2021",
           "tags": [
             "Julia",
@@ -581,7 +590,6 @@
         {
           "title": "DynamicPPL: Stan-like Speed for Dynamic Probabilistic Models",
           "venue": "JuliaCon",
-          "year": 2020,
           "date": "Jul 31, 2020",
           "tags": [
             "probabilistic programming",
@@ -602,7 +610,6 @@
         {
           "title": "Topology Optimization and JuMP",
           "venue": "JuMP-dev Workshop",
-          "year": 2018,
           "date": "Jul 28, 2018",
           "tags": [
             "topology optimization",
