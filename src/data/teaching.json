@@ -46,7 +46,7 @@
         },
         {
           "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
-          "venue": "American Conference on Pharmacometrics (ACoP) 2024",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
           "date": "Nov 9-10, 2024",
           "tags": [
             "machine learning",
@@ -81,7 +81,7 @@
         },
         {
           "title": "Scientific Modeling Augmented by Machine-Learning with DeepPumas",
-          "venue": "American Conference on Pharmacometrics (ACoP) 14",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
           "date": "Nov 4-5, 2023",
           "tags": [
             "machine learning",
@@ -153,7 +153,7 @@
         },
         {
           "title": "Bayesian Analysis in Pumas - (Almost) everything a Bayesian needs",
-          "venue": "American Conference on Pharmacometrics (ACoP) 13",
+          "venue": "American Conference on Pharmacometrics (ACoP)",
           "date": "Nov 3-4, 2022",
           "tags": [
             "Bayesian",
@@ -370,6 +370,10 @@
             {
               "label": "tutorial",
               "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
+            },
+            {
+              "label": "video",
+              "url": "https://www.youtube.com/watch?v=EK_bGd2vORo"
             }
           ]
         },
@@ -462,7 +466,8 @@
           "venue": "",
           "date": "Sept 9-25, 2025",
           "tags": [
-            "machine learning",
+             "youtube",
+           "machine learning",
             "ML",
             "pharmacometrics",
             "deep learning",
@@ -484,6 +489,7 @@
           "venue": "",
           "date": "April 12-15, 2025",
           "tags": [
+            "youtube",
             "pharmacometrics",
             "NLME",
             "tutorial"
@@ -504,6 +510,7 @@
           "venue": "",
           "date": "Mar 10, 2025",
           "tags": [
+            "youtube",
             "machine learning",
             "ML",
             "NLME",
@@ -517,13 +524,35 @@
           ]
         },
         {
+          "title": "Fitting Non-ientifiable Models using Bayesian Inference",
+          "venue": "",
+          "date": "Sept 4, 2024",
+          "tags": [
+            "youtube",
+            "Bayesian",
+            "pharmacometrics",
+            "identifiability",
+            "tutorial"
+          ],
+          "links": [
+            {
+              "label": "youtube",
+              "url": "https://www.youtube.com/watch?v=EK_bGd2vORo"
+            },
+            {
+              "label": "tutorial",
+              "url": "https://tutorials.pumas.ai/html/bayesian/06-fitting_nonidentifiable_models.html"
+            }
+          ]
+        },
+        {
           "title": "Understanding automatic differentiation (in Julia)",
           "venue": "",
           "date": "Dec 11, 2021",
           "tags": [
+            "youtube",
             "automatic differentiation",
-            "Julia",
-            "tutorial"
+            "Julia"
           ],
           "links": [
             {
@@ -537,9 +566,11 @@
           "venue": "JuMP-dev Workshop",
           "date": "Jul 30, 2021",
           "tags": [
+            "youtube",
             "optimization",
             "Julia",
-            "non-convex"
+            "non-convex",
+            "conference"
           ],
           "links": [
             {
@@ -557,9 +588,11 @@
           "venue": "JuliaCon",
           "date": "Jul 29, 2021",
           "tags": [
+            "youtube",
             "topology optimization",
             "Julia",
-            "optimization"
+            "optimization",
+            "conference"
           ],
           "links": [
             {
@@ -577,6 +610,7 @@
           "venue": "Canberra Julia Language Meetup",
           "date": "Apr 25, 2021",
           "tags": [
+            "youtube",
             "Julia",
             "tutorial"
           ],
@@ -594,7 +628,8 @@
           "tags": [
             "probabilistic programming",
             "Julia",
-            "Bayesian"
+            "Bayesian",
+            "youtube"
           ],
           "links": [
             {
@@ -615,7 +650,8 @@
             "topology optimization",
             "Julia",
             "optimization",
-            "mathematical programming"
+            "mathematical programming",
+            "youtube"
           ],
           "links": [
             {
