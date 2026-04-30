@@ -767,6 +767,30 @@
       "title": "Journals",
       "items": [
         {
+          "title": "Fitting Large Nonlinear Mixed Effects Models Using Variational Expectation Maximization",
+          "venue": "Quantitative Medicine",
+          "date": "",
+          "status": "Under Review",
+          "tags": [
+            "journal",
+            "pharmacometrics",
+            "NLME",
+            "variational inference",
+            "optimization",
+            "DeepNLME"
+          ],
+          "links": [
+            {
+              "label": "arxiv",
+              "url": "https://arxiv.org/abs/2604.26160"
+            },
+            {
+              "label": "preprint",
+              "url": "/pdfs/vem-large-nlme-2026.pdf"
+            }
+          ]
+        },
+        {
           "title": "DeepNLME: conditional generative scientific machine learning with applications in pharmacology",
           "venue": "Quantitative Medicine",
           "date": "",
@@ -901,6 +925,29 @@
     {
       "title": "Preprints",
       "items": [
+        {
+          "title": "Fitting Large Nonlinear Mixed Effects Models Using Variational Expectation Maximization",
+          "venue": "arXiv",
+          "date": "Apr 28, 2026",
+          "tags": [
+            "preprint",
+            "pharmacometrics",
+            "NLME",
+            "variational inference",
+            "optimization",
+            "DeepNLME"
+          ],
+          "links": [
+            {
+              "label": "arxiv",
+              "url": "https://arxiv.org/abs/2604.26160"
+            },
+            {
+              "label": "preprint",
+              "url": "/pdfs/vem-large-nlme-2026.pdf"
+            }
+          ]
+        },
         {
           "title": "Nonconvex.jl: A Comprehensive Julia Package for Non-Convex Optimization",
           "venue": "ResearchGate",
