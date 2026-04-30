@@ -28,21 +28,24 @@ But why would anyone want to use multiple languages in the same document? The an
 
 Fast-forward 10 years to 2026 and Julia's ecosystem has already matured quite a lot. However, R's ecosystem remains unparalleled for statistical analysis and Python's ecosystem for deep learning is still largely unmatched with enormous funds poured into it from big tech companies. Of course, both R and Python have their own quirks and limitations, such as the speed of their native code. Native code of both Python and R is very slow which can be a big issue if you are working in a computationally intensive domain. The way R and Python programmers usually work around this issue is by providing bindings to C/C++/Fortran libraries that are well optimized. So only the shell of your code is in R or Python, while the heavy lifting is done by code written in a lower level language. Julia on the other hand, while relatively young, was designed from the ground up to be fast in runtime (albeit precompilation and compilation can be slow), with excellent technical computing support in its standard library, e.g. support for linear algebra, statistics and multi-threading. Being fast and user-friendly at the same time attracted many early adopters from the Python, R, MATLAB and even C++ communities, each building their own Julia packages in their area of expertise.
 
-Given that each language still has its own strengths and weaknesses, you may find yourself needing to use multiple languages in the same project, if for nothing else then at least for benchmarking purposes, when comparing similar libraries across languages. In this post, I will show how you can use Quarto's multi-language support to call Julia, Python and R in the same notebook. I will then showcase how to call both Python and R from within Julia code using the `PythonCall` and `RCall` packages, sharing data structures and memory across language barriers, i.e. no writing to disk or message-passing using network-style protocols. `PythonCall` and `RCall` are actually how the native Julia Quarto engine implements multi-language support in Quarto under the hood when you set the engine to `julia` in a Quarto document. Different Quarto engines of course have different approaches. Beside their use in the Julia Quarto engine, `PythonCall` and `RCall` are also very powerful tools on their own, allowing you to call Python and R from any Julia code, not just in Quarto documents.
+Given that each language still has its own strengths and weaknesses, you may find yourself needing to use multiple languages in the same project, if for nothing else then at least for benchmarking purposes, when comparing similar libraries across languages. In this post, I will show how you can use Quarto's multi-language support to call Julia, Python and R in the same notebook. I will also showcase how to call both Python and R from within Julia code using the `PythonCall` and `RCall` packages, sharing data structures and memory across language barriers, i.e. no writing to disk or message-passing using network-style protocols. `PythonCall` and `RCall` are actually how the native Julia Quarto engine implements multi-language support in Quarto under the hood when you set the engine to `julia` in a Quarto document. Different Quarto engines of course have different approaches. Beside their use in the Julia Quarto engine, `PythonCall` and `RCall` are also very powerful tools on their own, allowing you to call Python and R from any Julia code, not just in Quarto documents.
 
 ## Prerequisites
 
 This document is built using **Quarto** and the **Julia Quarto engine**, which allows you to run Julia, Python, and R code blocks in the same document. Before running the code in this document, you need to have Julia, Python, and R installed on your system.
 
 **Installing Julia:**
+
 - Download from [julialang.org](https://julialang.org/downloads/) or use your system's package manager
 - Verify installation: `julia --version`
 
 **Installing Python:**
+
 - Download from [python.org](https://www.python.org/downloads/) or use your system's package manager
 - Verify installation: `python --version` or `python3 --version`
 
 **Installing R:**
+
 - Download from [cran.r-project.org](https://cran.r-project.org/)
 - Verify installation: `R --version`
 
@@ -102,7 +105,7 @@ using RCall
 R"version"
 ```
 
-In this post, we will install `RCall` below programmatically from within the document itself, which will trigger the build process after installation, so there is no need to manually call `Pkg.build("RCall")` in this case.
+In this post, we install `RCall` programmatically from within the document itself, which will trigger the build process after installation, so there is no need to manually call `Pkg.build("RCall")` in this case.
 
 ## Installing Packages
 
