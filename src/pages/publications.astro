@@ -19,6 +19,8 @@ const frontmatter = {
           type="text"
           id="pub-query"
           placeholder="Search publications by title, venue, date..."
+          data-placeholder-full="Search publications by title, venue, date..."
+          data-placeholder-short="Search publications"
           class="search-input"
         />
         <button id="pub-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
@@ -181,12 +183,22 @@ const frontmatter = {
     filterPublications();
   }
 
+  function syncPlaceholder(input: HTMLInputElement) {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const full = input.dataset.placeholderFull || input.placeholder;
+    const short = input.dataset.placeholderShort || full;
+    input.placeholder = isMobile ? short : full;
+  }
+
   function initSearch() {
     const input = document.getElementById('pub-query') as HTMLInputElement | null;
     const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement | null;
     const viewSelect = document.getElementById('pub-view') as HTMLSelectElement | null;
     if (!input || !clearBtn || !viewSelect) return;
     input.value = '';
+    syncPlaceholder(input);
+    const mq = window.matchMedia('(max-width: 768px)');
+    mq.addEventListener('change', () => syncPlaceholder(input));
     let saved = 'year';
     try { saved = localStorage.getItem('pub-view') || 'year'; } catch {}
     viewSelect.value = saved === 'category' ? 'category' : 'year';
