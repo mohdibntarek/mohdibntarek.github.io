@@ -7,25 +7,37 @@ const frontmatter = {
   title: "Publications",
   description: "Published research papers and conference proceedings.",
   published: true,
-  "number-sections": true,
+  "number-sections": false,
 };
 ---
 
 <Layout frontmatter={frontmatter}>
   <div id="pub-search">
-    <div class="search-container">
-      <input
-        type="text"
-        id="pub-query"
-        placeholder="Search publications by title, venue, date..."
-        class="search-input"
-      />
-      <button id="pub-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
+    <div class="pub-controls">
+      <div class="search-container">
+        <input
+          type="text"
+          id="pub-query"
+          placeholder="Search publications by title, venue, date..."
+          class="search-input"
+        />
+        <button id="pub-clear" class="search-clear" aria-label="Clear search" hidden>&times;</button>
+      </div>
+      <label class="view-select">
+        <span class="view-select__label">Group by</span>
+        <select id="pub-view">
+          <option value="year">Date</option>
+          <option value="category">Category</option>
+        </select>
+      </label>
     </div>
 
     <p id="pub-no-results" class="no-results" hidden>No publications matching your search.</p>
 
-    <ContentList sections={publications.sections} />
+    <div id="view-by-category">
+      <ContentList sections={publications.sections} />
+    </div>
+    <div id="view-by-year" hidden></div>
   </div>
 </Layout>
 
@@ -57,11 +69,21 @@ const frontmatter = {
     });
   }
 
+  function activeView(): HTMLElement | null {
+    const cat = document.getElementById('view-by-category');
+    const yr = document.getElementById('view-by-year');
+    if (cat && !cat.hidden) return cat;
+    if (yr && !yr.hidden) return yr;
+    return null;
+  }
+
   function filterPublications() {
     const input = document.getElementById('pub-query') as HTMLInputElement;
     const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement;
     const noResults = document.getElementById('pub-no-results') as HTMLElement;
-    const sections = document.querySelectorAll<HTMLElement>('#pub-search [data-section]');
+    const view = activeView();
+    if (!view) return;
+    const sections = view.querySelectorAll<HTMLElement>('[data-section]');
 
     const q = input.value.trim();
     const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
@@ -85,17 +107,96 @@ const frontmatter = {
     noResults.hidden = !q || anyVisible;
   }
 
+  function parseDate(d: string): number {
+    if (!d) return -Infinity;
+    let s = d.replace(/(\d+)\s*-\s*\d+/, '$1').replace(/\bSept\b/i, 'Sep');
+    const t = Date.parse(s);
+    if (!isNaN(t)) return t;
+    const m = d.match(/\b(\d{4})\b/);
+    return m ? Date.parse(`Jan 1, ${m[1]}`) : -Infinity;
+  }
+
+  function buildYearView() {
+    const yearView = document.getElementById('view-by-year');
+    const catView = document.getElementById('view-by-category');
+    if (!yearView || !catView || yearView.dataset.built === '1') return;
+
+    const buckets = new Map<string, HTMLLIElement[]>();
+
+    catView.querySelectorAll<HTMLLIElement>('li[data-title]').forEach(li => {
+      const date = li.dataset.date || '';
+      const match = date.match(/\b(\d{4})\b/);
+      const status = li.dataset.status || '';
+      const key = match ? match[1] : (status || 'No Date');
+      if (!buckets.has(key)) buckets.set(key, []);
+      buckets.get(key)!.push(li);
+    });
+
+    buckets.forEach(list => list.sort((a, b) =>
+      parseDate(b.dataset.date || '') - parseDate(a.dataset.date || '')
+    ));
+
+    const sortedKeys = Array.from(buckets.keys()).sort((a, b) => {
+      const an = parseInt(a, 10), bn = parseInt(b, 10);
+      const aIsYear = !isNaN(an), bIsYear = !isNaN(bn);
+      if (aIsYear && bIsYear) return bn - an;
+      if (aIsYear) return -1;
+      if (bIsYear) return 1;
+      return a.localeCompare(b);
+    });
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'content-list';
+
+    sortedKeys.forEach(key => {
+      const sectionDiv = document.createElement('div');
+      sectionDiv.setAttribute('data-section', '');
+      const h2 = document.createElement('h2');
+      h2.id = `year-${key.toLowerCase().replace(/\s+/g, '-')}`;
+      h2.textContent = key;
+      sectionDiv.appendChild(h2);
+      const ol = document.createElement('ol');
+      buckets.get(key)!.forEach(li => ol.appendChild(li.cloneNode(true)));
+      sectionDiv.appendChild(ol);
+      wrapper.appendChild(sectionDiv);
+    });
+
+    yearView.appendChild(wrapper);
+    yearView.dataset.built = '1';
+  }
+
+  function setView(mode: string) {
+    const catView = document.getElementById('view-by-category');
+    const yearView = document.getElementById('view-by-year');
+    if (!catView || !yearView) return;
+    if (mode === 'year') {
+      buildYearView();
+      catView.hidden = true;
+      yearView.hidden = false;
+    } else {
+      yearView.hidden = true;
+      catView.hidden = false;
+    }
+    try { localStorage.setItem('pub-view', mode); } catch {}
+    filterPublications();
+  }
+
   function initSearch() {
     const input = document.getElementById('pub-query') as HTMLInputElement | null;
     const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement | null;
-    if (!input || !clearBtn) return;
+    const viewSelect = document.getElementById('pub-view') as HTMLSelectElement | null;
+    if (!input || !clearBtn || !viewSelect) return;
     input.value = '';
-    filterPublications();
+    let saved = 'year';
+    try { saved = localStorage.getItem('pub-view') || 'year'; } catch {}
+    viewSelect.value = saved === 'category' ? 'category' : 'year';
+    setView(viewSelect.value);
     input.addEventListener('input', filterPublications);
     clearBtn.addEventListener('click', () => {
       input.value = '';
       filterPublications();
     });
+    viewSelect.addEventListener('change', () => setView(viewSelect.value));
   }
 
   initSearch();
@@ -103,11 +204,56 @@ const frontmatter = {
 </script>
 
 <style>
+  .pub-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
   .search-container {
     position: relative;
-    margin-bottom: 2rem;
+    flex: 1;
+    min-width: 220px;
     max-width: 100%;
-    overflow: hidden;
+  }
+
+  .view-select {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .view-select__label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary, #666);
+    white-space: nowrap;
+  }
+
+  .view-select select {
+    box-sizing: border-box;
+    padding: 0.75rem 2rem 0.75rem 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--color-card-border, #e5e5e5);
+    border-radius: 8px;
+    background: var(--color-card, #ffffff);
+    color: var(--color-text, #1a1a1a);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.65rem center;
+  }
+
+  .view-select select:focus {
+    border-color: var(--color-primary, #667eea);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
   }
 
   .search-input {
@@ -162,6 +308,44 @@ const frontmatter = {
     color: var(--color-text);
     margin: var(--space-md) 0;
   }
+</style>
 
-  /* Hidden sections don't contribute to h2 counter (display:none excludes from box tree) */
+<style is:global>
+  #view-by-year .content-list h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: var(--space-xl) 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-card-border);
+  }
+
+  #view-by-year .content-list ol {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  #view-by-year .content-list li {
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+  }
+
+  #view-by-year .content-list li strong {
+    font-weight: 600;
+  }
+
+  #view-by-year .content-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  #view-by-year .content-list a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    #view-by-year .content-list ol {
+      padding-left: 1.25rem;
+    }
+  }
 </style>
