@@ -151,7 +151,7 @@ This is useful when:
 │   ├── components/         # Reusable Astro components
 │   ├── layouts/            # Page layout templates
 │   ├── pages/              # Website pages (.astro, .md)
-│   ├── data/               # JSON data files (publications, teaching)
+│   ├── data/               # JSON data files (publications, software, teaching)
 │   ├── styles/             # Custom CSS stylesheets
 │   └── assets/             # Images and other assets
 ├── quarto_blog/            # Quarto blog content
