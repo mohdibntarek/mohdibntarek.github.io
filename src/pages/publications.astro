@@ -9,9 +9,56 @@ const frontmatter = {
   published: true,
   "number-sections": false,
 };
+
+function parseDateMs(d: string): number {
+  if (!d) return -Infinity;
+  const s = d.replace(/(\d+)\s*-\s*\d+/, '$1').replace(/\bSept\b/i, 'Sep');
+  const t = Date.parse(s);
+  if (!isNaN(t)) return t;
+  const m = d.match(/\b(\d{4})\b/);
+  return m ? Date.parse(`Jan 1, ${m[1]}`) : -Infinity;
+}
+
+type PubItem = {
+  title: string;
+  venue: string;
+  date: string;
+  status?: string;
+  tags: string[];
+  links: { label: string; url: string }[];
+};
+
+const allItems: PubItem[] = publications.sections.flatMap((s) => s.items as PubItem[]);
+const yearBuckets = new Map<string, PubItem[]>();
+for (const item of allItems) {
+  const m = (item.date || '').match(/\b(\d{4})\b/);
+  const key = m ? m[1] : (item.status || 'No Date');
+  if (!yearBuckets.has(key)) yearBuckets.set(key, []);
+  yearBuckets.get(key)!.push(item);
+}
+yearBuckets.forEach((list) =>
+  list.sort((a, b) => parseDateMs(b.date || '') - parseDateMs(a.date || ''))
+);
+const yearKeys = Array.from(yearBuckets.keys()).sort((a, b) => {
+  const an = parseInt(a, 10), bn = parseInt(b, 10);
+  const aIsYear = !isNaN(an), bIsYear = !isNaN(bn);
+  if (aIsYear && bIsYear) return bn - an;
+  if (aIsYear) return -1;
+  if (bIsYear) return 1;
+  return a.localeCompare(b);
+});
+const yearSections = yearKeys.map((k) => ({ title: k, items: yearBuckets.get(k)! }));
 ---
 
 <Layout frontmatter={frontmatter}>
+  <script is:inline>
+    (function () {
+      var v = 'year';
+      try { v = localStorage.getItem('pub-view') || 'year'; } catch (e) {}
+      document.documentElement.setAttribute('data-pub-view', v === 'category' ? 'category' : 'year');
+    })();
+  </script>
+
   <div id="pub-search">
     <div class="pub-controls">
       <div class="search-container">
@@ -39,7 +86,9 @@ const frontmatter = {
     <div id="view-by-category">
       <ContentList sections={publications.sections} />
     </div>
-    <div id="view-by-year" hidden></div>
+    <div id="view-by-year">
+      <ContentList sections={yearSections} />
+    </div>
   </div>
 </Layout>
 
@@ -71,19 +120,16 @@ const frontmatter = {
     });
   }
 
-  function activeView(): HTMLElement | null {
-    const cat = document.getElementById('view-by-category');
-    const yr = document.getElementById('view-by-year');
-    if (cat && !cat.hidden) return cat;
-    if (yr && !yr.hidden) return yr;
-    return null;
+  function activeViewId(): string {
+    return document.documentElement.getAttribute('data-pub-view') === 'category'
+      ? 'view-by-category' : 'view-by-year';
   }
 
   function filterPublications() {
     const input = document.getElementById('pub-query') as HTMLInputElement;
     const clearBtn = document.getElementById('pub-clear') as HTMLButtonElement;
     const noResults = document.getElementById('pub-no-results') as HTMLElement;
-    const view = activeView();
+    const view = document.getElementById(activeViewId());
     if (!view) return;
     const sections = view.querySelectorAll<HTMLElement>('[data-section]');
 
@@ -109,77 +155,10 @@ const frontmatter = {
     noResults.hidden = !q || anyVisible;
   }
 
-  function parseDate(d: string): number {
-    if (!d) return -Infinity;
-    let s = d.replace(/(\d+)\s*-\s*\d+/, '$1').replace(/\bSept\b/i, 'Sep');
-    const t = Date.parse(s);
-    if (!isNaN(t)) return t;
-    const m = d.match(/\b(\d{4})\b/);
-    return m ? Date.parse(`Jan 1, ${m[1]}`) : -Infinity;
-  }
-
-  function buildYearView() {
-    const yearView = document.getElementById('view-by-year');
-    const catView = document.getElementById('view-by-category');
-    if (!yearView || !catView || yearView.dataset.built === '1') return;
-
-    const buckets = new Map<string, HTMLLIElement[]>();
-
-    catView.querySelectorAll<HTMLLIElement>('li[data-title]').forEach(li => {
-      const date = li.dataset.date || '';
-      const match = date.match(/\b(\d{4})\b/);
-      const status = li.dataset.status || '';
-      const key = match ? match[1] : (status || 'No Date');
-      if (!buckets.has(key)) buckets.set(key, []);
-      buckets.get(key)!.push(li);
-    });
-
-    buckets.forEach(list => list.sort((a, b) =>
-      parseDate(b.dataset.date || '') - parseDate(a.dataset.date || '')
-    ));
-
-    const sortedKeys = Array.from(buckets.keys()).sort((a, b) => {
-      const an = parseInt(a, 10), bn = parseInt(b, 10);
-      const aIsYear = !isNaN(an), bIsYear = !isNaN(bn);
-      if (aIsYear && bIsYear) return bn - an;
-      if (aIsYear) return -1;
-      if (bIsYear) return 1;
-      return a.localeCompare(b);
-    });
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'content-list';
-
-    sortedKeys.forEach(key => {
-      const sectionDiv = document.createElement('div');
-      sectionDiv.setAttribute('data-section', '');
-      const h2 = document.createElement('h2');
-      h2.id = `year-${key.toLowerCase().replace(/\s+/g, '-')}`;
-      h2.textContent = key;
-      sectionDiv.appendChild(h2);
-      const ol = document.createElement('ol');
-      buckets.get(key)!.forEach(li => ol.appendChild(li.cloneNode(true)));
-      sectionDiv.appendChild(ol);
-      wrapper.appendChild(sectionDiv);
-    });
-
-    yearView.appendChild(wrapper);
-    yearView.dataset.built = '1';
-  }
-
   function setView(mode: string) {
-    const catView = document.getElementById('view-by-category');
-    const yearView = document.getElementById('view-by-year');
-    if (!catView || !yearView) return;
-    if (mode === 'year') {
-      buildYearView();
-      catView.hidden = true;
-      yearView.hidden = false;
-    } else {
-      yearView.hidden = true;
-      catView.hidden = false;
-    }
-    try { localStorage.setItem('pub-view', mode); } catch {}
+    const normalized = mode === 'category' ? 'category' : 'year';
+    document.documentElement.setAttribute('data-pub-view', normalized);
+    try { localStorage.setItem('pub-view', normalized); } catch {}
     filterPublications();
   }
 
@@ -199,10 +178,9 @@ const frontmatter = {
     syncPlaceholder(input);
     const mq = window.matchMedia('(max-width: 768px)');
     mq.addEventListener('change', () => syncPlaceholder(input));
-    let saved = 'year';
-    try { saved = localStorage.getItem('pub-view') || 'year'; } catch {}
-    viewSelect.value = saved === 'category' ? 'category' : 'year';
-    setView(viewSelect.value);
+    const current = document.documentElement.getAttribute('data-pub-view') === 'category' ? 'category' : 'year';
+    viewSelect.value = current;
+    filterPublications();
     input.addEventListener('input', filterPublications);
     clearBtn.addEventListener('click', () => {
       input.value = '';
@@ -212,7 +190,11 @@ const frontmatter = {
   }
 
   initSearch();
-  document.addEventListener('astro:page-load', initSearch);
+  document.addEventListener('astro:page-load', () => {
+    const v = (() => { try { return localStorage.getItem('pub-view') || 'year'; } catch { return 'year'; } })();
+    document.documentElement.setAttribute('data-pub-view', v === 'category' ? 'category' : 'year');
+    initSearch();
+  });
 </script>
 
 <style>
@@ -323,41 +305,9 @@ const frontmatter = {
 </style>
 
 <style is:global>
-  #view-by-year .content-list h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin: var(--space-xl) 0 var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-card-border);
-  }
-
-  #view-by-year .content-list ol {
-    margin: 0;
-    padding-left: 1.5rem;
-  }
-
-  #view-by-year .content-list li {
-    margin-bottom: var(--space-md);
-    line-height: 1.6;
-  }
-
-  #view-by-year .content-list li strong {
-    font-weight: 600;
-  }
-
-  #view-by-year .content-list a {
-    color: var(--color-primary);
-    text-decoration: none;
-  }
-
-  #view-by-year .content-list a:hover {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 768px) {
-    #view-by-year .content-list ol {
-      padding-left: 1.25rem;
-    }
+  :root[data-pub-view="year"] #view-by-category,
+  :root[data-pub-view="category"] #view-by-year,
+  :root:not([data-pub-view]) #view-by-category {
+    display: none;
   }
 </style>
