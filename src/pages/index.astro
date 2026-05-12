@@ -9,7 +9,7 @@ import personalPhoto from "../assets/personal_photo.png";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faCode, faLaptopCode, faBrain, faFlask, faTerminal, faLightbulb, faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import "../styles/typography.css";
 ---
 
@@ -37,7 +37,7 @@ import "../styles/typography.css";
       [data-theme="dark"] .theme-toggle__icon--sun,
       [data-theme="light"] .theme-toggle__icon--moon { display: block; }
     </style>
-    <ViewTransitions />
+    <ClientRouter />
     <!-- Umami Analytics - privacy-friendly, no cookies -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="83603249-8763-4c0b-a83b-bf4adae042e8"></script>
   </head>

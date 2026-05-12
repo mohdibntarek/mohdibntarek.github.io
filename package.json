@@ -5,8 +5,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "alpinejs": "^3.15.11",
-    "astro": "^5.17.3",
+    "alpinejs": "^3.15.12",
+    "astro": "^6.3.1",
     "astro-icon": "^1.1.5"
   },
   "scripts": {
@@ -21,6 +21,6 @@
   },
   "type": "module",
   "devDependencies": {
-    "pagefind": "^1.4.0"
+    "pagefind": "^1.5.2"
   }
 }
