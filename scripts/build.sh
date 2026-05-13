@@ -2,7 +2,7 @@
 set -e
 
 # Build Astro site
-astro build
+bunx astro build
 
 # Add data-pagefind-ignore to code blocks and code-tools button
 # Copy data-anchor-id to id on Quarto headings for Pagefind section indexing
