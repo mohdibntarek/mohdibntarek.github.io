@@ -18,7 +18,12 @@
             "NLME",
             "DeepNLME"
           ],
-          "links": []
+          "links": [
+            {
+              "label": "abstract",
+              "url": "https://www.page-meeting.org/Abstracts/early-go-no-go-decisions-in-clinical-trials-using-a-deepnlme-joint-tumor-growth-dynamics-and-overall-survival-model/"
+            }
+          ]
         },
         {
           "title": "Using DeepNLME to identify promising biomarkers with an application to disease progression modelling of Alzheimer's disease",
@@ -35,7 +40,12 @@
             "NLME",
             "DeepNLME"
           ],
-          "links": []
+          "links": [
+            {
+              "label": "abstract",
+              "url": "https://www.page-meeting.org/Abstracts/using-deepnlme-to-identify-promising-biomarkers-with-an-application-to-disease-progression-modelling-of-alzheimers-disease/"
+            }
+          ]
         },
         {
           "title": "Multidimensional scaling for longitudinal data embeddings in pharmacometrics",
@@ -48,7 +58,12 @@
             "embeddings",
             "mds"
           ],
-          "links": []
+          "links": [
+            {
+              "label": "abstract",
+              "url": "https://www.page-meeting.org/Abstracts/multidimensional-scaling-for-longitudinal-data-embeddings-in-pharmacometrics/"
+            }
+          ]
         },
         {
           "title": "Post-hoc model joining with normalizing flows for efficient and scalable multi-endpoint PKPD",
@@ -63,7 +78,12 @@
             "PKPD",
             "deep learning"
           ],
-          "links": []
+          "links": [
+            {
+              "label": "abstract",
+              "url": "https://www.page-meeting.org/Abstracts/post-hoc-model-joining-with-normalizing-flows-for-efficient-and-scalable-multi-endpoint-pkpd/"
+            }
+          ]
         },
         {
           "title": "Application of DeepNLME framework to characterize distinct platelet dynamics in patients treated with Milademetan",
@@ -79,7 +99,12 @@
             "oncology",
             "DeepNLME"
           ],
-          "links": []
+          "links": [
+            {
+              "label": "abstract",
+              "url": "https://www.page-meeting.org/Abstracts/application-of-deepnlme-framework-to-characterize-distinct-platelet-dynamics-in-patients-treated-with-milademetan/"
+            }
+          ]
         },
         {
           "title": "Metric multi-dimensional scaling for longitudinal data embeddings in pharmacometrics",
