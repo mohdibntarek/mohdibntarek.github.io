@@ -44,6 +44,10 @@
             {
               "label": "abstract",
               "url": "https://www.page-meeting.org/Abstracts/using-deepnlme-to-identify-promising-biomarkers-with-an-application-to-disease-progression-modelling-of-alzheimers-disease/"
+            },
+            {
+              "label": "poster",
+              "url": "/pdfs/deepnlme-biomarkers-page-2026.pdf"
             }
           ]
         },
@@ -62,6 +66,10 @@
             {
               "label": "abstract",
               "url": "https://www.page-meeting.org/Abstracts/multidimensional-scaling-for-longitudinal-data-embeddings-in-pharmacometrics/"
+            },
+            {
+              "label": "poster",
+              "url": "/pdfs/multidimensional-scaling-page-2026.pdf"
             }
           ]
         },
@@ -82,6 +90,10 @@
             {
               "label": "abstract",
               "url": "https://www.page-meeting.org/Abstracts/post-hoc-model-joining-with-normalizing-flows-for-efficient-and-scalable-multi-endpoint-pkpd/"
+            },
+            {
+              "label": "poster",
+              "url": "/pdfs/normalizing-flows-page-2026.pdf"
             }
           ]
         },
@@ -103,6 +115,10 @@
             {
               "label": "abstract",
               "url": "https://www.page-meeting.org/Abstracts/application-of-deepnlme-framework-to-characterize-distinct-platelet-dynamics-in-patients-treated-with-milademetan/"
+            },
+            {
+              "label": "poster",
+              "url": "/pdfs/milademetan-page-2026.pdf"
             }
           ]
         },
