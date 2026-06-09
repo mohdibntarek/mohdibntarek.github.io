@@ -6,16 +6,21 @@ layout: ../layouts/Layout.astro
 number-sections: true
 ---
 
-I am a senior product engineer and scientific consultant from Egypt and Australia (*eligible for the E-3 visa in the US*) with expertise in various areas of applied math, statistics, pharmacometrics, scientific computing, (scientific) machine learning and systems engineering.
+I am an applied mathematician from Egypt and Australia (*eligible for the E-3 visa in the US*) with expertise in various areas of applied math, statistics, pharmacometrics, scientific computing, (scientific) machine learning and systems engineering.
 
 ## Experience
 
-**Senior Product Engineer and Consultant**  
+**Associate Director, Clinical Pharmacology and Pharmacometrics**  
+PumasAI, USA (Remote)  
+*2026 - Present*
+
+- Led and supported consulting projects in pharmacometrics and scientific machine learning, including modelling of tumor dynamics and overall survival, item response theory, target-mediated drug disposition, Bayesian analysis and optimal design of experiments.
+
+**Senior Product Engineer**  
 PumasAI, USA (Remote)  
 *2020 - Present*
 
 - Developed and maintained proprietary parameter estimation, Bayesian inference, simulation, optimal design and scientific machine learning software for nonlinear mixed effects models in Julia.
-- Led and supported consulting projects in pharmacometrics and scientific machine learning, including modelling of tumor dynamics and overall survival, item response theory, target-mediated drug disposition, Bayesian analysis and optimal design of experiments.
 - Supported Pumas and DeepPumas users by providing training and technical support, and by developing educational materials and teaching them both virtually and in-person.
 - Led and supported new method development projects for parameter estimation, covariate modelling, sequential model building, exploratory data analysis, model evaluation, optimal design of experiments, Bayesian inference and biomarker modeling.
 - Supported the development of AskPumas, a RAG-based LLM assistant for Pumas users.
