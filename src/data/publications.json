@@ -812,6 +812,30 @@
       "title": "Journals",
       "items": [
         {
+          "title": "Pumas: A Unified Platform for Pharmaceutical Modeling and Simulation",
+          "venue": "Quantitative Medicine",
+          "date": "Jul 30, 2026",
+          "tags": [
+            "journal",
+            "pharmacometrics",
+            "Pumas",
+            "Julia",
+            "NLME",
+            "PK/PD",
+            "software"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://www.scienceopen.com/hosted-document?doi=10.70534/qm-2026-0011"
+            },
+            {
+              "label": "software",
+              "url": "https://pumas.ai/"
+            }
+          ]
+        },
+        {
           "title": "Turing.jl: a general-purpose probabilistic programming language",
           "venue": "ACM Transactions on Probabilistic Machine Learning (TPML)",
           "date": "Feb 14, 2025",
