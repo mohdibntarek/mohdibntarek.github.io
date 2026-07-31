@@ -6,4 +6,9 @@ PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
 RCall = "6f49c342-dc21-5d91-9882-a32aef131414"
 
 [compat]
+# PythonCall gained support for free-threaded CPython in 0.9.32; conda-forge
+# now serves those builds, and earlier versions throw `UndefRefError` from
+# JlWrap's `__init__` against them.
+CondaPkg = "0.2.36"
+PythonCall = "0.9.35"
 julia = "1.12"
