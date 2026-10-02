@@ -831,6 +831,10 @@
             {
               "label": "journal",
               "url": "https://www.scienceopen.com/document/read?vid=3e1c946c-1d45-4a48-ae96-e8fd0d7c99af"
+            },
+            {
+              "label": "software",
+              "url": "https://pumas.ai/our-products/deepPumas"
             }
           ]
         },
