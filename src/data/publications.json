@@ -812,6 +812,29 @@
       "title": "Journals",
       "items": [
         {
+          "title": "DeepNLME - Conditional Generative Scientific Machine Learning with Applications in Pharmacology",
+          "venue": "Quantitative Medicine",
+          "date": "Oct 1, 2026",
+          "tags": [
+            "journal",
+            "machine learning",
+            "ML",
+            "pharmacometrics",
+            "deep learning",
+            "NLME",
+            "DeepNLME",
+            "scientific ML",
+            "SciML",
+            "generative models"
+          ],
+          "links": [
+            {
+              "label": "journal",
+              "url": "https://www.scienceopen.com/document/read?vid=3e1c946c-1d45-4a48-ae96-e8fd0d7c99af"
+            }
+          ]
+        },
+        {
           "title": "Pumas: A Unified Platform for Pharmaceutical Modeling and Simulation",
           "venue": "Quantitative Medicine",
           "date": "Jul 30, 2026",
