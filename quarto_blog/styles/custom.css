@@ -779,3 +779,343 @@
     align-items: center;
     justify-content: center;
 }
+
+/* ===== Dark-mode content styling =====
+   Scoped with [data-bs-theme="dark"] and #quarto-document-content so that
+   Astro pages loading custom.css are not affected. */
+
+/* Blockquote (e.g. the Karpathy quote) */
+[data-bs-theme="dark"] #quarto-document-content blockquote {
+    color: var(--bs-body-color, #dee2e6);
+    background-color: oklch(24% 0.01 260);
+    border-left: 0.25rem solid oklch(62% 0.13 250);
+    padding: 0.75rem 1rem;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+[data-bs-theme="dark"] #quarto-document-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Callouts (.callout-note with collapse="true" in this post) */
+[data-bs-theme="dark"] #quarto-document-content .callout {
+    background-color: oklch(24% 0.01 260);
+    border: 1px solid var(--bs-border-color, #495057);
+    color: var(--bs-body-color, #dee2e6);
+    overflow: hidden;
+}
+
+[data-bs-theme="dark"] #quarto-document-content .callout-note {
+    border-left: 0.25rem solid oklch(62% 0.13 250);
+}
+
+[data-bs-theme="dark"] #quarto-document-content .callout .callout-header {
+    background-color: oklch(30% 0.02 255);
+    color: var(--bs-emphasis-color, #ffffff);
+}
+
+[data-bs-theme="dark"] #quarto-document-content .callout .callout-title-container,
+[data-bs-theme="dark"] #quarto-document-content .callout .callout-title {
+    color: var(--bs-emphasis-color, #ffffff);
+}
+
+[data-bs-theme="dark"] #quarto-document-content .callout .callout-body,
+[data-bs-theme="dark"] #quarto-document-content .callout .callout-body-container {
+    color: var(--bs-body-color, #dee2e6);
+}
+
+/* Flip the dark disclosure chevron so it stays visible on the dark header */
+[data-bs-theme="dark"] #quarto-document-content .callout .callout-toggle::before {
+    filter: invert(1);
+}
+
+/* Grayscale SVG sketches: opt-in inversion, only on tagged figures */
+[data-bs-theme="dark"] #quarto-document-content img.fig-dark-invert {
+    filter: invert(0.92) hue-rotate(180deg) contrast(0.95);
+}
+
+/* Tables: keep borders and header text readable on the dark background */
+[data-bs-theme="dark"] #quarto-document-content table.table {
+    --bs-table-color: var(--bs-body-color, #dee2e6);
+    --bs-table-bg: transparent;
+    --bs-table-border-color: var(--bs-border-color, #495057);
+    color: var(--bs-body-color, #dee2e6);
+}
+
+[data-bs-theme="dark"] #quarto-document-content table.table thead th {
+    color: var(--bs-emphasis-color, #ffffff);
+    border-bottom-color: var(--bs-border-color, #495057);
+}
+
+/* This post's economic figures: use the live body foreground in both themes.
+   Figure IDs keep this override local without changing other posts' captions. */
+#quarto-document-content :is(#fig-profit-regimes, #fig-revenue-sensitivity, #fig-compound-cashflows, #fig-development-evaluation, #fig-assumed-forms, #fig-cashflow-intro, #fig-debt-forms) figcaption {
+    color: var(--bs-body-color, inherit);
+}
+
+#quarto-document-content :is(#fig-profit-regimes, #fig-revenue-sensitivity, #fig-compound-cashflows, #fig-development-evaluation, #fig-assumed-forms, #fig-cashflow-intro, #fig-debt-forms) figcaption :is(a, .math) {
+    color: inherit;
+}
+
+/* Keep the dense cash-flow labels legible; scroll only the diagram, not its
+   caption or the page, when the article column is narrower than the SVG. */
+#quarto-document-content #fig-compound-cashflows > figure > div[aria-describedby] {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+#quarto-document-content #fig-compound-cashflows img {
+    width: 1000px;
+    min-width: 875px;
+    max-width: 100%;
+}
+
+#quarto-document-content #fig-compound-cashflows > figure > div[aria-describedby]:focus-visible {
+    outline: 2px solid var(--bs-body-color, currentColor);
+    outline-offset: 2px;
+}
+
+/* ===== Mermaid: neutral, live theme colors for this post's flowcharts =====
+   Set the font before Mermaid measures labels in its temporary pre > svg,
+   as well as on Quarto's final bare svg.mermaid-js. Do not change font size
+   or layout after Mermaid has calculated geometry. */
+/* Compact diagrams use their measured intrinsic size. On small screens the
+   caption stays in the column and only its diagram viewport scrolls. Chrome
+   makes overflowing scroll containers keyboard-focusable; retain a visible
+   focus indicator and the existing caption's accessible description. */
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) > figure > div[aria-describedby] {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) > figure > div[aria-describedby]:focus-visible {
+    outline: 2px solid var(--diagram-line);
+    outline-offset: 2px;
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) svg.mermaid-js {
+    max-width: none;
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) {
+    --diagram-body-bg: var(--bs-body-bg, #ffffff);
+    --diagram-text: var(--bs-body-color, #212529);
+    --diagram-border: var(--bs-border-color, #dee2e6);
+    --diagram-node-bg: color-mix(in srgb, var(--diagram-body-bg) 95%, var(--diagram-text));
+    --diagram-cluster-bg: color-mix(in srgb, var(--diagram-body-bg) 98%, var(--diagram-text));
+    --diagram-line: color-mix(in srgb, var(--diagram-text) 65%, var(--diagram-border));
+    --mermaid-font-family: var(--bs-body-font-family, system-ui, -apple-system,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+}
+
+:is([data-bs-theme="dark"], [data-theme="dark"]) #quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) {
+    --diagram-body-bg: var(--bs-body-bg, #212529);
+    --diagram-text: var(--bs-body-color, #dee2e6);
+    --diagram-border: var(--bs-border-color, #495057);
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(pre.mermaid-js, .mermaid) {
+    font-family: var(--mermaid-font-family);
+    background-color: transparent;
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) {
+    filter: none;
+    background-color: transparent;
+    font-family: var(--mermaid-font-family);
+}
+
+/* Two scoped IDs outweigh Mermaid's embedded #svg-id rules. Important is
+   only used for label fonts and arrow fills which Mermaid marks important. */
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) .node :is(rect, path, polygon, circle, ellipse) {
+    fill: var(--diagram-node-bg);
+    stroke: var(--diagram-line);
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) .cluster rect {
+    fill: var(--diagram-cluster-bg);
+    stroke: var(--diagram-line);
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) :is(.label, .nodeLabel, .edgeLabel, .cluster-label, foreignObject, text, .nodeLabel p, .nodeLabel span, .edgeLabel p, .edgeLabel span, .cluster-label p, .cluster-label span) {
+    color: var(--diagram-text);
+    fill: var(--diagram-text);
+    font-family: var(--mermaid-font-family) !important;
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) :is(.edgeLabel, .edgeLabel p, .edgeLabel span, .labelBkg) {
+    background-color: var(--diagram-body-bg);
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) :is(.edgeLabel rect, rect.labelBkg) {
+    fill: var(--diagram-body-bg);
+    opacity: 1;
+}
+
+/* Never fill connector paths or overwrite their stroke-dasharray. */
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) :is(.flowchart-link, .edgePath .path) {
+    fill: none;
+    stroke: var(--diagram-line);
+}
+
+#quarto-document-content :is(#fig-translation, #fig-two-cultures, #fig-pipeline) :is(svg.mermaid-js, pre.mermaid-js svg, .mermaid svg) :is(marker, marker .arrowMarkerPath, .arrowheadPath) {
+    fill: var(--diagram-line) !important;
+    stroke: var(--diagram-line);
+}
+
+/* Keep typeset article math at its natural size. Display equations use flex
+   auto margins to center when they fit; the margins collapse to zero for
+   equations wider than the article column, which then extend the page
+   instead of an inner horizontal scroller. */
+#quarto-document-content span.math.display {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+}
+
+#quarto-document-content mjx-container[display="true"] {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 100%;
+    overflow: visible;
+}
+
+#quarto-document-content mjx-container[display="true"] > mjx-math {
+    flex: 0 0 auto;
+    margin-inline: auto;
+}
+
+/* Callout bodies are flex items: do not let math's intrinsic width widen
+   the cell; a wide equation extends beyond the cell instead. */
+#quarto-document-content :is(.callout-body, .callout-body-container):has(.math) {
+    min-width: 0;
+}
+
+/* Inline expressions stay atomic within prose, but exceptionally long ones
+   can scroll locally rather than stretching the article. A grid wrapper
+   preserves the normal math baseline; padding protects tall fractions. */
+#quarto-document-content span.math.inline {
+    display: inline-grid;
+    max-width: 100%;
+}
+
+#quarto-document-content span.math.inline > mjx-container {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: 0.5em;
+    margin-block: -0.5em;
+    overscroll-behavior-x: contain;
+}
+
+/* Inline CairoMakie figures: match .fig-dark-invert external SVGs in dark mode */
+[data-bs-theme="dark"] #quarto-document-content .cell.fig-dark-invert img.figure-img,
+[data-bs-theme="dark"] #quarto-document-content .cell.fig-dark-invert svg {
+    filter: invert(0.92) hue-rotate(180deg) contrast(0.95);
+}
+
+/* ===== Regime summary table: scale to the article column, no inner scroll =====
+   Scoped to the .regime-summary fenced div around this one table, so no other
+   table in the post or site is affected. The generated <colgroup> pins each
+   column to 20%; we override those inline widths with a fixed five-column
+   layout. The font scales with the table's container (cqi) so every atomic
+   MathJax expression fits its column without an inner horizontal scroller.
+   On narrow screens the rows stack into labelled blocks so the values stay
+   readable at normal size instead of forcing a horizontal scroll region. */
+#quarto-document-content .regime-summary {
+    container-type: inline-size;
+}
+
+#quarto-document-content .regime-summary table {
+    table-layout: fixed;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+    font-size: clamp(0.6rem, 1.98cqi, 0.86rem);
+    line-height: 1.3;
+}
+
+#quarto-document-content .regime-summary table colgroup col:nth-child(1) { width: 21% !important; }
+#quarto-document-content .regime-summary table colgroup col:nth-child(2) { width: 16% !important; }
+#quarto-document-content .regime-summary table colgroup col:nth-child(3) { width: 18% !important; }
+#quarto-document-content .regime-summary table colgroup col:nth-child(4) { width: 17% !important; }
+#quarto-document-content .regime-summary table colgroup col:nth-child(5) { width: 28% !important; }
+
+#quarto-document-content .regime-summary table thead th:nth-child(1) { width: 21%; }
+#quarto-document-content .regime-summary table thead th:nth-child(2) { width: 16%; }
+#quarto-document-content .regime-summary table thead th:nth-child(3) { width: 18%; }
+#quarto-document-content .regime-summary table thead th:nth-child(4) { width: 17%; }
+#quarto-document-content .regime-summary table thead th:nth-child(5) { width: 28%; }
+
+#quarto-document-content .regime-summary table :is(th, td) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    padding: 0.3rem;
+    vertical-align: top;
+    min-width: 0;
+}
+
+/* Let typeset math shrink with the table font and never create its own scroller. */
+#quarto-document-content .regime-summary table span.math.inline {
+    display: inline;
+    max-width: none;
+}
+
+#quarto-document-content .regime-summary table span.math.inline > mjx-container,
+#quarto-document-content .regime-summary table mjx-container {
+    overflow: visible !important;
+    max-width: none;
+    min-width: 0;
+    padding-block: 0;
+    margin-block: 0;
+}
+
+/* Narrow article columns: stack each row into a labelled block. */
+@container (max-width: 560px) {
+    #quarto-document-content .regime-summary table {
+        display: block;
+        font-size: 1rem;
+    }
+
+    #quarto-document-content .regime-summary table colgroup,
+    #quarto-document-content .regime-summary table thead {
+        display: none;
+    }
+
+    #quarto-document-content .regime-summary table tbody,
+    #quarto-document-content .regime-summary table tr,
+    #quarto-document-content .regime-summary table td {
+        display: block;
+        width: auto !important;
+    }
+
+    #quarto-document-content .regime-summary table tr {
+        border: 1px solid var(--bs-border-color, #dee2e6);
+        border-radius: 0.4rem;
+        margin: 0 0 0.6rem;
+        padding: 0.4rem 0.55rem;
+    }
+
+    #quarto-document-content .regime-summary table tr:last-child {
+        margin-bottom: 0;
+    }
+
+    #quarto-document-content .regime-summary table td {
+        border: 0;
+        padding: 0.1rem 0;
+        text-align: left !important;
+    }
+
+    #quarto-document-content .regime-summary table td:nth-child(1) {
+        font-weight: 600;
+    }
+
+    #quarto-document-content .regime-summary table td:nth-child(2)::before { content: "Build cost: "; }
+    #quarto-document-content .regime-summary table td:nth-child(3)::before { content: "J'(0): "; }
+    #quarto-document-content .regime-summary table td:nth-child(4)::before { content: "J'(1): "; }
+    #quarto-document-content .regime-summary table td:nth-child(5)::before { content: "Loss shape and optimum: "; }
+}
