@@ -3,7 +3,7 @@ title: "The Philosophy and Economics of LLM Use in Software Engineering"
 author: "Mohamed Tarek"
 date: "2026-10-10"
 description: "Making sense of LLM use in software engineernig."
-tags: [ai, llm, software-engineering, decision-theory, llm-use]
+tags: [ai, llm, software-engineering, decision-theory, llm-use, economics, technical-debt, software-quality, risk]
 number-sections: true
 engine: julia
 execute:
