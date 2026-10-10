@@ -321,13 +321,13 @@ Revenue and costs are all measured over the same deployment horizon $T$, and the
 
 Expected net profit is just expected revenue minus expected total cost (at $s=1$ here):
 $$
-\Pi(v) = R(q(v)) - B(v) - \mathbb{E}[L(T)\mid q(v),E]
+\Pi_{\mathrm{base}}(v) = R(q(v)) - B(v) - \mathbb{E}[L(T)\mid q(v),E]
 $$
-where $\Pi(v)$ is expected net profit as a function of LLM use $v$. Plugging in $R(q(v))$, $B(v)$, and $\mathbb{E}[L(T)\mid q(v),E]$ lets me see how the level of LLM use moves profitability.
+where $\Pi_{\mathrm{base}}(v)$ is expected net profit as a function of LLM use $v$. Plugging in $R(q(v))$, $B(v)$, and $\mathbb{E}[L(T)\mid q(v),E]$ lets me see how the level of LLM use moves profitability.
 
 Equivalently, I can minimize the net economic loss
 $$
-J(v)=B(v)+\mathbb{E}[L(T)\mid q(v),E]-R(q(v))=-\Pi(v).
+J(v)=B(v)+\mathbb{E}[L(T)\mid q(v),E]-R(q(v))=-\Pi_{\mathrm{base}}(v).
 $$
 Unlike the random incident-only loss $L(T)$, $J(v)$ also includes the build cost and subtracts revenue, so it can go negative when the product is profitable.
 
@@ -336,13 +336,13 @@ Unlike the random incident-only loss $L(T)$, $J(v)$ also includes the build cost
 Substituting gives the optimization problem
 $$
 \begin{aligned}
-\Pi(v)&=R_{\max}\cdot\left(1-e^{-\delta q(v)}\right)-B_{\min}-\Lambda\cdot\left(e^{-\gamma v}-e^{-\gamma}\right)-A\cdot e^{-\beta q(v)},\\
-v^*&=\arg\max_{v\in[0,1]}\Pi(v).
+\Pi_{\mathrm{base}}(v)&=R_{\max}\cdot\left(1-e^{-\delta q(v)}\right)-B_{\min}-\Lambda\cdot\left(e^{-\gamma v}-e^{-\gamma}\right)-A\cdot e^{-\beta q(v)},\\
+v^*&=\arg\max_{v\in[0,1]}\Pi_{\mathrm{base}}(v).
 \end{aligned}
 $$
 Since $q'(v)=-2\alpha\cdot(v-v_{\text{opt}})$, differentiating gives
 $$
-\Pi'(v)=\Lambda\gamma\cdot e^{-\gamma v}
+\Pi_{\mathrm{base}}'(v)=\Lambda\gamma\cdot e^{-\gamma v}
 -2\alpha\cdot(v-v_{\text{opt}})
 \left[\delta R_{\max}\cdot e^{-\delta q(v)}+\beta A\cdot e^{-\beta q(v)}\right].
 $$
@@ -352,7 +352,7 @@ H(q)=\delta R_{\max}\cdot e^{-\delta q}+\beta A\cdot e^{-\beta q}>0.
 $$
 Then the derivative is
 $$
-\Pi'(v)=\Lambda\gamma\cdot e^{-\gamma v}
+\Pi_{\mathrm{base}}'(v)=\Lambda\gamma\cdot e^{-\gamma v}
 -2\alpha\cdot(v-v_{\text{opt}})\cdot H(q(v)).
 $$
 For $v\leq v_{\text{opt}}$ the derivative is strictly positive, since build costs fall while quality improves or stays flat. So the profit optimum sits strictly to the right of the quality optimum unless $v_{\text{opt}}=1$, and in particular $v=0$ cannot be optimal here when $B_{\max}>B_{\min}$.
@@ -360,7 +360,7 @@ For $v\leq v_{\text{opt}}$ the derivative is strictly positive, since build cost
 Differentiating once more to see the curvature and the monotonicity,
 $$
 \begin{aligned}
-\Pi''(v)={}&-\Lambda\gamma^2\cdot e^{-\gamma v}-2\alpha\cdot H(q(v))\\
+\Pi_{\mathrm{base}}''(v)={}&-\Lambda\gamma^2\cdot e^{-\gamma v}-2\alpha\cdot H(q(v))\\
 &-4\alpha^2\cdot(v-v_{\text{opt}})^2
 \left[\delta^2\cdot  R_{\max}\cdot e^{-\delta q(v)}+\beta^2\cdot  A\cdot e^{-\beta q(v)}\right]<0.
 \end{aligned}
@@ -368,37 +368,37 @@ $$
 
 ### Monotone Expected Profit: Necessary and Sufficient Conditions
 
-So expected profit is strictly concave and $\Pi'$ strictly decreasing on $[0,1]$, which gives $\Pi'(1)\leq\Pi'(v)\leq\Pi'(0)$ for every $v\in[0,1]$. Then $\Pi'(1)\geq0$ forces $\Pi'(v)\geq0$ everywhere; the same argument at $v=0$ handles the nonpositive case. A continuously differentiable function is nondecreasing on an interval exactly when its derivative is nonnegative throughout, and nonincreasing exactly when the derivative is nonpositive throughout. Under the stated assumptions, then, these conditions are both necessary and sufficient:
+So expected profit is strictly concave and $\Pi_{\mathrm{base}}'$ strictly decreasing on $[0,1]$, which gives $\Pi_{\mathrm{base}}'(1)\leq\Pi_{\mathrm{base}}'(v)\leq\Pi_{\mathrm{base}}'(0)$ for every $v\in[0,1]$. Then $\Pi_{\mathrm{base}}'(1)\geq0$ forces $\Pi_{\mathrm{base}}'(v)\geq0$ everywhere; the same argument at $v=0$ handles the nonpositive case. A continuously differentiable function is nondecreasing on an interval exactly when its derivative is nonnegative throughout, and nonincreasing exactly when the derivative is nonpositive throughout. Under the stated assumptions, then, these conditions are both necessary and sufficient:
 
 - Expected profit is nondecreasing on $[0,1]$ if and only if
   $$
-  \bigl[\forall v\in[0,1],\ \Pi'(v)\geq0\bigr]
-  \quad\Longleftrightarrow\quad \Pi'(1)\geq0
+  \bigl[\forall v\in[0,1],\ \Pi_{\mathrm{base}}'(v)\geq0\bigr]
+  \quad\Longleftrightarrow\quad \Pi_{\mathrm{base}}'(1)\geq0
   \quad\Longleftrightarrow\quad
   \Lambda\geq\frac{2\alpha\cdot(1-v_{\text{opt}})\cdot e^\gamma}{\gamma}H(q(1)).
   $$
   The unique optimum is $v^*=1$ (full LLM use). Recall that $\Lambda=(B_{\max}-B_{\min})/(1-e^{-\gamma})$ scales the build-cost saving. When $v_{\text{opt}}=1$, the threshold is zero, so every allowed $\Lambda>0$ satisfies it.
 - Expected profit would be nonincreasing on $[0,1]$ if and only if
   $$
-  \bigl[\forall v\in[0,1],\ \Pi'(v)\leq0\bigr]
-  \quad\Longleftrightarrow\quad \Pi'(0)\leq0
+  \bigl[\forall v\in[0,1],\ \Pi_{\mathrm{base}}'(v)\leq0\bigr]
+  \quad\Longleftrightarrow\quad \Pi_{\mathrm{base}}'(0)\leq0
   \quad\Longleftrightarrow\quad
   \Lambda\gamma+2\alpha v_{\text{opt}}\cdot H(q(0))\leq0.
   $$
   This condition is impossible under the stated assumptions, as shown below.
 
-Here $q(0)=q_{\max}-\alpha v_{\text{opt}}^2$ and $q(1)=q_{\max}-\alpha\cdot(1-v_{\text{opt}})^2$ are the quality values at the two endpoints, $v=0$ and $v=1$. The endpoint test and the sign of $\Pi'$ on the whole interval are equivalent in both directions. Necessity is immediate: $[0,1]$ contains its endpoints, so if $\Pi'(v)\geq0$ for every $v$, then in particular $\Pi'(1)\geq0$, and if $\Pi'(v)\leq0$ for every $v$, then in particular $\Pi'(0)\leq0$. Sufficiency comes from strict concavity, which makes $\Pi'$ strictly decreasing, so $\Pi'(1)\geq0$ forces $\Pi'(v)\geq0$ for every $v\leq1$, and $\Pi'(0)\leq0$ forces $\Pi'(v)\leq0$ for every $v\geq0$. The endpoint inequality can hold with equality, meaning the derivative is exactly zero at $v=1$ or at $v=0$. Even then strict concavity ($\Pi''<0$) makes $\Pi'$ strictly decreasing, so a zero at $v=1$ still forces $\Pi'(v)>0$ for every $v<1$, and a zero at $v=0$ forces $\Pi'(v)<0$ for every $v>0$. Profit is still strictly monotone, the endpoint stays the unique maximizer, and the curve never flattens into a tie or a plateau. Finally, since $J=-\Pi$ we have $J'=-\Pi'$, so the two functions move in opposite directions: the condition for nondecreasing profit is exactly the condition for nonincreasing loss, and vice versa, with the same strictness in the interior.
+Here $q(0)=q_{\max}-\alpha v_{\text{opt}}^2$ and $q(1)=q_{\max}-\alpha\cdot(1-v_{\text{opt}})^2$ are the quality values at the two endpoints, $v=0$ and $v=1$. The endpoint test and the sign of $\Pi_{\mathrm{base}}'$ on the whole interval are equivalent in both directions. Necessity is immediate: $[0,1]$ contains its endpoints, so if $\Pi_{\mathrm{base}}'(v)\geq0$ for every $v$, then in particular $\Pi_{\mathrm{base}}'(1)\geq0$, and if $\Pi_{\mathrm{base}}'(v)\leq0$ for every $v$, then in particular $\Pi_{\mathrm{base}}'(0)\leq0$. Sufficiency comes from strict concavity, which makes $\Pi_{\mathrm{base}}'$ strictly decreasing, so $\Pi_{\mathrm{base}}'(1)\geq0$ forces $\Pi_{\mathrm{base}}'(v)\geq0$ for every $v\leq1$, and $\Pi_{\mathrm{base}}'(0)\leq0$ forces $\Pi_{\mathrm{base}}'(v)\leq0$ for every $v\geq0$. The endpoint inequality can hold with equality, meaning the derivative is exactly zero at $v=1$ or at $v=0$. Even then strict concavity ($\Pi_{\mathrm{base}}''<0$) makes $\Pi_{\mathrm{base}}'$ strictly decreasing, so a zero at $v=1$ still forces $\Pi_{\mathrm{base}}'(v)>0$ for every $v<1$, and a zero at $v=0$ forces $\Pi_{\mathrm{base}}'(v)<0$ for every $v>0$. Profit is still strictly monotone, the endpoint stays the unique maximizer, and the curve never flattens into a tie or a plateau. Finally, since $J=-\Pi_{\mathrm{base}}$ we have $J'=-\Pi_{\mathrm{base}}'$, so the two functions move in opposite directions: the condition for nondecreasing profit is exactly the condition for nonincreasing loss, and vice versa, with the same strictness in the interior.
 
-It turns out that nonincreasing expected profit is impossible under this quadratic startup model. Suppose $\Pi'(v)\leq0$ for every $v\in[0,1]$. At $v=0$ that would require $\Pi'(0)\leq0$, but
+It turns out that nonincreasing expected profit is impossible under this quadratic startup model. Suppose $\Pi_{\mathrm{base}}'(v)\leq0$ for every $v\in[0,1]$. At $v=0$ that would require $\Pi_{\mathrm{base}}'(0)\leq0$, but
 $$
-\Pi'(0)=\Lambda\gamma+2\alpha v_{\text{opt}}\cdot H(q(0))\geq \Lambda\gamma>0,
+\Pi_{\mathrm{base}}'(0)=\Lambda\gamma+2\alpha v_{\text{opt}}\cdot H(q(0))\geq \Lambda\gamma>0,
 $$
-a contradiction, since $v_{\text{opt}}\geq0$, $\alpha>0$, and $H>0$. When $v_{\text{opt}}=0$, the same contradiction holds with $\Pi'(0)=\Lambda\gamma>0$. Continuity of $\Pi'$ then also gives some $\varepsilon\in(0,1]$ with $\Pi'(v)>0$ throughout $[0,\varepsilon)$, so this is not just an endpoint fact. Early on, build-cost savings and nondecreasing quality both push toward more LLM use. Expected profit either rises across the whole interval or has a single interior peak.
+a contradiction, since $v_{\text{opt}}\geq0$, $\alpha>0$, and $H>0$. When $v_{\text{opt}}=0$, the same contradiction holds with $\Pi_{\mathrm{base}}'(0)=\Lambda\gamma>0$. Continuity of $\Pi_{\mathrm{base}}'$ then also gives some $\varepsilon\in(0,1]$ with $\Pi_{\mathrm{base}}'(v)>0$ throughout $[0,\varepsilon)$, so this is not just an endpoint fact. Early on, build-cost savings and nondecreasing quality both push toward more LLM use. Expected profit either rises across the whole interval or has a single interior peak.
 
 ::: {.callout-note title="What if more LLM use always improved quality?"}
 Hypothetically, a capable enough LLM might keep improving quality all the way to full use. In the quadratic model, that is the special case $v_{\text{opt}}=1$: quality rises for $v<1$ and has zero slope at $v=1$. More generally, if $q'(v)\geq0$ throughout $[0,1]$, the assumptions I already made (falling build costs, quality-linked revenue, declining incident rates, and a fixed expected cost per incident) give
 $$
-\Pi'(v)=H(q(v))\cdot q'(v)+\Lambda\gamma\cdot e^{-\gamma v}>0,
+\Pi_{\mathrm{base}}'(v)=H(q(v))\cdot q'(v)+\Lambda\gamma\cdot e^{-\gamma v}>0,
 \qquad v^*=1.
 $$
 Then every extra bit of LLM use helps the modeled financial outcome. That would be a qualitative regime change, a kind of break-even capability threshold for the quality trade-off. It is a theoretical possibility, not a property I claim for current LLMs.
@@ -408,17 +408,17 @@ And this holds only for the original model without debt penalties or constraints
 
 ### Nonmonotone Expected Profit: An Interior Optimum
 
-An interior optimum appears exactly when $\Pi'(0)>0>\Pi'(1)$. Since $\Pi'$ is continuous and strictly decreasing, there is then one root $\Pi'(v^*)=0$: profit rises and then falls, while loss falls and then rises. For the quadratic quality model $\Pi'(0)>0$ always holds, so the condition on the parameters is
+An interior optimum appears exactly when $\Pi_{\mathrm{base}}'(0)>0>\Pi_{\mathrm{base}}'(1)$. Since $\Pi_{\mathrm{base}}'$ is continuous and strictly decreasing, there is then one root $\Pi_{\mathrm{base}}'(v^*)=0$: profit rises and then falls, while loss falls and then rises. For the quadratic quality model $\Pi_{\mathrm{base}}'(0)>0$ always holds, so the condition on the parameters is
 $$
 \Lambda\gamma\cdot e^{-\gamma}<2\alpha\cdot(1-v_{\text{opt}})\cdot H(q(1)).
 $$
-The root lies in $(v_{\text{opt}},1)$ and satisfies the stationarity condition $\Pi'(v^*)=0$, the point where the derivative in $v$ is zero:
+The root lies in $(v_{\text{opt}},1)$ and satisfies the stationarity condition $\Pi_{\mathrm{base}}'(v^*)=0$, the point where the derivative in $v$ is zero:
 $$
 \Lambda\gamma\cdot e^{-\gamma v^*}
 =2\alpha\cdot(v^*-v_{\text{opt}})
 \left[\delta R_{\max}\cdot e^{-\delta q(v^*)}+\beta A\cdot e^{-\beta q(v^*)}\right].
 $$
-The left side is the marginal saving in build cost, and the right side is the marginal revenue lost through lower quality plus the extra expected incident cost. This balance has no general elementary closed form, so after checking the boundary condition, I solve $\Pi'(v)=0$ numerically by bisection on $[v_{\text{opt}},1]$, where the derivative is continuous, strictly decreasing, and changes sign.
+The left side is the marginal saving in build cost, and the right side is the marginal revenue lost through lower quality plus the extra expected incident cost. This balance has no general elementary closed form, so after checking the boundary condition, I solve $\Pi_{\mathrm{base}}'(v)=0$ numerically by bisection on $[v_{\text{opt}},1]$, where the derivative is continuous, strictly decreasing, and changes sign.
 
 With everything else held fixed, higher expected incident costs or a longer deployment horizon raise $A=T\cdot \lambda_0(E)\cdot \mu(E)$, the horizon-total scale of expected incident loss, and pull the optimum toward the quality-maximizing level $v_{\text{opt}}$. A larger $R_{\max}$ does the same. A larger maximum cost $B_{\max}$ (equivalently a larger $\Lambda=(B_{\max}-B_{\min})/(1-e^{-\gamma})$) pushes the other way, toward more LLM use. The optimum can stay pinned at a boundary until this balance shifts; once it is interior, a shift moves it. For the horizon comparison, I hold the horizon-total revenue parameters fixed. So the quality-maximizing $v_{\text{opt}}$ and the profit-maximizing $v^*$ are different decisions: giving up some quality can pay off when it buys enough development savings.
 
@@ -436,14 +436,14 @@ Then any positive amount of LLM use lowers quality relative to manual coding, an
 
 The expected profit derivative becomes
 $$
-\Pi'(v)=\Lambda\gamma\cdot e^{-\gamma v}-2\alpha v\cdot H(q_{\max}-\alpha v^2),
-\qquad \Pi'(0)=\Lambda\gamma>0.
+\Pi_{\mathrm{base}}'(v)=\Lambda\gamma\cdot e^{-\gamma v}-2\alpha v\cdot H(q_{\max}-\alpha v^2),
+\qquad \Pi_{\mathrm{base}}'(0)=\Lambda\gamma>0.
 $$
 So zero is not the economic optimum when $B_{\max}>B_{\min}$, even though LLM use only hurts quality here: near zero, the quality penalty is quadratic while the build saving is first-order. Strict concavity still holds, so profit rises and $v^*=1$ exactly when
 $$
 2\alpha\cdot H(q_{\max}-\alpha)\leq \Lambda\gamma\cdot e^{-\gamma};
 $$
-otherwise there is a single interior root in $(0,1)$. Outside the strict $B_{\max}>B_{\min}$ case, if $B_{\max}=B_{\min}$ there is no build saving at all, and then $\Pi'(v)=-2\alpha v\cdot H(q(v))<0$ for $v>0$ with $v^*=0$, as long as quality has positive economic value ($H>0$, as it does for the revenue and incident parameters assumed here).
+otherwise there is a single interior root in $(0,1)$. Outside the strict $B_{\max}>B_{\min}$ case, if $B_{\max}=B_{\min}$ there is no build saving at all, and then $\Pi_{\mathrm{base}}'(v)=-2\alpha v\cdot H(q(v))<0$ for $v>0$ with $v^*=0$, as long as quality has positive economic value ($H>0$, as it does for the revenue and incident parameters assumed here).
 
 ### Allowing a Manual Optimum: A Different Quality Assumption
 
@@ -454,23 +454,23 @@ $$
 The build-cost, revenue, and incident assumptions stay the same. Unlike the quadratic case with $v_{\text{opt}}=0$, this curve has a nonzero initial quality penalty $q'(0)=-\alpha$, so
 $$
 \begin{aligned}
-\Pi'(v)&=\Lambda\gamma\cdot e^{-\gamma v}-\alpha\cdot H(q(v)),\\
-\Pi''(v)&=-\Lambda\gamma^2\cdot e^{-\gamma v}
+\Pi_{\mathrm{base}}'(v)&=\Lambda\gamma\cdot e^{-\gamma v}-\alpha\cdot H(q(v)),\\
+\Pi_{\mathrm{base}}''(v)&=-\Lambda\gamma^2\cdot e^{-\gamma v}
 -\alpha^2\left[\delta^2\cdot R_{\max}\cdot e^{-\delta q(v)}+\beta^2\cdot A\cdot e^{-\beta q(v)}\right]<0.
 \end{aligned}
 $$
-Here again $\Pi'$ is strictly decreasing, so $\Pi'(1)\leq\Pi'(v)\leq\Pi'(0)$ for every $v\in[0,1]$. Substituting the endpoint derivatives gives these necessary and sufficient conditions for the linear variant:
+Here again $\Pi_{\mathrm{base}}'$ is strictly decreasing, so $\Pi_{\mathrm{base}}'(1)\leq\Pi_{\mathrm{base}}'(v)\leq\Pi_{\mathrm{base}}'(0)$ for every $v\in[0,1]$. Substituting the endpoint derivatives gives these necessary and sufficient conditions for the linear variant:
 
 - Expected profit is nondecreasing on $[0,1]$ if and only if
   $$
-  \bigl[\forall v\in[0,1],\ \Pi'(v)\geq0\bigr]
+  \bigl[\forall v\in[0,1],\ \Pi_{\mathrm{base}}'(v)\geq0\bigr]
   \quad\Longleftrightarrow\quad
   \Lambda\gamma\cdot e^{-\gamma}\geq\alpha\cdot H(q_{\max}-\alpha),
   $$
   giving the unique full LLM use optimum $v^*=1$.
 - Expected profit is nonincreasing on $[0,1]$ if and only if
   $$
-  \bigl[\forall v\in[0,1],\ \Pi'(v)\leq0\bigr]
+  \bigl[\forall v\in[0,1],\ \Pi_{\mathrm{base}}'(v)\leq0\bigr]
   \quad\Longleftrightarrow\quad
   \Lambda\gamma\leq\alpha\cdot H(q_{\max}),
   $$
@@ -583,12 +583,12 @@ $$
 185{,}042.82e^{-2v}
 =2(v-0.3)\left[200{,}000e^{-2[1-(v-0.3)^2]}+50{,}000e^{-[1-(v-0.3)^2]}\right].
 $$
-Here $J'(0)\approx-216{,}562$ and $J'(1)\approx117{,}958$ USD per unit of $v$, so the loss is nonmonotone. Solving numerically gives $v^*\approx0.6945934$, about 69% on the model's LLM-use intensity scale. This is the unique minimizer of $J$, and so the maximizer of $\Pi$. At that optimum:
+Here $J'(0)\approx-216{,}562$ and $J'(1)\approx117{,}958$ USD per unit of $v$, so the loss is nonmonotone. Solving numerically gives $v^*\approx0.6945934$, about 69% on the model's LLM-use intensity scale. This is the unique minimizer of $J$, and so the maximizer of $\Pi_{\mathrm{base}}$. At that optimum:
 
 - Quality: $q(v^*)\approx0.844$.
 - Expected annual incident count: $\lambda(q(v^*),E)\cdot T\approx4.299$.
 - Expected revenue: $\$81{,}522$; upfront build cost: $\$30{,}542$; expected incident loss: $\$21{,}493$.
-- Net profit: $\Pi(v^*)\approx\$29{,}487$.
+- Net profit: $\Pi_{\mathrm{base}}(v^*)\approx\$29{,}487$.
 - Net economic loss: $J(v^*)\approx-\$29{,}487$.
 
 | Choice | $v$ | Net profit over the deployment year |
@@ -672,14 +672,14 @@ end
 
 Moving past the quality optimum saves enough build cost to raise profit, but going all the way to $v=1$ gives up too much revenue and adds incident losses. At this lower revenue ceiling, abandoning LLM use is itself a loss: the no-use choice is negative, and full use earns less than the interior optimum. The best balance is interior for these assumptions, though that is not a general recommendation.
 
-For the quality-only-worsens quadratic case, I change only $v_{\text{opt}}$ to $0$ and keep every other baseline parameter, including $B_{\max}=\$100{,}000$, $B_{\min}=\$20{,}000$, and $A=\$50{,}000$. Then $q(v)=1-v^2$, $J'(0)=-185{,}043$, and $J'(1)\approx474{,}957$ USD per unit of $v$. The unique root is $v^*\approx0.4995565$, with quality $q\approx0.750443$, expected annual incident count $\approx4.722$, and net profit $\Pi(v^*)\approx\$12{,}553$, compared with $-\$31{,}928$ at $v=0$. Even under this hypothetical quality penalty for unreviewed coding, build savings make some LLM use profitable, and no LLM use would lose money at this revenue ceiling.
+For the quality-only-worsens quadratic case, I change only $v_{\text{opt}}$ to $0$ and keep every other baseline parameter, including $B_{\max}=\$100{,}000$, $B_{\min}=\$20{,}000$, and $A=\$50{,}000$. Then $q(v)=1-v^2$, $J'(0)=-185{,}043$, and $J'(1)\approx474{,}957$ USD per unit of $v$. The unique root is $v^*\approx0.4995565$, with quality $q\approx0.750443$, expected annual incident count $\approx4.722$, and net profit $\Pi_{\mathrm{base}}(v^*)\approx\$12{,}553$, compared with $-\$31{,}928$ at $v=0$. Even under this hypothetical quality penalty for unreviewed coding, build savings make some LLM use profitable, and no LLM use would lose money at this revenue ceiling.
 
 For an optimum at full LLM use with the original quadratic quality curve, go back to the baseline $v_{\text{opt}}=0.3$ and hold every baseline parameter fixed except the maximum build cost $B_{\max}$. Written in terms of that maximum cost, the endpoint condition requires
 $$
 B_{\max}\geq B_{\min}+\frac{2\alpha\cdot(1-v_{\text{opt}})\cdot H(q(1))\cdot e^\gamma\cdot(1-e^{-\gamma})}{\gamma}
 \approx\$476{,}821.58.
 $$
-Take $B_{\max}=\$1{,}000{,}000$ (with $B_{\min}=\$20{,}000$): then $J'(1)\approx-163{,}773<0$, so loss falls throughout $[0,1]$ and $v^*=1$, with full LLM use profitable at $\Pi(1)\approx\$13{,}916$.
+Take $B_{\max}=\$1{,}000{,}000$ (with $B_{\min}=\$20{,}000$): then $J'(1)\approx-163{,}773<0$, so loss falls throughout $[0,1]$ and $v^*=1$, with full LLM use profitable at $\Pi_{\mathrm{base}}(1)\approx\$13{,}916$.
 
 For an optimum at no LLM use, which needs the modified linear quality assumption, I use $q(v)=1-v$ and the same other parameters, with the linear-variant build costs $B_{\max}=\$30{,}000$ and $B_{\min}=\$20{,}000$. Then $\alpha\cdot H(q_{\max})\approx\$45{,}461>\Lambda\gamma=\$23{,}130$, so $J'(0)\approx22{,}331>0$. Loss rises throughout the interval and $v^*=0$.
 
@@ -879,7 +879,7 @@ $$
 -2\alpha\cdot(v-v_{\text{opt}})
 \left[s\delta R_{\max}\cdot e^{-\delta q(v)}+\beta A\cdot e^{-\beta q(v)}\right].
 $$
-The strict-concavity argument from before still holds for every $s\geq0$: replacing $R_{\max}$ by $s\cdot R_{\max}$ in $\Pi''$ keeps $\Pi_s''<0$. For an interior optimum $v^*(s)>v_{\text{opt}}$ under $B_{\max}>B_{\min}$, differentiating $\Pi_s'(v^*(s))=0$ implicitly gives
+The strict-concavity argument from before still holds for every $s\geq0$: replacing $R_{\max}$ by $s\cdot R_{\max}$ in $\Pi_{\mathrm{base}}''$ keeps $\Pi_s''<0$. For an interior optimum $v^*(s)>v_{\text{opt}}$ under $B_{\max}>B_{\min}$, differentiating $\Pi_s'(v^*(s))=0$ implicitly gives
 $$
 \frac{dv^*}{ds}
 =\frac{2\alpha\cdot(v^*-v_{\text{opt}})\cdot \delta R_{\max}\cdot e^{-\delta q(v^*)}}
@@ -1368,9 +1368,9 @@ The cash-flow timeline runs in years from $t=0$ (deployment) to $t=T$ (retiremen
 
 ### Undiscounted Lifecycle Profit
 
-Start by giving dollars at all dates equal weight. Let $p$ index the cleanup policy, either never clean or clean at year 1. The debt-related cash cost of policy $p$ is its total maintenance plus cleanup, which I write per unit of initial stock as the coefficient $\kappa_p(T)$, so that the total cost is $\kappa_p(T)\cdot D_0(v)$. The two policies give:
+Start by giving dollars at all dates equal weight. Let $p$ denote the policy, either never clean or clean at year 1. The debt-related cash cost of the policy is its total maintenance plus cleanup, which I write per unit of initial stock as the coefficient $\kappa(T;p)$, so that the total cost is $\kappa(T;p)\cdot D_0(v)$. The two policies give:
 
-| Debt policy $p$ | Maintenance plus cleanup, divided by $D_0$ | $\kappa_p(T)$ |
+| Debt policy | Maintenance plus cleanup, divided by $D_0$ | $\kappa(T;p)$ |
 |:--|:--|:--|
 | Never clean | $\sum_{k=1}^{T}r\cdot(1+r)^{k-1}$ | $(1+r)^{T}-1$ |
 | Clean at year 1 | $r+(1+r)$ | $1+2r$ |
@@ -1379,14 +1379,14 @@ The maintenance sum telescopes to $[(1+r)^{T}-1]D_0$, which is numerically the g
 
 Expected lifecycle profit and its unique maximizing choice are
 $$
-\Pi_p(v;T)=T\cdot G(v)-B(v)-\kappa_p(T)\cdot D_0(v),
-\qquad v_p^*(T)=\arg\max_{v\in[0,1]}\Pi_p(v;T).
+\Pi_{\mathrm{debt}}(v;T,p)=T\cdot G(v)-B(v)-\kappa(T;p)\cdot D_0(v),
+\qquad v^{*}(T,p)=\arg\max_{v\in[0,1]}\Pi_{\mathrm{debt}}(v;T,p).
 $$
 Since $D_0(v)=B_{\max}-B(v)$, the debt term is proportional to the build-cost saving. Differentiating term by term, and using $q'(v)=-2\alpha\cdot(v-v_{\text{opt}})$, gives
 $$
 \begin{aligned}
-\Pi_p'(v)&=T\cdot G'(q(v))\cdot q'(v)+\Lambda\gamma\cdot e^{-\gamma v}-\kappa_p\Lambda\gamma\cdot e^{-\gamma v}\\
-&=(1-\kappa_p)\cdot \Lambda\gamma\cdot e^{-\gamma v}
+\Pi_{\mathrm{debt}}'(v;T,p)&=T\cdot G'(q(v))\cdot q'(v)+\Lambda\gamma\cdot e^{-\gamma v}-\kappa(T;p)\cdot\Lambda\gamma\cdot e^{-\gamma v}\\
+&=(1-\kappa(T;p))\cdot \Lambda\gamma\cdot e^{-\gamma v}
 -2\alpha T\cdot(v-v_{\text{opt}})\left[s\delta\bar R_{\max}\cdot e^{-\delta q(v)}
 +\beta\lambda_0\mu\cdot e^{-\beta q(v)}\right].
 \end{aligned}
@@ -1398,7 +1398,7 @@ g(q)=s\delta\bar R_{\max}\cdot e^{-\delta q}
 $$
 so the derivative simplifies to
 $$
-\Pi_p'(v)=(1-\kappa_p)\cdot \Lambda\gamma\cdot e^{-\gamma v}
+\Pi_{\mathrm{debt}}'(v;T,p)=(1-\kappa(T;p))\cdot \Lambda\gamma\cdot e^{-\gamma v}
 -2\alpha T\cdot(v-v_{\text{opt}})\cdot g(q(v)).
 $$
 The annual operating surplus is strictly concave:
@@ -1408,35 +1408,35 @@ G''(v)={}&-2\alpha\cdot g(q(v))\\
 &-4\alpha^2\cdot(v-v_{\text{opt}})^2
 \left[s\delta^2\cdot \bar R_{\max}\cdot e^{-\delta q(v)}
 +\beta^2\cdot \lambda_0\mu\cdot e^{-\beta q(v)}\right]<0,\\
-\Pi_p''(v)={}&T\cdot G''(v)+(\kappa_p-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}.
+\Pi_{\mathrm{debt}}''(v;T,p)={}&T\cdot G''(v)+(\kappa(T;p)-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}.
 \end{aligned}
 $$
-The operating surplus and the build-cost saving both bend the objective downward ($T\cdot G''<0$ and, since $D_0$ is concave, $-\Lambda\gamma^2\cdot e^{-\gamma v}<0$), but the debt cash $-\kappa_p\cdot D_0$ is convex and adds $+\kappa_p\Lambda\gamma^2\cdot e^{-\gamma v}$ back. Together these give $(\kappa_p-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}$. If $\kappa_p\le1$, the objective is strictly concave on $[0,1]$. If $\kappa_p>1$, it stays strictly concave as long as the operating surplus dominates, $T\lvert G''(v)\rvert>(\kappa_p-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}$; that holds across $[0,1]$ for the illustrative parameters and could break only at much larger horizons or debt coefficients, which would need a separate check.
+The operating surplus and the build-cost saving both bend the objective downward ($T\cdot G''<0$ and, since $D_0$ is concave, $-\Lambda\gamma^2\cdot e^{-\gamma v}<0$), but the debt cash $-\kappa(T;p)\cdot D_0$ is convex and adds $+\kappa(T;p)\cdot\Lambda\gamma^2\cdot e^{-\gamma v}$ back. Together these give $(\kappa(T;p)-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}$. If $\kappa(T;p)\le1$, the objective is strictly concave on $[0,1]$. If $\kappa(T;p)>1$, it stays strictly concave as long as the operating surplus dominates, $T\lvert G''(v)\rvert>(\kappa(T;p)-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}$; that holds across $[0,1]$ for the illustrative parameters and could break only at much larger horizons or debt coefficients, which would need a separate check.
 
 At $v=0$ the derivative is
 $$
-\Pi_p'(0)=(1-\kappa_p)\cdot \Lambda\gamma+2\alpha T v_{\text{opt}}\cdot g(q(0)).
+\Pi_{\mathrm{debt}}'(0;T,p)=(1-\kappa(T;p))\cdot \Lambda\gamma+2\alpha T v_{\text{opt}}\cdot g(q(0)).
 $$
-In the debt-free case, $\kappa_p=0$, so $\Pi_p'(0)=\Lambda\gamma+2\alpha T v_{\text{opt}}\cdot g(q(0))>0$, and $v_p^*=0$ cannot be optimal. Debt adds the constant $-(\kappa_p-1)\cdot \Lambda\gamma$, which can dominate the bounded term $2\alpha T v_{\text{opt}}\cdot g(q(0))$. The optimum is $0$, that is $v_p^*=0$, exactly when $\Pi_p'(0)\le0$:
+In the debt-free case, $\kappa(T;p)=0$, so $\Pi_{\mathrm{debt}}'(0;T,p)=\Lambda\gamma+2\alpha T v_{\text{opt}}\cdot g(q(0))>0$, and $v^{*}(T,p)=0$ cannot be optimal. Debt adds the constant $-(\kappa(T;p)-1)\cdot \Lambda\gamma$, which can dominate the bounded term $2\alpha T v_{\text{opt}}\cdot g(q(0))$. The optimum is $0$, that is $v^{*}(T,p)=0$, exactly when $\Pi_{\mathrm{debt}}'(0;T,p)\le0$:
 $$
-(\kappa_p-1)\cdot \Lambda\gamma\;\geq\;2\alpha T v_{\text{opt}}\cdot g(q(0)).
+(\kappa(T;p)-1)\cdot \Lambda\gamma\;\geq\;2\alpha T v_{\text{opt}}\cdot g(q(0)).
 $$
-If instead $(\kappa_p-1)\cdot \Lambda\gamma<2\alpha T v_{\text{opt}}\cdot g(q(0))$, then $\Pi_p'(0)>0$ and, when $\Pi_p'(1)<0$, there is a unique root of $\Pi_p'(v)=0$ with $0<v_p^*<1$, found by bisection.
+If instead $(\kappa(T;p)-1)\cdot \Lambda\gamma<2\alpha T v_{\text{opt}}\cdot g(q(0))$, then $\Pi_{\mathrm{debt}}'(0;T,p)>0$ and, when $\Pi_{\mathrm{debt}}'(1;T,p)<0$, there is a unique root of $\Pi_{\mathrm{debt}}'(v;T,p)=0$ with $0<v^{*}(T,p)<1$, found by bisection.
 
-For compound debt $\kappa_p=(1+r)^T-1$ at $r=0.30$:
-- $T=10$: $\kappa_p=12.785849$ and $(\kappa_p-1)\cdot \Lambda\gamma=\$2{,}180{,}887>\$315{,}188=2\alpha T v_{\text{opt}}\cdot g(q(0))$, so $\Pi_p'(0)<0$ and $v_p^*=0$;
-- the boundary $(\kappa_p-1)\cdot \Lambda\gamma=2\alpha T v_{\text{opt}}\cdot g(q(0))$ occurs at $T\approx3.681392$, so the optimum satisfies $0<v_p^*<1$ for $T\le3$ and equals $0$ for $T\ge4$;
-- $T=20$: $\kappa_p=189.049638$ and $(\kappa_p-1)\cdot \Lambda\gamma=\$34{,}797{,}236$, so $v_p^*=0$.
+For compound debt $\kappa(T;\mathrm{never})=(1+r)^T-1$ at $r=0.30$:
+- $T=10$: $\kappa(T;\mathrm{never})=12.785849$ and $(\kappa(T;\mathrm{never})-1)\cdot \Lambda\gamma=\$2{,}180{,}887>\$315{,}188=2\alpha T v_{\text{opt}}\cdot g(q(0))$, so $\Pi_{\mathrm{debt}}'(0;T,\mathrm{never})<0$ and $v^{*}(T,\mathrm{never})=0$;
+- the boundary $(\kappa(T;\mathrm{never})-1)\cdot \Lambda\gamma=2\alpha T v_{\text{opt}}\cdot g(q(0))$ occurs at $T\approx3.681392$, so the optimum satisfies $0<v^{*}(T,\mathrm{never})<1$ for $T\le3$ and equals $0$ for $T\ge4$;
+- $T=20$: $\kappa(T;\mathrm{never})=189.049638$ and $(\kappa(T;\mathrm{never})-1)\cdot \Lambda\gamma=\$34{,}797{,}236$, so $v^{*}(T,\mathrm{never})=0$.
 
-When $0<v_p^*<1$, the implicit-function theorem gives
+When $0<v^{*}(T,p)<1$, the implicit-function theorem gives
 $$
-\frac{\partial v_p^*}{\partial \kappa_p}
-=\frac{\Lambda\gamma\cdot e^{-\gamma v_p^*}}{\Pi_p''(v_p^*)}<0,
+\frac{\partial v^{*}(T,p)}{\partial \kappa(T;p)}
+=\frac{\Lambda\gamma\cdot e^{-\gamma v^{*}(T,p)}}{\Pi_{\mathrm{debt}}''(v^{*}(T,p);T,p)}<0,
 \qquad
-\frac{\partial v_p^*}{\partial r}
-=\frac{\kappa_p'(r)\cdot \Lambda\gamma\cdot e^{-\gamma v_p^*}}{\Pi_p''(v_p^*)}<0,
+\frac{\partial v^{*}(T,p)}{\partial r}
+=\frac{\partial\kappa(T;p)/\partial r\cdot \Lambda\gamma\cdot e^{-\gamma v^{*}(T,p)}}{\Pi_{\mathrm{debt}}''(v^{*}(T,p);T,p)}<0,
 $$
-the second for compound debt, since $\kappa_p'(r)>0$ and $\Pi_p''<0$.
+the second for compound debt, since $\partial\kappa(T;p)/\partial r>0$ and $\Pi_{\mathrm{debt}}''<0$.
 
 At a fixed $v$ with $D_0(v)>0$, year-1 cleanup is cheaper than never cleaning exactly when
 $$
@@ -1450,19 +1450,19 @@ At $r=0.30$ the threshold is $3.641927$, so on the annual grid cleanup first bec
 
 Treating $T$ as continuous and differentiating with respect to it, the first-order condition implicitly at an interior optimum gives
 $$
-\frac{dv_p^*}{dT}
-=\frac{2\alpha\cdot(v_p^*-v_{\text{opt}})\cdot g(q(v_p^*))+\kappa_p'(T)\cdot \Lambda\gamma\cdot e^{-\gamma v_p^*}}{\Pi_p''(v_p^*)}.
+\frac{\partial v^{*}(T,p)}{\partial T}
+=\frac{2\alpha\cdot(v^{*}(T,p)-v_{\text{opt}})\cdot g(q(v^{*}(T,p)))+\partial\kappa(T;p)/\partial T\cdot \Lambda\gamma\cdot e^{-\gamma v^{*}(T,p)}}{\Pi_{\mathrm{debt}}''(v^{*}(T,p);T,p)}.
 $$
-For the year-1 cleanup policy, $\kappa_p'=0$, so the numerator reduces to $2\alpha\cdot(v-v_{\text{opt}})\cdot g(q(v))$, and the sign of $\Pi_p''$ makes longer life move the interior optimum toward $v_{\text{opt}}$ (down if it is above, up if below). For never-clean debt, $\kappa_p'(T)=\log(1+r)(1+r)^{T}$ grows without bound, so the debt term takes over and drives the interior optimum toward zero; once it reaches the corner $v_p^*=0$, it stays there.
+For the year-1 cleanup policy, $\partial\kappa(T;\mathrm{clean})/\partial T=0$, so the numerator reduces to $2\alpha\cdot(v-v_{\text{opt}})\cdot g(q(v))$, and the sign of $\Pi_{\mathrm{debt}}''$ makes longer life move the interior optimum toward $v_{\text{opt}}$ (down if it is above, up if below). For never-clean debt, $\partial\kappa(T;\mathrm{never})/\partial T=\log(1+r)(1+r)^{T}$ grows without bound, so the debt term takes over and drives the interior optimum toward zero; once it reaches the corner $v^{*}(T,\mathrm{never})=0$, it stays there.
 
 The long-lifetime limits make the contrast clearest:
 $$
 \begin{aligned}
-\text{Year-1 cleanup:}\quad &v_p^*(T)\longrightarrow v_{\text{opt}},\\
-\text{Never clean:}\quad &v_p^*(T)\longrightarrow0.
+\text{Year-1 cleanup:}\quad &v^{*}(T,p)\longrightarrow v_{\text{opt}},\\
+\text{Never clean:}\quad &v^{*}(T,p)\longrightarrow0.
 \end{aligned}
 $$
-These are undiscounted limits with all annual operating and debt parameters fixed. For cleanup, divide $\Pi_p$ by $T$: the build and fixed cleanup terms vanish uniformly on $[0,1]$, leaving $G$, whose unique maximizer is $v_{\text{opt}}$ because quality has positive annual value. For never-clean debt, divide by $\kappa_p(T)$ instead: $T/\kappa_p(T)\to0$, so the objective converges uniformly to $-D_0(v)$, maximized at $v=0$. In each case compactness and the maximizing inequality give convergence to the unique maximizer of the limiting objective.
+These are undiscounted limits with all annual operating and debt parameters fixed. For cleanup, divide $\Pi_{\mathrm{debt}}$ by $T$: the build and fixed cleanup terms vanish uniformly on $[0,1]$, leaving $G$, whose unique maximizer is $v_{\text{opt}}$ because quality has positive annual value. For never-clean debt, divide by $\kappa(T;\mathrm{never})$ instead: $T/\kappa(T;\mathrm{never})\to0$, so the objective converges uniformly to $-D_0(v)$, maximized at $v=0$. In each case compactness and the maximizing inequality give convergence to the unique maximizer of the limiting objective.
 
 The results say that under early cleanup, a long horizon spreads the build and cleanup costs across many years, so they stop driving the choice; the annual operating surplus dominates and the optimum settles at the quality-maximizing level $v_{\text{opt}}$. Long-lived software therefore favors the quality-maximizing amount of LLM use, provided the debt is repaid early. Never cleaning is the opposite: compounded maintenance keeps growing and the debt is never removed, so the best response is to avoid creating it, which sends $v^*$ to zero, unless the software will only be in use for a short horizon.
 
@@ -1531,30 +1531,30 @@ $\Sigma_n(z)$ is an ordinary finite geometric sum; the ratio-one case $z=1$ is s
 Maintenance is paid every year, stopping after the first payment under cleanup, and cleanup is paid at year 1, after that first payment. Define the discounted debt coefficients as
 $$
 \begin{aligned}
-\bar\kappa_{\text{never}}&=r\cdot\nu\Sigma_T(\nu\cdot(1+r)),\\
-\bar\kappa_{\text{clean}}&=r\cdot\nu+(1+r)\cdot \nu.
+\bar\kappa(T,\rho;\mathrm{never})&=r\cdot\nu\Sigma_T(\nu\cdot(1+r)),\\
+\bar\kappa(T,\rho;\mathrm{clean})&=r\cdot\nu+(1+r)\cdot \nu.
 \end{aligned}
 $$
-Write $\bar\kappa_p=\bar\kappa_{\text{never}}$ for the never-clean policy and $\bar\kappa_p=\bar\kappa_{\text{clean}}$ for the year-1 cleanup policy; below, $\bar\kappa_p(T,\rho)$ is the coefficient for policy $p$.
+Write $\bar\kappa(T,\rho;\mathrm{never})$ for the never-clean policy and $\bar\kappa(T,\rho;\mathrm{clean})$ for the year-1 cleanup policy; below, $\bar\kappa(T,\rho;p)$ is the coefficient for a given policy.
 
 The two coefficients differ only in how many maintenance bills are discounted. Under never cleaning, the year-$k$ bill $r\cdot D_{k-1}$ is discounted by $\nu^k$; since $\nu^k\cdot(1+r)^{k-1}=\nu\,[\nu\cdot(1+r)]^{k-1}$, summing over $k$ gives the never-clean coefficient $r\cdot\nu\sum_{k=1}^{T}[\nu\cdot(1+r)]^{k-1}=r\cdot\nu\cdot\Sigma_T(\nu\cdot(1+r))$. Under year-1 cleanup, only two payments occur, both at year 1: the first maintenance $r\cdot D_0$ and the stock-removal bill $D_1=(1+r)\cdot D_0$, which discount to $r\cdot\nu$ and $(1+r)\cdot \nu$, so cleanup contributes $r\cdot\nu+(1+r)\cdot \nu$ and nothing later. The geometric ratio $\nu\cdot(1+r)$ compares how much a dollar is discounted in a year ($\nu$) with how much the debt grows over that year ($1+r$). When $\nu\cdot(1+r)=1$, equivalently $\rho=r$, the two exactly offset: every term in the sum equals $1$, so $\Sigma_T(1)=T$ grows linearly instead of converging, and the never-clean debt coefficient diverges as the horizon lengthens.
 
 Net present value (NPV) is
 $$
-\operatorname{NPV}_p(v;T,\rho)
-=W_T\cdot G(v)-B(v)-\bar\kappa_p(T,\rho)\cdot D_0(v).
+\operatorname{NPV}(v;T,\rho;p)
+=W_T\cdot G(v)-B(v)-\bar\kappa(T,\rho;p)\cdot D_0(v).
 $$
-Discounting applies to both revenue and baseline incident losses, through $W_T\cdot G$, and to the extra maintenance and cleanup through $\bar\kappa_p$. The build cost stays at time zero. The three terms are the operating stream discounted by $W_T$, the build payment at time zero, and the debt outflows discounted by $\bar\kappa_p$. Here the annual complexity-carry rate $r$ is not the annual time value of money $\rho$: one describes real maintenance and complexity costs, the other when the cash flows arrive, and they are not two charges on the same interest.
+Discounting applies to both revenue and baseline incident losses, through $W_T\cdot G$, and to the extra maintenance and cleanup through $\bar\kappa(T,\rho;p)$. The build cost stays at time zero. The three terms are the operating stream discounted by $W_T$, the build payment at time zero, and the debt outflows discounted by $\bar\kappa(T,\rho;p)$. Here the annual complexity-carry rate $r$ is not the annual time value of money $\rho$: one describes real maintenance and complexity costs, the other when the cash flows arrive, and they are not two charges on the same interest.
 
-Discounting can change how investments rank. Replacing $T$ by $W_T$ and $\kappa_p$ by $\bar\kappa_p$ gives
+Discounting can change how investments rank. Replacing $T$ by $W_T$ and $\kappa(T;p)$ by $\bar\kappa(T,\rho;p)$ gives
 $$
 \begin{aligned}
-\operatorname{NPV}_p'(v)&=(1-\bar\kappa_p)\cdot \Lambda\gamma\cdot e^{-\gamma v}
+\operatorname{NPV}'(v;T,\rho;p)&=(1-\bar\kappa(T,\rho;p))\cdot \Lambda\gamma\cdot e^{-\gamma v}
 -2\alpha W_T\cdot(v-v_{\text{opt}})\cdot g(q(v)),\\
-\operatorname{NPV}_p''(v)&=W_T\cdot G''(v)+(\bar\kappa_p-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}.
+\operatorname{NPV}''(v;T,\rho;p)&=W_T\cdot G''(v)+(\bar\kappa(T,\rho;p)-1)\cdot \Lambda\gamma^2\cdot e^{-\gamma v}.
 \end{aligned}
 $$
-The same dominance condition as before decides concavity. Discounting changes the marginal conditions in just two places: the horizon weight $T$ becomes $W_T$ and the debt coefficient $\kappa_p$ becomes $\bar\kappa_p$, so the rest of the optimization is unchanged. In particular, at $\rho=0$ we have $\nu=1$, so $\nu^k=1$, $W_T=T$, and every $\bar\kappa_p=\kappa_p$; the discounted expression collapses to the undiscounted lifecycle profit.
+The same dominance condition as before decides concavity. Discounting changes the marginal conditions in just two places: the horizon weight $T$ becomes $W_T$ and the debt coefficient $\kappa(T;p)$ becomes $\bar\kappa(T,\rho;p)$, so the rest of the optimization is unchanged. In particular, at $\rho=0$ we have $\nu=1$, so $\nu^k=1$, $W_T=T$, and every $\bar\kappa(T,\rho;p)=\kappa(T;p)$; the discounted expression collapses to the undiscounted lifecycle profit.
 
 ```{julia}
 #| label: verify-discounted-cash-accounting
@@ -1678,9 +1678,9 @@ let
 end
 ```
 
-Write $\bar\kappa_{p,\infty}=\lim_{T\to\infty}\bar\kappa_p(T,\rho)$ for the infinite-horizon debt coefficients: $\bar\kappa_{\text{clean},\infty}=r\cdot\nu+(1+r)\cdot \nu$, already constant in $T$, and $\bar\kappa_{\text{never},\infty}=r\cdot\nu/[1-\nu\cdot(1+r)]$, finite exactly when $\nu\cdot(1+r)<1$.
+Write $\bar\kappa_{\infty}(p)=\lim_{T\to\infty}\bar\kappa(T,\rho;p)$ for the infinite-horizon debt coefficients: $\bar\kappa_{\infty}(\mathrm{clean})=r\cdot\nu+(1+r)\cdot \nu$, already constant in $T$, and $\bar\kappa_{\infty}(\mathrm{never})=r\cdot\nu/[1-\nu\cdot(1+r)]$, finite exactly when $\nu\cdot(1+r)<1$.
 
-The undiscounted lifetime limits do not carry over unchanged to $\rho>0$. With discounting, distant years contribute little: $W_T\to1/\rho$ as $T\to\infty$, so the operating stream has a finite present value. The cleanup coefficient $\bar\kappa_{\text{clean}}$ is already constant in $T$. The never-clean coefficient tends to the finite limit $r\cdot\nu/[1-\nu\cdot(1+r)]$ only when $\nu\cdot(1+r)<1$, that is, when the discount rate exceeds the debt rate ($\rho>r$). If instead $\nu\cdot(1+r)\geq1$ (equivalently $\rho\leq r$), the discounted maintenance sum diverges, linearly in the number of payments at equality, so the debt cost grows without bound and the optimum is driven to $v=0$. When $\rho>r$, the limiting choice maximizes the finite objective $G(v)/\rho-B(v)-\bar\kappa_{p,\infty}\cdot D_0(v)$, which need not be the best-quality level or zero.
+The undiscounted lifetime limits do not carry over unchanged to $\rho>0$. With discounting, distant years contribute little: $W_T\to1/\rho$ as $T\to\infty$, so the operating stream has a finite present value. The cleanup coefficient $\bar\kappa(T,\rho;\mathrm{clean})$ is already constant in $T$. The never-clean coefficient tends to the finite limit $r\cdot\nu/[1-\nu\cdot(1+r)]$ only when $\nu\cdot(1+r)<1$, that is, when the discount rate exceeds the debt rate ($\rho>r$). If instead $\nu\cdot(1+r)\geq1$ (equivalently $\rho\leq r$), the discounted maintenance sum diverges, linearly in the number of payments at equality, so the debt cost grows without bound and the optimum is driven to $v=0$. When $\rho>r$, the limiting choice maximizes the finite objective $G(v)/\rho-B(v)-\bar\kappa_{\infty}(p)\cdot D_0(v)$, which need not be the best-quality level or zero.
 
 ### A Ten-Year Investment Example
 
@@ -1822,13 +1822,13 @@ end
 
 For a fixed $v$, annual expected revenue $\bar R(v)$ and ordinary incident expense $\ell(v)$ stay the same across these ten years. They differ between investments because each policy gets its own optimal $v$. Build spending happens at time zero, while operating receipts and baseline losses land at each year end. Maintenance happens at $t=1,2,\ldots,10$ under never cleaning, or at $t=1$ under cleanup. Cleanup occurs at the end of year 1, after the first maintenance payment, and modeled debt maintenance then stops. There is no retirement cleanup charge.
 
-Here $W_{10}=10$ and $\bar\kappa_p=\kappa_p$. There are two debt coefficients, for compound never and compound cleanup: $\kappa_p\approx12.785849$ and $\kappa_p=1.6$. I optimize each policy separately by solving its own marginal balance:
+Here $W_{10}=10$ and $\bar\kappa(T,\rho;p)=\kappa(T;p)$. There are two debt coefficients, for compound never and compound cleanup: $\kappa(T;\mathrm{never})\approx12.785849$ and $\kappa(T;\mathrm{clean})=1.6$. I optimize each policy separately by solving its own marginal balance:
 $$
-(1-\kappa_p)\cdot \Lambda\gamma\cdot e^{-2v}
+(1-\kappa(T;p))\cdot \Lambda\gamma\cdot e^{-2v}
 =20(v-0.3)\left[200{,}000e^{-2q(v)}+50{,}000e^{-q(v)}\right],
 \qquad q(v)=1-(v-0.3)^2.
 $$
-Because the debt cash is proportional to the build-cost saving, the debt term enters the marginal condition as $(1-\kappa_p)\cdot \Lambda\gamma\cdot e^{-\gamma v}$, not as a constant $d\kappa_p$. Compound-never has the largest coefficient, $\kappa_p\approx12.786$, and its corner marginal value is strongly negative, $\Pi_p'(0)\approx-\$1{,}865{,}699$, so it corners at $v^*=0$. Compound-cleanup has $\kappa_p=1.6$ and $\Pi_p'(0)\approx\$204{,}162$, so it settles inside at $v^*\approx0.222494$. The ten-year operating surplus is all ten annual expected revenues less all ten ordinary incident expenses. Debt cash spending is the extra maintenance plus any cleanup. All monetary entries are in USD, rounded to cents, and computed from the unrounded optima. Each policy row in the tables below is optimized over $v$.
+Because the debt cash is proportional to the build-cost saving, the debt term enters the marginal condition as $(1-\kappa(T;p))\cdot \Lambda\gamma\cdot e^{-\gamma v}$, not as a constant $d\kappa(T;\mathrm{never})$. Compound-never has the largest coefficient, $\kappa(T;\mathrm{never})\approx12.786$, and its corner marginal value is strongly negative, $\Pi_{\mathrm{debt}}'(0;T,\mathrm{never})\approx-\$1{,}865{,}699$, so it corners at $v^*=0$. Compound-cleanup has $\kappa(T;\mathrm{clean})=1.6$ and $\Pi_{\mathrm{debt}}'(0;T,\mathrm{clean})\approx\$204{,}162$, so it settles inside at $v^*\approx0.222494$. The ten-year operating surplus is all ten annual expected revenues less all ten ordinary incident expenses. Debt cash spending is the extra maintenance plus any cleanup. All monetary entries are in USD, rounded to cents, and computed from the unrounded optima. Each policy row in the tables below is optimized over $v$.
 
 | Debt policy | Optimal $v^*$ | Ten-year operating surplus | Upfront build | Total debt cash spending | Lifecycle profit |
 |:--|--:|--:|--:|--:|--:|
