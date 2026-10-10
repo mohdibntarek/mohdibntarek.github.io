@@ -1828,22 +1828,20 @@ $$
 =20(v-0.3)\left[200{,}000e^{-2q(v)}+50{,}000e^{-q(v)}\right],
 \qquad q(v)=1-(v-0.3)^2.
 $$
-Because the debt cash is proportional to the build-cost saving, the debt term enters the marginal condition as $(1-K_p)\Lambda\gamma e^{-\gamma v}$, not as a constant $dK_p$. Compound-never has the largest coefficient, $K_p\approx12.786$, and its corner marginal value is strongly negative, $\Pi_p'(0)\approx-\$1{,}865{,}699$, so it corners at $v^*=0$. Compound-cleanup has $K_p=1.6$ and $\Pi_p'(0)\approx\$204{,}162$, so it settles inside at $v^*\approx0.222494$. The ten-year operating surplus is all ten annual expected revenues less all ten ordinary incident expenses. Debt cash spending is the extra maintenance plus any cleanup. All monetary entries are in USD, rounded to cents, and computed from the unrounded optima. Only the debt-policy rows in the policy tables below are optimized over $v$; the manual, debt-free row is a reference baseline whose LLM use is fixed at $v=0$, and no optimization is performed for it.
+Because the debt cash is proportional to the build-cost saving, the debt term enters the marginal condition as $(1-K_p)\Lambda\gamma e^{-\gamma v}$, not as a constant $dK_p$. Compound-never has the largest coefficient, $K_p\approx12.786$, and its corner marginal value is strongly negative, $\Pi_p'(0)\approx-\$1{,}865{,}699$, so it corners at $v^*=0$. Compound-cleanup has $K_p=1.6$ and $\Pi_p'(0)\approx\$204{,}162$, so it settles inside at $v^*\approx0.222494$. The ten-year operating surplus is all ten annual expected revenues less all ten ordinary incident expenses. Debt cash spending is the extra maintenance plus any cleanup. All monetary entries are in USD, rounded to cents, and computed from the unrounded optima. Each policy row in the tables below is optimized over $v$.
 
 | Debt policy | Optimal $v^*$ | Ten-year operating surplus | Upfront build | Total debt cash spending | Lifecycle profit |
 |:--|--:|--:|--:|--:|--:|
 | Compound, never clean | 0.00000000 | $\$636{,}712.14$ | $\$100{,}000.00$ | $\$0.00$ | $\$536{,}712.14$ |
-| No LLM use, no debt | 0.00000000 (fixed) | $\$636{,}712.14$ | $\$100{,}000.00$ | $\$0.00$ | $\$536{,}712.14$ |
 | Compound, clean at year 1 | 0.22249421 | $\$677{,}980.95$ | $\$66{,}769.24$ | $\$53{,}169.21$ | $\$558{,}042.50$ |
 
-Because $D_0(0)=0$, the manual, debt-free row coincides with the compound-never corner: at these horizons never cleaning makes LLM use unprofitable and the policy collapses to ordinary manual coding.
+Because $D_0(0)=0$, the compound-never corner at $v^*=0$ is also the manual, LLM-free choice: at these horizons, never cleaning makes LLM use unprofitable and the policy collapses to ordinary manual coding.
 
 Re-optimizing the same two policies at a longer horizon shows what happens when debt is not paid down. At $T=20$ years, compound-never again takes the corner $v^*=0$ and gives the lower lifecycle profit, while cleanup recovers value:
 
 | Debt policy | Optimal $v^*$ | Total debt cash spending | Lifecycle profit |
 |:--|--:|--:|--:|
 | Compound, never clean | 0.00000000 | $\$0.00$ | $\$1{,}173{,}424.27$ |
-| No LLM use, no debt | 0.00000000 (fixed) | $\$0.00$ | $\$1{,}173{,}424.27$ |
 | Compound, clean at year 1 | 0.26406963 | $\$60{,}738.27$ | $\$1{,}237{,}498.13$ |
 
 ```{julia}
