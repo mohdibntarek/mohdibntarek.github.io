@@ -1828,12 +1828,12 @@ $$
 =20(v-0.3)\left[200{,}000e^{-2q(v)}+50{,}000e^{-q(v)}\right],
 \qquad q(v)=1-(v-0.3)^2.
 $$
-Because the debt cash is proportional to the build-cost saving, the debt term enters the marginal condition as $(1-K_p)\Lambda\gamma e^{-\gamma v}$, not as a constant $dK_p$. Compound-never has the largest coefficient, $K_p\approx12.786$, and its corner marginal value is strongly negative, $\Pi_p'(0)\approx-\$1{,}865{,}699$, so it corners at $v^*=0$. Compound-cleanup has $K_p=1.6$ and $\Pi_p'(0)\approx\$204{,}162$, so it settles inside at $v^*\approx0.222494$. The ten-year operating surplus is all ten annual expected revenues less all ten ordinary incident expenses. Debt cash spending is the extra maintenance plus any cleanup. All monetary entries are in USD, rounded to cents, and computed from the unrounded optima.
+Because the debt cash is proportional to the build-cost saving, the debt term enters the marginal condition as $(1-K_p)\Lambda\gamma e^{-\gamma v}$, not as a constant $dK_p$. Compound-never has the largest coefficient, $K_p\approx12.786$, and its corner marginal value is strongly negative, $\Pi_p'(0)\approx-\$1{,}865{,}699$, so it corners at $v^*=0$. Compound-cleanup has $K_p=1.6$ and $\Pi_p'(0)\approx\$204{,}162$, so it settles inside at $v^*\approx0.222494$. The ten-year operating surplus is all ten annual expected revenues less all ten ordinary incident expenses. Debt cash spending is the extra maintenance plus any cleanup. All monetary entries are in USD, rounded to cents, and computed from the unrounded optima. Only the debt-policy rows in the policy tables below are optimized over $v$; the manual, debt-free row is a reference baseline whose LLM use is fixed at $v=0$, and no optimization is performed for it.
 
 | Debt policy | Optimal $v^*$ | Ten-year operating surplus | Upfront build | Total debt cash spending | Lifecycle profit |
 |:--|--:|--:|--:|--:|--:|
 | Compound, never clean | 0.00000000 | $\$636{,}712.14$ | $\$100{,}000.00$ | $\$0.00$ | $\$536{,}712.14$ |
-| No LLM use, no debt | 0.00000000 | $\$636{,}712.14$ | $\$100{,}000.00$ | $\$0.00$ | $\$536{,}712.14$ |
+| No LLM use, no debt | 0.00000000 (fixed) | $\$636{,}712.14$ | $\$100{,}000.00$ | $\$0.00$ | $\$536{,}712.14$ |
 | Compound, clean at year 1 | 0.22249421 | $\$677{,}980.95$ | $\$66{,}769.24$ | $\$53{,}169.21$ | $\$558{,}042.50$ |
 
 Because $D_0(0)=0$, the manual, debt-free row coincides with the compound-never corner: at these horizons never cleaning makes LLM use unprofitable and the policy collapses to ordinary manual coding.
@@ -1843,7 +1843,7 @@ Re-optimizing the same two policies at a longer horizon shows what happens when 
 | Debt policy | Optimal $v^*$ | Total debt cash spending | Lifecycle profit |
 |:--|--:|--:|--:|
 | Compound, never clean | 0.00000000 | $\$0.00$ | $\$1{,}173{,}424.27$ |
-| No LLM use, no debt | 0.00000000 | $\$0.00$ | $\$1{,}173{,}424.27$ |
+| No LLM use, no debt | 0.00000000 (fixed) | $\$0.00$ | $\$1{,}173{,}424.27$ |
 | Compound, clean at year 1 | 0.26406963 | $\$60{,}738.27$ | $\$1{,}237{,}498.13$ |
 
 ```{julia}
@@ -2229,7 +2229,7 @@ Legend(f[3, 1],
 f
 ```
 
-Between the optimized policies at $T=10$, compound cleanup improves lifecycle profit by about $\$21{,}330.36$. Compound-never is already at the corner $v^*=0$, so never cleaning means abandoning LLM use; this is one debt model, not a menu of freely selectable technologies, and the comparison is between cleaning and never cleaning within it.
+Between the optimized policies at $T=10$, compound cleanup improves lifecycle profit by about $\$21{,}330.36$. Compound-never is already at the corner $v^*=0$, so never cleaning means abandoning LLM use.
 
 Cleanup is not always best over a short lifetime. The analytical compound threshold derived above is $T>1+\log 2/\log(1+r)\approx3.641927$ years without discounting: the first annual-grid horizon at which year-1 cleanup is cheaper than never cleaning, at any fixed $v$ with $D_0(v)>0$, is **4 years**. This debt-only comparison applies on annual horizons independently of the operating schedule.
 
@@ -2314,13 +2314,13 @@ Much of this may seem fairly obvious. The value of writing it down mathematicall
 
 Low-impact experiments with inexpensive fixes and uncertain commercial payoff can support greater reliance on LLMs, if the assumed savings and quality effects hold. When failures have serious consequences, or better quality brings greater expected revenue, preserving quality and investing in oversight become more important. The best-quality approach may still use LLMs; it need not be entirely manual. Under the assumption that quality is highest without LLM use, increasingly costly incidents instead push the unconstrained choice toward no use.
 
-An upfront budget changes what is feasible. When it excludes the preferred approach, it can force a higher-use, lower-quality choice without making that choice the safest or the most profitable without the constraint. Nor can a favorable average financial outcome justify unacceptable catastrophic harm. Regulatory and safety requirements may rule out choices that this economic model would otherwise allow.
+An upfront budget changes what is feasible. When it excludes the preferred approach, it can force a higher-use, lower-quality choice without making that choice the safest or the most profitable without the constraint. A favorable average financial outcome is not enough to justify accepting a risk of unacceptable catastrophic harm. Regulatory and safety requirements may rule out choices that this economic model would otherwise allow.
 
 I also worry about the incentives around these choices. With LLM assistance, a working prototype can make shortcuts look like productivity gains worth rewarding, while maintenance costs remain deferred. That can become a slippery slope: each apparent success normalizes more shortcuts. Engineers who later inherit fragile code may spend largely invisible effort reviewing, fixing, and refactoring it to repay technical debt. This can be especially frustrating for competent, conscientious engineers if delivery speed still counts for more than maintainability. The tool alone does not cause this problem, and a deliberately scoped, time-limited prototype can be a rational choice. That is different from passing unplanned debt to others. Rather than shaming LLM users, I would make cleanup time, resources, and accountability visible in the original decision.
 
 The curves and parameters here are illustrative, not empirical estimates. I see this framework as a way to clarify which assumptions drive a decision, not as a verdict on LLMs. In practice, I would estimate the trade-offs using evidence from the actual development context, including the effort spent reviewing, testing, and repairing code. Those estimates, and the level of assistance and oversight, should be revisited as the software and its deployment environment change.
 
-I should be upfront that this analysis leans on many simplifying assumptions. Incidents follow a homogeneous Poisson process in a fixed environment with a constant expected cost per incident; quality is a single scalar; the quality-response and build-cost curves are monotone in the ways I assumed; debt compounds at a single rate; and the base case sets discounting aside. These choices kept the model tractable and let me reach analytic results, but they are not the whole story. I would find it interesting to build more flexible versions with time-varying rates, heterogeneous costs, changing quality, richer treatment of risk and tails, and calibration to real data, then ask whether the conclusions above survive or shift.
+I should be clear that this analysis leans on many simplifying assumptions. Incidents follow a homogeneous Poisson process in a fixed environment with a constant expected cost per incident; quality is a single scalar; the quality-response and build-cost curves are monotone in the ways I assumed; debt compounds at a single rate; and the base case sets discounting aside. These choices kept the model tractable and let me reach analytic results, but they are not the whole story. I would find it interesting to build more flexible versions with time-varying rates, heterogeneous costs, changing quality, richer treatment of risk and tails, and calibration to real data, then ask whether the conclusions above survive or shift.
 
 One way to use these results is to give each parameter a prior distribution for a specific application, or even for a component of an application, using the best guesses of people who know the domain. A prior predictive simulation can then draw many parameter combinations, compute the optimal LLM use in each scenario, and summarize the draws as a credible interval for the optimal level. Because the LLM-use and quality variables are abstract and the model rests on strong structural assumptions, that interval is best read as a general guide to how much LLM use a team might accept, not a precise instruction. It also does not say concretely how to use LLMs while coding, which makes the recommendation hard to enforce or interpret. That is not a reason to abandon the economic reasoning though; it means more research is needed to make it more useful, perhaps by tailoring it to specific patterns of LLM use and specific applications.
 
