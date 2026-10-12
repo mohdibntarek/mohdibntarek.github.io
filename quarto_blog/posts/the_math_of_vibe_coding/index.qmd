@@ -2337,14 +2337,34 @@ To separate the policy effect from the choice of $v$, the next table evaluates b
 
 Both policies are evaluated at the cleanup-optimal level of LLM use $v^*$ reported in the first row; the never-clean policy's own optimum is the corner $v^*=0$, so its entries show that policy evaluated at the cleanup policy's level rather than at its own optimum. The two columns use each discount rate's own cleanup-optimal level ($v^*=0.22249421$ at $\rho=0$ and $v^*=0.20081608$ at $\rho=0.10$), so the policy comparison is at fixed $v$ within each column. Values are rounded; the cleanup advantage is computed from unrounded values.
 
-At the higher rate $\rho=0.40$ the ranking survives at $T=10$, but the margin narrows sharply. With $\nu=1/(1+\rho)=0.7142857$ the annuity factor is $W_T=2.4135709674$; because $\rho>r$ the factor $\nu(1+r)=0.9285714$ is below one, so the discounted never-clean coefficient stops growing and saturates at $r\nu/(1-\nu(1+r))=3.0$ as $T\to\infty$ (it is $1.5702028699$ at $T=10$), while the cleanup coefficient is $1.1428571429$. Never cleaning still corners at $v^*=0$ with NPV $\$53{,}674.99$; cleanup stays interior at $v^*=0.2237037437$ (with $q(v^*)=0.9941788813$, $G=\$67{,}806.63$, $B=\$66{,}625.99$, and discounted debt cash $\bar\kappa\cdot D_0=\$38{,}141.73$) with NPV $\$58{,}888.40$, an advantage of only $\$5{,}213.41$.
+At the higher rate $\rho=0.40$ the discounted never-clean coefficient stops growing and, because $\rho>r$, saturates at $r\nu/(1-\nu(1+r))=3.0$ as $T\to\infty$ (it is $1.5702$ at $T=10$), while the cleanup coefficient is $1.1429$. At $T=10$, cleanup still wins but by only $\$5{,}213.41$ (first table below). The ranking is not fixed by the discount rate alone: the same parameters at the shorter horizon $T=5$, below the crossover $T^*\approx6.4713$, put never cleaning ahead by $\$8{,}384.54$ (second table below), and there the never-clean coefficient $\bar\kappa=0.9289<1$ gives an interior optimum at $v^*=0.3362$ rather than the corner $v^*=0$.
 
 Discounting also moves the cleanup crossover. The discounted threshold solves $r\,\Sigma_T(\nu(1+r))=1+2r$, giving $T^*\approx6.471275$ and hence a first annual-grid horizon of $7$, against $4$ without discounting ($T^*=3.641927$) and $5$ at $\rho=0.10$ ($T^*=4.057846$). The reason is timing: the cleanup payment falls in year 1, whereas never cleaning's compounding maintenance lies in the discounted future, so a high discount rate favours deferring cleanup. Never cleaning is therefore the cheaper policy for horizons below about $6.5$ years at these parameters, and only longer-lived software justifies year-1 cleanup. The clean optimum is non-monotone in $\rho$ ($0.2225$ at $\rho=0$, $0.2008$ at $\rho=0.10$, $0.2237$ at $\rho=0.40$): a higher $\rho$ lowers the debt coefficient, which favours more LLM use, but also lowers $W_T$, which reduces the value of the quality-linked operating surplus and favours less. At $\rho=0.40$ the never-clean objective also becomes concave on all of $[0,1]$: the non-concave region present at $\rho=0$ and $\rho=0.10$ disappears, because the smaller debt coefficient restores the dominance of the build-cost convexity. A $40\%$ annual discount rate is far above any realistic cost of capital for software and is used only to trace the trend; the qualitative conclusion---that early cleanup pays for long-lived software, and more so as $\rho$ falls---matters more than these particular numbers.
 
-| Debt policy | $v^*$ at $\rho=0.40$ | NPV at $\rho=0.40$ |
-|:--|--:|--:|
-| Compound, never clean | 0.00000000 | $\$53{,}674.99$ |
-| Compound, clean at year 1 | 0.22370374 | $\$58{,}888.40$ |
+**$\rho=0.40$, $T=10$.** Here $W_T=2.4136$, $\bar\kappa^{\text{never}}=1.5702$, and $\bar\kappa^{\text{clean}}=1.1429$. The never-clean optimum corners at $v^*=0$ and cleanup is interior. $G$ is the annual operating surplus, $B$ the upfront build cost, and $\bar\kappa D_0$ the discounted debt cash. Values are rounded.
+
+| Policy | $v^*$ | $q(v^*)$ | $G$ | $B$ | $\bar\kappa D_0$ | NPV |
+|:--|--:|--:|--:|--:|--:|--:|
+| Compound, never clean | 0.00000000 | 0.91000000 | $\$63{,}671.21$ | $\$100{,}000.00$ | $\$0.00$ | $\$53{,}674.99$ |
+| Compound, clean at year 1 | 0.22370374 | 0.99417888 | $\$67{,}806.63$ | $\$66{,}625.99$ | $\$38{,}141.73$ | $\$58{,}888.40$ |
+
+**$\rho=0.40$, $T=5$ (below the cleanup crossover $T^*\approx6.4713$).** Here $W_T=2.0352$, $\bar\kappa^{\text{never}}=0.9289<1$, and $\bar\kappa^{\text{clean}}=1.1429$, so never cleaning is the better policy and its optimum is interior at $v^*=0.3362$. Columns as above. Values are rounded.
+
+| Policy | $v^*$ | $q(v^*)$ | $G$ | $B$ | $\bar\kappa D_0$ | NPV |
+|:--|--:|--:|--:|--:|--:|--:|
+| Compound, never clean | 0.33621106 | 0.99868876 | $\$68{,}012.83$ | $\$54{,}708.05$ | $\$42{,}072.39$ | $\$41{,}636.81$ |
+| Compound, clean at year 1 | 0.20684002 | 0.99132122 | $\$67{,}675.21$ | $\$68{,}654.90$ | $\$35{,}822.97$ | $\$33{,}252.27$ |
+
+At an interior cleanup optimum this non-monotone behaviour comes from two present values that move in opposite directions. Writing the marginal condition from $\operatorname{NPV}'(v;T,\rho;p)=0$ as
+$$
+2\alpha W_T\,(v_{\text{opt}}-v^*)\,g(q(v^*))
+=(\bar\kappa-1)\,\Lambda\gamma\,e^{-\gamma v^*},
+$$
+the left side is the discounted multi-year operating surplus that better quality buys, and the right side is the near-term debt obligation net of the build saving. Raising $\rho$ lowers both sides, but not in proportion at fixed $v$. The surplus is an annual flow over all $T$ years, so it scales with the annuity factor $W_T$, which is highly sensitive to $\rho$ ($W_T=10$, $6.1446$, and $2.4136$ at $\rho=0$, $0.10$, and $0.40$). The cleanup obligation is a single year-1 payment, so $\bar\kappa(T,\rho;\text{clean})=\nu(1+2r)$ is nearly flat ($1.6$, $1.4545$, and $1.1429$ at the same rates), and the build saving is spent at year zero and never discounted. Holding $v$ fixed, the surplus channel therefore reacts far more than the debt channel to a change in $\rho$.
+
+::: {.callout-note title="Why the direction is not obvious"}
+The optimum is not monotone in $\rho$. It falls over $0\le\rho\le0.10$, where $W_T$ drops 39% while $\bar\kappa-1$ drops only 24%, and rises again over $0.10\le\rho\le0.40$, where the comparison reverses: $\bar\kappa-1$ drops 69% and $W_T$ drops 61%. The two sides of the marginal condition above are built from flows with different dates, so they do not respond to $\rho$ in proportion. The build saving falls at year zero and is not discounted; the quality-linked revenue and the avoided incident loss accrue year by year; the maintenance and cleanup payment falls in year 1. Which side changes faster depends on the range of $\rho$ and, as the two tables above show, on the horizon. A higher discount rate does not automatically favour a faster, LLM-heavy build, because the main payoff to LLM use is a future stream of surplus rather than an immediate saving.
+:::
 
 ```{julia}
 #| label: verify-discounted-comparison
@@ -2390,6 +2410,65 @@ let
 end
 ```
 
+```{julia}
+#| label: verify-discounted-rho040
+#| include: false
+#| eval: true
+#| echo: false
+#| output: false
+#| warning: false
+#| error: false
+using Test
+let
+    @testset "Discounted rho = 0.40 comparison (T = 10 and T = 5)" begin
+        Rbar(v) = RMAXD*(1 - exp(-DELTAD*qf(v)))
+        ellf(v) = LAM0D*MUD*exp(-BETAD*qf(v))
+        Gf(v) = Rbar(v) - ellf(v)
+        gq(v) = DELTAD*RMAXD*exp(-DELTAD*qf(v)) + BETAD*LAM0D*MUD*exp(-BETAD*qf(v))
+        nu = 1/(1+0.40)
+        Sfun(n, z) = z == 1 ? Float64(n) : expm1(n*log(z))/expm1(log(z))
+        Wt(T) = (1 - nu^T)/0.40
+        kbar_never(T) = 0.30*nu*Sfun(T, nu*1.30)
+        kbar_clean = 0.30*nu + 1.30*nu
+        NPVf(v, w, kb) = w*Gf(v) - buildf(v) - kb*D0f(v)
+        dNPVf(v, w, kb) = (1-kb)*LAM*GAMMA*exp(-GAMMA*v) - 2*ALPHA*w*(v-VOPT)*gq(v)
+        optf(w, kb) = begin
+            dNPVf(0.0, w, kb) <= 0 && return 0.0
+            dNPVf(1.0, w, kb) >= 0 && return 1.0
+            lo, hi = 0.0, 1.0
+            for _ in 1:80
+                mid = (lo + hi)/2
+                dNPVf(mid, w, kb) > 0 ? (lo = mid) : (hi = mid)
+            end
+            (lo + hi)/2
+        end
+        # T = 10: cleanup still wins; never cleaning corners at 0.
+        w10 = Wt(10)
+        @test isapprox(w10, 2.4135709674; atol=1e-9)
+        @test isapprox(kbar_never(10), 1.5702028699; atol=1e-9)
+        @test isapprox(kbar_clean, 1.1428571429; atol=1e-9)
+        vn10 = optf(w10, kbar_never(10))
+        vc10 = optf(w10, kbar_clean)
+        @test vn10 == 0.0
+        @test isapprox(vc10, 0.2237037437; atol=1e-8)
+        @test isapprox(NPVf(0.0, w10, kbar_never(10)), 53_674.99; atol=0.01)
+        @test isapprox(NPVf(vc10, w10, kbar_clean), 58_888.40; atol=0.01)
+        # T = 5: never cleaning wins and its optimum is interior.
+        w5 = Wt(5)
+        @test isapprox(w5, 2.0351639198; atol=1e-9)
+        @test isapprox(kbar_never(5), 0.9289154073; atol=1e-9)
+        vn5 = optf(w5, kbar_never(5))
+        vc5 = optf(w5, kbar_clean)
+        @test isapprox(vn5, 0.3362110610; atol=1e-8)
+        @test isapprox(vc5, 0.2068400170; atol=1e-8)
+        @test isapprox(NPVf(vn5, w5, kbar_never(5)), 41_636.81; atol=0.01)
+        @test isapprox(NPVf(vc5, w5, kbar_clean), 33_252.27; atol=0.01)
+        @test NPVf(vn5, w5, kbar_never(5)) > NPVf(vc5, w5, kbar_clean)
+        @test abs(NPVf(vn5, w5, kbar_never(5)) - NPVf(vc5, w5, kbar_clean) - 8_384.54) < 0.02
+    end
+end
+```
+
 #### What the Zero-Discount Assumption Leaves Out
 
 Money committed to building or cleaning software cannot earn interest in a bank or fund another investment at the same time. A better available return raises the opportunity cost of spending now rather than receiving money later, and can make an upfront investment less attractive. Cash-flow discounting handles this timing by applying $(1+\rho)^{-t}$, with effective annual $\rho$ and $t$ in years, to every inflow and outflow at its actual date, not only to revenue. It does not automatically favor never cleaning: earlier cleanup spending can prevent larger later outflows. The debt rate $r$ describes real maintenance and complexity growth, while $\rho$ describes the required financial return; they are different parameters.
@@ -2400,7 +2479,7 @@ Revenue uncertainty belongs in $s$ or in the expected cash-flow forecasts. A ris
 
 For me, the main lesson is that there is no universally optimal amount of LLM use. Getting software built faster is only part of the decision. Development savings, expected revenue, and the consequences of incidents need to be considered together.
 
-Much of this may seem fairly obvious. The value of writing it down mathematically is that it forces the argument's assumptions into the open, where they can be checked.
+Much of this may seem fairly obvious, but not all of it is. The value of writing it down mathematically is that it forces the argument's assumptions into the open, where they can be checked. Even a single comparative static can be non-obvious: raising the discount rate lowers the optimal level of LLM use at moderate rates and raises it again at high ones, and the same parameters can flip which cleanup policy wins once the horizon changes. A rule of thumb would not get those signs right, which is the case for writing the framework down, and it is also why a Monte Carlo sensitivity analysis over the parameters---like the prior predictive simulation below---is a natural next step.
 
 Low-impact experiments with inexpensive fixes and uncertain commercial payoff can support greater reliance on LLMs, if the assumed savings and quality effects hold. When failures have serious consequences, or better quality brings greater expected revenue, preserving quality and investing in oversight become more important. The best-quality approach may still use LLMs; it need not be entirely manual. Under the assumption that quality is highest without LLM use, increasingly costly incidents instead push the unconstrained choice toward no use.
 
